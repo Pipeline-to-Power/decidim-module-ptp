@@ -6,12 +6,12 @@
     </div>
   </div>
   <div class="row">
-    <% %w(icon-selected-list.svg icon-stamped-ballot.svg icon-ballot-box.svg ).each_with_index do |item, index| %>
+    <% %w(icon-selected-list icon-stamped-ballot icon-ballot-box).each_with_index do |item, index| %>
       <% state = index == 0 ? "active" : "" %>
       <div class="columns small-12 medium-4 voting-help-item">
         <div class="row">
           <div class="circle <%= state %>">
-            <%= render partial: "decidim/budgets/partials/svgs/#{item}" %>
+            <%= render partial: "decidim/budgets/partials/svgs/#{item}", formats: [:svg] %>
           </div>
         </div>
         <div class="help-description <%= state %>">

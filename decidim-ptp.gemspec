@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["sina.eftekhar@mainiotech.fi"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/mainio/decidim-module-ptp"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
 
   s.name = "decidim-ptp"
   s.summary = "PTP module collection for Decidim"
@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-l10n", Decidim::Ptp.version
   s.add_dependency "decidim-smsauth", Decidim::Ptp.version
   s.add_dependency "decidim-sms-twilio", Decidim::Ptp.version
+  s.metadata["rubygems_mfa_required"] = "true"
 end

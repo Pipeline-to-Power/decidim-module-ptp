@@ -4,13 +4,15 @@
   <head>
     <title><%= decidim_page_title %></title>
     <%= render partial: "layouts/decidim/head" %>
-    <%= render partial: "layouts/decidim/js_configuration" %>
   </head>
 
   <body>
+    <!--noindex--><!--googleoff: all-->
+    <%= cell("decidim/data_consent", current_organization) %>
     <%= render partial: "layouts/decidim/impersonation_warning" %>
-    <%= render partial: "layouts/decidim/cookie_warning" %>
     <%= render partial: "layouts/decidim/timeout_modal" %>
+    <%= render partial: "layouts/decidim/offline_banner" %>
+    <!--googleon: all--><!--/noindex-->
 
     <%= render partial: "layouts/decidim/budgets/voting_notification" unless current_order_checked_out? %>
     <%= render "layouts/decidim/budgets/voting_wrapper" do %>
@@ -18,8 +20,7 @@
     <% end %>
 
     <%= render partial: "decidim/shared/confirm_modal" %>
-    <%= render partial: "decidim/shared/login_modal" unless current_user %>
-    <%= render partial: "decidim/shared/authorization_modal" %>
-    <%= render partial: "layouts/decidim/cors" if Decidim.cors_enabled %>
+    <%= render partial: "layouts/decidim/decidim_javascript" %>
+    <%= render partial: "layouts/decidim/data_consent_warning" %>
   </body>
 </html>

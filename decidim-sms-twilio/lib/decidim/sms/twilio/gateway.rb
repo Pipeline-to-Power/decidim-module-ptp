@@ -94,7 +94,7 @@ module Decidim
               ).delivery_url(token: generate_token(@organization.host))
             end
           end
-          client.messages.create(options)
+          client.messages.create(**options)
         end
 
         def track_delivery

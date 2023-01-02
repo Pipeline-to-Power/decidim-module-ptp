@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 shared_examples "filtering projects" do
-  let!(:project) { projects.first }
   let!(:categories) { create_list(:category, 3, participatory_space: current_component.participatory_space) }
   context "when filtering" do
     it "allows searching by text" do
+      project = current_projects.first
       within ".filters__search" do
-        fill_in "filter[search_text]", with: translated(project.title)
+        fill_in "filter[search_text_cont]", with: translated(project.title)
 
         find(".button").click
       end
@@ -18,13 +18,14 @@ shared_examples "filtering projects" do
     end
 
     it "allows filtering by scope" do
+      project = current_projects.first
       scope = create(:scope, organization: current_component.organization)
       project.scope = scope
       project.save
 
       visit_budget
 
-      within ".scope_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_scope_check_boxes_tree_filter" do
         uncheck "All"
         check translated(scope.name)
       end
@@ -36,13 +37,13 @@ shared_examples "filtering projects" do
     end
 
     it "allows filtering by category" do
+      project = current_projects.first
       category = categories.first
       project.category = category
       project.save
 
       visit_budget
-
-      within ".category_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_category_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
       end
@@ -54,13 +55,14 @@ shared_examples "filtering projects" do
     end
 
     it "works with 'back to list' link" do
+      project = current_projects.first
       category = categories.first
       project.category = category
       project.save
 
       visit_budget
 
-      within ".category_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_category_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
       end

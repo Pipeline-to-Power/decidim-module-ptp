@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["sina.eftekhar@mainiotech.fi"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim/decidim-module-smsauth"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
 
   s.name = "decidim-smsauth"
   s.summary = "A decidim smsauth module"
@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "countries", "~> 5.1", ">= 5.1.2"
   s.add_dependency "decidim-core", Decidim::Smsauth.decidim_version
+  s.metadata["rubygems_mfa_required"] = "true"
 end

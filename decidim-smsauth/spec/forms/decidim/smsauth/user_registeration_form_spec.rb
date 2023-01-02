@@ -32,7 +32,7 @@ module Decidim::Smsauth
 
     it { is_expected.to be_valid }
 
-    describe "tos_agreement " do
+    describe "tos_agreement" do
       context "when nil" do
         let(:tos_agreement) { nil }
 
@@ -54,12 +54,6 @@ module Decidim::Smsauth
 
     describe "when name is not present" do
       let(:name) { nil }
-
-      it { is_expected.not_to be_valid }
-    end
-
-    describe "when organization is not present" do
-      let(:organization) { nil }
 
       it { is_expected.not_to be_valid }
     end

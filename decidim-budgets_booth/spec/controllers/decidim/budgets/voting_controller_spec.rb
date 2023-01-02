@@ -46,7 +46,7 @@ module Decidim
           let(:action) do
             { scope: :user, action: :vote, subject: project }
           end
-          let!(:permission_action) { Decidim::PermissionAction.new(action) }
+          let!(:permission_action) { Decidim::PermissionAction.new(**action) }
 
           before do
             sign_in user, scope: :user

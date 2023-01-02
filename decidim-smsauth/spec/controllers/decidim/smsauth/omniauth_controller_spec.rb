@@ -14,11 +14,11 @@ module Decidim
       let(:verified) { false }
       let(:auth_session) do
         {
-          "verification_code": verification_code,
-          "sent_at": sent_at,
-          "country": country,
-          "phone": phone,
-          "verified": verified
+          verification_code: verification_code,
+          sent_at: sent_at,
+          country: country,
+          phone: phone,
+          verified: verified
         }
       end
 
@@ -89,7 +89,7 @@ module Decidim
             phone_number: phone,
             phone_country: country
           }
-          expect(session["authentication_attempt"]).to include({ "country": country, "phone": phone.to_i, "verified": false })
+          expect(session["authentication_attempt"]).to include({ country: country, phone: phone.to_i, verified: false })
         end
       end
 

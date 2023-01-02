@@ -6,13 +6,14 @@ describe "Voting booth flow", type: :system do
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
   let(:organization) { component.organization }
-  let(:component) { create(:budgets_component) }
 
   let(:budget) { create(:budget, component: component, total_budget: 100_000) }
   let(:projects_count) { 5 }
   let(:projects) { create_list(:project, projects_count, budget: budget, budget_amount: 25_000) }
 
-  context "when voting is enabled" do
+  context "when voting is open" do
+    let(:component) { create(:budgets_component) }
+
     before do
       sign_in user
       switch_to_host(organization.host)
@@ -25,7 +26,7 @@ describe "Voting booth flow", type: :system do
     end
 
     it_behaves_like "filtering projects" do
-      let!(:currnent_projects) { projects }
+      let!(:current_projects) { projects }
       let(:current_component) { component }
     end
 

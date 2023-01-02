@@ -26,7 +26,7 @@ describe "Voting index page", type: :system do
     end
 
     it_behaves_like "filtering projects" do
-      let!(:projects) { [project1, project2] }
+      let!(:current_projects) { [project1, project2] }
       let(:current_component) { component }
     end
     it "explores the budgets" do
@@ -66,7 +66,7 @@ describe "Voting index page", type: :system do
       end
     end
 
-    context "when user is not  authorized" do
+    context "when user is not authorized" do
       context "when there is only one authorization option configured" do
         let(:voting_url) { decidim_budgets.budget_voting_index_path(budget) }
         let(:authorization_url) { "/authorizations/new?handler=dummy_authorization_handler&redirect_url=#{CGI.escape(voting_url)}" }

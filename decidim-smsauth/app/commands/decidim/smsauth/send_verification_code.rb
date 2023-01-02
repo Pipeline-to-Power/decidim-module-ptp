@@ -3,7 +3,7 @@
 module Decidim
   module Smsauth
     # A command with all the business to add new line items to orders
-    class SendVerificationCode < Rectify::Command
+    class SendVerificationCode < Decidim::Command
       def initialize(form, organization: nil)
         @form = form
         @organization = organization

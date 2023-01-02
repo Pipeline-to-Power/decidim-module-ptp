@@ -59,7 +59,7 @@ module Decidim
                 hash_including(
                   "Body" => code,
                   "From" => twilio_sender,
-                  "StatusCallback" => %r{http://#{organization.host}/sms/twilio/delivery\?token=[a-f0-9]{32}},
+                  "StatusCallback" => %r{http://#{organization.host}:[0-9]+/sms/twilio/delivery\?token=[a-f0-9]{32}},
                   "To" => phone_number
                 )
               end

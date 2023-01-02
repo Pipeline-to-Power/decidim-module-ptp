@@ -31,7 +31,7 @@ module Decidim
           let!(:delivery) { Decidim::Sms::Twilio::Delivery.create(sid: sid, status: "") }
 
           before do
-            allow(JSON).to receive(:parse).and_return({ "sid": "Dummysid", "status": "Foo" })
+            allow(JSON).to receive(:parse).and_return({ sid: "Dummysid", status: "Foo" })
             request.env["decidim.current_organization"] = organization
             post :update, params: { token: token }
           end

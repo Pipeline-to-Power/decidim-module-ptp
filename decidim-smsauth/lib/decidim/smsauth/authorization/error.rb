@@ -5,7 +5,7 @@ module Decidim
     module Authorization
       class Error < StandardError; end
 
-      class AuthorizationBoundToOtherUserError; end
+      class AuthorizationBoundToOtherUserError < Error; end
     end
   end
 end

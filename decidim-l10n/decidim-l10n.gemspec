@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["sina.eftekhar@mainiotech.fi"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim/decidim-module-l10n"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
 
   s.name = "decidim-l10n"
   s.summary = "A decidim l10n module"
@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.add_dependency "decidim-core", Decidim::L10n.decidim_version
+  s.metadata["rubygems_mfa_required"] = "true"
 end
