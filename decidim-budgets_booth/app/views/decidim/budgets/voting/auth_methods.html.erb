@@ -1,0 +1,21 @@
+<div class="content">
+  <div class="wraper">
+    <div class="row collapse">
+      <div class="columns large-8 large-centered text-center page-title">
+        <h1><%= t ".title" %></h1>
+        <p><%= t ".explanation" %></p>
+        <p><%= t ".select_options" %></p>
+      </div>
+
+      <div class="row">
+        <% @auth_options.each do |option| %>
+          <div class="columns large-centered medium-centered text-center medium-4 medium-offset-2">
+            <%= link_to option.key == "sms" ? "/users/auth/sms" : option.root_path, class:"button expanded" do %>
+              <%= t("#{option.key}.name", scope: "decidim.authorization_handlers") %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

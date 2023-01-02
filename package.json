@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx decidim-*/app/packs"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
+    "@decidim/dev": "^0.27.0",
+    "@decidim/eslint-config": "^0.27.0"
+  }
+}

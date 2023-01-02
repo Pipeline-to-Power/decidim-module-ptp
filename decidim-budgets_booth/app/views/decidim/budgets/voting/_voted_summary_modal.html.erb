@@ -1,0 +1,26 @@
+<div class="reveal" id="voted-summary" role="dialog" data-reveal aria-modal="true" aria-labelledby="voted-summary-modal" aria-live="polite">
+  <div class="reveal__header text-center">
+    <h4 id="exit-voting-notification-label" class="reveal__title"><%= t(".title") %></h4>
+    <button class="close-button" data-close aria-label="<%= t(".label") %>" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <div class="card__content">
+      <h2 class="section-heading"><%= t(".list_description") %></h2>
+      <ul class="budget-summary__selected-list">
+        <% current_order.projects.each do |project| %>
+          <li class="budget-summary__selected-number">
+            <%= "#{translated_attribute(project.title)} #{budget_to_currency(project.budget_amount)}" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="columns medium-8 medium-offset-2">
+        <button class="button primary expanded" data-close type="button">
+          <%= t(".continue") %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

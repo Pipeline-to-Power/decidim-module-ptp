@@ -1,0 +1,71 @@
+<% add_decidim_page_title(t("devise.sessions.new.sign_in")) %>
+
+<div class="wrapper">
+  <div class="row collapse">
+    <div class="row collapse">
+      <div class="columns large-8 large-centered text-center page-title">
+
+        <h1><%= t("devise.sessions.new.sign_in") %></h1>
+        <% if current_organization.sign_up_enabled? %>
+          <p>
+            <%= t(".are_you_new?") %>
+            <%= link_to t(".register"), new_user_registration_path %>
+          </p>
+        <% elsif current_organization.sign_in_enabled? %>
+          <p>
+            <%= t(".sign_up_disabled") %>
+          </p>
+        <% else %>
+          <p>
+            <%= t(".sign_in_disabled") %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <% cache current_organization do %>
+      <%= render "decidim/devise/shared/omniauth_buttons" %>
+    <% end %>
+
+    <div class="row">
+      <div class="columns large-4 mediumlarge-6 medium-8 medium-centered">
+        <%= button_tag class: "columns small-12 button button--social button--email", data: { toggle: "form-wrapper" } do %>
+          <span class="button--social__icon">
+            <%= icon("envelope-closed") %>
+          </span>
+          <span class="button--social__text">
+            <%= t(".email") %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <% if current_organization.sign_in_enabled? %>
+      <div class="row <%= "hide" unless should_show? %>" id="form-wrapper" data-toggler=".hide">
+        <div class="columns large-6 medium-centered">
+          <div class="card">
+            <div class="card__content">
+              <%= decidim_form_for(resource, namespace: "session", as: resource_name, url: session_path(resource_name), html: { class: "register-form new_user" }) do |f| %>
+                <div>
+                  <div class="field">
+                    <%= f.email_field :email %>
+                  </div>
+                  <div class="field">
+                    <%= f.password_field :password, autocomplete: "off" %>
+                  </div>
+                </div>
+                  <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                      <%= f.check_box :remember_me %>
+                    </div>
+                  <% end %>
+                <div class="actions">
+                  <%= f.submit t("devise.sessions.new.sign_in"), class: "button expanded" %>
+                </div>
+              <% end %>
+              <%= render "decidim/devise/shared/links" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

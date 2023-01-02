@@ -1,0 +1,77 @@
+<% add_decidim_meta_tags(
+  title: translated_attribute(project.title),
+  description: translated_attribute(project.description)
+) %>
+
+<%
+edit_link(
+  resource_locator([project.budget, project]).edit,
+  :update,
+  :project,
+  project: project
+)
+%>
+<%= cell("decidim/budgets/limit_announcement", budget) %>
+
+<div class="voting-wrapper">
+  <div class="row columns">
+    <% if voting_mode? %>
+      <%= render partial: "budget_summary", locals: { include_heading: true } %>
+    <% else %>
+      <%= render partial: "pre_voting_budget_summary", locals: { include_heading: true } %>
+    <% end %>
+
+    <div class="row columns m-bottom">
+      <%= link_to budget_projects_path(budget), class: "link js-back-to-list" do %>
+        <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+        <%= t(".view_all_projects") %>
+      <% end %>
+      <h2 class="heading2"><%= translated_attribute project.title %></h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="project" class="columns section view-side mediumlarge-4 mediumlarge-push-8
+      large-3 large-push-9">
+      <div class="card extra">
+        <div class="card__content">
+          <div class="m-bottom">
+            <span class="definition-data__title"><%= t(".budget") %></span>
+            <span class="definition-data__number"><%= budget_to_currency project.budget_amount %></span>
+          </div>
+
+          <%= cell("decidim/budgets/project_votes_count", project, layout: :one_line, class: "display-block") %>
+
+          <% if voting_finished? %>
+            <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block") %>
+          <% elsif voting_open? && !current_order_checked_out? %>
+            <span class="text-wrap"><%= t(".pre_vote.introduction") %></span>
+            <%= link_to budget_voting_index_path(select_project: project.id), class: "button expanded hollow display-block" do %>
+              <span class="text-wrap"><%= progress?(budget) ? t(".pre_vote.continue_voting") : t(".pre_vote.start_voting") %></span>
+            <% end %>
+          <% else %>
+            <%= cell("decidim/budgets/project_voted_hint", project, text_medium: true, class: "success text-m display-block margin-top-1") if current_order_checked_out? && voted_for?(project) %>
+          <% end %>
+
+          <%= render partial: "decidim/shared/follow_button", locals: { followable: project, large: false  } %>
+        </div>
+      </div>
+      <%= resource_reference(project) %>
+      <%= render partial: "decidim/shared/share_modal" %>
+    </div>
+    <div class="columns mediumlarge-8 mediumlarge-pull-4">
+      <div class="section">
+        <%= cell("decidim/budgets/project_selected_status", project, as_label: true) %>
+        <%= decidim_sanitize_editor translated_attribute project.description %>
+        <%= cell "decidim/budgets/project_tags", project, context: { extra_classes: ["tags--project"] } %>
+      </div>
+      <%= attachments_for project %>
+      <%= linked_resources_for project, :proposals, "included_proposals" %>
+      <%= linked_resources_for project, :results, "included_projects" %>
+    </div>
+  </div>
+</div>
+
+<%= comments_for project, polymorphic: [project.budget] %>
+
+<%= javascript_pack_tag("decidim_budgets") %>

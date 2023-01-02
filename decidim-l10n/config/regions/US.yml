@@ -1,0 +1,30 @@
+US:
+  date:
+    formats:
+      decidim_short: "%m/%d/%Y"
+      decidim_short_with_month_name_short: "%b %d %Y"
+      decidim_with_day_and_month_name: "%A %d %b %Y"
+      decidim_with_month_name: "%B %d, %Y"
+      decidim_with_month_name_short: "%d %b"
+      default: "%m/%d/%Y"
+      long: "%B %d, %Y"
+      short: "%b %d"
+  time:
+    clock_format: 12
+    formats:
+      day_of_month: "%b %d"
+      day_of_week: "%a"
+      day_of_week_long: "%a %e"
+      day_of_year: "%m/%d/%y"
+      ddmm: "%m/%d"
+      ddmmyyyy: "%m/%d/%Y"
+      decidim_day_of_year: "%B %d, %Y"
+      decidim_short: "%m/%d/%Y %I:%M %p"
+      default: "%a, %d %b %Y %I:%M:%S %p %Z"
+      devise:
+        mailer:
+          invitation_instructions:
+            accept_until_format: "%B %d, %Y %I:%M %p"
+      long: "%B %d, %Y %I:%M %p"
+      short: "%b %d %I:%M %p"
+      time_of_day: "%I:%M %p"

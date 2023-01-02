@@ -1,0 +1,28 @@
+@import "vendor/slim-select/slimselect";
+
+.ss-main.country-select{
+  .ss-single-selected{
+    padding: $input-padding;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    height: 2.4375rem;
+    border: $input-border;
+    box-shadow: $input-shadow;
+  }
+
+  .ss-single-selected,
+  .ss-option{
+    .country-flag img{
+      position: relative;
+      display: inline-block;
+      width: 1rem;
+      margin: -.1rem .5rem 0 0;
+    }
+  }
+}
+
+form input[type='number']::-webkit-outer-spin-button,
+form input[type='number']::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}

@@ -1,0 +1,35 @@
+
+<div class="row collapse">
+  <div class="columns large-8 large-centered text-center page-title">
+    <h1><%= current_user ? t(".authenticate") : t(".sign_in") %></h1>
+    <h2><%= t(".step_two") %></h2>
+    <h3><%= t(".enter_verification_code") %></h3>
+    <p><%= t(".enter_verification_message", phone: current_phone_number) %></p>
+  </div>
+</div>
+<div class="columns large-4 medium-centered">
+  <div class="card">
+    <div class="card__content">
+      <div class="columns medium-7 large-10 medium-centered">
+        <%= decidim_form_for(@form, url: current_user ? users_auth_sms_update_path : users_auth_sms_authenticate_user_path, method: :post) do |form| %>
+          <div class="row">
+            <%= render partial: "development_hint" if Rails.env.development? || Rails.env.test? %>
+              <%= form.text_field :verification %>
+          </div>
+          <div class="row">
+            <div class="columns large-centered">
+              <%= form.submit t(".submit"), class:"button expanded" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <p class="text-center"><%= t(".not_receive") %></p>
+      <p class="text-center">
+        <%= link_to t(".resend_code"), users_auth_sms_resend_code_path %>
+        <%= t(".or") %>
+        <%= link_to t(".use_another_method"),  decidim.new_user_session_path %>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+<div class="budget-list__data <%= "flex-column" if voting? %>">
+  <% if voting_finished? %>
+    <div class="budget-list__data__votes">
+      <%= cell("decidim/budgets/project_votes_count", model) %>
+
+      <%= cell("decidim/budgets/project_voted_hint", model, class: "display-block margin-top-1") %>
+    </div>
+  <% else %>
+    <div class="text-center">
+      <%= render :selected_button_tag  if resource_added? && voting? %>
+    </div>
+    <div class="text-center">
+        <span class="budget-list__data__number">
+          <%= budget_to_currency(model.budget_amount) %>
+
+          <%= cell("decidim/budgets/project_votes_count", model, layout: :one_line, class: "display-inline-block") %>
+
+          <%= cell("decidim/budgets/project_voted_hint", model, class: "display-block margin-top-1") if current_order_checked_out? && resource_added? %>
+        </span>
+    </div>
+    <%= cell("decidim/budgets/project_vote_button", model) if !current_order_checked_out? && voting_open? && voting? %>
+  <% end %>
+</div>

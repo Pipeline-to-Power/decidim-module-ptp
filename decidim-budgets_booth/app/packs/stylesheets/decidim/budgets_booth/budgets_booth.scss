@@ -1,0 +1,137 @@
+/* css for decidim_budgets_booth */
+$passive-item-color: #919191;
+$active-item-color: $black;
+
+#voting-help,
+#thanks-message{
+  .reveal__header{
+    border: hidden;
+
+    .subtitle{
+      font-size: 1.2rem;
+    }
+  }
+
+  .voting-help-item{
+    @include breakpoint(medium down){
+      margin: 1rem 0;
+    }
+
+    .circle{
+      &.active{
+        fill: $active-item-color;
+        border: 4px solid $active-item-color;
+
+        svg{
+          fill: $active-item-color;
+        }
+      }
+
+      display: block;
+      position: relative;
+      border: 2px solid $passive-item-color;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      left: 10px;
+
+      @include breakpoint(medium down){
+        left: 20%;
+      }
+
+      svg{
+        display: block;
+        position: relative;
+        fill: $passive-item-color;
+        top: 23px;
+        left: 22px;
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .help-description{
+      margin-top: .5rem;
+      font-size: 1.2rem;
+
+      span{
+        &.strong{
+          font-weight: 800;
+        }
+      }
+
+      &.active{
+        color: $active-item-color;
+      }
+
+      color: $passive-item-color;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .card{
+    &.card--secondary{
+      .filters__section:first-child{
+        display: none;
+
+        @include breakpoint(medium){
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.card--list__icon{
+  margin-right: 0;
+}
+
+.budget-summary__progressbox--fixed{
+  padding: .5rem 2rem 1rem;
+
+  @include breakpoint(mediumlarge){
+    padding: 1rem 4rem;
+  }
+}
+
+.spaced-bottom{
+  margin-bottom: .3rem;
+}
+
+.budget-list{
+  &__item{
+    @include breakpoint(medium down){
+      margin-bottom: 2rem;
+      display: block;
+    }
+  }
+  &__data{
+    justify-content: center;
+  }
+}
+
+.flex-column{
+  flex-direction: column;
+
+    @include breakpoint(medium down){
+      flex-direction: column;
+    }
+}
+
+.card{
+  &.budget-summary{
+    display: flex;
+    flex-direction: column;
+
+    a{
+      margin: 1rem 0 0 0;
+    }
+  }
+}
+
+.customized-budget{
+  margin: auto;
+}

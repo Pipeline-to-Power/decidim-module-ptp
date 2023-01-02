@@ -1,0 +1,68 @@
+<% add_decidim_page_title(t(".welcome_to_platform")) %>
+
+<div class="wrapper">
+<div class="row collapse">
+  <div class="row collapse">
+    <div class="columns large-8 large-centered text-center page-title">
+      <h1 class="text-center"><%= t(".welcome_to_platform") %></h1>
+      <h2><%= t(".provide_account_detail") %></h2>
+      <p><%= t(".detail_info") %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns large-6 medium-10 medium-centered">
+
+      <%= decidim_form_for(@form, as: :user, url: users_auth_sms_user_registry_path, html: { class: "register-form new_user", id: "register-form" }) do |f| %>
+        <div class="card">
+          <div class="card__content">
+            <%= form_required_explanation %>
+
+            <div class="user-person">
+              <div class="field">
+                <%= f.text_field :name,  autocomplete: "name" %>
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.email_field :email, help_text: t(".email_help"),autocomplete: "email" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="card__tos">
+          <div class="card__content">
+            <h3><%= t(".tos_title") %></h3>
+
+            <p class="tos-text">
+              <%= strip_tags(translated_attribute(terms_and_conditions_page.content)) %>
+            </p>
+
+            <div class="field">
+              <%= f.check_box :tos_agreement, label: t(".tos_agreement", link: link_to(t(".terms"), terms_page_path)) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="card__newsletter">
+          <div class="card__content">
+            <h3><%= t(".newsletter_title") %></h3>
+              <div class="field">
+                <%= f.check_box :newsletter, label: t(".newsletter"), label_options: { class: "login__form-checkbox-label" }, checked: @form.newsletter %>
+              </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__content">
+            <div class="actions">
+              <%= f.submit t("devise.registrations.new.sign_up"), class: "button expanded" %>
+            </div>
+            <%= yield :devise_links %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+<%= render "decidim/devise/shared/newsletter_modal" %>

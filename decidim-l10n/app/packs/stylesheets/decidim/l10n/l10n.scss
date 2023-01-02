@@ -1,0 +1,5 @@
+@import "vendor/flatpickr/flatpickr.min";
+
+input[readonly].flatpickr-input{
+  background-color: $input-background;
+}

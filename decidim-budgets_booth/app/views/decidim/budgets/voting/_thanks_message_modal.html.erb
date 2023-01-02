@@ -1,0 +1,28 @@
+<div class="reveal" id="thanks-message" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="exit-voting-notification-label" aria-live="polite">
+  <div class="reveal__header text-center">
+    <h4 id="exit-voting-notification-label"><%= t(".title") %></h4>
+    <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
+      <div class="circle active">
+        <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box.svg" %>
+      </div>
+    </div>
+  </div>
+  <% if thanks_text.present? %>
+    <div class="row text-left margin-bottom-2">
+      <%== thanks_text %>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="columns medium-8 medium-offset-2">
+      <button class="button expanded" data-close type="button">
+        <%= t".continue" %>
+      </button>
+    </div>
+  </div>
+</div>

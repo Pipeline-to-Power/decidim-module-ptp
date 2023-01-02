@@ -1,0 +1,15 @@
+<div class="collection-sort-controls row small-up-1 medium-up-3 card-grid">
+  <div class="column">
+    <%= order_selector available_orders, i18n_scope: "decidim.budgets.projects.orders" %>
+  </div>
+</div>
+
+<div class="budget-list">
+  <% projects.each do |project| %>
+    <%= render partial: "project", locals: { project: project } %>
+    <%= render partial: "project_modal", locals: { project: project } if voting_mode? %>
+  <% end %>
+  <%= render partial: "project_modal", locals: { project: @select_project } if @select_project.present? %>
+</div>
+<%= render partial: "budget_excess" %>
+<%= decidim_paginate projects %>

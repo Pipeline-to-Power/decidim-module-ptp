@@ -1,0 +1,44 @@
+<% add_decidim_page_title(t("profile", scope: "layouts.decidim.user_menu")) %>
+<% content_for(:subtitle) { t("profile", scope: "layouts.decidim.user_menu") } %>
+
+<div class="row">
+  <%= decidim_form_for(@account, url: account_path, method: :put, html: { autocomplete: "off" }) do |f| %>
+    <input autocomplete="off" name="hidden" type="password" style="display:none;">
+    <div class="columns large-4">
+      <%= f.upload :avatar %>
+    </div>
+
+    <div class="columns large-8 end">
+      <%= form_required_explanation %>
+
+      <%= f.text_field :name %>
+      <%= f.text_field :nickname %>
+      <%= f.email_field :email %>
+      <%= render partial: "change_phone_number", locals: { f: f } if @account.phone_number.present? %>
+      <%= f.url_field :personal_url %>
+      <%= f.text_area :about, rows: 5 %>
+
+      <%= f.collection_select(
+            :locale,
+            @account.organization.available_locales,
+            :to_s,
+            ->(locale) {locale_name(locale) }
+          ) %>
+      <p class="help-text"><%= t(".available_locales_helper") %></p>
+      <% if @account.errors[:password].any? || @account.errors[:password_confirmation].any? %>
+        <%= render partial: "password_fields", locals: { form: f } %>
+      <% else %>
+        <% if current_organization.sign_in_enabled? %>
+          <p>
+            <button type="button" data-toggle="passwordChange" class="link change-password"><%= t ".change_password" %></button>
+          </p>
+          <div id="passwordChange" class="toggle-show" data-toggler=".is-expanded">
+            <%= render partial: "password_fields", locals: { form: f } %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= f.submit t(".update_account") %>
+    </div>
+  <% end %>
+</div>

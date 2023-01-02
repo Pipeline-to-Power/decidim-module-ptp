@@ -1,0 +1,24 @@
+<div class="content">
+  <div class="wraper">
+    <div class="row collapse">
+      <div class="columns large-8 large-centered text-center page-title margin-top-3">
+        <h1><%= t(".title") %></h1>
+        <%= render partial: "phone_instructions" %>
+      </div>
+      <div class="row">
+        <div class="columns large-6 medium-centered" id="select-wrapper">
+          <div class="card">
+            <div class="card__content">
+              <%= decidim_form_for(@form, url: users_auth_sms_send_message_path, method: :post) do |form| %>
+                <%= render partial: "phone_form", locals: { form: form } %>
+              <% end %>
+              <p class="text-center">
+                <%= link_to t(".another_method"), decidim.new_user_session_path, class: "text-center" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
