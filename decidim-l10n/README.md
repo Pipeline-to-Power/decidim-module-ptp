@@ -6,13 +6,19 @@ Localization improvements for the United States.
 
 L10n will be available as a Component for a Participatory
 Space.
+After installing this gem, all of the dates will be shown in U.S format. Also, date-pickers change to reflect these changes.
+
+![U.S format dates](date_change.png)
+
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-l10n"
+gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp" do
+  gem "decidim-l10n"
+end
 ```
 
 And then execute:
@@ -27,4 +33,5 @@ See [Decidim](https://github.com/decidim/decidim).
 
 ## License
 
-This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+See [LICENSE-AGPLv3.txt](../LICENSE-AGPLv3.txt).
+

@@ -1,27 +1,32 @@
-# Decidim::Sms-twilio
+# Decidim::Ptp
 
-Twilio SMS integration.
+A [Decidim](https://github.com/decidim/decidim) module that encapsulates following capabilities:
+1. decidim-budgets_booth module, which overrides the voting process.
+2. decidim-l10n module, that provides different formats for dates and times.
+3. decidim-sms-twilio module, which provides Twilio SMS integration.
+4. decdidim-smsauth module, that provides SMS based authentication implementation.
 
-## Usage
-
-Sms-twilio will be available as a Component for a Participatory
-Space.
+You may add a selection of the these modules, in which case, please refer to those modules readme.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add the following to your application's Gemfile:
 
 ```ruby
-gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp" do
-  gem "decidim-sms-twilio"
-end
+gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp"
 ```
+By the time of providing this documentation, this gem was not added to reby gem. If the gem has been added to the
+rubygems, you can add it from the rubygem instead:
 
+```ruby
+gem "decidim-ptp"
+```
 And then execute:
 
 ```bash
 bundle
 ```
+
 ## Configuration
 
 ### Configure Twilio
@@ -68,4 +73,4 @@ See [Decidim](https://github.com/decidim/decidim).
 
 ## License
 
-See [LICENSE-AGPLv3.txt](../LICENSE-AGPLv3.txt).
+See [LICENSE-AGPLv3.txt](LICENSE-AGPLv3.txt).
