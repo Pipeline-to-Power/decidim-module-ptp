@@ -1,14 +1,12 @@
 # Decidim::Ptp
 
 A [Decidim](https://github.com/decidim/decidim) module that encapsulates following capabilities:
-1. Decidim::BudgetsBooth module, which overrides the voting process.
-2. Decidim::L10n module, that provides different formats for dates and times.
-3. Decidim::Sms::Twilio, which provides Twilio SMS integration.
-4. Decidim::Smsauth, that provides SMS based authentication implementation.
+1. decidim-budgets_booth module, which overrides the voting process.
+2. decidim-l10n module, that provides different formats for dates and times.
+3. decidim-sms-twilio module, which provides Twilio SMS integration.
+4. decdidim-smsauth module, that provides SMS based authentication implementation.
 
 You may add a selection of the these modules, in which case, please refer to those modules readme.
-The development has been sponsored by the
-[Add the sponsor](http://www.add_sponsore.me)
 
 ## Installation
 
@@ -19,6 +17,7 @@ gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp", branch: "rele
 ```
 By the time of providing this documentation, this gem was not added to reby gem. If the gem has been added to the
 rubygems, you can add it from the rubygem instead:
+
 ```ruby
 gem "decidim-ptp"
 ```
@@ -46,8 +45,7 @@ Please refer to [Twilio documentation](https://www.twilio.com/docs/twilio-cli) f
 Next, you need to add the followings to your secrets.yml file:
 
 ```yml
-default: &default
-# Add the following to the end of your default list:
+# Add the following to the end of your environment list:
 twilio:
   twilio_account_sid: <%= ENV["TWILIO_ACCOUNT_SID"] %>
   twilio_auth_token: <%= ENV["TWILIO_AUTH_TOKEN"] %>
@@ -58,8 +56,6 @@ Aslo, add the sms option to your omniauth in your secrets, along with other omni
 provide:
 
 ```yml
-default:
-  <<: *default
   omniauth:
     sms:
       enabled: true

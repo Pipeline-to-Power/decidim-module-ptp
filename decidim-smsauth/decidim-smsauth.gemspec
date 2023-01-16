@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Sina Eftekhar"]
   s.email = ["sina.eftekhar@mainiotech.fi"]
   s.license = "AGPL-3.0"
-  s.homepage = "https://github.com/decidim/decidim-module-smsauth"
+  s.homepage = "https://github.com/Pipeline-to-Power/decidim-module-ptp"
   s.required_ruby_version = ">= 2.7"
 
   s.name = "decidim-smsauth"

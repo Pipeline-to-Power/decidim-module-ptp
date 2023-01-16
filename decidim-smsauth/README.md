@@ -12,7 +12,9 @@ Space.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-smsauth"
+gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp", branch: "release/0.26-stable" do
+  gem "decidim-smsauth"
+end
 ```
 
 And then execute:
@@ -27,4 +29,4 @@ See [Decidim](https://github.com/decidim/decidim).
 
 ## License
 
-This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+See [LICENSE-AGPLv3.txt](../LICENSE-AGPLv3.txt).

@@ -12,7 +12,9 @@ Space.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-ptp-budgets"
+gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp", branch: "realse/0.26-stable" do
+  gem "decidim-budgets_booth"
+end
 ```
 
 And then execute:
@@ -27,4 +29,4 @@ See [Decidim](https://github.com/decidim/decidim).
 
 ## License
 
-This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+See [LICENSE-AGPLv3.txt](../LICENSE-AGPLv3.txt).
