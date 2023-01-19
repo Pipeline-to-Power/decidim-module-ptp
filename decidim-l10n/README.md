@@ -26,12 +26,3 @@ And then execute:
 ```bash
 bundle
 ```
-
-## Contributing
-
-See [Decidim](https://github.com/decidim/decidim).
-
-## License
-
-See [LICENSE-AGPLv3.txt](../LICENSE-AGPLv3.txt).
-
