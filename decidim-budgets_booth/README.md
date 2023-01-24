@@ -1,4 +1,4 @@
-# Decidim::Ptp-budgets
+# Decidim::Budgets_booth
 
 Improvements to the budgets module based on the customer requirements.
 
