@@ -37,4 +37,4 @@ jobs:
       - uses: ./.github/actions/module-rspec
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ env.DECIDIM_MODULE }}
+          name: ${{ env.DECIDIM_MODULE }}.
