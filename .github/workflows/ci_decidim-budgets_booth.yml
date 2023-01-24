@@ -1,4 +1,4 @@
-name: "[CI] SmsTwilio"
+name: "[CI] BudgetsBooth"
 on: [push, pull_request]
 
 env:
