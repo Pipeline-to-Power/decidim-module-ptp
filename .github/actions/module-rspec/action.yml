@@ -20,6 +20,7 @@ runs:
     - name: Get npm cache directory path
       id: npm-cache-dir-path
       run: echo "::set-output name=dir::$(npm get cache)-${{ inputs.name }}"
+      shell: "bash"
     - uses: actions/cache@v2
       id: npm-cache
       with:
@@ -29,15 +30,19 @@ runs:
           npm-
     - run: bundle exec rake test_app
       name: Create test app
+      shell: "bash"
     - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
       name: Create the screenshots folder
+      shell: "bash"
     - uses: nanasess/setup-chromedriver@v1.0.1
     - run: RAILS_ENV=test bundle exec rails assets:precompile
       name: Precompile assets
       working-directory: ./spec/decidim_dummy_app/
+      shell: "bash"
     - run: bundle exec rspec
       name: RSpec
       working-directory: ${{ inputs.name }}
+      shell: "bash"
     - uses: codecov/codecov-action@v1
     - uses: actions/upload-artifact@v2
       if: always()
