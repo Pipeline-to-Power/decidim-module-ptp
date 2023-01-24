@@ -1,4 +1,4 @@
-# Decidim::Budgets_booth
+# Decidim::BudgetsBooth
 
 Improvements to the budgets module based on the customer requirements.
 
