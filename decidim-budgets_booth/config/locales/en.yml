@@ -9,6 +9,10 @@ en:
             confirm_vote_text: Text shown on the confirm vote page
             thanks_text: Popup text after voting
     budgets:
+      admin:
+        budgets:
+          edit:
+            images: Images
       budgets_list:
         vote: Show
       partials:
