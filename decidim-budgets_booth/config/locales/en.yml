@@ -8,6 +8,8 @@ en:
           global:
             confirm_vote_text: Text shown on the confirm vote page
             thanks_text: Popup text after voting
+            workflow_choices:
+              zip_code: "Vote based on zip code: allows participants to vote on budgets matching their entered zip code."
     budgets:
       admin:
         budgets:

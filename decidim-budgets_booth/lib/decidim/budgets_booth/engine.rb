@@ -83,11 +83,14 @@ module Decidim
       end
 
       # Initializing BudgetsBooth engine before running the server
+      # Also, we neeed to new workflow for zip_code_voting as a configuration option.
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
           settings.attribute :confirm_vote_text, type: :text, translated: true, editor: true
           settings.attribute :thanks_text, type: :text, translated: true, editor: true
+          settings.attribute :workflow, type: :enum, default: "one",
+                              choices: -> { Decidim::Budgets.workflows.merge(zip_code: Decidim::BudgetsBooth::BudgetWorkflowZipcode).keys.map(&:to_s) }
         end
       end
     end
