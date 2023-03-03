@@ -6,6 +6,15 @@ module Decidim
     module ProjectsHelperExtensions
       delegate :progress?, to: :current_workflow
 
+      def cuurent_phase
+        Decidim::ParticipatoryProcesses::OrganizationParticipatoryProcesses.new(current_organization)
+                                                                           .query
+                                                                           .where(slug: params[:participatory_process_slug])
+                                                                           .first
+                                                                           .active_step
+                                                                           .title
+      end
+
       def voting_mode?
         false
       end

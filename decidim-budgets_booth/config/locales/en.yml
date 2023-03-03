@@ -15,6 +15,9 @@ en:
             images: Images
       budgets_list:
         vote: Show
+      budget_list_item:
+        take_part: Take part
+        current_phase: "Current phase: %{phase}"
       partials:
         voting_help_modal:
           confirm: I understand how to vote
