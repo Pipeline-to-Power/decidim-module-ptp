@@ -25,6 +25,7 @@ module Decidim
             namespace :voting do
               resources :projects, only: [:show]
             end
+            resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
           end
         end
       end
