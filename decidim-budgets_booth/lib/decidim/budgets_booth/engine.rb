@@ -75,6 +75,14 @@ module Decidim
             Decidim::BudgetsBooth::BudgetExtensions
           )
 
+          Decidim::User.include(
+            Decidim::BudgetsBooth::UserExtensions
+          )
+
+          Decidim::Component.include(
+            Decidim::BudgetsBooth::ComponentExtensions
+          )
+
           # Forms extensions
           Decidim::Budgets::Admin::BudgetForm.include(
             Decidim::BudgetsBooth::BudgetFormExtensions
@@ -89,8 +97,6 @@ module Decidim
         manifest.settings(:global) do |settings|
           settings.attribute :confirm_vote_text, type: :text, translated: true, editor: true
           settings.attribute :thanks_text, type: :text, translated: true, editor: true
-          settings.attribute :workflow, type: :enum, default: "one",
-                              choices: -> { Decidim::Budgets.workflows.merge(zip_code: Decidim::BudgetsBooth::BudgetWorkflowZipcode).keys.map(&:to_s) }
         end
       end
     end
