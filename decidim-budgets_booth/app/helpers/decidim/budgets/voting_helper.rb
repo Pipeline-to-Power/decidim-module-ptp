@@ -7,8 +7,8 @@ module Decidim
         true
       end
 
-      def confirm_vote_text
-        translated_attribute(component_settings.try(:confirm_vote_text)).presence
+      def confirm_vote_content
+        translated_attribute(component_settings.try(:confirm_vote_content)).presence
       end
 
       def authorization_providers

@@ -25,7 +25,9 @@ module Decidim
             namespace :voting do
               resources :projects, only: [:show]
             end
-            resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
+            collection do
+              resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
+            end
           end
         end
       end
@@ -96,7 +98,7 @@ module Decidim
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
-          settings.attribute :confirm_vote_text, type: :text, translated: true, editor: true
+          settings.attribute :confirm_vote_contnet, type: :text, translated: true, editor: true
           settings.attribute :thanks_text, type: :text, translated: true, editor: true
         end
       end
