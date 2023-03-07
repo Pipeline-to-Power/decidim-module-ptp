@@ -31,8 +31,8 @@ module Decidim
         session.delete(:thanks_message)
       end
 
-      def thanks_text
-        translated_attribute(component_settings.try(:thanks_text)).presence || t("decidim.budgets.voting.thanks_message_modal.default_text")
+      def thanks_content
+        translated_attribute(component_settings.try(:thanks_content)).presence || t("decidim.budgets.voting.thanks_message_modal.default_text")
       end
 
       def i18n_scope

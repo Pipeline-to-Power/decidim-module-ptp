@@ -99,7 +99,7 @@ module Decidim
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
           settings.attribute :confirm_vote_contnet, type: :text, translated: true, editor: true
-          settings.attribute :thanks_text, type: :text, translated: true, editor: true
+          settings.attribute :thanks_content, type: :text, translated: true, editor: true
         end
       end
     end
