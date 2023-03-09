@@ -8,7 +8,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        has_many :budgets_user_data, foreign_key: "decidim_component_id", class_name: "Decidim::BudgetsUserData", dependent: :destroy
+        has_many :budgets_user_data, foreign_key: "decidim_component_id", class_name: "::Decidim::Budgets::UserData", dependent: :destroy
       end
     end
   end
