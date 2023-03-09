@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require "budgets_workflow_zip_code"
-Decidim::Budgets.workflows[:zip_code] = BudgetsWorkflowZipCode
+require "decidim/budgets_booth/zip_code"
+Decidim::Budgets.workflows[:zip_code] = Decidim::BudgetsBooth::ZipCode
