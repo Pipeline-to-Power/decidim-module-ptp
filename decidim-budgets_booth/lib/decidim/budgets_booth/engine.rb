@@ -100,6 +100,7 @@ module Decidim
         manifest.settings(:global) do |settings|
           settings.attribute :confirm_vote_content, type: :text, translated: true, editor: true
           settings.attribute :thanks_content, type: :text, translated: true, editor: true
+          settings.attribute :city_name, type: :string, translated: true
         end
       end
     end

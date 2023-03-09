@@ -8,6 +8,7 @@ en:
           global:
             confirm_vote_content: Text shown on the confirm vote page
             thanks_content: Popup text after voting
+            city_name: City name to be shown in the zip_code entering view
             workflow_choices:
               zip_code: "Vote based on zip code: allows participants to vote on budgets matching their entered zip code."
     budgets:
@@ -84,7 +85,7 @@ en:
           submit: FIND MY BALLOTS
           list_info: I understand that to vote on people's money I must
           list:
-            item_one: Live in NYC.
+            item_one: Live in %{city_name}.
             item_two: Be at least 11 years old
             item_three: Only vote one time
           affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
