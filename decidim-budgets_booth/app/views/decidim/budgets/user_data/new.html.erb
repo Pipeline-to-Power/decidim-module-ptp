@@ -1,1 +1,67 @@
-TOBE added
+<div class="row collapse">
+  <div class="columns large-8 large-centered text-center page-title">
+    <h1>
+      <%= t(".welcome") %><br>
+      <strong><%= translated_attribute(current_participatory_space.title) %></strong>
+    </h1>
+  </div>
+</div>
+
+
+<div class="columns large-5 medium-centered">
+  <div class="card">
+    <div class="card__content">
+      <div class="columns medium-8 large-10 medium-centered text-center">
+        <h2><%= t(".title") %></h2>
+        <p><%= t(".description") %></p>
+        <%= decidim_form_for(@form, url: zip_code_index_path, method: :post) do |form| %>
+          <div class="field">
+            <div id="zip-code" class="row">
+              <div class="columns small-2 small-offset-1">
+                <input type="text" name="digit1" class="small-10 text-center" autocomplete="off">
+              </div>
+              <div class="columns small-2">
+                <input type="text" name="digit2" class="small-10 text-center" autocomplete="off">
+              </div>
+              <div class="columns small-2">
+                <input type="text" name="digit3" class="small-10 text-center" autocomplete="off">
+              </div>
+              <div class="columns small-2">
+                <input type="text" name="digit4" class="small-10 text-center" autocomplete="off">
+              </div>
+              <div class="columns small-2 end">
+                <input type="text" name="digit5" class="small-10 text-center" autocomplete="off">
+              </div>
+            </div>
+            <br/>
+            <span class="form-error is-invisible" role="alert" id="zip-code-error">There's an error in this field.</span>
+            <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
+          </div>
+
+            <div class="card">
+              <div class="card__content">
+                <div class="columns medium-7 large-10 medium-centered text-left">
+                  <p><%= t(".list_info")%></p>
+                  <ul>
+                    <li><%= t(".list.item_one") %></li>
+                    <li><%= t(".list.item_two") %></li>
+                    <li><%= t(".list.item_three") %></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <div class="row column text-left margin-bottom-3">
+            <%= form.check_box :affirm_statements_are_correct, label: t(".affirm_statements"), required: true %>
+            <small data-abide-error class="form-error" id="affirm-checkbox" role="alert" data-accessibility-violation="true">must be accepted</small>
+          </div>
+          <div class="row">
+            <div class="columns large-centered">
+              <%= form.submit t(".submit"), class:"button expanded" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "decidim_zip_code" %>
