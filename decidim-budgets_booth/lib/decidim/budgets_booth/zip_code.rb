@@ -10,20 +10,16 @@ module Decidim
       end
 
       # User can vote in the resource where they have an order in progress or in the randomly selected resource.
-      def vote_allowed?(resource, consider_progress: true)
+      def vote_allowed?(resource, _consider_progress: true)
         return false unless user_zip_code
 
         return false unless zip_codes(projects(resource)).include?(user_zip_code)
 
-        if consider_progress
-          progress?(resource) || progress.none?
-        else
-          true
-        end
+        true
       end
 
       def budgets
-        budgets.select { |budjet| vote_allowed?(budjet, _consider_progress: true) }
+        super.select { |item| vote_allowed?(item) }
       end
 
       private
