@@ -89,6 +89,8 @@ en:
             item_two: Be at least 11 years old
             item_three: Only vote one time
           affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
+          first_input: Please enter your zip code. Character 1
+          other_inputs: Character %{num}
         error:
           unknown: There was an error. Please try again.
           registered_zip_code: You have already registered your zip code.
