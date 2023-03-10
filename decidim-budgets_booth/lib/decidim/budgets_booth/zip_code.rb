@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    class ZipCodeWorkflow < ::Decidim::Budgets::Workflows::Base
+    class ZipCode < ::Decidim::Budgets::Workflows::Base
       include ScopeManager
       # Highlight the resource if the user didn't vote and is allowed to vote on it.
       def highlighted?(resource)
@@ -10,10 +10,20 @@ module Decidim
       end
 
       # User can vote in the resource where they have an order in progress or in the randomly selected resource.
-      def vote_allowed?(resource, _consider_progress: true)
+      def vote_allowed?(resource, consider_progress: true)
         return false unless user_zip_code
 
-        zip_codes(projects(resource)).include?(user_zip_code)
+        return false unless zip_codes(projects(resource)).include?(user_zip_code)
+
+        if consider_progress
+          progress?(resource) || progress.none?
+        else
+          true
+        end
+      end
+
+      def budgets
+        budgets.select { |budjet| vote_allowed?(budjet, _consider_progress: true) }
       end
 
       private
