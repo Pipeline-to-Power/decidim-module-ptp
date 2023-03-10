@@ -7,5 +7,6 @@ module Decidim
   # allows users to create budgets_booth in a participatory space.
   module BudgetsBooth
     autoload :ZipCode, "decidim/budgets_booth/zip_code"
+    autoload :ScopeManager, "decidim/budgets_booth/scope_manager"
   end
 end
