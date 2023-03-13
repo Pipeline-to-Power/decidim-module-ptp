@@ -32,7 +32,7 @@
               </div>
             </div>
             <br/>
-            <span class="form-error is-invisible" role="alert" id="zip-code-error">There's an error in this field.</span>
+            <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.forms.errors.error") %></span>
             <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
           </div>
 
