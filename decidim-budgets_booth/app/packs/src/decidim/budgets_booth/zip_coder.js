@@ -1,25 +1,22 @@
 $(() => {
   const zipcodeInputs = document.querySelectorAll('#zip-code input[type="text"]');
   zipcodeInputs.forEach((input, ind) => {
+    input.setAttribute("maxlength", "1");
     input.addEventListener("click", () => {
-      input.value = ""
+      input.select();
     })
     input.addEventListener("input", () => {
       const val = input.value
-      if (val.length > 1) {
-        val.slice(0, 1)
+
+      if (!(/\d/).test(val)) {
+        input.value = ""
+        return
       }
-      if (val.length === 1) {
-        if (!(/^\d+$/).test(val.toString())) {
-          input.value = ""
-          return
-        }
-        const nextInput = zipcodeInputs[ind + 1];
-        if (nextInput) {
-          nextInput.focus();
-        } else {
-          input.blur()
-        }
+      const nextInput = zipcodeInputs[ind + 1];
+      if (nextInput) {
+        nextInput.focus();
+      } else {
+        input.blur()
       }
     })
   });
