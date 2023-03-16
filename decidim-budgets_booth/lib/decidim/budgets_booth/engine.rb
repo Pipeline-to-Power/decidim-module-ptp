@@ -73,6 +73,10 @@ module Decidim
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )
 
+          Decidim::Budgets::BudgetsController.include(
+            Decidim::BudgetsBooth::BudgetsControllerExtensions
+          )
+
           # Models extensions
           Decidim::Budgets::Budget.include(
             Decidim::BudgetsBooth::BudgetExtensions
