@@ -8,5 +8,6 @@ module Decidim
   module BudgetsBooth
     autoload :ZipCode, "decidim/budgets_booth/zip_code"
     autoload :ScopeManager, "decidim/budgets_booth/scope_manager"
+    autoload :BudgetsControllerHelper, "decidim/budgets_booth/budgets_controller_helper"
   end
 end
