@@ -30,6 +30,14 @@ module Decidim
       def decidim_budgets
         @decidim_budgets ||= Decidim::EngineRouter.main_proxy(current_component)
       end
+
+      def voted?(resource)
+        current_user && status(resource) == :voted
+      end
+
+      def status(budget)
+        @status ||= current_workflow.status(budget)
+      end
     end
   end
 end

@@ -28,14 +28,6 @@ module Decidim
           "decidim/budgets/voting_layout"
         end
 
-        def voted?(resource)
-          current_user && status(resource) == :voted
-        end
-
-        def status(budget)
-          @status ||= current_workflow.status(budget)
-        end
-
         def voted_all_budgets?
           current_workflow.budgets.map do |budget|
             return false unless voted?(budget)
