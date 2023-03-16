@@ -8,9 +8,8 @@ module Decidim
 
       included do
         layout :determine_layout
-        before_action :ensure_authenticated
-        before_action :ensre_user_zip_code
-        before_action :determine_layout
+        before_action :ensure_authenticated, if: :zip_code_workflow?
+        before_action :ensre_user_zip_code, if: :zip_code_workflow?
 
         def index
           # we need to redefine this action to avoid redirect in case of single budget
