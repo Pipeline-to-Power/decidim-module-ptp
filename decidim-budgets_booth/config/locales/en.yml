@@ -16,6 +16,10 @@ en:
         budgets:
           edit:
             images: Images
+      budgets:
+        index:
+          login_before_access: You need to login first.
+          set_zip_code_before_access: You need to enter your zip code first.
       budgets_list:
         vote: Show
       budget_list_item:
