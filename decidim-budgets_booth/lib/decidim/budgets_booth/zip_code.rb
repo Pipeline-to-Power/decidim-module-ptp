@@ -9,7 +9,8 @@ module Decidim
         vote_allowed?(resource)
       end
 
-      # User can vote in the resource where they have an order in progress or in the randomly selected resource.
+      # User can vote in the resource inside their area where they live. This is being determined
+      # by their zip code.
       def vote_allowed?(resource, _consider_progress: true)
         return false unless user_zip_code
 
