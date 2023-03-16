@@ -64,6 +64,12 @@ module Decidim
             Decidim::BudgetsBooth::BudgetListItemCellExtensions
           )
 
+          # We need to  change the budgets header only when zip-code is enabled.
+          # for that we need to access #zip_code_workflow? inside BudgetsControllerHelper
+          Decidim::Budgets::BudgetsHeaderCell.include(
+            Decidim::BudgetsBooth::BudgetsControllerHelper
+          )
+
           # Controllers extensions
           Decidim::Budgets::LineItemsController.include(
             Decidim::BudgetsBooth::LineItemsControllerExtensions
