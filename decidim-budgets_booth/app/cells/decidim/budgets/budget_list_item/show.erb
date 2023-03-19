@@ -4,17 +4,30 @@
       <div class="card__content">
         <%= link_to budget_path(budget), class: link_class do %>
           <h3 class="card--title">
-            <%= translated_attribute(title) %>
+            <% if zip_code_workflow? %>
+              <%= translated_attribute(budget.scope.name) %>
+            <% else %>
+              <%= translated_attribute(title) %>
+            <% end %>
           </h3>
         <% end %>
 
-        <div class="heading5">
-          <strong>
-            <%= budget_to_currency(total_budget) %>
-          </strong>
-        </div>
+        <% if zip_code_workflow? %>
+          <div class="heading5 margin-bottom-3">
+              <p><%= budget_scope_type(budget) %></p>
+          </div>
+          <%= link_to budget_path(budget), class: "button hollow" do %>
+            <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
+          <% end %>
+        <% else %>
+          <div class="heading5">
+              <strong>
+                <%= budget_to_currency(total_budget) %>
+              </strong>
+            </div>
 
-        <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
+          <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
+        <% end %>
       </div>
     </div>
     <div class="columns mediumlarge-8 large-6 card--process__column">
