@@ -29,6 +29,7 @@ en:
       budget_list_item:
         take_part: Take part
         current_phase: "Current phase: %{phase}"
+        more_info: More info
       partials:
         voting_help_modal:
           confirm: I understand how to vote
