@@ -70,6 +70,10 @@ module Decidim
             Decidim::BudgetsBooth::BudgetsControllerHelper
           )
 
+          Decidim::Budgets::BudgetsHeaderCell.include(
+            Decidim::BudgetsBooth::ScopeManager
+          )
+
           # Controllers extensions
           Decidim::Budgets::LineItemsController.include(
             Decidim::BudgetsBooth::LineItemsControllerExtensions
