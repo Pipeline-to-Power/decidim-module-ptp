@@ -20,6 +20,10 @@ en:
         index:
           login_before_access: You need to login first.
           set_zip_code_before_access: You need to enter your zip code first.
+      budgets_header:
+        title: "BALLOTS AVAILABLE TO YOU:"
+        based_on_zip_code: Bases on your ZIP code - %{zip_code}. Not the right one?
+        change_it_here: Change it here
       budgets_list:
         vote: Show
       budget_list_item:
