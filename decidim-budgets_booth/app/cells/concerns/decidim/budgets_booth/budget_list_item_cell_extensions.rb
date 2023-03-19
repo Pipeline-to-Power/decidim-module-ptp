@@ -4,6 +4,8 @@ module Decidim
   module BudgetsBooth
     module BudgetListItemCellExtensions
       extend ActiveSupport::Concern
+      include BudgetsControllerHelper
+      include ScopeManager
 
       included do
         def button_text
