@@ -5,12 +5,18 @@
       <h2 class="section-heading">
         <%= t(".title") %>
       </h2>
+      <p>
+        <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user, current_component))%>
+        <%= link_to t(".change_it_here"), new_zip_code_path %>
+      </p>
     <% else %>
       <%= decidim_sanitize_editor(landing_page_content) %>
     <% end %>
     </div>
   </div>
   <div class="columns medium-5 mediumlarge-4">
-  another
+    <div class="callout warning font-customizer">
+      <%= decidim_sanitize_editor(landing_page_content) %>
+    </div>
   </div>
 </div>
