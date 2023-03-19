@@ -14,7 +14,7 @@
     <%= render partial: "layouts/decidim/offline_banner" %>
     <!--googleon: all--><!--/noindex-->
 
-    <%= render partial: "layouts/decidim/budgets/voting_notification" unless !respond_to?(:current_order) || current_order_checked_out? %>
+    <%= render partial: "layouts/decidim/budgets/voting_notification" %>
     <%= render "layouts/decidim/budgets/voting_wrapper" do %>
       <%= yield %>
     <% end %>
