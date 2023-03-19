@@ -12,9 +12,9 @@ module Decidim
       # User can vote in the resource inside their area where they live. This is being determined
       # by their zip code.
       def vote_allowed?(resource, _consider_progress: true)
-        return false unless user_zip_code
+        return false unless user_zip_code(user, budgets_component)
 
-        return false unless zip_codes(projects(resource)).include?(user_zip_code)
+        return false unless zip_codes(projects(resource)).include?(user_zip_code(user, budgets_component))
 
         true
       end
@@ -27,11 +27,6 @@ module Decidim
 
       def projects(budget)
         Decidim::Budgets::Project.where(budget: budget)
-      end
-
-      def user_zip_code
-        user_data = user.budgets_user_data.find_by(component: budgets_component)
-        user_data.metadata
       end
     end
   end
