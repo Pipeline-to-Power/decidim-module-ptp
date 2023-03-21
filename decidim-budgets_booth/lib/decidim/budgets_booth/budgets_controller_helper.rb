@@ -5,6 +5,8 @@ module Decidim
     module BudgetsControllerHelper
       private
 
+      delegate :voted, to: :current_workflow
+
       def zip_code_workflow?
         current_component.settings.workflow == "zip_code"
       end
@@ -33,6 +35,10 @@ module Decidim
 
       def voted?(resource)
         current_user && status(resource) == :voted
+      end
+
+      def voted_any?
+        current_user && voted.any?
       end
 
       def status(budget)
