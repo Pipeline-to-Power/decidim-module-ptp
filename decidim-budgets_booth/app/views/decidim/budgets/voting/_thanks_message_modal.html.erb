@@ -6,13 +6,6 @@
     </button>
   </div>
 
-  <div class="row">
-    <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
-      <div class="circle active">
-        <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box", formats: [:svg] %>
-      </div>
-    </div>
-  </div>
   <% if thanks_content.present? %>
     <div class="row text-left margin-bottom-2">
       <%== thanks_content %>
