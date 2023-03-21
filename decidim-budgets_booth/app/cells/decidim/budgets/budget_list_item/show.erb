@@ -47,7 +47,7 @@
           <div class="large-6 large-offset-6 columns">
 
             <% if !voted_this?(budget) %>
-              <%= link_to budget_path(budget), class: "button expanded button--sc" do %>
+              <%= link_to budget_voting_index_path(budget), class: "button expanded button--sc" do %>
                 <span class="show-for-sr"><%= t(".take_part") %></span>
                 <span aria-hidden="true"><%= t(".take_part") %></span>
                 <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
