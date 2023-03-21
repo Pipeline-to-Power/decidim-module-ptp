@@ -6,8 +6,8 @@ en:
       budgets:
         settings:
           global:
-            confirm_vote_content: Text shown on the confirm vote page
-            thanks_content: Popup text after voting
+            vote_success_content: Popup text after voting
+            vote_completed_content: Popup text after voting in all available busgets
             city_name: City name to be shown in the zip_code entering view
             workflow_choices:
               zip_code: "Vote based on zip code: allows participants to vote on budgets matching their entered zip code."
@@ -96,6 +96,11 @@ en:
           close: Close
           continue: Continue
           default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
+        vote_completed_modal:
+          title: You successfully completed your votes
+          close: Close
+          continue: Continue
+          default_text: You  succesfully casted your votes in all available budgets. You can sign out from the platform now.
         confirm_voting_modal:
           title: Confirm vote
           message: These are the project you have chosen to be part of the budget.

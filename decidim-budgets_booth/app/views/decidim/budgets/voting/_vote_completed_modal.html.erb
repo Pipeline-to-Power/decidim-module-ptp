@@ -1,4 +1,4 @@
-<div class="reveal" id="thanks-message" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="exit-voting-notification-label" aria-live="polite">
+<div class="reveal" id="vote-completed" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="thanks-voting-completion-label" aria-live="polite">
   <div class="reveal__header text-center">
     <h4 id="exit-voting-notification-label"><%= t(".title") %></h4>
     <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
@@ -6,9 +6,9 @@
     </button>
   </div>
 
-  <% if vote_success_content.present? %>
+  <% if vote_completed_content.present? %>
     <div class="row text-left margin-bottom-2">
-      <%== vote_success_content %>
+      <%== vote_completed_content %>
     </div>
   <% end %>
   <div class="row">

@@ -108,8 +108,8 @@ module Decidim
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
-          settings.attribute :confirm_vote_content, type: :text, translated: true, editor: true
-          settings.attribute :thanks_content, type: :text, translated: true, editor: true
+          settings.attribute :vote_success_content, type: :text, translated: true, editor: true
+          settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
           settings.attribute :city_name, type: :string, translated: true
         end
       end

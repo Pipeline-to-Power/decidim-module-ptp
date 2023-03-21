@@ -76,7 +76,7 @@ describe "Confirm voting", type: :system do
       end
 
       context "when thanks message is set" do
-        let(:settings) { { vote_threshold_percent: 20, thanks_content: { "en" => "Dummy text" } } }
+        let(:settings) { { vote_threshold_percent: 20, vote_success_content: { "en" => "Dummy text" } } }
 
         before do
           visit current_path

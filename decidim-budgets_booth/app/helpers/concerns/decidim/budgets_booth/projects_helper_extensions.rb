@@ -19,22 +19,6 @@ module Decidim
         false
       end
 
-      def thanks_popup?
-        session[:thanks_message] == true
-      end
-
-      def handle_thanks_popup
-        remove_thanks_session if thanks_popup?
-      end
-
-      def remove_thanks_session
-        session.delete(:thanks_message)
-      end
-
-      def thanks_content
-        translated_attribute(component_settings.try(:thanks_content)).presence || t("decidim.budgets.voting.thanks_message_modal.default_text")
-      end
-
       def budgets_accessible?
         !voting_mode? && budgets_count > 1
       end

@@ -7,10 +7,6 @@ module Decidim
         true
       end
 
-      def confirm_vote_content
-        translated_attribute(component_settings.try(:confirm_vote_content)).presence
-      end
-
       def authorization_providers
         Verifications::Adapter.from_collection(
           available_authorization_provider_keys - user_authorizations.pluck(:name)

@@ -3,9 +3,9 @@
 module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
-      private
-
       delegate :voted, to: :current_workflow
+
+      private
 
       def zip_code_workflow?
         current_component.settings.workflow == "zip_code"
