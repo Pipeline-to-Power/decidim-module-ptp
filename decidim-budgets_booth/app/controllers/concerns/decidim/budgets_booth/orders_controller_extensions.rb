@@ -13,12 +13,12 @@ module Decidim
           Decidim::Budgets::Checkout.call(current_order) do
             on(:ok) do
               session[:thanks_message] = true
-              redirect_to budget_projects_path
+              redirect_to budgets_path
             end
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("orders.checkout.error", scope: "decidim")
-              redirect_to budget_projects_path
+              redirect_to budgets_path
             end
           end
         end
