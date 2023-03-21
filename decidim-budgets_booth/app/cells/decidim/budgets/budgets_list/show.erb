@@ -1,14 +1,12 @@
 <div class="row">
+<!--TODO: Remove this part after development -->
   <% if !voting_finished? && (voted?) %>
     <div class="section">
-      <h2 class="section-heading">
-        <%= t(:my_budgets, scope: i18n_scope) %>
-      </h2>
 
       <%= render :voted %>
     </div>
   <% end %>
-
+<!-- End of TODO -->
   <div class="row">
     <div class="columns mediumlarge-12">
       <%= render :card_list %>
