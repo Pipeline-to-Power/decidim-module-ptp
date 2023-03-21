@@ -7,15 +7,23 @@ module Decidim
       include BudgetsControllerHelper
       include ScopeManager
 
+      delegate :voted?, to: :BudgetsControllerHelper
+
       included do
         def button_text
           t(:vote, scope: i18n_scope)
         end
 
         def mark_image_as_voted(budget)
-          return nil unless current_workflow.status(budget) == :voted
+          return nil unless voted_this?(budget)
 
           "voted-budget"
+        end
+
+        private
+
+        def voted_this?(budget)
+          current_workflow.status(budget) == :voted
         end
       end
     end
