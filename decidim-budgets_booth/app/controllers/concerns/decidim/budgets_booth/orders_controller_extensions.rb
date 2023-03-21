@@ -22,6 +22,19 @@ module Decidim
             end
           end
         end
+
+        private
+
+        def redirect_path
+          case params[:return_to]
+          when "budget"
+            budget_path(budget)
+          when "homepage"
+            decidim.root_path
+          else
+            budgets_path
+          end
+        end
       end
     end
   end
