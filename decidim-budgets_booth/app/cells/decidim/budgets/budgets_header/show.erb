@@ -22,9 +22,11 @@
     <% end %>
     </div>
   </div>
-  <div class="columns medium-5 mediumlarge-4">
-    <div class="callout warning font-customizer">
-      <%= decidim_sanitize_editor(landing_page_content) %>
+    <div class="columns medium-5 mediumlarge-4">
+  <% if !voted_any? %>
+      <div class="callout warning font-customizer">
+        <%= decidim_sanitize_editor(landing_page_content) %>
+      </div>
+  <% end %>
     </div>
-  </div>
 </div>
