@@ -46,10 +46,12 @@
         <div class="card__content row collapse">
           <div class="large-6 large-offset-6 columns">
 
-            <%= link_to budget_path(budget), class: "button expanded button--sc" do %>
-              <span class="show-for-sr"><%= t(".take_part") %></span>
-              <span aria-hidden="true"><%= t(".take_part") %></span>
-              <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
+            <% if !voted_this?(budget) %>
+              <%= link_to budget_path(budget), class: "button expanded button--sc" do %>
+                <span class="show-for-sr"><%= t(".take_part") %></span>
+                <span aria-hidden="true"><%= t(".take_part") %></span>
+                <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
+              <% end %>
             <% end %>
           </div>
         </div>
