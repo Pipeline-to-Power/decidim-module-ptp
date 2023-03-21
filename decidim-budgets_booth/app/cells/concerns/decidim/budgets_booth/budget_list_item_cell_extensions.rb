@@ -11,6 +11,12 @@ module Decidim
         def button_text
           t(:vote, scope: i18n_scope)
         end
+
+        def mark_image_as_voted(budget)
+          return nil unless current_workflow.status(budget) == :voted
+
+          "voted-budget"
+        end
       end
     end
   end

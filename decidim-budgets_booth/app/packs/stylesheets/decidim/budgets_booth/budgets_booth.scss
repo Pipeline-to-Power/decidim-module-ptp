@@ -141,3 +141,7 @@ $active-item-color: $black;
     font-size: 1.1rem;
   }
 }
+
+.voted-budget{
+  filter: grayscale(80%);
+}
