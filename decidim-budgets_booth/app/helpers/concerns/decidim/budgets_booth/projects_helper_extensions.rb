@@ -35,29 +35,6 @@ module Decidim
         translated_attribute(component_settings.try(:thanks_content)).presence || t("decidim.budgets.voting.thanks_message_modal.default_text")
       end
 
-      def i18n_scope
-        "decidim.budgets.projects.pre_voting_budget_summary.pre_vote"
-      end
-
-      def vote_text
-        key = if current_workflow.vote_allowed?(budget) && progress?(budget)
-                :finish_voting
-              else
-                :start_voting
-              end
-
-        t(key, scope: i18n_scope)
-      end
-
-      def description_text
-        key = if current_workflow.vote_allowed?(budget) && progress?(budget)
-                :finish_description
-              else
-                :start_description
-              end
-        t(key, scope: i18n_scope)
-      end
-
       def budgets_accessible?
         !voting_mode? && budgets_count > 1
       end
