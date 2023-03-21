@@ -15,7 +15,9 @@
       </h2>
       <p>
         <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user, current_component))%>
-        <%= link_to t(".change_it_here"), new_zip_code_path %>
+        <% if !voted_any? %>
+          <%= t(".not_right_one", link: link_to(t(".change_it_here"), new_zip_code_path)) %>
+        <% end %>
       </p>
     <% else %>
       <%= decidim_sanitize_editor(landing_page_content) %>
