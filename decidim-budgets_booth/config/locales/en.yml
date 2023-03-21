@@ -31,14 +31,6 @@ en:
         take_part: Take part
         current_phase: "Current phase: %{phase}"
         more_info: More info
-      partials:
-        voting_help_modal:
-          confirm: I understand how to vote
-          step1: Pick the project
-          step2: Confirm your vote
-          step3: Cast your vote
-          subtitle: You need to cast your vote for it to be counted in the final result.
-          title: Your vote has not been cast.
       projects:
         budget_summary:
           cancel_voting: Cancel voting
@@ -54,7 +46,6 @@ en:
           back_to_budgets: Back to budgets
         order_progress:
           total_budget: "Total budget: "
-          vote: I am ready
         pre_voting_budget_summary:
           cancel_order: Cancel your vote
           are_you_sure: Are you sure you want to delete your vote?
@@ -117,6 +108,12 @@ en:
           close: Close
           continue: Continue
           default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
+        confirm_voting_modal:
+          title: Confirm vote
+          message: These are the project you have chosen to be part of the budget.
+          change_mind: If you change your mind, you can change your vote later.
+          confirm: Confirm
+          cancel: Cancel
         confirm:
           return_voting: I want to change my vote
           back: Back

@@ -1,0 +1,106 @@
+<div class="reveal" id="confirm-voting" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="confirm-voting-notification-label" aria-live="polite">
+  <div class="reveal__header text-center">
+    <h4 id="exit-voting-notification-label"><%= t(".title") %></h4>
+    <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
+      <div class="circle active">
+        <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box", formats: [:svg] %>
+      </div>
+    </div>
+  </div>
+  <% if thanks_content.present? %>
+    <div class="row text-left margin-bottom-2">
+      <%== thanks_content %>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="columns medium-8 medium-offset-2">
+      <button class="button expanded" data-close type="button">
+        <%= t".continue" %>
+      </button>
+    </div>
+  </div>
+</div>
+
+<% if current_order.present? %>
+  <div class="row margin-top-3">
+    <div class="columns medium-8 small-12 medium-offset-2">
+      <div class="m-bottom">
+        <% if current_order_checked_out? %>
+          <%= link_to budget_projects_path(budget), class: "link" do %>
+            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+            <%= t(".back") %>
+          <% end %>
+        <% else %>
+          <%= link_to budget_voting_index_path, class: "link" do %>
+              <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+              <%= t(".return_voting") %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="card card__content">
+        <h1 class="text-center"><%= current_order_checked_out? ? t(".casted_title") : t(".title") %></h1>
+        <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
+          <span class="mini-title"><%= t(".total_budget") %>
+            <strong class="mini-title__strong mini-title__strong--highlight">
+              <%= budget_to_currency(budget.total_budget) %>
+            </strong>
+          </span>
+        </div>
+        <%= render partial: "decidim/budgets/projects/order_progress", locals: { checkout?: true } %>
+        <div class="m-bottom">
+          <span class="mini-title">
+            <%= t(".assigned") %>
+            <%= render partial: "decidim/budgets/projects/order_total_budget" %>
+          </span>
+        </div>
+        <div class="card padding-1">
+          <h2 class="section-heading">
+            <%= current_order_checked_out? ? t(".casted_list_description"): t(".list_description") %>
+          </h2>
+          <ul class="budget-summary__selected-list">
+            <% current_order.projects.each do |project| %>
+              <li class="budget-summary__selected-number">
+                <%= "#{translated_attribute(project.title)} #{budget_to_currency(project.budget_amount)}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% if current_order_checked_out? %>
+          <div class="m-bottom">
+            <p><%= t(".changed_your_mind_html", cancel_link: link_to(t(".cancel_order"), budget_order_path(return_to: "budget"), method: :delete, class: "cancel-order", data: { confirm: t("decidim.budgets.projects.budget_summary.are_you_sure") })) %></p>
+          </div>
+        <% end %>
+        <% unless current_order_checked_out? %>
+          <div class="padding-2">
+            <div class="margin-bottom-2">
+              <h3 class="text-center"><%= t(".confirm") %></h3>
+              <% if confirm_vote_content.present? %>
+                <p><%== confirm_vote_content %></p>
+              <% end %>
+            </div>
+            <div class="row">
+              <div class="column large-6 large-push-6">
+                <%= button_to checkout_budget_order_path(budget), class: "button expanded" do %>
+                  <%= t(".cast_vote") %>
+                  <%= icon "chevron-right", class: "icon--small", role: "img", "aria-hidden": true %>
+                <% end %>
+              </div>
+
+              <div class="column large-6 large-pull-6">
+                <%= link_to budget_voting_index_path, class: "button hollow expanded" do %>
+                  <%= t(".return_voting") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
