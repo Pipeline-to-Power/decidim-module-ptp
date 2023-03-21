@@ -15,11 +15,8 @@ edit_link(
 
 <div class="voting-wrapper">
   <div class="row columns">
-    <% if voting_mode? %>
-      <%= render partial: "budget_summary", locals: { include_heading: true } %>
-    <% else %>
-      <%= render partial: "pre_voting_budget_summary", locals: { include_heading: true } %>
-    <% end %>
+
+    <%= render partial: "budget_summary", locals: { include_heading: true } %>
 
     <div class="row columns m-bottom">
       <%= link_to budget_projects_path(budget), class: "link js-back-to-list" do %>

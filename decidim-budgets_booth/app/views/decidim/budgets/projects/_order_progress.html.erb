@@ -8,10 +8,10 @@
       </div>
     </div>
     <% checkedout = local_assigns.fetch(:checkout?, false) %>
-    <% if !current_order_checked_out? && voting_open? && !checkedout %>
-      <%= button_to confirm_budget_voting_index_path, class: "button small button--sc margin-0", disabled: !current_order_can_be_checked_out?, method: :get do %>
+    <% if !current_order_checked_out? && voting_open? %>
+      <button class="button small button--sc" data-toggle="budget-confirm" <%= budget_confirm_disabled_attr %>>
         <%= t(".vote") %>
-      <% end %>
+      </button>
     <% end %>
   </div>
 
@@ -30,13 +30,11 @@
           <span class="progress-meter-text progress-meter-text--right"><%= current_order_budget_percent %>%</span>
         </div>
       </div>
-      <% if !current_order_checked_out? && voting_open? && !checkedout %>
-        <%= link_to confirm_budget_voting_index_path, class: "margin-0"  do %>
-          <button class="button small button--sc" <%= budget_confirm_disabled_attr %>>
-            <%= t(".vote") %>
-          </button>
-        <% end %>
-      <% end %>
+      <% if !current_order_checked_out? && voting_open? %>
+      <button class="button small button--sc" data-toggle="budget-confirm" <%= budget_confirm_disabled_attr %>>
+        <%= t(".vote") %>
+      </button>
+    <% end %>
     </div>
   </div>
 </div>
