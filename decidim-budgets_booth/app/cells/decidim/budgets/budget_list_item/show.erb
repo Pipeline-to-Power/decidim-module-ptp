@@ -2,6 +2,15 @@
   <div class="row collapse card--process__row">
     <div class="columns mediumlarge-8 large-6 card--process__column">
       <div class="card__content">
+      <% if voted_this?(budget) %>
+        <h3 class="card--title">
+            <% if zip_code_workflow? %>
+              <%= translated_attribute(budget.scope.name) %>
+            <% else %>
+              <%= translated_attribute(title) %>
+            <% end %>
+          </h3>
+      <% else %>
         <%= link_to budget_voting_index_path(budget), class: link_class do %>
           <h3 class="card--title">
             <% if zip_code_workflow? %>
@@ -11,12 +20,13 @@
             <% end %>
           </h3>
         <% end %>
+      <% end%>
 
         <% if zip_code_workflow? %>
           <div class="heading5 margin-bottom-3">
               <p><%= budget_scope_type(budget) %></p>
           </div>
-          <%= link_to budget_voting_index_path(budget), class: "button hollow" do %>
+          <%= link_to budget_voting_index_path(budget), class: "button hollow #{"disabled" if voted_this?(budget)}" do %>
             <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
           <% end %>
         <% else %>
