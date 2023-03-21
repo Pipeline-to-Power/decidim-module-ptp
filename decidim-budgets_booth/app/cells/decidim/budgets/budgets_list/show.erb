@@ -1,15 +1,19 @@
 <div class="row">
-<!--TODO: Remove this part after development -->
-  <% if !voting_finished? && (voted?) %>
-    <div class="section">
-
-      <%= render :voted %>
-    </div>
-  <% end %>
-<!-- End of TODO -->
   <div class="row">
     <div class="columns mediumlarge-12">
       <%= render :card_list %>
     </div>
   </div>
+  <% if voting_open? && voted? %>
+  <div>
+    <p>
+      <%= t(:if_change_opinion, scope: i18n_scope) %>
+      <%= link_to(
+      t("cancel_order.only_one", scope: i18n_scope),
+      budget_order_path(voted.first),
+      method: :delete,
+      data: { confirm: t("projects.budget_summary.are_you_sure", scope: "decidim.budgets") }) if voted.one? %>
+    </p>
+  </div>
+<% end %>
 </div>
