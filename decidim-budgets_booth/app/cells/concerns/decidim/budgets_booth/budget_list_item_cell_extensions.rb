@@ -7,8 +7,6 @@ module Decidim
       include BudgetsControllerHelper
       include ScopeManager
 
-      delegate :voted?, to: :BudgetsControllerHelper
-
       included do
         def button_text
           t(:vote, scope: i18n_scope)
