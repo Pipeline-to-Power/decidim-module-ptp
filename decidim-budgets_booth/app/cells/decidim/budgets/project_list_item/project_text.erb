@@ -1,31 +1,37 @@
 <div class="budget-list__text card__text margin-bottom-0">
   <div>
-    <% if voting? %>
-      <h3 class="text-left margin-bottom-0">
-        <button class="link" data-open="project-modal-<%= model.id %>">
+    <% if voting_open? %>
+      <% if show_full_description? %>
+       <h3 class="text-left margin-bottom-0">
           <%= resource_title %>
-        </button>
-      </h3>
+        </h3>
+      <% else %>
+        <h3 class="text-left margin-bottom-0">
+          <button class="link" data-open="project-modal-<%= model.id %>">
+            <%= resource_title %>
+          </button>
+        </h3>
+      <% end %>
     <% else %>
       <%= link_to resource_path, class: "link" do %>
         <h3 class="text-left margin-bottom-0">
           <%= cell("decidim/budgets/project_selected_status", model) %>
-
           <%= resource_title %>
         </h3>
       <% end %>
     <% end %>
 
-
     <div>
       <%= resource_text %>
     </div>
-    <% if voting? %>
-      <button class="link" data-open="project-modal-<%= model.id %>">
-        <%= t ".read_more" %>
-      </button>
-    <% else %>
-      <%= link_to t(".read_more"), resource_path, class: "link" %>
+    <% if !show_full_description? %>
+      <% if voting_open? %>
+        <button class="link" data-open="project-modal-<%= model.id %>">
+          <%= t ".read_more" %>
+        </button>
+      <% else %>
+        <%= link_to t(".read_more"), resource_path, class: "link" %>
+      <% end %>
     <% end %>
   </div>
 </div>
