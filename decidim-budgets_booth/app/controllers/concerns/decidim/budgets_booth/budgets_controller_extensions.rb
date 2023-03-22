@@ -24,13 +24,6 @@ module Decidim
 
           "decidim/budgets/voting_layout"
         end
-
-        def voted_all_budgets?
-          current_workflow.budgets.map do |budget|
-            return false unless voted?(budget)
-          end
-          true
-        end
       end
     end
   end
