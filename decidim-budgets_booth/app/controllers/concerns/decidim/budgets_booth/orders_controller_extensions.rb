@@ -13,7 +13,7 @@ module Decidim
           Decidim::Budgets::Checkout.call(current_order) do
             on(:ok) do
               session[:thanks_message] = true
-              redirect_to budgets_path
+              handle_user_redirect
             end
 
             on(:invalid) do
@@ -34,6 +34,29 @@ module Decidim
           else
             budgets_path
           end
+        end
+
+        def handle_user_redirect
+          if voted_all_budgets?
+            redirect_to component_settings.try(:vote_success_url).presence || budgets_path
+          else
+            redirect_to budgets_path
+          end
+        end
+
+        def voted_all_budgets?
+          current_workflow.budgets.map do |budget|
+            return false unless voted?(budget)
+          end
+          true
+        end
+
+        def voted?(resource)
+          current_user && status(resource) == :voted
+        end
+
+        def status(budget)
+          @status ||= current_workflow.status(budget)
         end
       end
     end

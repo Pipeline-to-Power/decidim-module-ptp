@@ -111,6 +111,8 @@ module Decidim
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
           settings.attribute :city_name, type: :string, translated: true
+          settings.attribute :vote_success_url, type: :string
+          settings.attribute :vote_cancel_url, type: :string
         end
       end
     end
