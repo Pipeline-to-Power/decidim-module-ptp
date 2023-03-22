@@ -11,7 +11,7 @@ module Decidim
 
       # User can vote in the resource inside their area where they live. This is being determined
       # by their zip code.
-      def vote_allowed?(resource, _consider_progress: true)
+      def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument
         return false unless user_zip_code(user, budgets_component)
 
         return false unless zip_codes(projects(resource)).include?(user_zip_code(user, budgets_component))
