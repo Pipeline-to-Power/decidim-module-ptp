@@ -23,15 +23,6 @@ module Decidim
         enforce_permission_to :vote, :project, project: budget.projects.first, budget: budget, workflow: current_workflow
       end
 
-      def user_has_no_permission
-        flash[:alert] = if current_user
-                          t(".not_permitted_to")
-                        else
-                          t(".sign_in_first")
-                        end
-        redirect_to(user_has_no_permission_referer || user_has_no_permission_path)
-      end
-
       private
 
       delegate :voted?, to: :current_workflow
@@ -43,12 +34,6 @@ module Decidim
       # - The request is an Ajax request as this can lead to very unexpected behaviour.
       def storable_location?
         request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
-      end
-
-      def user_has_no_permission_path
-        return decidim_budgets.budget_projects_path(budget) if user_signed_in?
-
-        super
       end
 
       def store_user_location!
