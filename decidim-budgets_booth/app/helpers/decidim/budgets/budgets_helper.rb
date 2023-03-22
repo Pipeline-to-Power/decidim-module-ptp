@@ -3,6 +3,7 @@
 module Decidim
   module Budgets
     module BudgetsHelper
+      include ::Decidim::BudgetsBooth::BudgetsControllerHelper
       def thanks_popup?
         session[:thanks_message] == true
       end
@@ -21,21 +22,6 @@ module Decidim
 
       def vote_completed_content
         translated_attribute(component_settings.try(:vote_completed_content)).presence || t("decidim.budgets.voting.vote_completed_modal.default_text")
-      end
-
-      def voted_all_budgets?
-        current_workflow.budgets.map do |budget|
-          return false unless voted?(budget)
-        end
-        true
-      end
-
-      def voted?(resource)
-        current_user && status(resource) == :voted
-      end
-
-      def status(budget)
-        @status ||= current_workflow.status(budget)
       end
     end
   end
