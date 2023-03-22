@@ -11,7 +11,7 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        return broadcast(:invalid, user_data_error) if user_data_exist?
+        # return broadcast(:invalid, user_data_error) if user_data_exist?
 
         return broadcast(:invalid, zip_code_not_exit) unless zip_code_included?
 
@@ -31,19 +31,17 @@ module Decidim
           metadata: form.metadata,
           affirm_statements_are_correct: form.affirm_statements_are_correct
         }
-        @user_data = Decidim.traceability.create!(
-          UserData,
+        @user_data = Decidim::Budgets::UserData.find_or_create_by!(
+          user: form.user,
+          component: form.component
+        )
+
+        Decidim.traceability.update!(
+          @user_data,
           form.user,
           attributes,
           visibility: "all"
         )
-      end
-
-      def user_data_exist?
-        Decidim::Budgets::UserData.where(
-          user: form.user,
-          component: form.component
-        ).any?
       end
 
       def user_data_error

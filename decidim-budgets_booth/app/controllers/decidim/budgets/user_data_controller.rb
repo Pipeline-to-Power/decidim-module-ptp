@@ -26,6 +26,12 @@ module Decidim
           end
         end
       end
+
+      private
+
+      def budgets
+        @budgets ||= Decidim::Budgets::Budget.where(component: current_component)
+      end
     end
   end
 end
