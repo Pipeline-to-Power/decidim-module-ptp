@@ -60,6 +60,10 @@ module Decidim
             Decidim::BudgetsBooth::BudgetListItemCellExtensions
           )
 
+          Decidim::Budgets::BudgetsHeaderCell.include(
+            Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
+          )
+
           # We need to  change the budgets header only when zip-code is enabled.
           # for that we need to access #zip_code_workflow? inside BudgetsControllerHelper
           Decidim::Budgets::BudgetsHeaderCell.include(
@@ -113,6 +117,7 @@ module Decidim
           settings.attribute :city_name, type: :string, translated: true
           settings.attribute :vote_success_url, type: :string
           settings.attribute :vote_cancel_url, type: :string
+          settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
       end
     end
