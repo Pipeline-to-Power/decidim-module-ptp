@@ -3,7 +3,7 @@
 module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
-      delegate :voted, to: :current_workflow
+      delegate :voted, :voted?, to: :current_workflow
 
       private
 
@@ -33,10 +33,6 @@ module Decidim
         @decidim_budgets ||= Decidim::EngineRouter.main_proxy(current_component)
       end
 
-      def voted?(resource)
-        current_user && status(resource) == :voted
-      end
-
       def voted_any?
         current_user && voted.any?
       end
@@ -57,6 +53,13 @@ module Decidim
 
         flash[:warning] = t(".change_zip_code_after_vote")
         redirect_to decidim_budgets.budgets_path
+      end
+
+      def voted_all_budgets?
+        current_workflow.budgets.map do |budget|
+          return false unless voted?(budget)
+        end
+        true
       end
     end
   end
