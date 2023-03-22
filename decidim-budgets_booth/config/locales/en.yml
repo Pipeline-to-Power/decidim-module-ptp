@@ -85,7 +85,6 @@ en:
           other_inputs: Character %{num}
         error:
           unknown: There was an error. Please try again.
-          registered_zip_code: You have already registered your zip code.
           zip_code_included: The zip code you provided is not part of the areas that are eligible for voting. make sure you have entered the correct zip code and try again.
         success: You have successfully registered your zip code.
       voting:

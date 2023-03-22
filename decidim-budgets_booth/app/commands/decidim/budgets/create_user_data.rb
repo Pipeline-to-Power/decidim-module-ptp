@@ -11,8 +11,6 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        # return broadcast(:invalid, user_data_error) if user_data_exist?
-
         return broadcast(:invalid, zip_code_not_exit) unless zip_code_included?
 
         create_user_data!
@@ -42,10 +40,6 @@ module Decidim
           attributes,
           visibility: "all"
         )
-      end
-
-      def user_data_error
-        I18n.t("registered_zip_code", scope: "decidim.budgets.user_data.error")
       end
 
       def zip_code_included?
