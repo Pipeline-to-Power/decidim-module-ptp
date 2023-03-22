@@ -12,6 +12,8 @@ module Decidim
         end
 
         def resource_text
+          return translated_attribute(model.description) if show_full_description? && voting_open?
+
           raw = translated_attribute(model.description)
           return raw if raw.length < 65
 
@@ -25,6 +27,10 @@ module Decidim
         end
 
         private
+
+        def show_full_description?
+          current_component.settings.show_full_description_on_listing_page == true
+        end
 
         def trimmer
           65
