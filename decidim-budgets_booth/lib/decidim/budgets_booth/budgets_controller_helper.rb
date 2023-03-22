@@ -44,6 +44,20 @@ module Decidim
       def status(budget)
         @status ||= current_workflow.status(budget)
       end
+
+      def ensure_zip_code_workflow
+        return true if zip_code_workflow?
+
+        flash[:warning] = t(".not_allowed")
+        redirect_to decidim.root_path
+      end
+
+      def ensure_not_voted
+        return true unless voted_any?
+
+        flash[:warning] = t(".change_zip_code_after_vote")
+        redirect_to decidim_budgets.budgets_path
+      end
     end
   end
 end

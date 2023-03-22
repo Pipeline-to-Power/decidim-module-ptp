@@ -23,6 +23,7 @@ en:
         index:
           login_before_access: You need to login first.
           set_zip_code_before_access: You need to enter your zip code first.
+          not_allowed: You are not allowed to perform this action.
           cancel_voting: Cancel voting
       budgets_header:
         title: "BALLOTS AVAILABLE TO YOU:"
@@ -83,6 +84,7 @@ en:
           affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
           first_input: Please enter your zip code. Character 1
           other_inputs: Character %{num}
+          change_zip_code_after_vote: You can not change your zip code after started voting. Delete all of your votes first.
         error:
           unknown: There was an error. Please try again.
           zip_code_included: The zip code you provided is not part of the areas that are eligible for voting. make sure you have entered the correct zip code and try again.
