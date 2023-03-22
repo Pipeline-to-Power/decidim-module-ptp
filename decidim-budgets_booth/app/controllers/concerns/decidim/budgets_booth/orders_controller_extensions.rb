@@ -4,6 +4,7 @@
 module Decidim
   module BudgetsBooth
     module OrdersControllerExtensions
+      include ::Decidim::BudgetsBooth::BudgetsControllerHelper
       extend ActiveSupport::Concern
 
       included do
@@ -44,20 +45,20 @@ module Decidim
           end
         end
 
-        def voted_all_budgets?
-          current_workflow.budgets.map do |budget|
-            return false unless voted?(budget)
-          end
-          true
-        end
+        # def voted_all_budgets?
+        #   current_workflow.budgets.map do |budget|
+        #     return false unless voted?(budget)
+        #   end
+        #   true
+        # end
 
-        def voted?(resource)
-          current_user && status(resource) == :voted
-        end
+        # def voted?(resource)
+        #   current_user && status(resource) == :voted
+        # end
 
-        def status(budget)
-          @status ||= current_workflow.status(budget)
-        end
+        # def status(budget)
+        #   @status ||= current_workflow.status(budget)
+        # end
       end
     end
   end
