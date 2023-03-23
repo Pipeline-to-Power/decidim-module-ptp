@@ -8,7 +8,7 @@ module Decidim
 
       included do
         layout :determine_layout
-        before_action :ensure_authenticated, if: :zip_code_workflow?
+        before_action :ensure_authenticated, if: :zip_code_workflow? && :voting_open?
         before_action :ensre_user_zip_code, if: :zip_code_workflow? && :voting_open?
 
         def index
