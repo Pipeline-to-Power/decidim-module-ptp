@@ -39,7 +39,7 @@ module Decidim
 
         def handle_user_redirect
           if voted_all_budgets?
-            redirect_to component_settings.try(:vote_success_url).presence || budgets_path
+            redirect_to success_redirect_path
           else
             redirect_to budgets_path
           end

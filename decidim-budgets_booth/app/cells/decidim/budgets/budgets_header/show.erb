@@ -2,7 +2,7 @@
   <div class="row">
     <div class="row">
       <div class="columns medium-8 large-9">
-        <%= button_to decidim.root_path, class: "link margin-bottom-3", method: :get do %>
+        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get do %>
             <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
             <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
         <% end %>
