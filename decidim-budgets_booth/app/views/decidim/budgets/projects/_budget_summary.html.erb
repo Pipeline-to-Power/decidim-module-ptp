@@ -1,11 +1,24 @@
 <div class="row column voting-rules">
-  <% if !current_order_checked_out? && zip_code_workflow? %>
+  <% if zip_code_workflow? %>
     <div class="row">
       <div class="columns medium-8 large-9">
         <button class="link m-bottom" data-open="cancel-voting">
           <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
           <%= t(".cancel_voting") %>
         </button>
+      </div>
+    </div>
+  <% else %>
+    <div class="callout warning">
+      <div class="row">
+        <div class="columns medium-8 large-9">
+          <h2 class="heading3">
+            <%= t(".rules.title") %>
+          </h2>
+          <ul>
+            <%= raw current_rule_explanation %>
+          </ul>
+        </div>
       </div>
     </div>
   <% end %>
