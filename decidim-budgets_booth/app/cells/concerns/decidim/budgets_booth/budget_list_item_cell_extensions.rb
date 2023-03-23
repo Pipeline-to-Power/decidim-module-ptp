@@ -22,6 +22,14 @@ module Decidim
           "voted-budget"
         end
 
+        def generate_projects_link(resource)
+          if voting_open?
+            budget_voting_index_path(resource)
+          else
+            budget_path(resource)
+          end
+        end
+
         private
 
         def voted_this?(budget)
