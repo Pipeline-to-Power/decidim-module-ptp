@@ -11,6 +11,7 @@ module Decidim
       before_action :ensure_zip_code_workflow
       before_action :ensure_authenticated
       before_action :ensure_not_voted
+      before_action :ensure_voting_open
 
       def new
         @form = form(UserDataForm).instance
@@ -33,6 +34,13 @@ module Decidim
       end
 
       private
+
+      def ensure_voting_open
+        return true if voting_open?
+
+        flash[:warning] = t(".voting_ended")
+        redirect_to decidim.root_path
+      end
 
       def budgets
         @budgets ||= Decidim::Budgets::Budget.where(component: current_component)
