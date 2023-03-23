@@ -3,10 +3,12 @@
 <%= cell("decidim/budgets/budgets_header", current_workflow) %>
 
 <%= cell("decidim/budgets/budgets_list", current_workflow) %>
-<% if voted_all_budgets? %>
-  <%= render partial: "decidim/budgets/voting/vote_completed_modal" %>
-<% else %>
-  <%= render partial: "decidim/budgets/voting/thanks_message_modal" %>
-<% end %>
+<% if zip_code_workflow? %>
+  <% if voted_all_budgets? %>
+    <%= render partial: "decidim/budgets/voting/vote_completed_modal" %>
+  <% else %>
+    <%= render partial: "decidim/budgets/voting/thanks_message_modal" %>
+  <% end %>
+<% end%>
 <% handle_thanks_popup %>
 <%= javascript_pack_tag("decidim_budgets_booth_budgets") %>
