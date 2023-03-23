@@ -8,7 +8,7 @@
               <%= translated_attribute(budget.scope.name) %>
             </h3>
         <% else %>
-          <%= link_to budget_voting_index_path(budget), class: link_class do %>
+          <%= link_to generate_projects_link(budget), class: link_class do %>
             <h3 class="card--title">
                 <%= translated_attribute(budget.scope.name) %>
             </h3>
@@ -18,7 +18,7 @@
           <div class="heading5 margin-bottom-3">
               <p><%= budget_scope_type(budget) %></p>
           </div>
-          <%= link_to budget_voting_index_path(budget), class: "button hollow #{"disabled" if voted_this?(budget)}" do %>
+          <%= link_to generate_projects_link(budget), class: "button hollow #{"disabled" if voted_this?(budget)}" do %>
             <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
           <% end %>
         </div>
@@ -31,7 +31,7 @@
               <div class="large-6 large-offset-6 columns">
 
                 <% if !voted_this?(budget) %>
-                  <%= link_to budget_voting_index_path(budget), class: "button expanded button--sc" do %>
+                  <%= link_to generate_projects_link(budget), class: "button expanded button--sc" do %>
                     <span class="show-for-sr"><%= t(".take_part") %></span>
                     <span aria-hidden="true"><%= t(".take_part") %></span>
                     <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
