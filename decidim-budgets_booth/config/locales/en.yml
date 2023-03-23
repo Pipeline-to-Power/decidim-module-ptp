@@ -32,6 +32,7 @@ en:
         change_it_here: Change it here
       budgets_list:
         vote: Show
+        no_budgets_found: No budgets were found based on your zip code. You can change your zip code if it's not correct, or you can search again later.
       budget_list_item:
         take_part: Take part
         current_phase: "Current phase: %{phase}"

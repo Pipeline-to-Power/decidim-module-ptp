@@ -1,4 +1,11 @@
 <% if zip_code_workflow? %>
+  <% if budgets.none? %>
+  <div class="section">
+    <div class="callout warning font-customizer">
+      <%= t(".no_budgets_found") %>
+    </h2>
+  </div>
+  <% end %>
   <% if highlighted.any? %>
     <% highlighted.each do |budget| %>
       <div id="highlighted-budgets" class="card card--list budget-list">
