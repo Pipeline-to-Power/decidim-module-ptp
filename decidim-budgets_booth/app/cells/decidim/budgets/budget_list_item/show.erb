@@ -1,61 +1,86 @@
-<div class="card card--full card--process">
-  <div class="row collapse card--process__row">
-    <div class="columns mediumlarge-8 large-6 card--process__column">
-      <div class="card__content">
-      <% if voted_this?(budget) %>
-        <h3 class="card--title">
-            <% if zip_code_workflow? %>
-              <%= translated_attribute(budget.scope.name) %>
-            <% else %>
-              <%= translated_attribute(title) %>
-            <% end %>
-          </h3>
-      <% else %>
-        <%= link_to budget_voting_index_path(budget), class: link_class do %>
+<% if zip_code_workflow? %>
+  <div class="card card--full card--process">
+    <div class="row collapse card--process__row">
+      <div class="columns mediumlarge-8 large-6 card--process__column">
+        <div class="card__content">
+        <% if voted_this?(budget) %>
           <h3 class="card--title">
-            <% if zip_code_workflow? %>
               <%= translated_attribute(budget.scope.name) %>
-            <% else %>
-              <%= translated_attribute(title) %>
-            <% end %>
-          </h3>
-        <% end %>
-      <% end%>
+            </h3>
+        <% else %>
+          <%= link_to budget_voting_index_path(budget), class: link_class do %>
+            <h3 class="card--title">
+                <%= translated_attribute(budget.scope.name) %>
+            </h3>
+          <% end %>
+        <% end%>
 
-        <% if zip_code_workflow? %>
           <div class="heading5 margin-bottom-3">
               <p><%= budget_scope_type(budget) %></p>
           </div>
           <%= link_to budget_voting_index_path(budget), class: "button hollow #{"disabled" if voted_this?(budget)}" do %>
             <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
           <% end %>
-        <% else %>
-          <div class="heading5">
-              <strong>
-                <%= budget_to_currency(total_budget) %>
-              </strong>
-            </div>
-
-          <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
-        <% end %>
+        </div>
       </div>
-    </div>
-    <div class="columns mediumlarge-8 large-6 card--process__column">
-      <div class="card--full__image <%= mark_image_as_voted(budget) %>"
-      style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
-        <div class="card__content row collapse">
-          <div class="large-6 large-offset-6 columns">
+      <div class="columns mediumlarge-8 large-6 card--process__column">
+        <div class="card--full__image <%= mark_image_as_voted(budget) %>"
+        style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
+          <% if voting_open? %>
+            <div class="card__content row collapse">
+              <div class="large-6 large-offset-6 columns">
 
-            <% if !voted_this?(budget) %>
-              <%= link_to budget_voting_index_path(budget), class: "button expanded button--sc" do %>
-                <span class="show-for-sr"><%= t(".take_part") %></span>
-                <span aria-hidden="true"><%= t(".take_part") %></span>
-                <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
-              <% end %>
-            <% end %>
-          </div>
+                <% if !voted_this?(budget) %>
+                  <%= link_to budget_voting_index_path(budget), class: "button expanded button--sc" do %>
+                    <span class="show-for-sr"><%= t(".take_part") %></span>
+                    <span aria-hidden="true"><%= t(".take_part") %></span>
+                    <span class="button__info"><%= t(".current_phase", phase: translated_attribute(cuurent_phase)) %></span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% else %>
+  <div class="<%= card_class %> budget-list__item budget-list__item-cell">
+    <div class="budget-list__text flex-horizontal">
+      <%= link_to budget_path(budget), class: link_class do %>
+        <h3 class="card--list__heading">
+          <%= translated_attribute(title) %>
+        </h3>
+      <% end %>
+
+      <div class="heading5">
+        <strong>
+          <%= budget_to_currency(total_budget) %>
+        </strong>
+      </div>
+
+      <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
+    </div>
+
+    <% if !voting_finished? %>
+      <div class="budget-list__icon mr-s">
+        <% if voted? %>
+          <span class="button tiny success card--list__check card--list__check--disabled card--list__check--inline">
+            <%= icon "check", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_finished") %>
+          </span>
+        <% elsif progress? %>
+          <span class="button tiny warning card--list__check card--list__check--disabled card--list__check--inline">
+            <%= icon "bookmark", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_started") %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="budget-list__data">
+      <%= link_to budget_path(budget), class: "button button--sc expanded #{button_class} mb-none" do %>
+        <span><%= button_text %></span>
+        <%= icon "chevron-right", class: "icon--small", role: "img" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

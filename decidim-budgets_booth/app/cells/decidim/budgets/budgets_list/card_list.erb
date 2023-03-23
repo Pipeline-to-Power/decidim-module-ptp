@@ -1,19 +1,39 @@
-<%# show highlighted budgets first %>
-<% if highlighted.any? %>
-  <% highlighted.each do |budget| %>
+<% if zip_code_workflow? %>
+  <% if highlighted.any? %>
+    <% highlighted.each do |budget| %>
+      <div id="highlighted-budgets" class="card card--list budget-list">
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% non_highlighted = (budgets - highlighted - voted) %>
+
+  <% if non_highlighted.any? %>
+
+    <% non_highlighted.each do |budget| %>
+      <div id="budgets" class="card card--list budget-list">
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%# show highlighted budgets first %>
+  <% if highlighted.any? %>
     <div id="highlighted-budgets" class="card card--list budget-list">
-      <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% highlighted.each do |budget| %>
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% end %>
     </div>
   <% end %>
-<% end %>
 
-<% non_highlighted = (budgets - highlighted - voted) %>
+  <% non_highlighted = (budgets - highlighted - voted) %>
 
-<% if non_highlighted.any? %>
-
-  <% non_highlighted.each do |budget| %>
+  <% if non_highlighted.any? %>
     <div id="budgets" class="card card--list budget-list">
-      <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% non_highlighted.each do |budget| %>
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
