@@ -7,10 +7,6 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        def voting?
-          options[:voting]
-        end
-
         def resource_text
           return translated_attribute(model.description) if show_full_description? && voting_open?
 

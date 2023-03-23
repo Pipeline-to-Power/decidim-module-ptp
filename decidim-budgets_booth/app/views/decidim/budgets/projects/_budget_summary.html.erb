@@ -1,5 +1,5 @@
 <div class="row column voting-rules">
-  <% unless current_order_checked_out? %>
+  <% if !current_order_checked_out? && zip_code_workflow? %>
     <div class="row">
       <div class="columns medium-8 large-9">
         <button class="link m-bottom" data-open="cancel-voting">

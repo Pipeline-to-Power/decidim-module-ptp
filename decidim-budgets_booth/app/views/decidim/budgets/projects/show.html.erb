@@ -41,13 +41,8 @@ edit_link(
 
           <% if voting_finished? %>
             <%= cell("decidim/budgets/project_voted_hint", project, class: "display-block") %>
-          <% elsif voting_open? && !current_order_checked_out? %>
-            <span class="text-wrap"><%= t(".pre_vote.introduction") %></span>
-            <%= link_to budget_voting_index_path(select_project: project.id), class: "button expanded hollow display-block" do %>
-              <span class="text-wrap"><%= progress?(budget) ? t(".pre_vote.continue_voting") : t(".pre_vote.start_voting") %></span>
-            <% end %>
-          <% else %>
-            <%= cell("decidim/budgets/project_voted_hint", project, text_medium: true, class: "success text-m display-block margin-top-1") if current_order_checked_out? && voted_for?(project) %>
+          <% elsif voting_open? %>
+            <%= render partial: "project_budget_button", locals: { project: project } %>
           <% end %>
 
           <%= render partial: "decidim/shared/follow_button", locals: { followable: project, large: false  } %>

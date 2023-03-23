@@ -1,5 +1,5 @@
 
-<div class="budget-list__data <%= "flex-column" if voting? %>">
+<div class="budget-list__data <%= "flex-column" %>">
   <% if voting_finished? %>
     <div class="budget-list__data__votes">
       <%= cell("decidim/budgets/project_votes_count", model) %>
@@ -8,7 +8,7 @@
     </div>
   <% else %>
     <div class="text-center">
-      <%= render :selected_button_tag  if resource_added? && voting? %>
+      <%= render :selected_button_tag  if resource_added? %>
     </div>
     <div class="text-center">
         <span class="budget-list__data__number">
@@ -19,6 +19,6 @@
           <%= cell("decidim/budgets/project_voted_hint", model, class: "display-block margin-top-1") if current_order_checked_out? && resource_added? %>
         </span>
     </div>
-    <%= cell("decidim/budgets/project_vote_button", model) if !current_order_checked_out? && voting_open? && voting? %>
+    <%= cell("decidim/budgets/project_vote_button", model) if !current_order_checked_out? && voting_open? %>
   <% end %>
 </div>

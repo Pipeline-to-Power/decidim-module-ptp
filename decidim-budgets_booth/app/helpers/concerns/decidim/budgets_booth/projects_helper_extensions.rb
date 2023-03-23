@@ -4,6 +4,8 @@ module Decidim
   module BudgetsBooth
     # Customizes the projects helper
     module ProjectsHelperExtensions
+      include BudgetsControllerHelper
+
       delegate :progress?, to: :current_workflow
 
       def cuurent_phase
