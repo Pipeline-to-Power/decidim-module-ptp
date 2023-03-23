@@ -19,6 +19,8 @@ module Decidim
       end
 
       def user_zip_code(user, budgets_component)
+        return if user.blank?
+
         user_data = user.budgets_user_data.find_by(component: budgets_component)
         user_data&.metadata
       end
