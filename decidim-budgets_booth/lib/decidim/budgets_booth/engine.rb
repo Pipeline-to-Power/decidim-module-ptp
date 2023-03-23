@@ -91,6 +91,10 @@ module Decidim
             Decidim::BudgetsBooth::BudgetsControllerExtensions
           )
 
+          Decidim::Budgets::ProjectsController.include(
+            Decidim::BudgetsBooth::ProjectsControllerExtensions
+          )
+
           # Models extensions
           Decidim::Budgets::Budget.include(
             Decidim::BudgetsBooth::BudgetExtensions
