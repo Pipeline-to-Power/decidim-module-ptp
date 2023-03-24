@@ -8,7 +8,7 @@ en:
           global:
             vote_success_content: Popup text after voting
             vote_completed_content: Popup text after voting in all available busgets
-            city_name: City name to be shown in the zip_code entering view
+            voting_terms: Terms and conditions to be shown when user wants to tenter their zip code.
             vote_success_url: URL to redirect user after voting on all available budgets(default is budgets list)
             vote_cancel_url: URL to redirect user when canceling voting(defaullt to the root path)
             show_full_description_on_listing_page: Show full project descriptions on the listing page and disable the details popup
@@ -77,11 +77,6 @@ en:
           title: ZIP CODE
           description: Please provide your ZIP code to find your Participatory Budgeting ballots.
           submit: FIND MY BALLOTS
-          list_info: I understand that to vote on people's money I must
-          list:
-            item_one: Live in %{city_name}.
-            item_two: Be at least 11 years old
-            item_three: Only vote one time
           affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
           first_input: Please enter your zip code. Character 1
           other_inputs: Character %{num}

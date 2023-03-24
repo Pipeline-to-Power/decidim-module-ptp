@@ -122,7 +122,7 @@ module Decidim
         manifest.settings(:global) do |settings|
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
-          settings.attribute :city_name, type: :string, translated: true
+          settings.attribute :voting_terms, type: :text, translated: true, editor: true
           settings.attribute :vote_success_url, type: :string
           settings.attribute :vote_cancel_url, type: :string
           settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false

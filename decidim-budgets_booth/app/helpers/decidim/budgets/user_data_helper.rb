@@ -3,8 +3,8 @@
 module Decidim
   module Budgets
     module UserDataHelper
-      def city_name
-        translated_attribute(component_settings.try(:city_name)).presence
+      def voting_terms
+        translated_attribute(component_settings.try(:voting_terms)).presence
       end
     end
   end
