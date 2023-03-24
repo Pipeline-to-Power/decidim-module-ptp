@@ -14,7 +14,7 @@ module Decidim
       def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument
         return true unless user_zip_code(user, budgets_component)
 
-        return false unless zip_codes(projects(resource)).include?(user_zip_code(user, budgets_component))
+        return false unless zip_codes(resource).include?(user_zip_code(user, budgets_component))
 
         true
       end

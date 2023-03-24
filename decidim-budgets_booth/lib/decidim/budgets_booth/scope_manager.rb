@@ -3,15 +3,23 @@
 module Decidim
   module BudgetsBooth
     module ScopeManager
-      def zip_codes(resources)
-        result = []
-        resources.map(&:scope).each do |scope|
-          postal = zip_code(scope)
-          next if result.include?(postal)
+      def zip_codes(resource)
+        return [] if resource.scope.blank?
 
-          result << postal
+        result = Set.new
+        process_subscopes(resource.scope, result)
+        result.to_a
+      end
+
+      def process_subscopes(scope, result)
+        scope.children.each do |subscope|
+          if subscope.children.any?
+            process_subscopes(subscope, result)
+          else
+            postal = zip_code(subscope)
+            result.add(postal)
+          end
         end
-        result
       end
 
       def zip_code(scope)
