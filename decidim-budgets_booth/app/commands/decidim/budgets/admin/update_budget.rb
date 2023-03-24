@@ -34,9 +34,10 @@ module Decidim
             title: form.title,
             weight: form.weight,
             description: form.description,
-            total_budget: form.total_budget,
-            main_image: form.main_image
-          }
+            total_budget: form.total_budget
+          }.merge(
+            form.main_image&.attached? ? form.main_image.attachment_attributes : {}
+          )
 
           Decidim.traceability.update!(
             budget,
