@@ -22,6 +22,8 @@ module Decidim
 
           return nil unless voting_enabled?
 
+          return nil if voted_all_budgets?
+
           "decidim/budgets/voting_layout"
         end
       end
