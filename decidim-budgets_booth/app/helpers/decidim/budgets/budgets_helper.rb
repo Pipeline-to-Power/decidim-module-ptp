@@ -17,11 +17,11 @@ module Decidim
       end
 
       def vote_success_content
-        translated_attribute(component_settings.try(:vote_success_content)).presence || t("decidim.budgets.voting.thanks_message_modal.default_text")
+        raw(translated_attribute(component_settings.try(:vote_success_content)))
       end
 
       def vote_completed_content
-        translated_attribute(component_settings.try(:vote_completed_content)).presence || t("decidim.budgets.voting.vote_completed_modal.default_text")
+        raw(translated_attribute(component_settings.try(:vote_completed_content)))
       end
     end
   end

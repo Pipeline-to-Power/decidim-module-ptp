@@ -96,12 +96,10 @@ en:
           title: Thank you for voting!
           close: Close
           continue: Continue
-          default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
         vote_completed_modal:
           title: You successfully completed your votes
           close: Close
           continue: Continue
-          default_text: You  succesfully casted your votes in all available budgets. You can sign out from the platform now.
         confirm_voting_modal:
           title: Confirm vote
           message: These are the project you have chosen to be part of the budget.

@@ -6,11 +6,10 @@
     </button>
   </div>
 
-  <% if vote_completed_content.present? %>
-    <div class="row text-left margin-bottom-2">
-      <%== vote_completed_content %>
-    </div>
-  <% end %>
+  <div class="row text-left margin-bottom-2">
+    <%= vote_completed_content %>
+  </div>
+
   <div class="row">
     <div class="columns medium-8 medium-offset-2">
       <button class="button expanded" data-close type="button">
