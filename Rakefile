@@ -12,6 +12,7 @@ def install_module(path)
   Dir.chdir(path) do
     system("bundle exec rake decidim_sms_twilio:install:migrations")
     system("bundle exec rake decidim_smsauth:install:migrations")
+    system("bundle exec rake decidim_budgets_booth:install:migrations")
     system("bundle exec rake db:migrate")
   end
 end
