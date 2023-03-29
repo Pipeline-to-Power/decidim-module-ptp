@@ -9,7 +9,7 @@ module Decidim
       included do
         layout :determine_layout
         before_action :ensure_authenticated, if: :open_zip_code_workflow?
-        before_action :ensre_user_zip_code, if: :open_zip_code_workflow?
+        before_action :ensure_user_zip_code, if: :open_zip_code_workflow?
 
         def index
           # we need to redefine this action to avoid redirect in case of single budget
