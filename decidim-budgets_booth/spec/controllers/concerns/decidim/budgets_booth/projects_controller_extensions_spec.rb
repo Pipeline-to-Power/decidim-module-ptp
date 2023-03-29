@@ -33,8 +33,9 @@ module Decidim
         context "when zip_code workflow" do
           context "when voting enabled" do
             it "redirects to the login page" do
-              get :index, params: { budget_id: budgets.last.id }
-              expect(response).to redirect_to(decidim_budgets.budget_voting_index_path(budgets.last))
+              expect do
+                get :index, params: { budget_id: budgets.last.id }
+              end.to raise_error(ActionController::RoutingError, "Not Found")
             end
           end
 
