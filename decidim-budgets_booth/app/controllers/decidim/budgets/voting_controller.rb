@@ -17,7 +17,7 @@ module Decidim
       before_action :ensure_voting_open!
       before_action :ensure_authenticated, if: :zip_code_workflow?
       before_action :ensre_user_zip_code, if: :zip_code_workflow?
-      before_action :ensure_not_voted!, only: [:index]
+      before_action :ensure_not_voted_this!, only: [:index]
 
       def index
         enforce_permission_to :vote, :project, project: budget.projects.first, budget: budget, workflow: current_workflow
@@ -48,7 +48,7 @@ module Decidim
         redirect_to decidim_budgets.budget_projects_path(budget)
       end
 
-      def ensure_not_voted!
+      def ensure_not_voted_this!
         redirect_to decidim_budgets.budgets_path if current_order.checked_out?
       end
 
