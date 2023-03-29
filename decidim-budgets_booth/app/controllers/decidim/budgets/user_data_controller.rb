@@ -18,9 +18,8 @@ module Decidim
       end
 
       def create
-        postals = zip_codes(Decidim::Budgets::Project.where(budget: budgets))
         @form = form(UserDataForm).from_params(params.merge(user: current_user, component: current_component))
-        CreateUserData.call(@form, postals) do
+        CreateUserData.call(@form, all_zip_codes) do
           on(:ok) do
             flash[:notice] = I18n.t(".success", scope: "decidim.budgets.user_data")
             redirect_to budgets_path
@@ -40,6 +39,14 @@ module Decidim
 
         flash[:warning] = t(".voting_ended")
         redirect_to decidim.root_path
+      end
+
+      def all_zip_codes
+        [].tap do |zip_code|
+          budgets.each do |budget|
+            zip_code << zip_codes(budget)
+          end
+        end.flatten.uniq
       end
 
       def budgets
