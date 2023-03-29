@@ -8,8 +8,8 @@ module Decidim
 
       included do
         layout :determine_layout
-        before_action :ensure_authenticated, if: :zip_code_workflow? && :voting_open?
-        before_action :ensre_user_zip_code, if: :zip_code_workflow? && :voting_open?
+        before_action :ensure_authenticated, if: :open_zip_code_workflow?
+        before_action :ensre_user_zip_code, if: :open_zip_code_workflow?
 
         def index
           # we need to redefine this action to avoid redirect in case of single budget
@@ -18,13 +18,21 @@ module Decidim
         private
 
         def determine_layout
-          return nil unless zip_code_workflow?
+          return layout unless zip_code_workflow?
 
-          return nil unless voting_enabled?
+          return layout unless voting_enabled?
 
-          return nil if voted_all_budgets?
+          return layout if voted_all_budgets?
 
           "decidim/budgets/voting_layout"
+        end
+
+        def open_zip_code_workflow?
+          zip_code_workflow? && voting_open?
+        end
+
+        def layout
+          current_participatory_space_manifest.context(current_participatory_space_context).layout
         end
       end
     end
