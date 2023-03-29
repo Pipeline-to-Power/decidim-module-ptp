@@ -22,7 +22,7 @@ module Decidim
         redirect_to decidim.new_user_session_path
       end
 
-      def ensre_user_zip_code
+      def ensure_user_zip_code
         return true if current_user.try(:budgets_user_data).present?
 
         flash[:warning] = t(".set_zip_code_before_access")
