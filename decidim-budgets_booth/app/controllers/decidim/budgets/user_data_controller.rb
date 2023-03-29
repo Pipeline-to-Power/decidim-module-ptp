@@ -37,7 +37,7 @@ module Decidim
       def ensure_voting_open
         return true if voting_open?
 
-        flash[:warning] = t(".voting_ended")
+        flash[:warning] = t(".voting_ended", scope: "decidim.budgets.user_data.new")
         redirect_to decidim.root_path
       end
 
