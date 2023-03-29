@@ -79,9 +79,6 @@ module Decidim
           )
 
           # Controllers extensions
-          Decidim::Budgets::LineItemsController.include(
-            Decidim::BudgetsBooth::LineItemsControllerExtensions
-          )
 
           Decidim::Budgets::OrdersController.include(
             Decidim::BudgetsBooth::OrdersControllerExtensions
