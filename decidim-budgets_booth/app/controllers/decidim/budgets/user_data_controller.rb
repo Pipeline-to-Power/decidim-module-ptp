@@ -21,7 +21,7 @@ module Decidim
         @form = form(UserDataForm).from_params(params.merge(user: current_user, component: current_component))
         CreateUserData.call(@form, all_zip_codes) do
           on(:ok) do
-            flash[:notice] = I18n.t(".success", scope: "decidim.budgets.user_data")
+            flash[:notice] = I18n.t("success", scope: "decidim.budgets.user_data")
             redirect_to budgets_path
           end
 
@@ -37,7 +37,7 @@ module Decidim
       def ensure_voting_open
         return true if voting_open?
 
-        flash[:warning] = t(".voting_ended", scope: "decidim.budgets.user_data.new")
+        flash[:warning] = t("voting_ended", scope: "decidim.budgets.user_data.new")
         redirect_to decidim.root_path
       end
 
