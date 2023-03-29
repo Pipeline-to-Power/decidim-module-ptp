@@ -18,14 +18,14 @@ module Decidim
       def ensure_authenticated
         return true if current_user
 
-        flash[:warning] = t(".login_before_access")
+        flash[:warning] = t(".login_before_access", scope: "decidim.budgets.budgets.index")
         redirect_to decidim.new_user_session_path
       end
 
       def ensure_user_zip_code
         return true if current_user.try(:budgets_user_data).present?
 
-        flash[:warning] = t(".set_zip_code_before_access")
+        flash[:warning] = t("set_zip_code_before_access", scope: "decidim.budgets.budgets.index")
         redirect_to decidim_budgets.new_zip_code_path
       end
 
@@ -44,14 +44,14 @@ module Decidim
       def ensure_zip_code_workflow
         return true if zip_code_workflow?
 
-        flash[:warning] = t(".not_allowed")
+        flash[:warning] = t("not_allowed", scope: "decidim.budgets.budgets.index")
         redirect_to decidim.root_path
       end
 
       def ensure_not_voted
         return true unless voted_any?
 
-        flash[:warning] = t(".change_zip_code_after_vote")
+        flash[:warning] = t("change_zip_code_after_vote", scope: "decidim.budgets.user_data.new")
         redirect_to decidim_budgets.budgets_path
       end
 
