@@ -10,13 +10,14 @@ module Decidim
         def index
           raise ActionController::RoutingError, "Not Found" unless budget
 
-          raise ActionController::RoutingError, "Not Found" if zip_code_workflow? && voting_enabled?
+          redirect_to decidim_budgets.budget_voting_index_path(budget) if zip_code_workflow? && voting_enabled?
         end
 
         def show
           raise ActionController::RoutingError, "Not Found" unless budget
           raise ActionController::RoutingError, "Not Found" unless project
-          raise ActionController::RoutingError, "Not Found" if zip_code_workflow? && voting_enabled?
+
+          redirect_to decidim_budgets.budget_voting_index_path(budget) if zip_code_workflow? && voting_enabled?
         end
       end
     end
