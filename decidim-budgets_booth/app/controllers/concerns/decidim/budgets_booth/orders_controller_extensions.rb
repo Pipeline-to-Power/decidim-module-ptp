@@ -26,17 +26,6 @@ module Decidim
 
         private
 
-        def redirect_path
-          case params[:return_to]
-          when "budget"
-            budget_path(budget)
-          when "homepage"
-            decidim.root_path
-          else
-            budgets_path
-          end
-        end
-
         def handle_user_redirect
           if voted_all_budgets?
             redirect_to success_redirect_path
