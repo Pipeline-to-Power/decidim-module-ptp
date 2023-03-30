@@ -4,7 +4,6 @@ module Decidim
   module Budgets
     class VotingController < ProjectsController
       include Decidim::Budgets::NeedsCurrentOrder
-      include Decidim::UserProfile
       include ::Decidim::BudgetsBooth::BudgetsControllerHelper
 
       layout "decidim/budgets/voting_layout"
@@ -50,7 +49,7 @@ module Decidim
       def ensure_not_voted_this!
         return unless current_order.checked_out?
 
-        flash[:warning] = I18n.t("not_allowed", scope: "decidim.budgets.budgets")
+        flash[:warning] = I18n.t("not_allowed", scope: "decidim.budgets.budgets.index")
         redirect_to decidim_budgets.budgets_path
       end
 
