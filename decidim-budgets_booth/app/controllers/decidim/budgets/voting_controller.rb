@@ -13,11 +13,10 @@ module Decidim
       # as `authenticate_user!` (or whatever your resource is) will halt the filter chain and redirect
       # before the location can be stored.
 
-      before_action :authenticate_user!
+      before_action :ensure_zip_code_workflow
       before_action :ensure_voting_open!
-      before_action :ensure_authenticated, if: :zip_code_workflow?
-      before_action :ensre_user_zip_code, if: :zip_code_workflow?
-      before_action :ensure_not_voted_this!, only: [:index]
+      before_action :ensure_authenticated
+      before_action :ensure_not_voted_this!
 
       def index
         enforce_permission_to :vote, :project, project: budget.projects.first, budget: budget, workflow: current_workflow
@@ -44,16 +43,15 @@ module Decidim
       def ensure_voting_open!
         return if voting_open?
 
-        flash[:warning] = I18n.t("decidim.budgets.voting.general.not_open_warning")
+        flash[:warning] = I18n.t("not_open_warning", scope: "decidim.budgets.voting.general")
         redirect_to decidim_budgets.budget_projects_path(budget)
       end
 
       def ensure_not_voted_this!
-        redirect_to decidim_budgets.budgets_path if current_order.checked_out?
-      end
+        return unless current_order.checked_out?
 
-      def authorization_required?
-        @authorization_required ||= authorization_options&.present?
+        flash[:warning] = I18n.t("not_allowed", scope: "decidim.budgets.budgets")
+        redirect_to decidim_budgets.budgets_path
       end
 
       def decidim_budgets
