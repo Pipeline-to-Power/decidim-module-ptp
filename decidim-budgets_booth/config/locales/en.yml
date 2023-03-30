@@ -1,6 +1,9 @@
 ---
 
 en:
+  activerecord:
+    errors/models/budget/attributes/main_image:
+      invalid: There was a problem uploading this image
   decidim:
     components:
       budgets:
