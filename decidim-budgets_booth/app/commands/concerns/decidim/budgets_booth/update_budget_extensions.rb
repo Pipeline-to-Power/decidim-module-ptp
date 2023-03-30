@@ -6,6 +6,7 @@ module Decidim
   module BudgetsBooth
     module UpdateBudgetExtensions
       extend ActiveSupport::Concern
+      include ::Decidim::AttachmentAttributesMethods
 
       included do
         private
@@ -18,7 +19,7 @@ module Decidim
             description: form.description,
             total_budget: form.total_budget
           }.merge(
-            form.main_image&.attached? ? form.main_image.attachment_attributes : {}
+            attachment_attributes(:main_image)
           )
 
           Decidim.traceability.update!(
