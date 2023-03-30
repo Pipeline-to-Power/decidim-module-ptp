@@ -16,18 +16,6 @@ module Decidim
                                                                            .active_step
                                                                            .title
       end
-
-      def voting_mode?
-        false
-      end
-
-      def budgets_accessible?
-        !voting_mode? && budgets_count > 1
-      end
-
-      def budgets_count
-        Decidim::Budgets::Budget.where(component: current_component).count
-      end
     end
   end
 end
