@@ -8,7 +8,7 @@ module Decidim
 
         result = Set.new
         process_subscopes(resource.scope, result)
-        result.to_a
+        result.to_a.uniq
       end
 
       private
