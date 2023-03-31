@@ -8,7 +8,7 @@ module Decidim
 
       delegate :progress?, to: :current_workflow
 
-      def cuurent_phase
+      def current_phase
         process = Decidim::ParticipatoryProcesses::OrganizationParticipatoryProcesses
                   .new(current_organization).query.find_by(slug: params[:participatory_process_slug])
         process&.active_step&.title
