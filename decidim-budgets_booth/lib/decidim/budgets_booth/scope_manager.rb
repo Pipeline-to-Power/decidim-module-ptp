@@ -11,6 +11,13 @@ module Decidim
         result.to_a.uniq
       end
 
+      def user_zip_code(user, budgets_component)
+        return false if user.blank?
+
+        user_data = user.budgets_user_data.find_by(component: budgets_component)
+        user_data&.metadata
+      end
+
       private
 
       def process_subscopes(scope, result)
@@ -26,13 +33,6 @@ module Decidim
 
       def zip_code(scope)
         scope.code.split("_").last
-      end
-
-      def user_zip_code(user, budgets_component)
-        return false if user.blank?
-
-        user_data = user.budgets_user_data.find_by(component: budgets_component)
-        user_data&.metadata
       end
 
       def budget_scope_type(budget)
