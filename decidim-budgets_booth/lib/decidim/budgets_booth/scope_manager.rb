@@ -11,6 +11,8 @@ module Decidim
         result.to_a
       end
 
+      private
+
       def process_subscopes(scope, result)
         scope.children.each do |subscope|
           if subscope.children.any?
