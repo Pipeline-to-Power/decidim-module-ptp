@@ -6,7 +6,6 @@ describe Decidim::BudgetsBooth::ProjectsHelperExtensions, type: :helper do
   describe "#current_phase" do
     let(:organization) { create(:organization) }
     let(:participatory_process) { create(:participatory_process, organization: organization) }
-    # let(:participatory_process_group) { create(:participatory_process_group, organization: organization) }
     let!(:step1) do
       create(:participatory_process_step,
              active: true,
