@@ -5,7 +5,7 @@ module Decidim
     module Workflows
       # This is the zip_code Workflow class.
       class ZipCode < ::Decidim::Budgets::Workflows::Base
-        include ScopeManager
+        delegate :zip_codes, :user_zip_code, to: :scope_manager
         # Highlight the resource if the user didn't vote and is allowed to vote on it.
         def highlighted?(resource)
           vote_allowed?(resource)
@@ -25,6 +25,10 @@ module Decidim
         end
 
         private
+
+        def scope_manager
+          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+        end
 
         def projects(budget)
           Decidim::Budgets::Project.where(budget: budget)

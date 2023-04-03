@@ -5,7 +5,6 @@ module Decidim
     module BudgetListItemCellExtensions
       extend ActiveSupport::Concern
       include BudgetsControllerHelper
-      include ScopeManager
 
       included do
         delegate :voting_open?, :voting_finished?, to: :controller
@@ -34,6 +33,17 @@ module Decidim
 
         def voted_this?(budget)
           current_workflow.status(budget) == :voted
+        end
+
+        def scope_manager
+          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+        end
+
+        def budget_scope_type(budget)
+          type = translated_attribute(budget&.scope&.scope_type&.name)
+          return if type.blank?
+
+          type.split.last
         end
       end
     end

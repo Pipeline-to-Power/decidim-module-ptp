@@ -74,10 +74,6 @@ module Decidim
             Decidim::BudgetsBooth::BudgetsControllerHelper
           )
 
-          Decidim::Budgets::BudgetsHeaderCell.include(
-            Decidim::BudgetsBooth::ScopeManager
-          )
-
           # Controllers extensions
 
           Decidim::Budgets::OrdersController.include(

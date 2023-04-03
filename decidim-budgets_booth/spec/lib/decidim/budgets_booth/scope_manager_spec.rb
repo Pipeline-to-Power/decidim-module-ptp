@@ -3,11 +3,7 @@
 require "spec_helper"
 
 describe Decidim::BudgetsBooth::ScopeManager do
-  subject do
-    Class.new do
-      include Decidim::BudgetsBooth::ScopeManager
-    end.new
-  end
+  subject { described_class.new }
 
   let(:organization) { create(:organization) }
   let(:component) { create(:budgets_component, organization: organization) }

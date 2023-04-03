@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    module ScopeManager
+    class ScopeManager
       def zip_codes(resource)
         return [] if resource.scope.blank?
 
@@ -33,13 +33,6 @@ module Decidim
 
       def zip_code(scope)
         scope.code.split("_").last
-      end
-
-      def budget_scope_type(budget)
-        type = translated_attribute(budget&.scope&.scope_type&.name)
-        return if type.blank?
-
-        type.split.last
       end
     end
   end

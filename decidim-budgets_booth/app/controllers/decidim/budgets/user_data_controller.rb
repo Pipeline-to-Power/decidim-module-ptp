@@ -4,8 +4,9 @@ module Decidim
   module Budgets
     class UserDataController < ApplicationController
       include FormFactory
-      include ::Decidim::BudgetsBooth::ScopeManager
       include ::Decidim::BudgetsBooth::BudgetsControllerHelper
+
+      delegate :zip_codes, :user_zip_code, to: :scope_manager
 
       layout "decidim/budgets/voting_layout"
       before_action :ensure_zip_code_workflow
@@ -51,6 +52,10 @@ module Decidim
 
       def budgets
         @budgets ||= Decidim::Budgets::Budget.where(component: current_component)
+      end
+
+      def scope_manager
+        @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
       end
     end
   end

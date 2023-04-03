@@ -3,11 +3,7 @@
 require "spec_helper"
 
 describe Decidim::BudgetsBooth::Workflows::ZipCode do
-  subject do
-    described_class do
-      include Decidim::BudgetsBooth::WorkflowsZipCode
-    end.new(component, user)
-  end
+  subject { described_class.new(component, user) }
 
   let(:organization) { create(:organization) }
   let(:component) { create(:budgets_component, organization: organization) }
@@ -47,7 +43,6 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
 
   describe "#budgets" do
     let!(:budgets) { create_list(:budget, 3, component: component) }
-    let(:vote_allowed?) { double.as_null_object }
 
     before do
       allow(subject).to receive(:vot_allowed?).and_return(true)

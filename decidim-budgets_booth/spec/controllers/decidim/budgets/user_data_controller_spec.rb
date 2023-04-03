@@ -51,11 +51,12 @@ module Decidim
           let!(:order) { create(:order, :with_projects, user: user, budget: budgets.first) }
 
           before do
-            order.update!(checked_out_at: Time.current)
+            order.update(checked_out_at: Time.current)
             sign_in user, scope: :user
           end
 
           it "redirects to the budgets path" do
+            puts "voted_any? value: #{controller.send(:voted_any?)}"
             get :new
             expect(response).to redirect_to(decidim_budgets.budgets_path)
             expect(flash[:warning]).to have_content("You can not change your zip code after started voting. Delete all of your votes first.")
