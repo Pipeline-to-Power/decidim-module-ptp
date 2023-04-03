@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-describe Decidim::BudgetsBooth::ZipCode do
+describe Decidim::BudgetsBooth::Workflows::ZipCode do
   subject do
     described_class do
-      include Decidim::BudgetsBooth::ZipCode
+      include Decidim::BudgetsBooth::WorkflowsZipCode
     end.new(component, user)
   end
 
