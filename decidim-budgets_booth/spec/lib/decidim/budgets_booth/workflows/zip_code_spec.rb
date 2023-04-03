@@ -44,8 +44,14 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
   describe "#budgets" do
     let!(:budgets) { create_list(:budget, 3, component: component) }
 
+    let(:scope_manager) { instance_double(Decidim::BudgetsBooth::ScopeManager) }
+
     before do
-      allow(subject).to receive(:vot_allowed?).and_return(true)
+      allow(::Decidim::BudgetsBooth::ScopeManager).to receive(:new).and_return(scope_manager)
+      allow(scope_manager).to receive(:user_zip_code).with(user, component).and_return("dummy zip_code")
+      allow(scope_manager).to receive(:zip_codes).with(budgets.first).and_return(["dummy zip_code"])
+      allow(scope_manager).to receive(:zip_codes).with(budgets.second).and_return(["dummy zip_code"])
+      allow(scope_manager).to receive(:zip_codes).with(budgets.last).and_return(["another code"])
     end
 
     it "returns the correct budgets list" do
