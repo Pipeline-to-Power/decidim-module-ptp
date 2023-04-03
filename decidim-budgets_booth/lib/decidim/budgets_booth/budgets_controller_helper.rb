@@ -56,9 +56,10 @@ module Decidim
       end
 
       def voted_all_budgets?
+        budgets = current_workflow.budgets
         return false if budgets.blank?
 
-        current_workflow.budgets.map do |budget|
+        budgets.map do |budget|
           return false unless voted?(budget)
         end
         true

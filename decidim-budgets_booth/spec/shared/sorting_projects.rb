@@ -10,7 +10,6 @@ shared_examples "ordering projects by selected option" do |selected_option|
   end
 
   it "lists the projects ordered by selected option" do
-    # expect(page).to have_selector("#projects li.is-dropdown-submenu-parent a", text: selected_option)
     within "#projects li.is-dropdown-submenu-parent a" do
       expect(page).to have_no_content("Random order", wait: 20)
       expect(page).to have_content(selected_option)
