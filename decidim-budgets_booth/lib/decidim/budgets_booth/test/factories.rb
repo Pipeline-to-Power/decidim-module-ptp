@@ -8,5 +8,9 @@ FactoryBot.define do
     association :user, factory: :user
     affirm_statements_are_correct { true }
     metadata { "" }
+
+    before(:create) do |user_data, evaluator|
+      user_data.metadata = evaluator.metadata if evaluator.metadata.present?
+    end
   end
 end
