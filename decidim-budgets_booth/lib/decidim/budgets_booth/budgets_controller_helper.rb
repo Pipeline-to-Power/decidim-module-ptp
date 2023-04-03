@@ -18,7 +18,7 @@ module Decidim
       def ensure_authenticated
         return true if current_user
 
-        flash[:warning] = t(".login_before_access", scope: "decidim.budgets.budgets.index")
+        flash[:warning] = t("login_before_access", scope: "decidim.budgets.budgets.index")
         redirect_to decidim.new_user_session_path
       end
 
@@ -56,6 +56,8 @@ module Decidim
       end
 
       def voted_all_budgets?
+        return false if budgets.blank?
+
         current_workflow.budgets.map do |budget|
           return false unless voted?(budget)
         end
