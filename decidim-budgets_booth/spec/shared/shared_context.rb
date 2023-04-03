@@ -22,3 +22,28 @@ end
 RSpec.shared_context "with user_data" do
   let!(:user_data) { create(:user_data, component: component, user: user) }
 end
+
+RSpec.shared_context "with scoped budgets" do
+  include_context "with scopes"
+  let(:component) { create(:budgets_component) }
+  let(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000) }
+  let(:projects_count) { 10 }
+  let!(:first_projects_set) { create_list(:project, projects_count, budget: budgets.first, budget_amount: 25_000) }
+  let!(:second_projects_set) { create_list(:project, projects_count, budget: budgets.second, budget_amount: 25_000) }
+  let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets.last, budget_amount: 25_000) }
+
+  before do
+    budgets.first.update!(scope: parent_scopes.first)
+    budgets.second.update!(scope: subscopes.first)
+    budgets.last.update!(scope: subscopes.last)
+  end
+end
+
+RSpec.shared_context "with zip_code workflow" do
+  let!(:component) do
+    create(
+      :budgets_component,
+      settings: { workflow: "zip_code" }
+    )
+  end
+end
