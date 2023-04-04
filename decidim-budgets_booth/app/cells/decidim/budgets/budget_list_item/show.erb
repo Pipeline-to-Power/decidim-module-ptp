@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="columns mediumlarge-8 large-6 card--process__column">
-        <div class="card--full__image <%= mark_image_as_voted(budget) %>"
+        <div class="card--full__image<%= mark_image_as_voted(budget) %>"
         style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
           <% if voting_open? %>
             <div class="card__content row collapse">
