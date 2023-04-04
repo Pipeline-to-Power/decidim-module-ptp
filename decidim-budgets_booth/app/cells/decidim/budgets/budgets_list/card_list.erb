@@ -6,19 +6,10 @@
     </h2>
   </div>
   <% end %>
-  <% if highlighted.any? %>
-    <% highlighted.each do |budget| %>
-      <div id="highlighted-budgets" class="card card--list budget-list">
-        <%= cell("decidim/budgets/budget_list_item", budget) %>
-      </div>
-    <% end %>
-  <% end %>
 
-  <% non_highlighted = (budgets - highlighted - voted) %>
+  <% if budgets.any? %>
 
-  <% if non_highlighted.any? %>
-
-    <% non_highlighted.each do |budget| %>
+    <% budgets.each do |budget| %>
       <div id="budgets" class="card card--list budget-list">
         <%= cell("decidim/budgets/budget_list_item", budget) %>
       </div>
