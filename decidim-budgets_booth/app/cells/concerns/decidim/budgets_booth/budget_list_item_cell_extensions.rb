@@ -18,7 +18,7 @@ module Decidim
 
           return nil unless voting_open?
 
-          "voted-budget"
+          " voted-budget"
         end
 
         def generate_projects_link(resource)
