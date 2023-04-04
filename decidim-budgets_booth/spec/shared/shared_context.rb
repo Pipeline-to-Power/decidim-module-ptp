@@ -33,6 +33,7 @@ RSpec.shared_context "with scoped budgets" do
   let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets.last, budget_amount: 25_000) }
 
   before do
+    attach_images(budgets)
     budgets.first.update!(scope: parent_scopes.first)
     budgets.second.update!(scope: subscopes.first)
     budgets.last.update!(scope: subscopes.last)
@@ -45,5 +46,18 @@ RSpec.shared_context "with zip_code workflow" do
       :budgets_component,
       settings: { workflow: "zip_code" }
     )
+  end
+end
+
+private
+
+def attach_images(budgets)
+  city_files = ["city.jpeg", "city2.jpeg", "city3.jpeg"]
+  budgets.each_with_index do |budget, ind|
+    budget.update(main_image: ActiveStorage::Blob.create_and_upload!(
+      io: File.open(Decidim::Dev.asset(city_files[ind])),
+      filename: city_files[ind],
+      content_type: "image/jpeg"
+    ))
   end
 end
