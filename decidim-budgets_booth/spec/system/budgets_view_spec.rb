@@ -16,7 +16,7 @@ describe "Budgets view", type: :system do
     context "when not signed in" do
       before { visit decidim_budgets.budgets_path }
 
-      it "redirects the user" do
+      it "shows the normal layout" do
         expect(page).to have_link(translated(budgets.first.title), href: decidim_budgets.budget_path(budgets.first))
         expect(page).to have_selector("a", text: /show/i, count: 3)
         expect(page).to have_content("€100,000")
