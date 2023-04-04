@@ -6,9 +6,9 @@ module Decidim
       # This is the zip_code Workflow class.
       class ZipCode < ::Decidim::Budgets::Workflows::Base
         delegate :zip_codes, :user_zip_code, to: :scope_manager
-        # Highlight the resource if the user didn't vote and is allowed to vote on it.
-        def highlighted?(resource)
-          vote_allowed?(resource)
+        # No budget is highlighted for this workflow
+        def highlighted?(_resource)
+          false
         end
 
         # User can vote in the resource inside their area where they live. This is being determined
