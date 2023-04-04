@@ -20,6 +20,8 @@ en:
           edit:
             images: Images
       budgets:
+        actions:
+          cancel_voting: Are you sure you want to exit the voting booth?
         index:
           login_before_access: You need to login first.
           set_zip_code_before_access: You need to enter your zip code first.
