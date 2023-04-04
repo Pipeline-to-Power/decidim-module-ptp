@@ -2,7 +2,9 @@
   <div class="row">
     <div class="row">
       <div class="columns medium-8 large-9">
-        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get do %>
+        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
+            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
+          } do %>
             <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
             <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
         <% end %>
@@ -22,7 +24,7 @@
       </div>
     </div>
     <div class="columns medium-5 mediumlarge-4">
-      <% if !voted_any? %>
+      <% if !voted_any? && landing_page_content.present? %>
         <div class="callout warning font-customizer">
           <%= decidim_sanitize_editor(landing_page_content) %>
         </div>
