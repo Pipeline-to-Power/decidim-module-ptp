@@ -13,9 +13,7 @@
       <button class="button expanded" data-close type="button">
         <%= t(".continue") %>
       </button>
-      <%= link_to t(".exit"), cancel_redirect_path, id: "exit-notification-link", class: "button hollow expanded", data: {
-            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
-          } %>
+      <%= link_to t(".exit"), cancel_redirect_path, id: "exit-notification-link", class: "button hollow expanded" %>
     </div>
   </div>
 </div>
