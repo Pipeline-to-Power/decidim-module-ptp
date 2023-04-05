@@ -3,132 +3,151 @@
 require "spec_helper"
 
 describe "Voting index page", type: :system do
+  include_context "with scoped budgets"
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
   let(:organization) { component.organization }
-  let(:component) { create(:budgets_component) }
-
-  let(:budget) { create(:budget, component: component, total_budget: 100_000) }
-  let!(:project1) { create(:project, budget: budget, budget_amount: 25_000) }
-  let!(:project2) { create(:project, budget: budget, budget_amount: 50_000) }
+  let(:first_budget) { budgets.first }
+  let(:second_budget) { budgets.second }
+  let(:active_step_id) { component.participatory_space.active_step.id }
 
   before do
     switch_to_host(organization.host)
   end
 
-  context "when not voting" do
+  context "when not zip_code workflow" do
     before do
-      visit decidim_budgets.budgets_path
+      visit_budget(first_budget)
     end
 
-    it_behaves_like "non-voting view" do
-      let!(:projects) { [project1, project2] }
-    end
-
-    it_behaves_like "filtering projects" do
-      let!(:current_projects) { [project1, project2] }
-      let(:current_component) { component }
-    end
-    it "explores the budgets" do
-      expect(page).to have_content("Welcome to the vote!")
-      expect(page).to have_content("Start voting")
-      expect(page).not_to have_content("Back to budgets")
-    end
-
-    context "when ordering by highest cost" do
-      it_behaves_like "ordering projects by selected option", "Highest cost" do
-        let(:first_project) { project2 }
-        let(:last_project) { project1 }
-      end
-    end
-
-    context "when ordering by lowest cost" do
-      it_behaves_like "ordering projects by selected option", "Lowest cost" do
-        let(:first_project) { project1 }
-        let(:last_project) { project2 }
+    it "redirects user to root path" do
+      expect(page).to have_current_path "/"
+      within_flash_messages do
+        expect(page).to have_content "You are not allowed to perform this action."
       end
     end
   end
 
-  context "when entering voting" do
-    context "when use is not signed_in" do
+  context "when not signed in" do
+    before do
+      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      visit_budget(first_budget)
+    end
+
+    it "redirects user to the login page" do
+      expect(page).to have_current_path(decidim.new_user_session_path)
+      within_flash_messages do
+        expect(page).to have_content "You need to login first."
+      end
+    end
+  end
+
+  context "when no user_data" do
+    before do
+      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      sign_in user, scope: :user
+      visit_budget(first_budget)
+    end
+
+    it "redirects the user" do
+      expect(page).to have_current_path("/")
+      within_flash_messages do
+        expect(page).to have_content "You are not authorized to perform this action"
+      end
+    end
+  end
+
+  context "when not allowed to vote that budget" do
+    let!(:user_data) { create(:user_data, component: component, user: user) }
+
+    before do
+      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      sign_in user, scope: :user
+      visit_budget(first_budget)
+    end
+
+    it "redirects the user" do
+      expect(page).to have_current_path("/")
+      within_flash_messages do
+        expect(page).to have_content "You are not authorized to perform this action"
+      end
+    end
+  end
+
+  context "when voted to that budget" do
+    let!(:user_data) { create(:user_data, component: component, user: user) }
+    let!(:order) { create(:order, :with_projects, user: user, budget: first_budget) }
+
+    before do
+      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      order.update!(checked_out_at: Time.current)
+      user_data.update!(metadata: "1004")
+      sign_in user, scope: :user
+      visit_budget(first_budget)
+    end
+
+    it "redirects the user" do
+      expect(page).to have_current_path(decidim_budgets.budgets_path)
+      within_flash_messages do
+        expect(page).to have_content "You are not allowed to perform this action."
+      end
+    end
+  end
+
+  describe "voting" do
+    let!(:user_data) { create(:user_data, component: component, user: user) }
+
+    before do
+      component.update(settings: { workflow: "zip_code", projects_per_page: 5 }, step_settings: { active_step_id => { votes_enabled: false } })
+      user_data.update!(metadata: "1004")
+      sign_in user, scope: :user
+      visit_budget(first_budget)
+    end
+
+    it_behaves_like "budget booth layout"
+    it_behaves_like "budget summary"
+    it_behaves_like "cancel voting"
+    it_behaves_like "paginated projects"
+    it_behaves_like "add/remove projects from booth", projects_count: 5
+    it_behves_like "filtering projects"
+
+    context "when maximum budget exceeds" do
       before do
-        visit decidim_budgets.budget_voting_index_path(budget)
+        first_budget.update!(total_budget: 24_999)
+        visit current_path
       end
 
-      it "sends the user to the sign in page" do
-        expect(page).to have_current_path "/users/sign_in"
-        within_flash_messages do
-          expect(page).to have_content "You need to sign in to start voting."
-        end
-        expect(page).to have_content("Sign in with SMS")
-        expect(page).to have_content("Sign in with Email")
+      it_behaves_like "maximum budget exceed"
+    end
+
+    context "when highest cost" do
+      before { first_budget.projects.second.update!(budget_amount: 30_000) }
+
+      it_behaves_like "ordering projects by selected option", "Highest cost" do
+        let(:first_project) { first_budget.projects.second }
       end
     end
 
-    context "when user is not authorized" do
-      context "when there is only one authorization option configured" do
-        let(:voting_url) { decidim_budgets.budget_voting_index_path(budget) }
-        let(:authorization_url) { "/authorizations/new?handler=dummy_authorization_handler&redirect_url=#{CGI.escape(voting_url)}" }
+    context "when lowest cost" do
+      before { first_budget.projects.second.update!(budget_amount: 20_000) }
 
-        include_context "with single permission"
-        before do
-          sign_in user
-          visit decidim_budgets.budget_voting_index_path(budget)
-        end
-
-        it "asks the user to authorize before voting" do
-          within_flash_messages do
-            expect(page).to have_content "You need to verify your phone number with SMS in order to vote."
-          end
-          expect(page).to have_current_path(authorization_url)
-        end
-      end
-
-      context "when multiple authorizations are configured" do
-        let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler) }
-        let(:permissions) do
-          {
-            vote: {
-              authorization_handlers: {
-                "dummy_authorization_handler" => {},
-                "another_dummy_authorization_handler" => {}
-              }
-            }
-          }
-        end
-
-        before do
-          component.organization.update!(available_authorizations: available_authorizations)
-          component.update!(permissions: permissions)
-
-          sign_in user
-          visit decidim_budgets.budget_voting_index_path(budget)
-        end
-
-        it "displays the authorization options" do
-          expect(page).to have_content("You need to verify yourself in order to vote.")
-          expect(page).to have_content("Example authorization")
-          expect(page).to have_content("Another example authorization")
-          expect(page).not_to have_content("You are now in the voting booth.")
-          expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-        end
+      it_behaves_like "ordering projects by selected option", "Lowest cost" do
+        let(:first_project) { first_budget.projects.second }
       end
     end
+  end
 
-    context "when authorized" do
-      include_context "with single permission"
-      let!(:authorization) { create(:authorization, :granted, user: user, name: "dummy_authorization_handler", unique_id: "123456789X") }
+  private
 
-      before do
-        sign_in user
-        visit decidim_budgets.budget_voting_index_path(budget)
-      end
+  def decidim_budgets
+    Decidim::EngineRouter.main_proxy(component)
+  end
 
-      it "enters the voting booth" do
-        expect(page).to have_content("You are now in the voting booth.")
-        expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-      end
-    end
+  def budget_path(budget)
+    decidim_budgets.budget_path(budget.id)
+  end
+
+  def visit_budget(budget)
+    visit decidim_budgets.budget_voting_index_path(budget)
   end
 end
