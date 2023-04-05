@@ -4,8 +4,6 @@ shared_examples "add/remove projects from booth" do |projects_count:|
   it "adds and removes projects" do
     expect(page).to have_button("Add to your vote", count: projects_count)
     click_button("Add to your vote", match: :first)
-    expect(page).to have_content("Your vote has not been cast.")
-    click_button "I understand how to vote"
     expect(page).to have_button("Add to your vote", count: projects_count - 1)
     expect(page).to have_button("Remove your vote", count: 1)
     expect(page).to have_css("svg.icon--actions.icon.card--list__icon.card--list__check", count: 1)
