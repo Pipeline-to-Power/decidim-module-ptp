@@ -109,7 +109,7 @@ describe "Voting index page", type: :system do
     it_behaves_like "cancel voting"
     it_behaves_like "paginated projects"
     it_behaves_like "add/remove projects from booth", projects_count: 5
-    it_behves_like "filtering projects"
+    it_behaves_like "filtering projects"
 
     context "when maximum budget exceeds" do
       before do
