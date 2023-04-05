@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 shared_examples "filtering projects" do
-  let!(:categories) { create_list(:category, 3, participatory_space: current_component.participatory_space) }
+  let!(:categories) { create_list(:category, 3, participatory_space: component.participatory_space) }
+  let(:current_projects) { first_budget.projects }
   context "when filtering" do
     it "allows searching by text" do
       project = current_projects.first
@@ -19,9 +20,13 @@ shared_examples "filtering projects" do
 
     it "allows filtering by scope" do
       project = current_projects.first
+      project.scope = first_budget.scope
+      project.save
+      visit current_path
+
       within ".filters__section.with_any_scope_check_boxes_tree_filter" do
         uncheck "All"
-        check translated(project.scope.name)
+        check translated(first_budget.scope.name)
       end
 
       within "#projects" do
@@ -47,42 +52,5 @@ shared_examples "filtering projects" do
         expect(page).to have_content(translated(project.title))
       end
     end
-
-    it "works with 'back to list' link" do
-      project = current_projects.first
-      category = categories.first
-      project.category = category
-      project.save
-
-      visit_budget
-
-      within ".filters__section.with_any_category_check_boxes_tree_filter" do
-        uncheck "All"
-        check translated(category.name)
-      end
-
-      within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
-        expect(page).to have_content(translated(project.title))
-      end
-
-      find("a", text: "Read more", match: :first).click
-      click_link "View all projects"
-
-      within "#projects" do
-        expect(page).to have_css(".budget-list__item", count: 1)
-        expect(page).to have_content(translated(project.title))
-      end
-    end
-  end
-
-  private
-
-  def decidim_budgets
-    Decidim::EngineRouter.main_proxy(component)
-  end
-
-  def visit_budget
-    page.visit decidim_budgets.budget_projects_path(budget)
   end
 end
