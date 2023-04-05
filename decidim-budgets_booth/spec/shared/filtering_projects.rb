@@ -19,15 +19,9 @@ shared_examples "filtering projects" do
 
     it "allows filtering by scope" do
       project = current_projects.first
-      scope = create(:scope, organization: current_component.organization)
-      project.scope = scope
-      project.save
-
-      visit_budget
-
       within ".filters__section.with_any_scope_check_boxes_tree_filter" do
         uncheck "All"
-        check translated(scope.name)
+        check translated(project.scope.name)
       end
 
       within "#projects" do
@@ -42,7 +36,7 @@ shared_examples "filtering projects" do
       project.category = category
       project.save
 
-      visit_budget
+      visit current_path
       within ".filters__section.with_any_category_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
