@@ -3,7 +3,6 @@
 shared_examples "budget summary" do
   before do
     click_button "Add to your vote", match: :first
-    click_button "I understand how to vote"
   end
 
   it "updates budget summary" do
