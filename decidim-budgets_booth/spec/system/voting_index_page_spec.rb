@@ -30,7 +30,7 @@ describe "Voting index page", type: :system do
 
   context "when not signed in" do
     before do
-      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      component.update(settings: { workflow: "zip_code" })
       visit_budget(first_budget)
     end
 
@@ -44,7 +44,7 @@ describe "Voting index page", type: :system do
 
   context "when no user_data" do
     before do
-      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      component.update(settings: { workflow: "zip_code" })
       sign_in user, scope: :user
       visit_budget(first_budget)
     end
@@ -61,7 +61,7 @@ describe "Voting index page", type: :system do
     let!(:user_data) { create(:user_data, component: component, user: user) }
 
     before do
-      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      component.update(settings: { workflow: "zip_code" })
       sign_in user, scope: :user
       visit_budget(first_budget)
     end
@@ -79,7 +79,7 @@ describe "Voting index page", type: :system do
     let!(:order) { create(:order, :with_projects, user: user, budget: first_budget) }
 
     before do
-      component.update(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes_enabled: false } })
+      component.update(settings: { workflow: "zip_code" })
       order.update!(checked_out_at: Time.current)
       user_data.update!(metadata: "1004")
       sign_in user, scope: :user
@@ -98,7 +98,7 @@ describe "Voting index page", type: :system do
     let!(:user_data) { create(:user_data, component: component, user: user) }
 
     before do
-      component.update(settings: { workflow: "zip_code", projects_per_page: 5 }, step_settings: { active_step_id => { votes_enabled: false } })
+      component.update(settings: { workflow: "zip_code", projects_per_page: 5 })
       user_data.update!(metadata: "1004")
       sign_in user, scope: :user
       visit_budget(first_budget)
