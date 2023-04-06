@@ -87,7 +87,7 @@ describe "Budgets view", type: :system do
               expect(page).to have_content(first_type)
               expect(page).to have_content(second_type)
             end
-            expect(page).not_to have_css(".callout.warning.font-customizer")
+            expect(page).to have_no_css(".callout.warning.font-customizer")
             expect(page).to have_button("Cancel voting")
             click_button "Cancel voting"
             within ".small.reveal.confirm-reveal" do
