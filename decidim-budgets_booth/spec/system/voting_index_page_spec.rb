@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "Voting index page", type: :system do
   include_context "with scoped budgets"
+  let(:projects_count) { 10 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
   let(:organization) { component.organization }
@@ -373,6 +374,45 @@ describe "Voting index page", type: :system do
           click_button("Cancel")
         end
         expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(first_budget))
+      end
+    end
+
+    describe "#show_full_description_on_listing_page" do
+      let(:projects_count) { 1 }
+      let(:project) { first_budget.projects.first }
+
+      before do
+        project.update!(description: Decidim::Faker::Localized.sentence(word_count: 20))
+      end
+
+      context "when not set" do
+        before do
+          visit current_path
+        end
+
+        it "does not shows complete description by default" do
+          within("#project-#{project.id}-item") do
+            expect(page).to have_selector("button", text: translated(project.title))
+            expect(page).to have_button("Read more")
+            expect(page).to have_content(/.*\.{3}$/)
+          end
+        end
+      end
+
+      context "when set" do
+        before do
+          component.update!(settings: { workflow: "zip_code", show_full_description_on_listing_page: true })
+          visit current_path
+        end
+
+        it "does not shows complete description by default" do
+          within("#project-#{project.id}-item") do
+            expect(page).to have_no_selector("button", text: translated(project.title))
+            expect(page).to have_no_button("Read more")
+            expect(page).to have_no_content(/.*\.{3}$/)
+            expect(page).to have_content(translated(project.description))
+          end
+        end
       end
     end
   end
