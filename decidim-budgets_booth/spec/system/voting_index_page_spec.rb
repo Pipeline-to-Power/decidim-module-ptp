@@ -21,12 +21,7 @@ describe "Voting index page", type: :system do
       visit_budget(first_budget)
     end
 
-    it "redirects user to root path" do
-      expect(page).to have_current_path "/"
-      within_flash_messages do
-        expect(page).to have_content "You are not allowed to perform this action."
-      end
-    end
+    it_behaves_like "ensure zip code workflow"
   end
 
   context "when not signed in" do
@@ -35,12 +30,7 @@ describe "Voting index page", type: :system do
       visit_budget(first_budget)
     end
 
-    it "redirects user to the login page" do
-      expect(page).to have_current_path(decidim.new_user_session_path)
-      within_flash_messages do
-        expect(page).to have_content "You need to login first."
-      end
-    end
+    it_behaves_like "ensure user sign in"
   end
 
   context "when no user_data" do
@@ -50,12 +40,7 @@ describe "Voting index page", type: :system do
       visit_budget(first_budget)
     end
 
-    it "redirects the user" do
-      expect(page).to have_current_path("/")
-      within_flash_messages do
-        expect(page).to have_content "You are not authorized to perform this action"
-      end
-    end
+    it_behaves_like "ensure user data"
   end
 
   context "when not allowed to vote that budget" do
@@ -67,12 +52,7 @@ describe "Voting index page", type: :system do
       visit_budget(first_budget)
     end
 
-    it "redirects the user" do
-      expect(page).to have_current_path("/")
-      within_flash_messages do
-        expect(page).to have_content "You are not authorized to perform this action"
-      end
-    end
+    it_behaves_like "not allowable voting"
   end
 
   context "when voted to that budget" do

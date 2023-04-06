@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "Budgets view", type: :system do
   include_context "with scoped budgets"
+  let(:projects_count) { 1 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
   let(:organization) { component.organization }
@@ -28,12 +29,7 @@ describe "Budgets view", type: :system do
     context "when not signed in" do
       before { visit decidim_budgets.budgets_path }
 
-      it "redirects user to the login page" do
-        expect(page).to have_current_path(decidim.new_user_session_path)
-        within_flash_messages do
-          expect(page).to have_content "You need to login first."
-        end
-      end
+      it_behaves_like "ensure user sign in"
     end
 
     context "when signed in" do
