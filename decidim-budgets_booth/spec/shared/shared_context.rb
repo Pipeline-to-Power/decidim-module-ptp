@@ -27,7 +27,6 @@ RSpec.shared_context "with scoped budgets" do
   include_context "with scopes"
   let(:component) { create(:budgets_component) }
   let(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000) }
-  let(:projects_count) { 10 }
   let!(:first_projects_set) { create_list(:project, projects_count, budget: budgets.first, budget_amount: 25_000) }
   let!(:second_projects_set) { create_list(:project, projects_count, budget: budgets.second, budget_amount: 25_000) }
   let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets.last, budget_amount: 25_000) }
