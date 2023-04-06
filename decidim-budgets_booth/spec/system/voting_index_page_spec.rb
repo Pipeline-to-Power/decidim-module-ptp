@@ -285,15 +285,17 @@ describe "Voting index page", type: :system do
       before do
         first_budget.update!(total_budget: 26_000)
         second_budget.update!(total_budget: 26_000)
-        create_order_for(second_budget)
         order.checked_out_at = Time.current
         order.projects << second_budget.projects.first
         order.save!
-        visit current_path
-        vote_budget!
       end
 
       context "when not set" do
+        before do
+          visit current_path
+          vote_budget!
+        end
+
         it "does not show the modal" do
           expect(page).to have_no_selector("#vote-completed")
           expect(page).to have_current_path(decidim_budgets.budgets_path)
@@ -303,11 +305,13 @@ describe "Voting index page", type: :system do
       context "when was set" do
         before do
           component.update!(settings: { workflow: "zip_code", vote_completed_content: { en: "<p>Completed voting dummy text</p>" } })
+          visit current_path
+          vote_budget!
         end
 
         it "shows the modal" do
           expect(page).to have_selector("#vote-completed")
-          within "#vote_completed" do
+          within "#vote-completed" do
             expect(page).to have_content("You successfully completed your votes")
             expect(page).to have_content("Completed voting dummy text")
           end
