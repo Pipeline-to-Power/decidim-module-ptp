@@ -52,7 +52,7 @@ module Decidim
         return true unless voted_any?
 
         flash[:warning] = t("change_zip_code_after_vote", scope: "decidim.budgets.user_data.new")
-        redirect_to decidim_budgets.budgets_path
+        redirect_to decidim.root_path
       end
 
       def voted_all_budgets?

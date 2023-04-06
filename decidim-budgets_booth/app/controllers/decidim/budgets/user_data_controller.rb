@@ -11,8 +11,8 @@ module Decidim
       layout "decidim/budgets/voting_layout"
       before_action :ensure_zip_code_workflow
       before_action :ensure_authenticated
-      before_action :ensure_not_voted
       before_action :ensure_voting_open
+      before_action :ensure_not_voted
 
       def new
         @form = form(UserDataForm).instance
