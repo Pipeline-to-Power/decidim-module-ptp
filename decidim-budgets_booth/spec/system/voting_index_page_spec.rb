@@ -135,6 +135,17 @@ describe "Voting index page", type: :system do
         let(:first_project) { first_budget.projects.second }
       end
     end
+
+    context "when casting vote" do
+      before do
+        first_budget.update!(total_budget: 26_000)
+        visit current_path
+        click_button("Add to your vote", match: :first)
+        click_button "Vote"
+      end
+
+      it_behaves_like "vote confirmation modal"
+    end
   end
 
   private
