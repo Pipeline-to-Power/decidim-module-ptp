@@ -9,5 +9,10 @@ module Decidim
   # allows users to create budgets_booth in a participatory space.
   module BudgetsBooth
     autoload :BudgetsControllerHelper, "decidim/budgets_booth/budgets_controller_helper"
+    include ActiveSupport::Configurable
+    # Default configuration digits to generate the zip code.
+    config_accessor :zip_code_length do
+      5
+    end
   end
 end
