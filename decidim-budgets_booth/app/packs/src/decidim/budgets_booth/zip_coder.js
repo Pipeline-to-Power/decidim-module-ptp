@@ -1,5 +1,22 @@
 $(() => {
   const zipcodeInputs = document.querySelectorAll('#zip-code input[type="text"]');
+  const zipCodeelement = document.querySelector("#zip-code-not-valid");
+  const togglevalidity = (item) => {
+    if (item.classList.contains("is-invisible")) {
+      item.classList.remove("is-invisible")
+      item.classList.add("is-visible")
+    } else {
+      item.classList.remove("is-visible")
+      item.classList.add("is-invisible")
+    }
+  }
+  if (zipCodeelement.dataset.invalid) {
+    console.log("The valididity is", zipCodeelement.dataset.invalid);
+    zipcodeInputs.forEach((input) => {
+      input.classList.add("is-invalid-input")
+    });
+    togglevalidity(zipCodeelement)
+  }
   zipcodeInputs.forEach((input, ind) => {
     input.setAttribute("maxlength", "1");
     input.addEventListener("click", () => {
@@ -29,16 +46,6 @@ $(() => {
     });
     return allFieldsFilled
   };
-
-  const togglevalidity = (item) => {
-    if (item.classList.contains("is-invisible")) {
-      item.classList.remove("is-invisible")
-      item.classList.add("is-visible")
-    } else {
-      item.classList.remove("is-visible")
-      item.classList.add("is-invisible")
-    }
-  }
 
   const setZipcodeField = () => {
     let combinedValue = "";

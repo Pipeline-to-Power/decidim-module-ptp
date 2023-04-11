@@ -19,6 +19,7 @@ module Decidim
       end
 
       def create
+        @invalid = false
         @form = form(UserDataForm).from_params(params.merge(user: current_user, component: current_component))
         CreateUserData.call(@form, all_zip_codes) do
           on(:ok) do
@@ -27,7 +28,8 @@ module Decidim
           end
 
           on(:invalid) do |result|
-            flash.now[:alert] = result || I18n.t("unknown", scope: "decidim.budgets.user_data.error")
+            invalidate_form if result.present?
+            flash.now[:alert] = I18n.t("unknown", scope: "decidim.budgets.user_data.error")
             render action: "new"
           end
         end
@@ -56,6 +58,10 @@ module Decidim
 
       def scope_manager
         @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+      end
+
+      def invalidate_form
+        @invalid = true
       end
     end
   end

@@ -23,6 +23,7 @@
             </div>
             <br/>
             <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.forms.errors.error") %></span>
+            <span class="form-error is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
             <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
           </div>
             <% if voting_terms.present? %>
@@ -35,8 +36,8 @@
               </div>
             <% end %>
           <div class="row column text-left margin-bottom-3">
-            <%= form.check_box :affirm_statements_are_correct, label: t(".affirm_statements"), required: true %>
-            <small data-abide-error class="form-error" id="affirm-checkbox" role="alert" data-accessibility-violation="true">must be accepted</small>
+            <%= form.check_box :affirm_statements_are_correct, help_text: t(".affirm_statements"), required: true %>
+            <small data-abide-error class="form-error" id="affirm-checkbox" role="alert" data-accessibility-violation="true"><%= t(".must_be_accepted") %></small>
           </div>
           <div class="row">
             <div class="columns large-centered">
