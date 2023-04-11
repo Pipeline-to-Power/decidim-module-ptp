@@ -14,22 +14,12 @@
         <p><%= t(".description") %></p>
         <%= decidim_form_for(@form, url: zip_code_index_path, method: :post) do |form| %>
           <div class="field">
-            <div id="zip-code" class="row">
-              <div class="columns small-2 small-offset-1">
-                <input type="text" name="digit1" class="small-10 text-center" autocomplete="off" aria-label="<%= t(".first_input")%>">
-              </div>
-              <div class="columns small-2">
-                <input type="text" name="digit2" class="small-10 text-center" autocomplete="off" aria-label="<%= t(".other_inputs", num: 2)%>">
-              </div>
-              <div class="columns small-2">
-                <input type="text" name="digit3" class="small-10 text-center" autocomplete="off" aria-label="<%= t(".other_inputs", num: 3)%>">
-              </div>
-              <div class="columns small-2">
-                <input type="text" name="digit4" class="small-10 text-center" autocomplete="off" aria-label="<%= t(".other_inputs", num: 4)%>">
-              </div>
-              <div class="columns small-2 end">
-                <input type="text" name="digit5" class="small-10 text-center" autocomplete="off" aria-label="<%= t(".other_inputs", num: 5)%>">
-              </div>
+            <div id="zip-code" class="row small-up-<%= zip_code_length %>">
+              <% zip_code_length.times do  |ind| %>
+                <div class="column column-block">
+                  <input type="text" name="<%= "digit#{ind + 1}"%>" class="thumbnail text-center" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
+                </div>
+              <% end %>
             </div>
             <br/>
             <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.forms.errors.error") %></span>

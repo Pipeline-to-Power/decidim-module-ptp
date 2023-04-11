@@ -84,6 +84,9 @@ en:
           other_inputs: Character %{num}
           change_zip_code_after_vote: You can not change your zip code after started voting. Delete all of your votes first.
           voting_ended: You can not set your zip code when the voting is not open.
+          inputs:
+            one: First digit
+            other: digit %{count}
         error:
           unknown: There was an error. Please try again.
           zip_code_included: The zip code you provided is not part of the areas that are eligible for voting. make sure you have entered the correct zip code and try again.
