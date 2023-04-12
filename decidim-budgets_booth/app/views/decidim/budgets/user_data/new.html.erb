@@ -22,7 +22,8 @@
               <% end %>
             </div>
             <br/>
-            <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.forms.errors.error") %></span>
+            <span class="form-error is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
+            <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
             <span class="form-error is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
             <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
           </div>
