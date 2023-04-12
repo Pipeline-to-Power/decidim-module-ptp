@@ -62,7 +62,7 @@ describe "Voting index page", type: :system do
     before do
       component.update(settings: { workflow: "zip_code" })
       order.update!(checked_out_at: Time.current)
-      user_data.update!(metadata: "1004")
+      user_data.update!(metadata: "10004")
       sign_in user, scope: :user
       visit_budget(first_budget)
     end
@@ -80,7 +80,7 @@ describe "Voting index page", type: :system do
 
     before do
       component.update(settings: { workflow: "zip_code", projects_per_page: 5 })
-      user_data.update!(metadata: "1004")
+      user_data.update!(metadata: "10004")
       sign_in user, scope: :user
       visit_budget(first_budget)
     end

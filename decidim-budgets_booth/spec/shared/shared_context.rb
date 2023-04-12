@@ -11,10 +11,10 @@ RSpec.shared_context "with scopes" do
       postal.update(code: "#{postal.code}_#{i + 1000}")
     end
     second_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 1004}")
+      postal.update(code: "#{postal.code}_#{i + 10_004}")
     end
     third_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 1010}")
+      postal.update(code: "#{postal.code}_#{i + 10_010}")
     end
   end
 end

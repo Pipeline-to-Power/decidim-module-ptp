@@ -49,7 +49,7 @@ module Decidim
             end
 
             context "when user data is set" do
-              let!(:user_data) { create(:user_data, component: component, user: user, metadata: "12345") }
+              let!(:user_data) { create(:user_data, component: component, user: user, metadata: "123456") }
 
               before do
                 sign_in user, scope: :user

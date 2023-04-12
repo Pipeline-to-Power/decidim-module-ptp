@@ -15,8 +15,8 @@ describe Decidim::BudgetsBooth::ScopeManager do
     let!(:second_budget) { create(:budget, component: component, scope: subscopes.first) }
 
     it "returns correct zip_codes" do
-      expect(subject.zip_codes(first_budget)).to match_array(%w(1000 1001 1002 1003 1004))
-      expect(subject.zip_codes(second_budget)).to match_array(%w(1004 1005 1006 1007 1008 1009 1010))
+      expect(subject.zip_codes(first_budget)).to match_array(%w(10000 10001 10002 10003 10004))
+      expect(subject.zip_codes(second_budget)).to match_array(%w(10004 10005 10006 10007 10008 10009 10010))
     end
   end
 

@@ -28,7 +28,7 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
 
     context "when user zip code presents" do
       before do
-        user_data.update(metadata: "1004")
+        user_data.update(metadata: "10004")
       end
 
       it "returns false for not_allowed_budget" do
