@@ -145,3 +145,14 @@ $active-item-color: $black;
 .voted-budget{
   filter: grayscale(80%);
 }
+
+.booth-zipcode {
+  margin-bottom: 10px;
+}
+
+.zip-code {
+  &.x-margin{
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}

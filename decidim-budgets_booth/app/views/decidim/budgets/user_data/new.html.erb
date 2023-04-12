@@ -1,36 +1,38 @@
 <div class="row collapse">
-  <div class="columns large-8 large-centered text-center page-title">
+  <div class="columns large-6 large-centered text-center page-title">
     <h1>
     <h1><%= t(".welcome", organization: current_organization.name).html_safe %></h1>
   </div>
 </div>
 
 
-<div class="columns large-5 medium-centered">
+<div class="columns xlarge-3 large-4 medium-6 smallmedium-10 small-centered">
   <div class="card">
     <div class="card__content">
-      <div class="columns medium-8 large-10 medium-centered text-center">
+      <div class="row text-center">
         <h2><%= t(".title") %></h2>
         <p><%= t(".description") %></p>
         <%= decidim_form_for(@form, url: zip_code_index_path, method: :post) do |form| %>
           <div class="field">
             <div id="zip-code" class="row small-up-<%= zip_code_length %>">
               <% zip_code_length.times do  |ind| %>
-                <div class="column column-block">
+                <div class="column column-block booth-zipcode">
                   <input type="text" name="<%= "digit#{ind + 1}"%>" class="thumbnail text-center" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
+
                 </div>
               <% end %>
+              <div class="zip-code x-margin">
+                <span class="form-error text-left is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
+                <span class="form-error text-left  is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
+                <span class="form-error text-left  is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
+              </div>
+              <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
             </div>
-            <br/>
-            <span class="form-error is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
-            <span class="form-error is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
-            <span class="form-error is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
-            <%= form.hidden_field :metadata, vlaue: @form.metadata || nil %>
           </div>
             <% if voting_terms.present? %>
               <div class="card">
                 <div class="card__content">
-                  <div class="columns medium-7 large-10 medium-centered text-left">
+                  <div class="row medium-7 large-10 medium-centered text-left">
                     <%= raw(voting_terms) %>
                   </div>
                 </div>
