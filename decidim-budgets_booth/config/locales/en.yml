@@ -89,6 +89,8 @@ en:
             other: digit %{count}
           must_be_accepted: must be accepted
         error:
+          only_letters: Only letters and digits are allowed.
+          zip_code_empty: Zip code is not correct.
           unknown: There was an error. Please try again.
           zip_code_included: The zip code you provided is not part of the areas that are eligible for voting. make sure you have entered the correct zip code and try again.
         success: You have successfully registered your zip code.
