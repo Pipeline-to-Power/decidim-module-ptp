@@ -58,7 +58,7 @@ module Decidim
           it "redirects to the budgets path" do
             get :new
             expect(response).to redirect_to("/")
-            expect(flash[:warning]).to have_content("You can not change your zip code after started voting. Delete all of your votes first.")
+            expect(flash[:warning]).to have_content("You can not change your ZIP code after started voting. Delete all of your votes first.")
           end
         end
 
@@ -72,7 +72,7 @@ module Decidim
           it "redirects to the root path with error" do
             get :new
             expect(response).to redirect_to("/")
-            expect(flash[:warning]).to have_content("You can not set your zip code when the voting is not open.")
+            expect(flash[:warning]).to have_content("You can not set your ZIP code when the voting is not open.")
           end
         end
 

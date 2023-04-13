@@ -19,12 +19,14 @@ module Decidim
       let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
       let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 45_000_000) }
+      let(:current_workflow) { double(:current_workflow, voting_booth_forced?: false) }
 
       before do
         request.env["decidim.current_organization"] = component.organization
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
         allow(controller).to receive(:current_settings).and_return(current_settings)
+        allow(controller).to receive(:current_workflow).and_return(current_workflow)
       end
 
       describe "#index" do

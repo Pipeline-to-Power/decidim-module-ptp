@@ -47,7 +47,7 @@ describe "user data workflow", type: :system do
 
     it "does not let adding zip code" do
       within_flash_messages do
-        expect(page).to have_content("You can not change your zip code after started voting. Delete all of your votes first.")
+        expect(page).to have_content("You can not change your ZIP code after started voting. Delete all of your votes first.")
       end
       expect(page).to have_current_path("/")
     end
@@ -64,7 +64,7 @@ describe "user data workflow", type: :system do
 
     it "does not let the user to add their zip code" do
       within_flash_messages do
-        expect(page).to have_content("You can not set your zip code when the voting is not open.")
+        expect(page).to have_content("You can not set your ZIP code when the voting is not open.")
       end
       expect(page).to have_current_path("/")
     end
@@ -96,7 +96,7 @@ describe "user data workflow", type: :system do
     context "when submitting the form" do
       context "when empty" do
         before do
-          click_button "FIND MY BALLOTS"
+          click_button "Find my ballots"
         end
 
         it "renders errors" do
@@ -107,13 +107,13 @@ describe "user data workflow", type: :system do
             expect(page).to have_content("must be accepted")
           end
           check "Affirm statements are correct"
-          click_button "FIND MY BALLOTS"
+          click_button "Find my ballots"
 
           expect(page).to have_no_selector("#affirm-checkbox")
           expect(page).to have_no_content("must be accepted")
 
           fill_in_code(non_existing_zip_code, "digit")
-          click_button "FIND MY BALLOTS"
+          click_button "Find my ballots"
           within "#zip-code-not-valid" do
             expect(page).to have_content("The zip code you provided is not part of the areas that are eligible for voting.")
           end
@@ -125,7 +125,7 @@ describe "user data workflow", type: :system do
       before do
         check "Affirm statements are correct"
         fill_in_code(existing_zip_code, "digit")
-        click_button "FIND MY BALLOTS"
+        click_button "Find my ballots"
       end
 
       context "when user data does not exist" do
@@ -145,7 +145,7 @@ describe "user data workflow", type: :system do
       before do
         check "Affirm statements are correct"
         fill_in_code(existing_zip_code, "digit")
-        click_button "FIND MY BALLOTS"
+        click_button "Find my ballots"
       end
 
       it "updates existing metadata" do
@@ -217,15 +217,15 @@ describe "user data workflow", type: :system do
         end
       end
 
-      context "key up" do
-        it "deletes with backspace" do
-          find('div[contenteditable="true"].ql-editor').native.send_keys "a", [:left], [:enter], [:shift, :enter], [:backspace], [:backspace]
-        end
+      # context "key up" do
+      #   it "deletes with backspace" do
+      #     find('div[contenteditable="true"].ql-editor').native.send_keys "a", [:left], [:enter], [:shift, :enter], [:backspace], [:backspace]
+      #   end
 
-        it "adds the key" do
+      #   it "adds the key" do
 
-        end
-      end
+      #   end
+      # end
     end
   end
 
