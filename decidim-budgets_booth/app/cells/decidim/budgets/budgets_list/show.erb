@@ -1,11 +1,11 @@
 <% if zip_code_workflow? %>
   <div class="row">
-    <div class="row">
-      <div class="columns mediumlarge-12">
-        <%= render :card_list %>
-      </div>
+    <div class="columns mediumlarge-12">
+      <%= render :card_list %>
     </div>
-    <% if voting_open? && voted? %>
+  </div>
+  <% if voting_open? && voted? %>
+    <div class="row columns">
       <div class="margin-bottom-3">
         <p>
           <%= t(:if_change_opinion, scope: i18n_scope) %>
@@ -32,8 +32,8 @@
           </ul>
         <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% else %>
   <div class="row">
     <div class="columns medium-7 mediumlarge-8">

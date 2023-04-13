@@ -6,14 +6,14 @@ en:
       budgets:
         settings:
           global:
-            vote_success_content: Popup text after voting
+            vote_success_content: Popup text after each vote
             vote_completed_content: Popup text after voting in all available busgets
-            voting_terms: Terms and conditions to be shown when user wants to tenter their zip code.
-            vote_success_url: URL to redirect user after voting on all available budgets(default is budgets list)
-            vote_cancel_url: URL to redirect user when canceling voting(defaullt to the root path)
+            voting_terms: Terms and conditions to be shown when user wants to enter their ZIP code
+            vote_success_url: URL to redirect user after voting on all available budgets (default is budgets list)
+            vote_cancel_url: URL to redirect user when canceling voting (defaullt to the root path)
             show_full_description_on_listing_page: Show full project descriptions on the listing page and disable the details popup
             workflow_choices:
-              zip_code: "Vote based on zip code: allows participants to vote on budgets matching their entered zip code."
+              zip_code: "Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code."
     budgets:
       admin:
         budgets:
@@ -25,17 +25,17 @@ en:
           cancel_zip_code: Are you sure you want to exit?
         index:
           login_before_access: You need to login first.
-          set_zip_code_before_access: You need to enter your zip code first.
+          set_zip_code_before_access: You need to enter your ZIP code first.
           not_allowed: You are not allowed to perform this action.
           cancel_voting: Cancel voting
       budgets_header:
-        title: "BALLOTS AVAILABLE TO YOU:"
+        title: "Ballots available to you:"
         based_on_zip_code: Bases on your ZIP code - %{zip_code}.
         not_right_one: Not the right one? %{link}
         change_it_here: Change it here
       budgets_list:
         vote: Show
-        no_budgets_found: No budgets were found based on your zip code. You can change your zip code if it's not correct, or you can search again later.
+        no_budgets_found: No budgets were found based on your ZIP code. You can change your ZIP code if it's not correct, or you can search again later.
       budget_list_item:
         take_part: Take part
         current_phase: "Current phase: %{phase}"
@@ -78,24 +78,24 @@ en:
         new:
           cancel: Cancel
           welcome: "Welcome to the <br><strong>%{organization} Participatory Budgeting!</strong>"
-          title: ZIP CODE
+          title: ZIP code
           description: Please provide your ZIP code to find your Participatory Budgeting ballots.
-          submit: FIND MY BALLOTS
+          submit: Find my ballots
           affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
-          first_input: Please enter your zip code. Character 1
+          first_input: Please enter your ZIP code. Character 1
           other_inputs: Character %{num}
-          change_zip_code_after_vote: You can not change your zip code after started voting. Delete all of your votes first.
-          voting_ended: You can not set your zip code when the voting is not open.
+          change_zip_code_after_vote: You can not change your ZIP code after started voting. Delete all of your votes first.
+          voting_ended: You can not set your ZIP code when the voting is not open.
           inputs:
             one: First digit
             other: digit %{count}
           must_be_accepted: must be accepted
         error:
           only_letters: Only letters and digits are allowed.
-          zip_code_empty: Zip code format is not correct.
+          zip_code_empty: ZIP code format is not correct.
           unknown: There was an error. Please try again.
-          zip_code_included: The zip code you provided is not part of the areas that are eligible for voting. make sure you have entered the correct zip code and try again.
-        success: You have successfully registered your zip code.
+          zip_code_included: The ZIP code you provided is not part of the areas that are eligible for voting. Make sure you have entered the correct ZIP code and try again.
+        success: You have successfully registered your ZIP code.
       voting:
         voted_summary_modal:
           title: Your vote

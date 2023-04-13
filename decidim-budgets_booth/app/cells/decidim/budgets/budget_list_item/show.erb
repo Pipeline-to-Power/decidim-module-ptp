@@ -18,7 +18,7 @@
           <div class="heading5 margin-bottom-3">
               <p><%= budget_scope_type(budget) %></p>
           </div>
-          <%= link_to generate_projects_link(budget), class: "button hollow #{"disabled" if voting_open? && voted_this?(budget)}" do %>
+          <%= link_to generate_projects_link(budget), class: "button small hollow #{"disabled" if voting_open? && voted_this?(budget)}" do %>
             <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
           <% end %>
         </div>
