@@ -1,17 +1,17 @@
 <% if voting_open? &&  zip_code_workflow? %>
-  <div class="row">
-    <div class="row">
-      <% if !voted_all_budgets? %>
-        <div class="columns medium-8 large-9">
-          <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
-              confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
-            } do %>
-              <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-              <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
-          <% end %>
-        </div>
-      <% end %>
+  <% unless voted_all_budgets? %>
+    <div class="row margin-top-2">
+      <div class="columns medium-8 large-9">
+        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
+            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
+          } do %>
+            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+            <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
+        <% end %>
+      </div>
     </div>
+  <% end %>
+  <div class="row">
     <div class="columns medium-7 mediumlarge-8">
       <div class="section">
         <h2 class="section-heading">
@@ -20,7 +20,7 @@
         <p>
           <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user, current_component))%>
           <% if !voted_any? %>
-            <%= t(".not_right_one", link: link_to(t(".change_it_here"), new_zip_code_path)) %>
+            <em class="margin-left-1"><%= t(".not_right_one", link: link_to(t(".change_it_here"), new_zip_code_path)) %></em>
           <% end %>
         </p>
       </div>

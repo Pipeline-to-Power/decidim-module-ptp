@@ -6,8 +6,6 @@ module Decidim
       delegate :voted, :voted?, to: :base_workflow
       delegate :voted_all_budgets?, to: :current_workflow
 
-      private
-
       def zip_code_workflow?
         current_component.settings.workflow == "zip_code"
       end
