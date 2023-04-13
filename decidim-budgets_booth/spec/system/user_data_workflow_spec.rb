@@ -71,16 +71,8 @@ describe "user data workflow", type: :system do
   end
 
   context "when before_actions met" do
-    let(:non_existing_zip_code) do
-      {
-        zip_code: "12345"
-      }
-    end
-    let(:existing_zip_code) do
-      {
-        zip_code: "10004"
-      }
-    end
+    let(:non_existing_zip_code) { "12345" }
+    let(:existing_zip_code) { "10004" }
 
     before do
       component.update!(settings: { workflow: "zip_code" })
@@ -142,7 +134,7 @@ describe "user data workflow", type: :system do
             expect(page).to have_content("You have successfully registered your zip code.")
           end
           expect(page).to have_current_path(decidim_budgets.budgets_path)
-          expect(user.budgets_user_data.last.metadata).to eq(existing_zip_code)
+          expect(user.budgets_user_data.last.metadata).to eq({ "zip_code" => existing_zip_code })
         end
       end
     end
@@ -163,7 +155,7 @@ describe "user data workflow", type: :system do
         expect(page).to have_current_path(decidim_budgets.budgets_path)
         data = Decidim::Budgets::UserData.last
         expect(Decidim::Budgets::UserData.count).to eq(1)
-        expect(data.metadata).to eq({ zip_code: "10004" })
+        expect(data.metadata).to eq({ "zip_code" => "10004" })
       end
     end
   end
