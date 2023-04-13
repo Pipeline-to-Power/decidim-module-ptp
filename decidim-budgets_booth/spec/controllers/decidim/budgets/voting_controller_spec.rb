@@ -19,7 +19,8 @@ module Decidim
       let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
       let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 45_000_000) }
-      let(:current_workflow) { double(:current_workflow, voting_booth_forced?: false) }
+      let(:current_workflow) { double(:current_workflow, voting_booth_forced?: zip_code?) }
+      let(:zip_code?) { true }
 
       before do
         request.env["decidim.current_organization"] = component.organization
@@ -31,6 +32,7 @@ module Decidim
 
       describe "#index" do
         context "when not zip code workflow" do
+          let!(:zip_code?) { false }
           before do
             component.update(settings: { workflow: "foo" })
           end

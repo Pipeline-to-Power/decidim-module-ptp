@@ -101,7 +101,7 @@ describe "user data workflow", type: :system do
 
         it "renders errors" do
           within ".zip-code" do
-            expect(page).to have_content("Zip code format is not correct.")
+            expect(page).to have_content("ZIP code format is not correct.")
           end
           within "#affirm-checkbox" do
             expect(page).to have_content("must be accepted")
@@ -115,7 +115,7 @@ describe "user data workflow", type: :system do
           fill_in_code(non_existing_zip_code, "digit")
           click_button "Find my ballots"
           within "#zip-code-not-valid" do
-            expect(page).to have_content("The zip code you provided is not part of the areas that are eligible for voting.")
+            expect(page).to have_content("The ZIP code you provided is not part of the areas that are eligible for voting.")
           end
         end
       end
@@ -131,7 +131,7 @@ describe "user data workflow", type: :system do
       context "when user data does not exist" do
         it "creates user_data and redirects the user" do
           within_flash_messages do
-            expect(page).to have_content("You have successfully registered your zip code.")
+            expect(page).to have_content("You have successfully registered your ZIP code.")
           end
           expect(page).to have_current_path(decidim_budgets.budgets_path)
           expect(user.budgets_user_data.last.metadata).to eq({ "zip_code" => existing_zip_code })
@@ -150,7 +150,7 @@ describe "user data workflow", type: :system do
 
       it "updates existing metadata" do
         within_flash_messages do
-          expect(page).to have_content("You have successfully registered your zip code.")
+          expect(page).to have_content("You have successfully registered your ZIP code.")
         end
         expect(page).to have_current_path(decidim_budgets.budgets_path)
         data = Decidim::Budgets::UserData.last
