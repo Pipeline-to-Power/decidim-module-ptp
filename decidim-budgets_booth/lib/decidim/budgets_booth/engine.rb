@@ -123,6 +123,7 @@ module Decidim
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
+          settings.attribute :maximum_budgets_to_vote_on, type: :integer, default: 0
           settings.attribute :vote_success_content, type: :text, translated: true, editor: true
           settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
           settings.attribute :voting_terms, type: :text, translated: true, editor: true

@@ -1,14 +1,16 @@
 <% if voting_open? &&  zip_code_workflow? %>
   <div class="row">
     <div class="row">
-      <div class="columns medium-8 large-9">
-        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
-            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
-          } do %>
-            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-            <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
-        <% end %>
-      </div>
+      <% if !voted_all_budgets? %>
+        <div class="columns medium-8 large-9">
+          <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
+              confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
+            } do %>
+              <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+              <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="columns medium-7 mediumlarge-8">
       <div class="section">

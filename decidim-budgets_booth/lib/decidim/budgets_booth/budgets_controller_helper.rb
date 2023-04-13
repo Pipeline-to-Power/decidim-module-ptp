@@ -4,6 +4,7 @@ module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
       delegate :voted, :voted?, to: :base_workflow
+      delegate :voted_all_budgets?, to: :current_workflow
 
       private
 
@@ -53,16 +54,6 @@ module Decidim
 
         flash[:warning] = t("change_zip_code_after_vote", scope: "decidim.budgets.user_data.new")
         redirect_to decidim.root_path
-      end
-
-      def voted_all_budgets?
-        budgets = current_workflow.budgets
-        return false if budgets.blank?
-
-        budgets.map do |budget|
-          return false unless voted?(budget)
-        end
-        true
       end
 
       # This configuration option can be set in component settings, the dfault url when the user has voted on all budgets
