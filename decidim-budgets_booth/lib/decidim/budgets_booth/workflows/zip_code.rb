@@ -24,6 +24,10 @@ module Decidim
           super.select { |item| vote_allowed?(item) }
         end
 
+        def voting_booth_forced?
+          true
+        end
+
         private
 
         def scope_manager

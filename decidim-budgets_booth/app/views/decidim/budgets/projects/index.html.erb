@@ -2,7 +2,7 @@
 
 <%= cell("decidim/budgets/limit_announcement", budget) %>
 
-<div class="voting-wrapper <%="margin-top-3" if zip_code_workflow? %>">
+<div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns">
     <% if voting_finished? %>
       <h2 class="heading2">

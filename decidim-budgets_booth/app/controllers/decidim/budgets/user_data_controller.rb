@@ -9,7 +9,7 @@ module Decidim
       delegate :zip_codes, :user_zip_code, to: :scope_manager
 
       layout "decidim/budgets/voting_layout"
-      before_action :ensure_zip_code_workflow
+      before_action :ensure_voting_booth_forced
       before_action :ensure_authenticated
       before_action :ensure_voting_open
       before_action :ensure_not_voted

@@ -6,8 +6,8 @@ module Decidim
       delegate :voted, :voted?, to: :base_workflow
       delegate :voted_all_budgets?, to: :current_workflow
 
-      def zip_code_workflow?
-        current_component.settings.workflow == "zip_code"
+      def voting_booth_forced?
+        current_component.settings.workflow.try(:voting_booth_forced?)
       end
 
       def voting_enabled?
@@ -40,8 +40,8 @@ module Decidim
         @status ||= current_workflow.status(budget)
       end
 
-      def ensure_zip_code_workflow
-        return true if zip_code_workflow?
+      def ensure_voting_booth_forced
+        return true if voting_booth_forced?
 
         flash[:warning] = t("not_allowed", scope: "decidim.budgets.budgets.index")
         redirect_to decidim.root_path

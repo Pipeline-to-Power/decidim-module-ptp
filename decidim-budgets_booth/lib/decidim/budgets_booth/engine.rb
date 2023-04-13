@@ -69,7 +69,7 @@ module Decidim
           )
 
           # We need to  change the budgets header only when zip-code is enabled.
-          # for that we need to access #zip_code_workflow? inside BudgetsControllerHelper
+          # for that we need to access #voting_booth_forced? inside BudgetsControllerHelper
           Decidim::Budgets::BudgetsHeaderCell.include(
             Decidim::BudgetsBooth::BudgetsControllerHelper
           )

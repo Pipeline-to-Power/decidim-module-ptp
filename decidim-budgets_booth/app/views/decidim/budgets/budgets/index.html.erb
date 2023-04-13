@@ -4,7 +4,7 @@
 
 <%= cell("decidim/budgets/budgets_list", current_workflow) %>
 
-<% if zip_code_workflow? %>
+<% if voting_booth_forced? %>
   <% if voted_all_budgets? %>
     <%= render partial: "decidim/budgets/voting/vote_completed_modal" if vote_completed_content.present? %>
   <% else %>

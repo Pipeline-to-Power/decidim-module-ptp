@@ -1,4 +1,4 @@
-<% if voting_open? &&  zip_code_workflow? %>
+<% if voting_open? && voting_booth_forced? %>
   <% unless voted_all_budgets? %>
     <div class="row margin-top-2">
       <div class="columns medium-8 large-9">

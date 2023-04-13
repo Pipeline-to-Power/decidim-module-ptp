@@ -12,7 +12,6 @@ module Decidim
       # as `authenticate_user!` (or whatever your resource is) will halt the filter chain and redirect
       # before the location can be stored.
 
-      before_action :ensure_zip_code_workflow
       before_action :ensure_voting_open!
       before_action :ensure_authenticated
       before_action :ensure_not_voted_this!
