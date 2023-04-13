@@ -5,8 +5,16 @@
   </div>
 </div>
 
-
 <div class="columns xlarge-3 large-4 medium-6 smallmedium-10 small-centered">
+  <div class="row">
+
+    <%= button_to cancel_redirect_path, class: "link", method: :get, data: {
+        confirm: t("actions.cancel_zip_code", scope: "decidim.budgets.budgets")
+      } do %>
+        <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+        <%= t("cancel", scope:"decidim.budgets.user_data.new") %>
+    <% end %>
+  </div>
   <div class="card">
     <div class="card__content">
       <div class="row text-center">

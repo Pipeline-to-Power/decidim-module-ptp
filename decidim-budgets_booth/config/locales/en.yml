@@ -22,6 +22,7 @@ en:
       budgets:
         actions:
           cancel_voting: Are you sure you want to exit the voting booth?
+          cancel_zip_code: Are you sure you want to exit?
         index:
           login_before_access: You need to login first.
           set_zip_code_before_access: You need to enter your zip code first.
@@ -75,6 +76,7 @@ en:
         ordered_item: This item is added to the your votes.
       user_data:
         new:
+          cancel: Cancel
           welcome: "Welcome to the <br><strong>%{organization} Participatory Budgeting!</strong>"
           title: ZIP CODE
           description: Please provide your ZIP code to find your Participatory Budgeting ballots.
