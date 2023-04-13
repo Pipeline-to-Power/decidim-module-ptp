@@ -33,7 +33,7 @@ describe Decidim::BudgetsBooth::ScopeManager do
       let!(:another_component) { create(:budgets_component, organization: organization) }
 
       before do
-        user_data.update(metadata: "dummy metadata")
+        user_data.update(metadata: { zip_code: "dummy metadata" })
       end
 
       it "returns the user_data" do

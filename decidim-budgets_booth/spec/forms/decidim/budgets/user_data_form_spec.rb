@@ -7,7 +7,7 @@ module Decidim
     describe UserDataForm do
       subject(:form) { described_class.from_params(attributes) }
 
-      let(:metadata) { "dummy metadata" }
+      let(:zip_code) { "dummy metadata" }
       let(:organization) { create(:organization) }
       let(:affirm_statements_are_correct) { true }
       let(:user) { create(:user, :confirmed, organization: organization) }
@@ -15,7 +15,7 @@ module Decidim
 
       let(:attributes) do
         {
-          metadata: metadata,
+          zip_code: zip_code,
           affirm_statements_are_correct: affirm_statements_are_correct,
           user: user,
           component: component
@@ -43,7 +43,7 @@ module Decidim
       end
 
       context "when no metadata" do
-        let!(:metadata) { nil }
+        let!(:zip_code) { nil }
 
         it { is_expected.not_to be_valid }
       end

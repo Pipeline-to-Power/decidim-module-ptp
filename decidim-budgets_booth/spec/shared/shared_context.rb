@@ -8,7 +8,7 @@ RSpec.shared_context "with scopes" do
   let!(:third_postals) { create_list(:scope, 8, parent: subscopes[1]) }
   before do
     first_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 1000}")
+      postal.update(code: "#{postal.code}_#{i + 10_000}")
     end
     second_postals.each_with_index do |postal, i|
       postal.update(code: "#{postal.code}_#{i + 10_004}")

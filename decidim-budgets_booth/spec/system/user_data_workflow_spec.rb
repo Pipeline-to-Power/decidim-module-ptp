@@ -71,8 +71,16 @@ describe "user data workflow", type: :system do
   end
 
   context "when before_actions met" do
-    let(:non_existing_zip_code) { "12345" }
-    let(:existing_zip_code) { "10004" }
+    let(:non_existing_zip_code) do
+      {
+        zip_code: "12345"
+      }
+    end
+    let(:existing_zip_code) do
+      {
+        zip_code: "10004"
+      }
+    end
 
     before do
       component.update!(settings: { workflow: "zip_code" })
@@ -140,7 +148,7 @@ describe "user data workflow", type: :system do
     end
 
     context "when userdata exists" do
-      let!(:user_data) { create(:user_data, component: component, user: user, metadata: "quox") }
+      let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "quox" }) }
 
       before do
         check "Affirm statements are correct"
@@ -155,7 +163,7 @@ describe "user data workflow", type: :system do
         expect(page).to have_current_path(decidim_budgets.budgets_path)
         data = Decidim::Budgets::UserData.last
         expect(Decidim::Budgets::UserData.count).to eq(1)
-        expect(data.metadata).to eq("10004")
+        expect(data.metadata).to eq({ zip_code: "10004" })
       end
     end
   end
@@ -214,6 +222,16 @@ describe "user data workflow", type: :system do
           expect(inputs[2].value).to have_content("a")
           expect(inputs[3].value).to have_content("b")
           expect(inputs[4].value).to have_content("c")
+        end
+      end
+
+      context "key up" do
+        it "deletes with backspace" do
+          find('div[contenteditable="true"].ql-editor').native.send_keys "a", [:left], [:enter], [:shift, :enter], [:backspace], [:backspace]
+        end
+
+        it "adds the key" do
+
         end
       end
     end

@@ -47,7 +47,7 @@ describe "Budgets view", type: :system do
       end
 
       context "with user zip_code exist" do
-        let!(:user_data) { create(:user_data, component: component, user: user, metadata: "dummy_1234") }
+        let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "dummy_1234" }) }
 
         context "when no budgets to vote" do
           before { visit decidim_budgets.budgets_path }

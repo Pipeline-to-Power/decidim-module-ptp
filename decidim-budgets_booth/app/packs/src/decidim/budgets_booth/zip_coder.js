@@ -119,7 +119,7 @@ $(() => {
     zipcodeInputs.forEach((input) => {
       combinedValue += input.value.trim();
     });
-    document.querySelector('input[name="user_data[metadata]"]').value = combinedValue
+    document.querySelector('input[name="user_data[zip_code]"]').value = combinedValue
   };
 
   const form = document.querySelector(".new_user_data");

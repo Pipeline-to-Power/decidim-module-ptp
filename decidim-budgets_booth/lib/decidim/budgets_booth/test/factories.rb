@@ -7,7 +7,11 @@ FactoryBot.define do
     association :component, factory: :budgets_component
     association :user, factory: :user
     affirm_statements_are_correct { true }
-    metadata { "" }
+    metadata do
+      {
+        zip_code: ""
+      }
+    end
 
     before(:create) do |user_data, evaluator|
       user_data.metadata = evaluator.metadata if evaluator.metadata.present?

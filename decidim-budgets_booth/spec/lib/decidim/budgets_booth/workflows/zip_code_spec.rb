@@ -18,7 +18,7 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
 
     context "when user zip code is blank" do
       before do
-        user_data.update(metadata: "")
+        user_data.update(metadata: { zip_code: "" })
       end
 
       it "returns false" do
@@ -28,7 +28,7 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
 
     context "when user zip code presents" do
       before do
-        user_data.update(metadata: "10004")
+        user_data.update(metadata: { zip_code: "10004" })
       end
 
       it "returns false for not_allowed_budget" do

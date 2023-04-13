@@ -26,7 +26,7 @@ module Decidim
         attributes = {
           component: form.component,
           user: form.user,
-          metadata: form.metadata,
+          metadata: { zip_code: form.zip_code },
           affirm_statements_are_correct: form.affirm_statements_are_correct
         }
         @user_data = Decidim::Budgets::UserData.find_or_create_by!(
@@ -43,7 +43,7 @@ module Decidim
       end
 
       def zip_code_included?
-        zip_codes.include?(form.metadata)
+        zip_codes.include?(form.zip_code)
       end
 
       def zip_code_not_exit
