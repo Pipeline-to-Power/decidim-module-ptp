@@ -4,10 +4,9 @@ module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
       delegate :voted, :voted?, to: :base_workflow
-      delegate :voted_all_budgets?, to: :current_workflow
 
       def voting_booth_forced?
-        current_component.settings.workflow.try(:voting_booth_forced?)
+        current_workflow.try(:voting_booth_forced?)
       end
 
       def voting_enabled?
