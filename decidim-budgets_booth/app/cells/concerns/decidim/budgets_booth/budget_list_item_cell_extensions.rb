@@ -31,10 +31,6 @@ module Decidim
 
         private
 
-        def voted_this?(budget)
-          current_workflow.status(budget) == :voted
-        end
-
         def scope_manager
           @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
         end

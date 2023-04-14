@@ -79,6 +79,20 @@ module Decidim
       def cancel_redirect_path
         component_settings.try(:vote_cancel_url).presence || decidim.root_path
       end
+
+      def hide_unvoted?(budget)
+        return false unless voting_open?
+
+        return false if voted_this?(budget)
+
+        return false unless voted_all_budgets?
+
+        true
+      end
+
+      def voted_this?(budget)
+        current_workflow.status(budget) == :voted
+      end
     end
   end
 end
