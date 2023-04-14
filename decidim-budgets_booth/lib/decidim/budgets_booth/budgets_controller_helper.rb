@@ -4,6 +4,7 @@ module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
       delegate :voted, :voted?, to: :base_workflow
+      delegate :budgets, to: :current_workflow
 
       def voting_booth_forced?
         current_workflow.try(:voting_booth_forced?)
@@ -53,13 +54,19 @@ module Decidim
         redirect_to decidim.root_path
       end
 
+      # maximum_budgets_to_vote_on is being set by the admin. the default is zero, which means users can
+      # vote in all available budgets. to check that user has voted to all available budgets, we should
+      # consider this settings as well.
       def voted_all_budgets?
-        budgets = current_workflow.budgets
-        return false if budgets.blank?
+        default_limit = current_component.settings.maximum_budgets_to_vote_on
+        available_budgets = budgets.count
+        vote_limit = if default_limit.zero?
+                       available_budgets
+                     else
+                       [default_limit, available_budgets].min
+                     end
+        return false if voted.count < vote_limit
 
-        budgets.map do |budget|
-          return false unless voted?(budget)
-        end
         true
       end
 

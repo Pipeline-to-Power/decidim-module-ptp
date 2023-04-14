@@ -32,10 +32,29 @@ module Decidim
 
         context "when zip_code workflow" do
           context "when voting enabled" do
-            it "redirects to the login page" do
-              expect do
-                get :index, params: { budget_id: budgets.last.id }
-              end.to raise_error(ActionController::RoutingError, "Not Found")
+            context "when not voted all budgets" do
+              before do
+                allow(controller).to receive(:voted_all_budgets?).and_return(false)
+              end
+
+              it "raises error" do
+                expect do
+                  get :index, params: { budget_id: budgets.last.id }
+                end.to raise_error(ActionController::RoutingError, "Not Found")
+              end
+            end
+
+            context "when voted all budgets" do
+              before do
+                allow(controller).to receive(:voted_all_budgets?).and_return(true)
+              end
+
+              it "does not raise error" do
+                expect do
+                  get :index, params: { budget_id: budgets.last.id }
+                end.not_to raise_error(ActionController::RoutingError, "Not Found")
+                expect(response).to render_template(:index)
+              end
             end
           end
 

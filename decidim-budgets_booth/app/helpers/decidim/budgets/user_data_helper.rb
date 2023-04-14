@@ -25,18 +25,6 @@ module Decidim
         end
       end
 
-      # def voted_all_budgets?
-      #   return false if budgets.blank?
-
-      #   max_allowed_votes = budgets_component.settings.maximum_budgets_to_vote_on
-      #   return true if max_allowed_votes.positive? && voted.count >= max_allowed_votes
-
-      #   budgets.map do |budget|
-      #     return false unless voted?(budget)
-      #   end
-      #   true
-      # end
-
       private
 
       def scope_manager
