@@ -3,6 +3,7 @@ $(() => {
   const zipCodeNotValid = document.querySelector("#zip-code-not-valid");
   const zipCodeError = document.querySelector("#zip-code-error");
   const onlyLettersAllowed = document.querySelector("#only-letters-allowed");
+  const submitBotton = document.querySelector("button[name='commit']");
 
   const removeAllErrorMessages = () => {
     document.querySelectorAll(".form-error").forEach((element) => {
@@ -100,7 +101,7 @@ $(() => {
       if (nextInput) {
         nextInput.select();
       } else {
-        input.blur()
+        submitBotton.focus();
       }
     })
   });
