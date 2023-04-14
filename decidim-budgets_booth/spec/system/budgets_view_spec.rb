@@ -64,7 +64,7 @@ describe "Budgets view", type: :system do
           let(:landing_page_content) { Decidim::Faker::Localized.sentence(word_count: 5) }
 
           before do
-            user_data.update!(metadata: {zip_code: "10004" })
+            user_data.update!(metadata: { zip_code: "10004" })
             visit decidim_budgets.budgets_path
           end
 

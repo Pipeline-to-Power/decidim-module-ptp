@@ -3,8 +3,7 @@
 module Decidim
   module BudgetsBooth
     module BudgetsControllerHelper
-      delegate :voted, :voted?, to: :base_workflow
-      delegate :budgets, to: :current_workflow
+      delegate :budgets, :voted, :voted?, to: :current_workflow
 
       def voting_booth_forced?
         current_workflow.try(:voting_booth_forced?)
@@ -79,10 +78,6 @@ module Decidim
       # This configuration option can be set in component settings, the dfault url when the user cancels voting is the root path.
       def cancel_redirect_path
         component_settings.try(:vote_cancel_url).presence || decidim.root_path
-      end
-
-      def base_workflow
-        @base_workflow ||= Decidim::Budgets::Workflows::Base.new(current_component, current_user)
       end
     end
   end

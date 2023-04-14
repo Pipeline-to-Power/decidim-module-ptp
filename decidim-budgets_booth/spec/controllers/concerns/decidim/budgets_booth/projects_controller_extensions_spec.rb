@@ -50,9 +50,7 @@ module Decidim
               end
 
               it "does not raise error" do
-                expect do
-                  get :index, params: { budget_id: budgets.last.id }
-                end.not_to raise_error(ActionController::RoutingError, "Not Found")
+                get :index, params: { budget_id: budgets.last.id }
                 expect(response).to render_template(:index)
               end
             end
