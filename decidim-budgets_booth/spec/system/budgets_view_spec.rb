@@ -40,9 +40,6 @@ describe "Budgets view", type: :system do
 
         it "redirects user to zipcode entering path" do
           expect(page).to have_current_path(decidim_budgets.new_zip_code_path)
-          within_flash_messages do
-            expect(page).to have_content "You need to enter your ZIP code first."
-          end
         end
       end
 

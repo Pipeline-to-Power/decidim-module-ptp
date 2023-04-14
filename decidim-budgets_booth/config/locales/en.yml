@@ -26,7 +26,6 @@ en:
           cancel_zip_code: Are you sure you want to exit?
         index:
           login_before_access: You need to login first.
-          set_zip_code_before_access: You need to enter your ZIP code first.
           not_allowed: You are not allowed to perform this action.
           cancel_voting: Cancel voting
       budgets_header:

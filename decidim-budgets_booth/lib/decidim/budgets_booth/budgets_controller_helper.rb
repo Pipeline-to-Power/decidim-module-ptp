@@ -23,7 +23,6 @@ module Decidim
       def ensure_user_zip_code
         return true if current_user.try(:budgets_user_data).present?
 
-        flash[:warning] = t("set_zip_code_before_access", scope: "decidim.budgets.budgets.index")
         redirect_to decidim_budgets.new_zip_code_path
       end
 
