@@ -106,7 +106,7 @@ describe "user data workflow", type: :system do
           within "#affirm-checkbox" do
             expect(page).to have_content("must be accepted")
           end
-          check "Affirm statements are correct"
+          check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
           click_button "Find my ballots"
 
           expect(page).to have_no_selector("#affirm-checkbox")
@@ -123,7 +123,7 @@ describe "user data workflow", type: :system do
 
     context "when submitting with correct data" do
       before do
-        check "Affirm statements are correct"
+        check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
         fill_in_code(existing_zip_code, "digit")
         click_button "Find my ballots"
       end
@@ -143,7 +143,7 @@ describe "user data workflow", type: :system do
       let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "quox" }) }
 
       before do
-        check "Affirm statements are correct"
+        check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
         fill_in_code(existing_zip_code, "digit")
         click_button "Find my ballots"
       end
@@ -166,7 +166,7 @@ describe "user data workflow", type: :system do
         component.update!(settings: { workflow: "zip_code" })
         sign_in user, scope: :user
         visit decidim_budgets.new_zip_code_path
-        check "Affirm statements are correct"
+        check "By checking this box, I affirm that these stamenets are true, and that I meet the voting eligibility requirements."
       end
 
       context "when not valid clipboard" do

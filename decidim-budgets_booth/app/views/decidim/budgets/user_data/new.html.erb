@@ -37,17 +37,18 @@
               <%= form.hidden_field :zip_code, vlaue: @form.zip_code || nil %>
             </div>
           </div>
-            <% if voting_terms.present? %>
-              <div class="card">
-                <div class="card__content">
-                  <div class="row medium-7 large-10 medium-centered text-left">
-                    <%= raw(voting_terms) %>
-                  </div>
+          <% if voting_terms.present? %>
+            <div class="card">
+              <div class="card__content">
+                <div class="row medium-7 large-10 medium-centered text-left">
+                  <%= raw(voting_terms) %>
                 </div>
               </div>
-            <% end %>
+            </div>
+          <% end %>
+
           <div class="row column text-left margin-bottom-3">
-            <%= form.check_box :affirm_statements_are_correct, help_text: t(".affirm_statements"), required: true %>
+            <%= form.check_box :affirm_statements_are_correct, label: t(".affirm_statements"), required: true %>
             <small data-abide-error class="form-error" id="affirm-checkbox" role="alert" data-accessibility-violation="true"><%= t(".must_be_accepted") %></small>
           </div>
           <div class="row">
