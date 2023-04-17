@@ -110,7 +110,15 @@ $(() => {
       if (nextInput) {
         nextInput.select();
       } else {
-        submitBotton.focus();
+        let checkbox = document.querySelector("#user_data_affirm_statements_are_correct")
+        console.log(checkbox)
+        console.log("Checkbox is checked?", checkbox.checked)
+        if (checkbox.checked) {
+          submitBotton.focus();
+        } else {
+          console.log("NOT CHECKED")
+          checkbox.focus()
+        }
       }
     })
   });
