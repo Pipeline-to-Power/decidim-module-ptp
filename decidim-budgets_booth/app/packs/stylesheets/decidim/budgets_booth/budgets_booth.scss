@@ -148,8 +148,23 @@ $active-item-color: $black;
 
 .booth-zipcode {
   margin-bottom: 10px;
+  &.thumbnail{
+    padding-right: 4px !important;
+    padding-left: 4px !important;
+  }
+  &.maximum-width{
+    max-width: 430px;
+  }
+  &.custom-input{
+    padding: 25px 0 !important;
+    @include breakpoint(smallmedium and medium down){
+     height: 3.25rem;
+    }
+    @include breakpoint(xxlarge){
+      height: 3.2rem;
+    }
+  }
 }
-
 .zip-code {
   &.x-margin{
     margin-left: 15px;
