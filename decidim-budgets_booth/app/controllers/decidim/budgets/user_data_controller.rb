@@ -16,6 +16,7 @@ module Decidim
 
       def new
         @form = form(UserDataForm).instance
+        @form.zip_code = user_zip_code(current_user, current_component)
       end
 
       def create

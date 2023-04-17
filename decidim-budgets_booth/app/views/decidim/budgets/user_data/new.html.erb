@@ -37,7 +37,7 @@
                     <span class="form-error text-left  is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
                     <span class="form-error text-left  is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
                   </div>
-                  <%= form.hidden_field :zip_code, vlaue: @form.zip_code || nil %>
+                  <%= form.hidden_field :zip_code, vlaue: @form.zip_code %>
                 </div>
               </div>
             </div>

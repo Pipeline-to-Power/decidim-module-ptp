@@ -40,6 +40,15 @@ $(() => {
 
   const validUserInput = (val) => (/^[a-zA-Z0-9]+$/).test(val)
 
+   // check if the hidden zip code input field has a value
+   const hiddenZipCodeField = document.querySelector('input[name="user_data[zip_code]"]');
+   if (hiddenZipCodeField.value.trim() !== "") {
+     const zipCodeValue = hiddenZipCodeField.value.trim().split("");
+     zipcodeInputs.forEach((input, index) => {
+       input.value = zipCodeValue[index] || "";
+     });
+   }
+
   if (zipCodeNotValid.dataset.invalid) {
     zipcodeInputs.forEach((input) => {
       input.classList.add("is-invalid-input")
