@@ -29,6 +29,13 @@ module Decidim
           end
         end
 
+        def resource_description(model)
+          raw = translated_attribute(model.description)
+          return raw if raw.length < 65
+
+          "#{raw[0..65]} ..."
+        end
+
         private
 
         def scope_manager

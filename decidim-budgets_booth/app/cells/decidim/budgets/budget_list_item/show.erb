@@ -5,18 +5,18 @@
         <div class="card__content">
         <% if voting_open? && voted_this?(budget) %>
           <h3 class="card--title">
-              <%= translated_attribute(budget.scope.name) %>
+              <%= translated_attribute(budget.title) %>
             </h3>
         <% else %>
           <%= link_to generate_projects_link(budget), class: link_class do %>
             <h3 class="card--title">
-                <%= translated_attribute(budget.scope.name) %>
+                <%= translated_attribute(budget.title) %>
             </h3>
           <% end %>
         <% end%>
 
           <div class="heading5 margin-bottom-3">
-              <p><%= budget_scope_type(budget) %></p>
+              <p><%= resource_description(budget) %></p>
           </div>
           <%= link_to generate_projects_link(budget), class: "button small hollow #{"disabled" if voting_open? && voted_this?(budget)}" do %>
             <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
