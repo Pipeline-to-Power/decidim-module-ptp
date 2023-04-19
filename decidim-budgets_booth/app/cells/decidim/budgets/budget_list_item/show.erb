@@ -16,7 +16,7 @@
         <% end%>
 
           <div class="heading5 margin-bottom-3">
-              <p><%= resource_description(budget) %></p>
+              <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
           </div>
           <%= link_to generate_projects_link(budget), class: "button small hollow" do %>
             <span class="text-wrap">
