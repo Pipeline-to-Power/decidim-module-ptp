@@ -73,12 +73,10 @@ describe "Budgets view", type: :system do
               expect(page).to have_selector("a", text: "More info", count: 2)
               expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(first_budget))
               expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(second_budget))
-              expect(page).to have_link(translated(first_budget.scope.name), href: decidim_budgets.budget_voting_index_path(budgets.first))
-              expect(page).to have_link(translated(second_budget.scope.name), href: decidim_budgets.budget_voting_index_path(second_budget))
-              first_type = translated(first_budget.scope.scope_type.name).split("_").last
-              second_type = translated(second_budget.scope.scope_type.name).split("_").last
-              expect(page).to have_content(first_type)
-              expect(page).to have_content(second_type)
+              expect(page).to have_link(translated(first_budget.title), href: decidim_budgets.budget_voting_index_path(budgets.first))
+              expect(page).to have_link(translated(second_budget.title), href: decidim_budgets.budget_voting_index_path(second_budget))
+              expect(page).to have_content("Eius officiis expedita. 55")
+              expect(page).to have_content("Eius officiis expedita. 56")
             end
             expect(page).to have_no_css(".callout.warning.font-customizer")
             expect(page).to have_button("Cancel voting")
@@ -88,6 +86,21 @@ describe "Budgets view", type: :system do
               click_link "OK"
             end
             expect(page).to have_link(href: "/")
+          end
+
+          context "when description is long" do
+            before do
+              first_budget.update!(description: { en: "<p>Lorem ipsum dolor sit amet, <em>consectetur</em> adipiscing elit. <b>Fus</b>. ultricies lacus vel dui vestibulum, eu aliquam libero convallis. Donec vitae ligula velit</p" })
+              second_budget.update!(description: { en: "<p>Fooba ligul dolor sit amet, <em>consectetur</em> adipiscing elit. <b>Fus</b>. ultricies lacus vel dui vestibulum, eu aliquam libero convallis. Donec vitae ligula velit</p" })
+              visit decidim_budgets.budgets_path
+            end
+
+            it "truncates the budgets description" do
+              within "#budgets" do
+                expect(page).to have_content("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fus. ult...")
+                expect(page).to have_content("Fooba ligul dolor sit amet, consectetur adipiscing elit. Fus. ult...")
+              end
+            end
           end
 
           context "with landing page content" do
@@ -100,7 +113,7 @@ describe "Budgets view", type: :system do
 
             it "renders callout message" do
               expect(page).to have_css(".callout.warning.font-customizer")
-              within ".ql-editor-display" do
+              within ".callout.warning.font-customizer" do
                 expect(page).to have_content(translated(landing_page_content))
               end
             end

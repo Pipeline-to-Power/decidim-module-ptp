@@ -33,6 +33,7 @@ describe "user data workflow", type: :system do
 
   context "when voted" do
     let!(:order) { create(:order, user: user, budget: first_budget) }
+    let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
 
     before do
       component.update(settings: { workflow: "zip_code" })

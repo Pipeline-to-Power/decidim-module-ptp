@@ -32,9 +32,10 @@ RSpec.shared_context "with scoped budgets" do
   let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets.last, budget_amount: 25_000) }
 
   before do
+    # We update the description to be less than the truncation limit. To test the truncation, we update those in tests.
     attach_images(budgets)
-    budgets.first.update!(scope: parent_scopes.first)
-    budgets.second.update!(scope: subscopes.first)
+    budgets.first.update!(scope: parent_scopes.first, description: { en: "<p>Eius officiis expedita. 55</p>" })
+    budgets.second.update!(scope: subscopes.first, description: { en: "<p>Eius officiis expedita. 56</p>" })
     budgets.last.update!(scope: subscopes.last)
   end
 end

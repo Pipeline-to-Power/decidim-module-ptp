@@ -44,9 +44,9 @@ module Decidim
               end
             end
 
-            context "when voted all budgets" do
+            context "when voted that budget" do
               before do
-                allow(controller).to receive(:voted_all_budgets?).and_return(true)
+                allow(controller).to receive(:voted_this?).and_return(true)
               end
 
               it "does not raise error" do
