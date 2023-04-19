@@ -40,9 +40,11 @@ en:
         take_part: Take part
         current_phase: "Current phase: %{phase}"
         more_info: More info
+        show_my_vote: Show my vote
       projects:
         budget_summary:
           cancel_voting: Cancel voting
+          back_to_budgets: Show all budgets
           choose_budget: You decide the budget
           choose_description: Choose the projects you like and cast your vote at the end.
         cancel_voting_modal:

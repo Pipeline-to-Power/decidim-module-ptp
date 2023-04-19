@@ -22,10 +22,18 @@ module Decidim
         end
 
         def generate_projects_link(resource)
-          if voting_open?
+          if voting_open? && !voted_this?(resource)
             budget_voting_index_path(resource)
           else
-            budget_path(resource)
+            budget_projects_path(resource)
+          end
+        end
+
+        def generate_text_for(resource)
+          if voted_this?(resource)
+            t("decidim.budgets.budget_list_item.show_my_vote")
+          else
+            t("decidim.budgets.budget_list_item.more_info")
           end
         end
 

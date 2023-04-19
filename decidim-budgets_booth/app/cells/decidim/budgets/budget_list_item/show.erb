@@ -18,8 +18,10 @@
           <div class="heading5 margin-bottom-3">
               <p><%= resource_description(budget) %></p>
           </div>
-          <%= link_to generate_projects_link(budget), class: "button small hollow #{"disabled" if voting_open? && voted_this?(budget)}" do %>
-            <span class="text-wrap"><%= t("decidim.budgets.budget_list_item.more_info") %></span>
+          <%= link_to generate_projects_link(budget), class: "button small hollow" do %>
+            <span class="text-wrap">
+            <%= generate_text_for(budget)%>
+            </span>
           <% end %>
         </div>
       </div>

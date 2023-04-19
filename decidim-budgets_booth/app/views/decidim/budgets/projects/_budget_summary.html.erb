@@ -1,12 +1,21 @@
 <div class="row column voting-rules">
   <% if voting_booth_forced? %>
-    <% if voting_open? %>
+    <% if voting_open? && !voted_this?(budget) %>
       <div class="row">
         <div class="columns medium-8 large-9">
           <button class="link m-bottom" data-open="cancel-voting">
             <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
             <%= t(".cancel_voting") %>
           </button>
+        </div>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="columns medium-8 large-9">
+          <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
+            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+            <%= t(".back_to_budgets") %>
+          <% end %>
         </div>
       </div>
     <% end %>

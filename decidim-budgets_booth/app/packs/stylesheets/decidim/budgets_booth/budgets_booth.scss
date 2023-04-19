@@ -164,6 +164,20 @@ $active-item-color: $black;
       height: 3.2rem;
     }
   }
+  &.add-padding{
+    @include breakpoint(xlarge){
+      padding: 0 20px;
+    }
+    @include breakpoint(mediumlarge medium){
+      padding: 0 20px;
+    }
+    @include breakpoint(smallmedium and mediumlarge down){
+      padding: 0 15px;
+    }
+    @include breakpoint(small){
+      padding: 0 5px;
+    }
+  }
 }
 .zip-code {
   &.x-margin{
