@@ -18,7 +18,7 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("orders.checkout.error", scope: "decidim")
-              redirect_to budgets_path
+              redirect_to decidim_budgets.budgets_path
             end
           end
         end
@@ -29,7 +29,7 @@ module Decidim
           if voted_all_budgets?
             redirect_to success_redirect_path
           else
-            redirect_to budgets_path
+            redirect_to decidim_budgets.budgets_path
           end
         end
       end

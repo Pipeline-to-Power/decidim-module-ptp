@@ -25,7 +25,7 @@ module Decidim
         CreateUserData.call(@form, all_zip_codes) do
           on(:ok) do
             flash[:notice] = I18n.t("success", scope: "decidim.budgets.user_data")
-            redirect_to budgets_path
+            redirect_to decidim_budgets.budgets_path
           end
 
           on(:invalid) do |result|
