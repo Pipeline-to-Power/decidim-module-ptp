@@ -33,6 +33,7 @@ module Decidim
       describe "#index" do
         context "when not zip code workflow" do
           let!(:zip_code?) { false }
+
           before do
             component.update(settings: { workflow: "foo" })
           end

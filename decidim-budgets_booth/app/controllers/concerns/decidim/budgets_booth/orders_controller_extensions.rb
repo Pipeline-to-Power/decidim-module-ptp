@@ -10,7 +10,6 @@ module Decidim
       included do
         def checkout
           enforce_permission_to :vote, :project, order: current_order, budget: budget, workflow: current_workflow
-
           Decidim::Budgets::Checkout.call(current_order) do
             on(:ok) do
               session[:thanks_message] = true
