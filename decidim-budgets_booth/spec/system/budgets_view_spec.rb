@@ -137,6 +137,46 @@ describe "Budgets view", type: :system do
               expect(page).to have_current_path("http://www.example.com/foo")
             end
           end
+
+          describe "vote all budgets" do
+            # We add another budget to the list of budgets where use is eligible to vote
+            let!(:extra_budget) { create(:budget, component: component, scope: extra_scope, total_budget: 100_000) }
+            let!(:extra_scope) { create(:scope, parent: parent_scopes.second) }
+            let!(:extra_postal) { create(:scope, parent: extra_scope) }
+            let!(:extra_project) { create(:project, budget: extra_budget, budget_amount: 75_000) }
+
+            before do
+              extra_postal.update(code: "#{extra_postal.code}_10004")
+              component.update(settings: { workflow: "zip_code", vote_threshold_percent: 0 })
+            end
+
+            context "when maximum_budgets_to_vote_on not set" do
+              before do
+                [extra_budget, first_budget, second_budget].each do |bdg|
+                  create_order(bdg)
+                end
+                visit current_path
+              end
+
+              it "shows all of the budgets after completing voting" do
+                expect(page).to have_selector("div.card.card--list.budget-list", count: 3)
+              end
+            end
+
+            context "when maximum_budgets_to_vote_on is set" do
+              before do
+                component.update(settings: { workflow: "zip_code", vote_threshold_percent: 0, maximum_budgets_to_vote_on: 2 })
+                [extra_budget, first_budget].each do |bdg|
+                  create_order(bdg)
+                end
+                visit current_path
+              end
+
+              it "shows only voted budgets" do
+                expect(page).to have_selector("div.card.card--list.budget-list", count: 2)
+              end
+            end
+          end
         end
       end
     end
@@ -150,5 +190,12 @@ describe "Budgets view", type: :system do
 
   def budget_path(budget)
     decidim_budgets.budget_path(budget.id)
+  end
+
+  def create_order(budget)
+    order = create(:order, user: user, budget: budget)
+    order.projects << budget.projects.first
+    order.checked_out_at = Time.current
+    order.save!
   end
 end
