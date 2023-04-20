@@ -60,4 +60,13 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
       expect(subject.budgets).not_to include(budgets.last)
     end
   end
+
+  describe "highlighted?" do
+    let!(:budgets) { create_list(:budget, 3, component: component) }
+
+    it "returs false" do
+      result = subject.highlighted?(budgets.first)
+      expect(result).to be_falsey
+    end
+  end
 end
