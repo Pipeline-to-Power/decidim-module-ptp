@@ -42,7 +42,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
     context "when command call returns ok" do
       it "sets thanks session and redirects the user" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
-        expect(response).to redirect_to("/budgets")
+        expect(response).to redirect_to(decidim_budgets.budgets_path)
         expect(session[:thanks_message]).to be(true)
       end
     end
@@ -55,7 +55,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
 
       it "redirects the user with flash message" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
-        expect(response).to redirect_to("/budgets")
+        expect(response).to redirect_to(decidim_budgets.budgets_path)
         expect(flash[:alert]).to have_content("There was a problem processing your vote")
       end
     end
