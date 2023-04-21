@@ -154,6 +154,7 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
 
     context "when voting is not open" do
       let(:current_settings) { double(:current_settings, votes: "disabled") }
+
       before do
         allow(component).to receive(:current_settings).and_return(current_settings)
         component.update(settings: { workflow: "zip_code", maximum_budgets_to_vote_on: 1 })
