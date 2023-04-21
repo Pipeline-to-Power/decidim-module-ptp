@@ -4,7 +4,7 @@
 module Decidim
   module BudgetsBooth
     module OrdersControllerExtensions
-      include ::Decidim::BudgetsBooth::BudgetsControllerHelper
+      include ::Decidim::BudgetsBooth::BudgetsHelper
       extend ActiveSupport::Concern
 
       included do

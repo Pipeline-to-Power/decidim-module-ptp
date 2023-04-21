@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    module BudgetsControllerHelper
+    module BudgetsHelper
       delegate :budgets, :voted, :voted?, to: :current_workflow
 
       def voting_booth_forced?

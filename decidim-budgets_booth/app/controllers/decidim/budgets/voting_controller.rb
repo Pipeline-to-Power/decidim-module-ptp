@@ -4,7 +4,7 @@ module Decidim
   module Budgets
     class VotingController < ProjectsController
       include Decidim::Budgets::NeedsCurrentOrder
-      include ::Decidim::BudgetsBooth::BudgetsControllerHelper
+      include ::Decidim::BudgetsBooth::BudgetsHelper
 
       layout "decidim/budgets/voting_layout"
       before_action :store_user_location!, if: :storable_location?

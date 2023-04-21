@@ -4,7 +4,7 @@ module Decidim
   module BudgetsBooth
     module ProjectsControllerExtensions
       extend ActiveSupport::Concern
-      include BudgetsControllerHelper
+      include BudgetsHelper
 
       included do
         def index

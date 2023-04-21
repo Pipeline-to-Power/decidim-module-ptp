@@ -4,7 +4,7 @@ module Decidim
   module BudgetsBooth
     module BudgetListItemCellExtensions
       extend ActiveSupport::Concern
-      include BudgetsControllerHelper
+      include BudgetsHelper
 
       included do
         delegate :voting_open?, :voting_finished?, to: :controller

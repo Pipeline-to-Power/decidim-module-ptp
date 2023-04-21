@@ -4,7 +4,7 @@ module Decidim
   module Budgets
     class UserDataController < ApplicationController
       include FormFactory
-      include ::Decidim::BudgetsBooth::BudgetsControllerHelper
+      include ::Decidim::BudgetsBooth::BudgetsHelper
 
       delegate :zip_codes, :user_zip_code, to: :scope_manager
 
