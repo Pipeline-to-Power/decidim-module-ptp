@@ -7,12 +7,12 @@ en:
         settings:
           global:
             vote_success_content: Popup text after each vote
-            vote_completed_content: Popup text after voting in all available busgets
+            vote_completed_content: Popup text after voting in all available budgets
             voting_terms: Terms and conditions to be shown when user wants to enter their ZIP code
             vote_success_url: URL to redirect user after voting on all available budgets (default is budgets list)
             vote_cancel_url: URL to redirect user when canceling voting (defaullt to the root path)
             show_full_description_on_listing_page: Show full project descriptions on the listing page and disable the details popup
-            maximum_budgets_to_vote_on: Maximum number of budgets that user can vote on(default is 0, which means user can vote on all available budgets)
+            maximum_budgets_to_vote_on: Maximum number of budgets that user can vote on (default is 0, which means user can vote on all available budgets)
             workflow_choices:
               zip_code: "Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code."
     budgets:
@@ -30,7 +30,7 @@ en:
           cancel_voting: Cancel voting
       budgets_header:
         title: "Ballots available to you:"
-        based_on_zip_code: Bases on your ZIP code - %{zip_code}.
+        based_on_zip_code: Based on your ZIP code - %{zip_code}.
         not_right_one: Not the right one? %{link}
         change_it_here: Change it here
       budgets_list:
@@ -41,6 +41,12 @@ en:
         current_phase: "Current phase: %{phase}"
         more_info: More info
         show_my_vote: Show my vote
+      orders:
+        modal:
+          close: Close window
+          description: These are the projects you have chosen to be part of the budget.
+          ok: OK
+          title: Your vote in %{budget_title}
       projects:
         budget_summary:
           cancel_voting: Cancel voting
@@ -71,11 +77,11 @@ en:
             start_voting: Start voting
             introduction: Want to vote this project?
       project_vote_button:
-        removee_From_votes: Remove your vote
-        add_to_votes: Add to your vote
+        remove_from_vote: Remove from vote
+        add_to_vote: Add to your vote
       project_list_item:
         read_more: Read more
-        ordered_item: This item is added to the your votes.
+        ordered_item: This item is added to the your vote.
       user_data:
         new:
           cancel: Cancel
