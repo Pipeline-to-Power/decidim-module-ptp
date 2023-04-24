@@ -23,12 +23,11 @@
         <%= decidim_form_for(@form, url: zip_code_index_path, method: :post) do |form| %>
           <div class="field">
             <div class="row">
-              <div class="booth-zipcode maximum-width columns small-centered medium-11 mediumlarge-12">
-                <div id="zip-code" class="row small-up-<%= zip_code_length %>">
+              <div class="booth-zipcode maximum-width columns small-centered medium-11 mediumlarge-12 margin-bottom-2">
+                <div id="zip-code" class="flex-digits">
                   <% zip_code_length.times do  |ind| %>
-                    <div class="column column-block booth-zipcode add-padding">
-                      <input type="text" name="<%= "digit#{ind + 1}"%>" class="booth-zipcode custom-input text-center" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
-
+                    <div class="flex-digits-input">
+                      <input type="text" name="<%= "digit#{ind + 1}"%>" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
                     </div>
                   <% end %>
                   </div>

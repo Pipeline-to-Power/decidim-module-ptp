@@ -116,9 +116,9 @@ $active-item-color: $black;
 .flex-column{
   flex-direction: column;
 
-    @include breakpoint(medium down){
-      flex-direction: column;
-    }
+  @include breakpoint(medium down){
+    flex-direction: column;
+  }
 }
 
 .card{
@@ -137,7 +137,7 @@ $active-item-color: $black;
 }
 
 .font-customizer{
-  h2, h3 {
+  h2, h3{
     font-size: 1.1rem;
   }
 }
@@ -146,40 +146,40 @@ $active-item-color: $black;
   filter: grayscale(100%);
 }
 
-.booth-zipcode {
-  margin-bottom: 10px;
+.flex-digits{
+  display: flex;
+  justify-content: space-between;
+
+  .flex-digits-input{
+    display: flex;
+    flex: 0 0 auto;
+
+    input{
+      margin: 0 auto;
+      height: 2.5rem;
+      width: 2.5rem;
+      text-align: center;
+
+      @include breakpoint(smallmedium up){
+        height: 3rem;
+        width: 3rem;
+      }
+    }
+  }
+}
+
+.booth-zipcode{
   &.thumbnail{
     padding-right: 4px !important;
     padding-left: 4px !important;
   }
+
   &.maximum-width{
     max-width: 430px;
   }
-  &.custom-input{
-    padding: 25px 0 !important;
-    @include breakpoint(smallmedium and medium down){
-     height: 3.25rem;
-    }
-    @include breakpoint(xxlarge){
-      height: 3.2rem;
-    }
-  }
-  &.add-padding{
-    @include breakpoint(xlarge){
-      padding: 0 20px;
-    }
-    @include breakpoint(mediumlarge medium){
-      padding: 0 20px;
-    }
-    @include breakpoint(smallmedium and mediumlarge down){
-      padding: 0 15px;
-    }
-    @include breakpoint(small){
-      padding: 0 5px;
-    }
-  }
 }
-.zip-code {
+
+.zip-code{
   &.x-margin{
     margin-left: 15px;
     margin-right: 15px;
