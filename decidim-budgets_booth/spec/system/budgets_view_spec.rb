@@ -177,6 +177,31 @@ describe "Budgets view", type: :system do
               end
             end
           end
+
+          describe "votes popup" do
+            before do
+              first_budget.projects.first.update!(budget_amount: 75_000)
+              create_order(first_budget)
+              visit current_path
+            end
+
+            it "shows the popups" do
+              within "div.card.card--list.budget-list", match: :first do
+                expect(page).to have_link("Show my vote")
+                click_link "Show my vote"
+              end
+              expect(page).to have_selector("div", id: "budget-votes-#{first_budget.id}")
+              order = Decidim::Budgets::Order.last
+              project = order.projects.first
+              within "#budget-votes-#{first_budget.id}" do
+                expect(page).to have_content("Your vote in #{translated(first_budget.title)}")
+                expect(page).to have_content("These are the projects you have chosen to be part of the budget.")
+                expect(page).to have_content(translated(project.title))
+                click_button "OK"
+              end
+              expect(page).to have_no_selector("div", id: "budget-votes-#{first_budget.id}")
+            end
+          end
         end
       end
     end

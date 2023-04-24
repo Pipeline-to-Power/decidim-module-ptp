@@ -53,4 +53,25 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
       end
     end
   end
+
+  describe "#show" do
+    context "when order does not exist" do
+      it "renders error" do
+        expect do
+          get :show, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
+        end.to raise_error(ActionController::RoutingError)
+      end
+    end
+
+    context "when order exists" do
+      before do
+        order.update!(checked_out_at: Time.current)
+      end
+
+      it "redirects the html requests" do
+        get :show, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
+        expect(response).to redirect_to(decidim_budgets.budgets_path)
+      end
+    end
+  end
 end
