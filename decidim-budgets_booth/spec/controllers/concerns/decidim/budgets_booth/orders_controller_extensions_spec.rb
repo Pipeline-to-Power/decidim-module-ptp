@@ -8,17 +8,12 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
   end
 
   routes { Decidim::Budgets::Engine.routes }
+
   include_context "with scoped budgets"
 
-  let(:user) { create(:user, :confirmed, organization: component.organization) }
-  let(:component) do
-    create(
-      :budgets_component,
-      settings: { workflow: "zip_code" }
-    )
-  end
+  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:component) { create(:budgets_component, settings: component_settings.merge(workflow: "zip_code"), organization: organization) }
   let(:projects_count) { 5 }
-  let(:organization) { component.organization }
   let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 75_000_000) }
@@ -26,7 +21,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
   let!(:order) { create(:order, user: user, budget: budgets.first) }
 
   before do
-    request.env["decidim.current_organization"] = component.organization
+    request.env["decidim.current_organization"] = organization
     request.env["decidim.current_user"] = user
     request.env["decidim.current_participatory_space"] = component.participatory_space
     request.env["decidim.current_component"] = component
@@ -37,8 +32,6 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
   end
 
   describe "#checkout" do
-    subject { controller.checkout }
-
     context "when command call returns ok" do
       it "sets thanks session and redirects the user" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }

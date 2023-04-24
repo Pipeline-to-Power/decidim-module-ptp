@@ -4,10 +4,10 @@ require "spec_helper"
 
 describe "Voting index page", type: :system do
   include_context "with scoped budgets"
+
   let(:projects_count) { 10 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-  let(:user) { create(:user, :confirmed, organization: component.organization) }
-  let(:organization) { component.organization }
+  let(:user) { create(:user, :confirmed, organization: organization) }
   let(:first_budget) { budgets.first }
   let(:second_budget) { budgets.second }
   let(:active_step_id) { component.participatory_space.active_step.id }
@@ -26,7 +26,7 @@ describe "Voting index page", type: :system do
 
   context "when not signed in" do
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       visit_budget(first_budget)
     end
 
@@ -35,7 +35,7 @@ describe "Voting index page", type: :system do
 
   context "when no user_data" do
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       sign_in user, scope: :user
       visit_budget(first_budget)
     end
@@ -47,7 +47,7 @@ describe "Voting index page", type: :system do
     let!(:user_data) { create(:user_data, component: component, user: user) }
 
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       sign_in user, scope: :user
       visit_budget(first_budget)
     end
@@ -60,7 +60,7 @@ describe "Voting index page", type: :system do
     let!(:order) { create(:order, :with_projects, user: user, budget: first_budget) }
 
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       order.update!(checked_out_at: Time.current)
       user_data.update!(metadata: { zip_code: "10004" })
       sign_in user, scope: :user
@@ -79,7 +79,7 @@ describe "Voting index page", type: :system do
     let!(:user_data) { create(:user_data, component: component, user: user) }
 
     before do
-      component.update(settings: { workflow: "zip_code", projects_per_page: 5 })
+      component.update(settings: component_settings.merge(workflow: "zip_code", projects_per_page: 5))
       user_data.update!(metadata: { zip_code: "10004" })
       sign_in user, scope: :user
       visit_budget(first_budget)
@@ -244,7 +244,7 @@ describe "Voting index page", type: :system do
 
       context "when vote success is set" do
         before do
-          component.update!(settings: { workflow: "zip_code", vote_success_content: { en: "<p>Some dummy text</p>" } })
+          component.update!(settings: component_settings.merge(workflow: "zip_code", vote_success_content: { en: "<p>Some dummy text</p>" }))
           visit current_path
           vote_budget!
         end
@@ -285,7 +285,7 @@ describe "Voting index page", type: :system do
 
       context "when was set" do
         before do
-          component.update!(settings: { workflow: "zip_code", vote_completed_content: { en: "<p>Completed voting dummy text</p>" } })
+          component.update!(settings: component_settings.merge(workflow: "zip_code", vote_completed_content: { en: "<p>Completed voting dummy text</p>" }))
           visit current_path
           vote_budget!
         end
@@ -381,7 +381,7 @@ describe "Voting index page", type: :system do
 
       context "when set" do
         before do
-          component.update!(settings: { workflow: "zip_code", show_full_description_on_listing_page: true })
+          component.update!(settings: component_settings.merge(workflow: "zip_code", show_full_description_on_listing_page: true))
           visit current_path
         end
 

@@ -4,10 +4,10 @@ require "spec_helper"
 
 describe "Budgets view", type: :system do
   include_context "with scoped budgets"
+
   let(:projects_count) { 1 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-  let(:user) { create(:user, :confirmed, organization: component.organization) }
-  let(:organization) { component.organization }
+  let(:user) { create(:user, :confirmed, organization: organization) }
 
   before do
     switch_to_host(organization.host)
@@ -107,7 +107,7 @@ describe "Budgets view", type: :system do
             let(:landing_page_content) { Decidim::Faker::Localized.sentence(word_count: 5) }
 
             before do
-              component.update(settings: { workflow: "zip_code", landing_page_content: landing_page_content })
+              component.update(settings: component_settings.merge(workflow: "zip_code", landing_page_content: landing_page_content))
               visit current_path
             end
 
@@ -123,7 +123,7 @@ describe "Budgets view", type: :system do
             before do
               stub_request(:get, "http://www.example.com/foo")
                 .to_return(status: 200, body: "Dummy body")
-              component.update(settings: { workflow: "zip_code", vote_cancel_url: "http://www.example.com/foo" })
+              component.update(settings: component_settings.merge(workflow: "zip_code", vote_cancel_url: "http://www.example.com/foo"))
               visit current_path
             end
 
@@ -141,13 +141,12 @@ describe "Budgets view", type: :system do
           describe "vote all budgets" do
             # We add another budget to the list of budgets where use is eligible to vote
             let!(:extra_budget) { create(:budget, component: component, scope: extra_scope, total_budget: 100_000) }
-            let!(:extra_scope) { create(:scope, parent: parent_scopes.second) }
-            let!(:extra_postal) { create(:scope, parent: extra_scope) }
+            let!(:extra_scope) { create(:scope, parent: parent_scope, organization: organization) }
+            let!(:extra_postal) { create(:scope, name: { en: "10004" }, code: "EXTRA_10004", parent: extra_scope, organization: organization) }
             let!(:extra_project) { create(:project, budget: extra_budget, budget_amount: 75_000) }
 
             before do
-              extra_postal.update(code: "#{extra_postal.code}_10004")
-              component.update(settings: { workflow: "zip_code", vote_threshold_percent: 0 })
+              component.update(settings: component_settings.merge(workflow: "zip_code", vote_threshold_percent: 0))
             end
 
             context "when maximum_budgets_to_vote_on not set" do
@@ -165,7 +164,7 @@ describe "Budgets view", type: :system do
 
             context "when maximum_budgets_to_vote_on is set" do
               before do
-                component.update(settings: { workflow: "zip_code", vote_threshold_percent: 0, maximum_budgets_to_vote_on: 2 })
+                component.update(settings: component_settings.merge(workflow: "zip_code", vote_threshold_percent: 0, maximum_budgets_to_vote_on: 2))
                 [extra_budget, first_budget].each do |bdg|
                   create_order(bdg)
                 end

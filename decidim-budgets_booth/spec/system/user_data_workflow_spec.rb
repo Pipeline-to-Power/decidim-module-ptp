@@ -4,10 +4,10 @@ require "spec_helper"
 
 describe "user data workflow", type: :system do
   include_context "with scoped budgets"
+
   let(:projects_count) { 4 }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-  let(:user) { create(:user, :confirmed, organization: component.organization) }
-  let(:organization) { component.organization }
+  let(:user) { create(:user, :confirmed, organization: organization) }
   let(:first_budget) { budgets.first }
 
   before do
@@ -24,7 +24,7 @@ describe "user data workflow", type: :system do
 
   context "when not signed in" do
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       visit decidim_budgets.new_zip_code_path
     end
 
@@ -36,7 +36,7 @@ describe "user data workflow", type: :system do
     let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
 
     before do
-      component.update(settings: { workflow: "zip_code" })
+      component.update(settings: component_settings.merge(workflow: "zip_code"))
       order.projects << first_budget.projects.first
       order.projects << first_budget.projects.second
       order.projects << first_budget.projects.third
@@ -58,7 +58,7 @@ describe "user data workflow", type: :system do
     let(:active_step_id) { component.participatory_space.active_step.id }
 
     before do
-      component.update!(settings: { workflow: "zip_code" }, step_settings: { active_step_id => { votes: :finished } })
+      component.update!(settings: component_settings.merge(workflow: "zip_code"), step_settings: { active_step_id => { votes: :finished } })
       sign_in user, scope: :user
       visit decidim_budgets.new_zip_code_path
     end
@@ -76,7 +76,7 @@ describe "user data workflow", type: :system do
     let(:existing_zip_code) { "10004" }
 
     before do
-      component.update!(settings: { workflow: "zip_code" })
+      component.update!(settings: component_settings.merge(workflow: "zip_code"))
       sign_in user, scope: :user
       visit decidim_budgets.new_zip_code_path
     end

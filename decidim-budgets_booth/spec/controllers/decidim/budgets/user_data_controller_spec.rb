@@ -8,18 +8,16 @@ module Decidim
       routes { Decidim::Budgets::Engine.routes }
 
       include_context "with scoped budgets"
+
       let(:projects_count) { 5 }
-      let(:organization) { component.organization }
       let(:user) { create(:user, :confirmed, organization: organization) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-      let(:vote) { "enabled" }
-      let(:current_settings) { double(:current_settings, votes: vote) }
+      let(:votes) { "enabled" }
 
       before do
         request.env["decidim.current_organization"] = organization
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
-        allow(controller).to receive(:current_settings).and_return(current_settings)
       end
 
       context "when not zip_code workflow" do
@@ -31,8 +29,10 @@ module Decidim
       end
 
       context "when zip code workflow" do
+        let(:active_step_id) { component.participatory_space.active_step.id }
+
         before do
-          component.update(settings: { workflow: "zip_code" })
+          component.update!(settings: component_settings.merge(workflow: "zip_code"), step_settings: { active_step_id => { votes: votes } })
         end
 
         context "when not authenticated" do
@@ -59,13 +59,13 @@ module Decidim
         end
 
         context "when voting not open" do
-          let(:vote) { "finished" }
+          let(:votes) { "finished" }
 
           before do
             sign_in user, scope: :user
           end
 
-          it "redirects to the root path with error" do
+          it "redirects to the root path with warning" do
             get :new
             expect(response).to redirect_to("/")
             expect(flash[:warning]).to have_content("You can not set your ZIP code when the voting is not open.")

@@ -22,7 +22,7 @@ shared_examples "cancel voting" do
 
   context "when vote_cancel_url is set to a specific location" do
     before do
-      component.update!(settings: { workflow: "zip_code", vote_cancel_url: decidim_budgets.budgets_path })
+      component.update!(settings: component_settings.merge(workflow: "zip_code", vote_cancel_url: decidim_budgets.budgets_path))
       visit current_path
     end
 

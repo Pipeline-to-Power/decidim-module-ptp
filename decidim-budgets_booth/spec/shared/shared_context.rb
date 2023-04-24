@@ -1,42 +1,69 @@
 # frozen_string_literal: true
 
 RSpec.shared_context "with scopes" do
-  let!(:parent_scopes) { create_list(:scope, 2, organization: organization) }
-  let!(:subscopes) { create_list(:scope, 2, parent: parent_scopes.second) }
-  let!(:first_postals) { create_list(:scope, 5, parent: parent_scopes.first) }
-  let!(:second_postals) { create_list(:scope, 7, parent: subscopes[0]) }
-  let!(:third_postals) { create_list(:scope, 8, parent: subscopes[1]) }
-  before do
-    first_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 10_000}")
+  let(:parent_scope) { create(:scope, organization: organization) }
+  let!(:subscopes) { create_list(:scope, 3, parent: parent_scope, organization: organization) }
+  let!(:first_postals) do
+    [].tap do |postals|
+      5.times do |i|
+        code = (10_000 + i).to_s
+        postals << create(:scope, name: { en: code }, code: "FIRST_#{code}", parent: subscopes[0], organization: organization)
+      end
     end
-    second_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 10_004}")
+  end
+  let!(:second_postals) do
+    [].tap do |postals|
+      7.times do |i|
+        code = (10_010 + i).to_s
+        postals << create(:scope, name: { en: code }, code: "SECOND_#{code}", parent: subscopes[1], organization: organization)
+      end
     end
-    third_postals.each_with_index do |postal, i|
-      postal.update(code: "#{postal.code}_#{i + 10_010}")
+  end
+  let!(:third_postals) do
+    [].tap do |postals|
+      8.times do |i|
+        code = (10_020 + i).to_s
+        postals << create(:scope, name: { en: code }, code: "THIRD_#{code}", parent: subscopes[2], organization: organization)
+      end
     end
   end
 end
 
-RSpec.shared_context "with user_data" do
+RSpec.shared_context "with user data" do
   let!(:user_data) { create(:user_data, component: component, user: user) }
 end
 
 RSpec.shared_context "with scoped budgets" do
   include_context "with scopes"
-  let(:component) { create(:budgets_component) }
+
+  let(:organization) { create(:organization) }
+  let(:component) { create(:budgets_component, settings: component_settings, organization: organization) }
+  let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
+
   let(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000) }
-  let!(:first_projects_set) { create_list(:project, projects_count, budget: budgets.first, budget_amount: 25_000) }
-  let!(:second_projects_set) { create_list(:project, projects_count, budget: budgets.second, budget_amount: 25_000) }
-  let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets.last, budget_amount: 25_000) }
+  let!(:first_projects_set) { create_list(:project, projects_count, budget: budgets[0], budget_amount: 25_000) }
+  let!(:second_projects_set) { create_list(:project, projects_count, budget: budgets[1], budget_amount: 25_000) }
+  let!(:last_projects_set) { create_list(:project, projects_count, budget: budgets[2], budget_amount: 25_000) }
 
   before do
     # We update the description to be less than the truncation limit. To test the truncation, we update those in tests.
     attach_images(budgets)
-    budgets.first.update!(scope: parent_scopes.first, description: { en: "<p>Eius officiis expedita. 55</p>" })
-    budgets.second.update!(scope: subscopes.first, description: { en: "<p>Eius officiis expedita. 56</p>" })
-    budgets.last.update!(scope: subscopes.last)
+    budgets[0].update!(scope: parent_scope, description: { en: "<p>Eius officiis expedita. 55</p>" })
+    budgets[1].update!(scope: subscopes[0], description: { en: "<p>Eius officiis expedita. 56</p>" })
+    budgets[2].update!(scope: subscopes[1])
+  end
+
+  private
+
+  def attach_images(budgets)
+    city_files = ["city.jpeg", "city2.jpeg", "city3.jpeg"]
+    budgets.each_with_index do |budget, ind|
+      budget.update(main_image: ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Decidim::Dev.asset(city_files[ind])),
+        filename: city_files[ind],
+        content_type: "image/jpeg"
+      ))
+    end
   end
 end
 
@@ -44,20 +71,8 @@ RSpec.shared_context "with zip_code workflow" do
   let!(:component) do
     create(
       :budgets_component,
-      settings: { workflow: "zip_code" }
+      settings: component_settings.merge(workflow: "zip_code"),
+      organization: organization
     )
-  end
-end
-
-private
-
-def attach_images(budgets)
-  city_files = ["city.jpeg", "city2.jpeg", "city3.jpeg"]
-  budgets.each_with_index do |budget, ind|
-    budget.update(main_image: ActiveStorage::Blob.create_and_upload!(
-      io: File.open(Decidim::Dev.asset(city_files[ind])),
-      filename: city_files[ind],
-      content_type: "image/jpeg"
-    ))
   end
 end
