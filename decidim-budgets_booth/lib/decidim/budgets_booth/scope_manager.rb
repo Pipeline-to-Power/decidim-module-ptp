@@ -13,6 +13,11 @@ module Decidim
           scopes_mapping_cache[scope.id] ||= generate_scopes_mapping_for(scope)
         end
 
+        # Fetches the user's component specific metadata from the local cache in
+        # order to improve the performance. This data is fetched multiple times
+        # during the request and it requires decryption which causes a small
+        # delay when this data is utilized. It should be decrypted only once per
+        # request.
         def user_data_for(component, user)
           user_scopes_cache[component.id] ||= {}
           user_scopes_cache[component.id][user.id] ||= begin
