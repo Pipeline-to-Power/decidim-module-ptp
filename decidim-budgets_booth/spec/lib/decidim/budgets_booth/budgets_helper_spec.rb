@@ -39,10 +39,14 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
   let(:component) do
     create(
       :budgets_component,
-      settings: { workflow: "zip_code" }
+      settings: component_settings.merge(workflow: "zip_code"),
+      step_settings: step_settings,
+      organization: organization
     )
   end
-  let(:organization) { component.organization }
+  let(:step_settings) { { active_step_id => { votes: votes } } }
+  let(:votes) { "enabled" }
+  let(:active_step_id) { component.participatory_space.active_step.id }
   let!(:user) { create(:user, :confirmed, organization: organization) }
   let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
   let(:projects_count) { 5 }
@@ -51,14 +55,14 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
   let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
   let!(:order) { create(:order, user: user, budget: budgets.first) }
   let!(:second_order) { create(:order, user: user, budget: budgets.second) }
-  let(:current_settings) { double(:current_settings, votes: "enabled") }
 
   include_context "with scoped budgets"
+
   before do
     allow(dummy).to receive(:component).and_return(component)
     allow(dummy).to receive(:user).and_return(user)
     allow(dummy).to receive(:organization).and_return(organization)
-    allow(dummy).to receive(:current_settings).and_return(current_settings)
+    allow(dummy).to receive(:current_settings).and_return(component.current_settings)
   end
 
   describe "#voting_enabled?" do
@@ -114,7 +118,7 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
     context "when maximum_budgets_to_vote_on is set" do
       context "when voted the limit" do
         before do
-          component.update(settings: { workflow: "zip_code", maximum_budgets_to_vote_on: 1 })
+          component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1))
           vote_this(order, projects.first)
         end
 
@@ -139,7 +143,7 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
 
     context "when maximum_budgets_to_vote_on is set" do
       before do
-        component.update(settings: { workflow: "zip_code", maximum_budgets_to_vote_on: 1 })
+        component.update(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1))
         vote_this(order, projects.first)
       end
 
@@ -153,12 +157,13 @@ describe Decidim::BudgetsBooth::BudgetsHelper do
     end
 
     context "when voting is not open" do
-      let(:current_settings) { double(:current_settings, votes: "disabled") }
+      let(:votes) { "disabled" }
 
       before do
-        allow(component).to receive(:current_settings).and_return(current_settings)
-        component.update(settings: { workflow: "zip_code", maximum_budgets_to_vote_on: 1 })
+        component.update!(settings: component_settings.merge(workflow: "zip_code", maximum_budgets_to_vote_on: 1), step_settings: step_settings)
         vote_this(order, projects.first)
+
+        allow(dummy).to receive(:current_settings).and_return(component.current_settings)
       end
 
       it "does not hide unvoted budgets, even when the maximum is reached" do
