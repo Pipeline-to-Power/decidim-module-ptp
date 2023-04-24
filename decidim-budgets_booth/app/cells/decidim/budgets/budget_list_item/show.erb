@@ -61,7 +61,7 @@
         </strong>
       </div>
 
-      <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
+      <%= decidim_sanitize_editor translated_attribute(description) %>
     </div>
 
     <% if !voting_finished? %>
