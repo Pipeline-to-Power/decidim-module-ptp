@@ -4,11 +4,11 @@ module Decidim
   # This holds the decidim-meetings version.
   module BudgetsBooth
     def self.decidim_version
-      "~> 0.27.0"
+      "~> 0.26.0"
     end
 
     def self.version
-      "0.27.0"
+      "0.26.0"
     end
   end
 end

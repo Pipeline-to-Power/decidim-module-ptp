@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateDecidimBudgetsUserData < ActiveRecord::Migration[6.1]
+class CreateDecidimBudgetsUserData < ActiveRecord::Migration[6.0]
   def change
     create_table :decidim_budgets_user_data do |t|
       t.jsonb :metadata

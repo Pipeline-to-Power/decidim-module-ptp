@@ -41,7 +41,7 @@ describe Decidim::Budgets::Admin::CreateBudget do
   context "when image is attached" do
     it "adds main image to the budget" do
       subject.call
-      expect(budget.main_image.blob).to be_a(ActiveStorage::Blob)
+      expect(budget.main_image.try(:blob)).to be_a(ActiveStorage::Blob)
     end
   end
 
@@ -50,7 +50,7 @@ describe Decidim::Budgets::Admin::CreateBudget do
 
     it "does not add main image to the budget" do
       subject.call
-      expect(budget.main_image.blob).to be_nil
+      expect(budget.main_image.try(:blob)).to be_nil
     end
   end
 end

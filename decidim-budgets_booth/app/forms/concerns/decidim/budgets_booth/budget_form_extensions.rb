@@ -7,6 +7,7 @@ module Decidim
 
       included do
         attribute :main_image
+        attribute :remove_main_image, const_get(:Boolean), default: false
         validates :main_image, passthru: {
           to: ::Decidim::Budgets::Budget,
           with: {

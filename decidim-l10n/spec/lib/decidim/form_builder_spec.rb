@@ -18,16 +18,9 @@ describe Decidim::FormBuilder do
         ActiveModel::Name.new(self, nil, "dummy")
       end
 
-      # 0.27->
-      extend ActiveModel::Translation
-      include ActiveModel::Model
-      include Decidim::AttributeObject::Model
+      include Virtus.model
+      include ActiveModel::Validations
       include Decidim::TranslatableAttributes
-
-      # 0.26
-      # include Virtus.model
-      # include ActiveModel::Validations
-      # include Decidim::TranslatableAttributes
 
       attribute :start_time, DateTime
 

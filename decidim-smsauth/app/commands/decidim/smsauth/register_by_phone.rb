@@ -2,7 +2,7 @@
 
 module Decidim
   module Smsauth
-    class RegisterByPhone < Decidim::Command
+    class RegisterByPhone < Rectify::Command
       include Decidim::Sms::Twilio::TokenGenerator
 
       def initialize(form)

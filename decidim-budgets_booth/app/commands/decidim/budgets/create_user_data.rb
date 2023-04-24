@@ -2,7 +2,7 @@
 
 module Decidim
   module Budgets
-    class CreateUserData < Decidim::Command
+    class CreateUserData < Rectify::Command
       def initialize(form, zip_codes)
         @zip_codes = zip_codes
         @form = form

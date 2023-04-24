@@ -12,6 +12,7 @@
       <%= form.translated :editor, :description %>
 
       <%= form.number_field :total_budget %>
+
       <% if current_component.has_subscopes? %>
         <div class="row column">
           <%= scopes_picker_field form, :decidim_scope_id, root: current_component.scope %>
@@ -24,7 +25,8 @@
   </div>
   <div class="card-section">
     <div class="row column">
-      <%= form.upload :main_image %>
+      <%= form.upload :main_image, optional: false %>
+      <%= form.check_box(:remove_main_image, label: t("remove_this_file", scope: "decidim.forms")) %>
     </div>
   </div>
 </div>

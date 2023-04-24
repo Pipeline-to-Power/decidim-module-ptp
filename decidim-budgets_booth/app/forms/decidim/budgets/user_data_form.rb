@@ -3,10 +3,10 @@
 module Decidim
   module Budgets
     class UserDataForm < Decidim::Form
-      attribute :zip_code, type: :string
-      attribute :affirm_statements_are_correct, type: :boolean
-      attribute :user, type: :string
-      attribute :component, type: :string
+      attribute :zip_code, String
+      attribute :affirm_statements_are_correct, Boolean
+      attribute :user, String
+      attribute :component, String
 
       validates :zip_code, presence: true
       validates :affirm_statements_are_correct, acceptance: true

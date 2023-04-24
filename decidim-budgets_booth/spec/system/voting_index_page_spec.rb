@@ -178,7 +178,7 @@ describe "Voting index page", type: :system do
       it "allows searching by text" do
         project = current_projects.first
         within ".filters__search" do
-          fill_in "filter[search_text_cont]", with: translated(project.title)
+          fill_in "filter[search_text]", with: translated(project.title)
 
           find(".button").click
         end
@@ -195,7 +195,7 @@ describe "Voting index page", type: :system do
         project.save
         visit current_path
 
-        within ".filters__section.with_any_scope_check_boxes_tree_filter" do
+        within ".filters__section.scope_id_check_boxes_tree_filter" do
           uncheck "All"
           check translated(first_budget.scope.name)
         end
@@ -213,7 +213,7 @@ describe "Voting index page", type: :system do
         project.save
 
         visit current_path
-        within ".filters__section.with_any_category_check_boxes_tree_filter" do
+        within ".filters__section.category_id_check_boxes_tree_filter" do
           uncheck "All"
           check translated(category.name)
         end
