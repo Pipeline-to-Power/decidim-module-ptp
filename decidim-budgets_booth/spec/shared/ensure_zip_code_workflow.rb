@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples "ensure zip code workflow" do
   it "redirects user to root path" do
     expect(page).to have_current_path "/"
