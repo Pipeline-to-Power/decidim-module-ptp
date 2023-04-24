@@ -16,7 +16,7 @@
         <% end%>
 
           <div class="heading5 margin-bottom-3">
-              <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
+              <%= decidim_sanitize_editor translated_attribute(description) %>
           </div>
           <%= link_to generate_projects_link(budget), class: "button small hollow" do %>
             <span class="text-wrap">
@@ -61,7 +61,7 @@
         </strong>
       </div>
 
-      <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
+      <%= decidim_sanitize_editor translated_attribute(description) %>
     </div>
 
     <% if !voting_finished? %>
