@@ -5,10 +5,10 @@
         <div class="card__content">
         <% if voting_open? && voted_this?(budget) %>
           <h3 class="card--title">
-              <%= translated_attribute(budget.title) %>
-            </h3>
+            <%= translated_attribute(budget.title) %>
+          </h3>
         <% else %>
-          <%= link_to generate_projects_link(budget), class: link_class do %>
+          <%= link_to_budget budget, class: link_class do %>
             <h3 class="card--title">
                 <%= translated_attribute(budget.title) %>
             </h3>
@@ -16,24 +16,24 @@
         <% end%>
 
           <div class="heading5 margin-bottom-3">
-              <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
+            <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
           </div>
-          <%= link_to generate_projects_link(budget), class: "button small hollow" do %>
+
+          <%= link_to_budget budget, class: "button small hollow show_votes" do %>
             <span class="text-wrap">
-            <%= generate_text_for(budget)%>
+              <%= generate_text_for(budget)%>
             </span>
           <% end %>
         </div>
       </div>
       <div class="columns mediumlarge-8 large-6 card--process__column">
-        <div class="card--full__image<%= mark_image_as_voted(budget) %>"
-        style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
+        <div class="card--full__image<%= mark_image_as_voted(budget) %>" style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
           <% if voting_open? %>
             <div class="card__content row collapse">
               <div class="large-6 large-offset-6 columns">
 
                 <% if !voted_this?(budget) %>
-                  <%= link_to generate_projects_link(budget), class: "button expanded button--sc" do %>
+                  <%= link_to_budget budget, class: "button expanded button--sc" do %>
                     <span class="show-for-sr"><%= t(".take_part") %></span>
                     <span aria-hidden="true"><%= t(".take_part") %></span>
                     <span class="button__info"><%= t(".current_phase", phase: translated_attribute(current_phase)) %></span>

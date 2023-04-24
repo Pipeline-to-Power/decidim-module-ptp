@@ -6,10 +6,6 @@
       <%= t(".add") %>
     </button>
   </div>
-<% else %>
-  <div id="project-<%= project.id %>-budget-button"
-       class="<%= "added" if voted_for?(project) %> button expanded hollow primary button--sc budget-vote-button budget-list__data"
-       aria-label="<%= t(".#{voted_for?(project) ? ".added" : ".add"}_descriptive", resource_name: translated_attribute(project.title)) %>">
-    <%= cell("decidim/budgets/project_vote_button", project) %>
-  </div>
+<% elsif can_have_order? && !current_order_checked_out? %>
+  <%= cell("decidim/budgets/project_vote_button", project, scale_up: true) %>
 <% end %>

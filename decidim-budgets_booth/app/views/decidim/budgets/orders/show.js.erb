@@ -1,0 +1,14 @@
+var modalId = "budget_order_<%= budget.id %>";
+var modalWrapper = document.getElementById(modalId);
+
+if (!modalWrapper) {
+  modalWrapper = document.createElement("div");
+  modalWrapper.id = modalId;
+  document.body.appendChild(modalWrapper);
+}
+
+modalWrapper.innerHTML = '<%= j(render partial: "decidim/budgets/orders/modal", locals: { budget: budget, projects: current_order.projects }).strip.html_safe %>'
+
+var $reveal = $(".reveal", modalWrapper);
+$(modalWrapper).foundation();
+$reveal.foundation("open");

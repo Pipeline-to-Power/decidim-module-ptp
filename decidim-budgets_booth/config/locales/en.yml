@@ -41,6 +41,12 @@ en:
         current_phase: "Current phase: %{phase}"
         more_info: More info
         show_my_vote: Show my vote
+      orders:
+        modal:
+          close: Close window
+          description: These are the projects you have chosen to be part of the budget.
+          ok: OK
+          title: Your vote in %{budget_title}
       projects:
         budget_summary:
           cancel_voting: Cancel voting
@@ -71,11 +77,11 @@ en:
             start_voting: Start voting
             introduction: Want to vote this project?
       project_vote_button:
-        removee_From_votes: Remove from votes
-        add_to_votes: Add to your vote
+        remove_from_vote: Remove from vote
+        add_to_vote: Add to your vote
       project_list_item:
         read_more: Read more
-        ordered_item: This item is added to the your votes.
+        ordered_item: This item is added to the your vote.
       user_data:
         new:
           cancel: Cancel
