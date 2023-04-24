@@ -3,7 +3,7 @@
 module Decidim
   module Smsauth
     module Verification
-      class DestroyAuthorization < Rectify::Command
+      class DestroyAuthorization < Decidim::Command
         # Public: Initializes the command.
         #
         # authorization - An Authorization object.

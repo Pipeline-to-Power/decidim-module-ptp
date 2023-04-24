@@ -11,10 +11,9 @@
 .rspec-failures
 
 # default test application
-spec/*decidim_dummy_app
+spec/decidim_dummy_app
 
 # default development application
-development_app
 *development_app
 
 # env vars
@@ -22,4 +21,6 @@ development_app
 .rbenv-vars
 node_modules
 
-# Decidim versions
+# Asset compilation
+public/sw.js
+public/sw.js.map

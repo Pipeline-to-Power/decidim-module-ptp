@@ -8,153 +8,84 @@ module Decidim
       routes { Decidim::Budgets::Engine.routes }
 
       let(:user) { create(:user, :confirmed, organization: component.organization) }
-      let(:params) { { budget_id: budget.id } }
+      let(:component) do
+        create(
+          :budgets_component,
+          settings: { workflow: "zip_code" }
+        )
+      end
+      let(:vote) { "enabled" }
+      let(:current_settings) { double(:current_settings, votes: vote) }
+      let!(:budgets) { create_list(:budget, 3, component: component, total_budget: 100_000_000) }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
+      let(:projects) { create_list(:project, 3, budget: budgets.first, budget_amount: 45_000_000) }
+      let(:current_workflow) { double(:current_workflow, voting_booth_forced?: zip_code?) }
+      let(:zip_code?) { true }
 
       before do
         request.env["decidim.current_organization"] = component.organization
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
+        allow(controller).to receive(:current_settings).and_return(current_settings)
+        allow(controller).to receive(:current_workflow).and_return(current_workflow)
       end
 
       describe "#index" do
-        let(:component) { create(:budgets_component) }
-        let!(:project) { create(:project, budget: budget, component: component, budget_amount: 70_000) }
-        let(:budget) { create(:budget, component: component, total_budget: 100_000) }
+        context "when not zip code workflow" do
+          let!(:zip_code?) { false }
 
-        context "with not logged in" do
-          it "redirects unauthorized" do
-            get :index, params: params
-            expect(flash[:alert]).to be_present
+          before do
+            component.update(settings: { workflow: "foo" })
+          end
+
+          it "redirects user" do
+            get :index, params: { budget_id: budgets.last.id }
+            expect(response).to redirect_to("/")
+            expect(flash[:warning]).to have_content("You are not allowed to perform this action.")
+          end
+        end
+
+        context "when voting is not open" do
+          let!(:vote) { "foo" }
+
+          it "redirects the user with proper message" do
+            get :index, params: { budget_id: budgets.last.id }
+            expect(response).to redirect_to(decidim_budgets.budget_projects_path(budgets.last))
+            expect(flash[:warning]).to have_content("Voting is not allowed.")
+          end
+        end
+
+        context "when not singed in" do
+          it "redirects to the sign in page" do
+            get :index, params: { budget_id: budgets.last.id }
             expect(response).to redirect_to("/users/sign_in")
           end
         end
 
-        context "with permission not exist" do
+        context "when voted that budget" do
+          let!(:order) { create(:order, :with_projects, user: user, budget: budgets.last) }
+
           before do
+            order.update!(checked_out_at: Time.current)
             sign_in user, scope: :user
           end
 
-          it "renders the voting page" do
-            get :index, params: params
-            expect(flash[:alert]).to be_nil
-            expect(response.status).to eq(200)
+          it "redirects the user" do
+            get :index, params: { budget_id: budgets.last.id }
+            expect(response).to redirect_to(decidim_budgets.budgets_path)
+            expect(flash[:warning]).to have_content("You are not allowed to perform this action.")
           end
         end
 
-        context "when permission exits" do
-          let(:action) do
-            { scope: :user, action: :vote, subject: project }
-          end
-          let!(:permission_action) { Decidim::PermissionAction.new(action) }
-
+        context "when all before actions checked" do
           before do
+            allow(controller).to receive(:enforce_permission_to).and_return(true)
             sign_in user, scope: :user
           end
 
-          context "when not voted yet" do
-            it "permits the user" do
-              get :index, params: params
-              expect(flash[:alert]).to be_nil
-              expect(subject).to render_template(layout: "decidim/budgets/voting_layout")
-              expect(subject).to render_template(:index)
-            end
-          end
-
-          context "when already voted" do
-            let(:projects) do
-              build_list(:project, 2, budget_amount: 35_000, budget: budget)
-            end
-            let!(:order) do
-              order = create(:order,
-                             user: user,
-                             budget: budget)
-              order.projects << projects
-              order.checked_out_at = Time.current
-              order.save!
-            end
-
-            it "redirects the user to projects" do
-              get :index, params: params
-              expect(flash[:alert]).to be_nil
-              expect(subject).to redirect_to(decidim_budgets.confirm_budget_voting_index_path(budget))
-            end
-          end
-        end
-
-        context "when authorization is required" do
-          let(:permissions) do
-            {
-              vote: {
-                authorization_handlers: {
-                  "dummy_authorization_handler" => {}
-                }
-              }
-            }
-          end
-          let(:available_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler) }
-          let(:voting_url) { decidim_budgets.budget_voting_index_path(budget) }
-          let(:authorization_url) { "/authorizations/new?handler=dummy_authorization_handler&redirect_url=#{CGI.escape(voting_url)}" }
-
-          before do
-            component.organization.update!(available_authorizations: available_authorizations)
-            component.update!(permissions: permissions)
-            sign_in user, scope: :user
-          end
-
-          context "when the user is authorized with the configured authorization" do
-            let!(:authorization) { create(:authorization, :granted, user: user, name: "dummy_authorization_handler", unique_id: "123456789X") }
-
-            it "lets the user to vote" do
-              get :index, params: params
-              expect(subject).to render_template(layout: "decidim/budgets/voting_layout")
-              expect(subject).to render_template(:index)
-            end
-
-            context "and the authorization is not granted" do
-              let!(:authorization) { create(:authorization, :pending, user: user, name: "dummy_authorization_handler", unique_id: "123456789X") }
-
-              it "redirects the user to authorize themselves" do
-                get :index, params: params
-                expect(subject).to redirect_to authorization_url
-              end
-            end
-          end
-
-          context "when the user is authorized with unallowed authorization" do
-            let!(:authorization) { create(:authorization, :granted, metadata: { postal_code: "123456" }, name: "another_dummy_authorization_handler") }
-
-            it "redirects the user to authorize themselves" do
-              get :index, params: params
-              expect(subject).to redirect_to authorization_url
-            end
-          end
-
-          context "when the user is not authorized" do
-            it "redirects the user to authorize themselves" do
-              get :index, params: params
-              expect(subject).to redirect_to authorization_url
-            end
-          end
-
-          context "when there are multiple authorizations configured" do
-            let(:permissions) do
-              {
-                vote: {
-                  authorization_handlers: {
-                    "dummy_authorization_handler" => {},
-                    "another_dummy_authorization_handler" => {}
-                  }
-                }
-              }
-            end
-
-            context "when the user is not authorized" do
-              it "renders the authorization options page" do
-                get :index, params: params
-                expect(subject).to render_template(:auth_methods)
-              end
-            end
+          it "renders the voting booth" do
+            get :index, params: { budget_id: budgets.last.id }
+            expect(response).to render_template(:index, layout: "decidim/budgets/voting_layout")
           end
         end
       end

@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-l10n", Decidim::Ptp.version
   s.add_dependency "decidim-smsauth", Decidim::Ptp.version
   s.add_dependency "decidim-sms-twilio", Decidim::Ptp.version
+  s.metadata["rubygems_mfa_required"] = "true"
 end

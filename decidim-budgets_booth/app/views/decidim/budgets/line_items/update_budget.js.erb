@@ -2,12 +2,13 @@ var $orderTotalBudget = $('#order-total-budget');
 var $orderSelectedProjects = $('#order-selected-projects');
 var $orderProgress = $('#order-progress');
 var $projectItem = $('#project-<%= project.id %>-item');
-
+var $budgetConfirm = $('#budget-confirm');
 var $projectModal = $('#project-modal-<%= project.id %>');
 
 morphdom($orderTotalBudget[0], '<%= j(render partial: "decidim/budgets/projects/order_total_budget").strip.html_safe %>');
 morphdom($orderSelectedProjects[0], '<%= j(render partial: "decidim/budgets/projects/order_selected_projects").strip.html_safe %>');
 morphdom($orderProgress[0], '<%= j(render partial: "decidim/budgets/projects/order_progress").strip.html_safe %>');
+morphdom($budgetConfirm[0], '<%= j(render partial: "decidim/budgets/projects/budget_confirm").strip.html_safe %>')
 
 $("#order-progress").foundation();
 $(".budget-summary__selected").foundation();
@@ -25,9 +26,5 @@ if ($projectModal.length > 0 && $projectModal.attr("aria-hidden") === "false") {
 } else {
   $(".project-vote-button", $projectItem).focus();
 }
-
-<% if @show_help_modal %>
-  $("#voting-help").foundation("open");
-<% end %>
 
 window.DecidimBudgets.checkProgressPosition();

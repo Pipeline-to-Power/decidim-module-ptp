@@ -1,0 +1,39 @@
+<% if voting_booth_forced? %>
+  <% if budgets.none? %>
+  <div class="section">
+    <div class="callout warning font-customizer">
+      <%= t(".no_budgets_found") %>
+    </h2>
+  </div>
+  <% end %>
+
+  <div id="budgets">
+    <% if budgets.any? %>
+      <% budgets.each do |budget| %>
+        <% next if hide_unvoted?(budget) %>
+        <div class="card card--list budget-list">
+          <%= cell("decidim/budgets/budget_list_item", budget) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <%# show highlighted budgets first %>
+  <% if highlighted.any? %>
+    <div id="highlighted-budgets" class="card card--list budget-list">
+      <% highlighted.each do |budget| %>
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% non_highlighted = (budgets - highlighted - voted) %>
+
+  <% if non_highlighted.any? %>
+    <div id="budgets" class="card card--list budget-list">
+      <% non_highlighted.each do |budget| %>
+        <%= cell("decidim/budgets/budget_list_item", budget) %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

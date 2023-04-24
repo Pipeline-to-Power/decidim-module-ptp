@@ -3,7 +3,7 @@
 module Decidim
   module Smsauth
     # A command with all the business to add new line items to orders
-    class VerifyMobilePhone < Rectify::Command
+    class VerifyMobilePhone < Decidim::Command
       def initialize(form, data)
         @form = form
         @data = data.presence.transform_keys(&:to_sym) || {}

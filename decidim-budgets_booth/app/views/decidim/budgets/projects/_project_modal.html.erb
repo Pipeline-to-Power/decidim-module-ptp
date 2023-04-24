@@ -17,7 +17,7 @@
   </div>
   <div class="row attachments">
     <div class="large-12">
-      <%= render partial: "decidim/application/photos.html", locals: { photos: project.photos } %>
+      <%= render partial: "decidim/application/photos", locals: { photos: project.photos }, formats: [:html] %>
     </div>
   </div>
   <%= cell("decidim/budgets/project_vote_button", project, scale_up: true) %>

@@ -2,7 +2,7 @@
 
 module Decidim
   module Smsauth
-    class RegisterByPhone < Rectify::Command
+    class RegisterByPhone < Decidim::Command
       include Decidim::Sms::Twilio::TokenGenerator
 
       def initialize(form)
@@ -38,7 +38,6 @@ module Decidim
           record.tos_agreement = "1"
           record.organization = form.organization
           record.newsletter_notifications_at = form.newsletter_at
-          record.email_on_notification = record.email.present?
           record.accepted_tos_version = form.organization.tos_version
           record.locale = form.current_locale
         end

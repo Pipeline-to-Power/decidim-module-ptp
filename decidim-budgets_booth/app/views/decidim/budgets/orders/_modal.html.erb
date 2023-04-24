@@ -1,0 +1,26 @@
+<div class="reveal" data-reveal id="budget-votes-<%= budget.id %>">
+  <% if projects.present? %>
+    <div class="reveal__header">
+      <h3 class="reveal__title"><%= t(".title", budget_title: translated_attribute(budget.title)) %></h3>
+      <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <p><%= t(".description") %></p>
+    <div class="card card--secondary">
+      <ul class="card__content">
+        <% projects.each do |project| %>
+          <li class="budget-summary__selected-item">
+            <%= translated_attribute(project.title) %>
+            <strong class="budget-summary__selected-number">
+              <%= budget_to_currency project.budget_amount %>
+            </strong>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="text-center">
+      <button class="button primary expanded" data-close><%= t(".ok") %></button>
+    </div>
+  <% end %>
+</div>

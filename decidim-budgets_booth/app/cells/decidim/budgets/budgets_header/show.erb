@@ -1,0 +1,44 @@
+<% if voting_open? && voting_booth_forced? %>
+  <% unless voted_all_budgets? %>
+    <div class="row margin-top-2">
+      <div class="columns medium-8 large-9">
+        <%= button_to cancel_redirect_path, class: "link margin-bottom-3", method: :get, data: {
+            confirm: t("actions.cancel_voting", scope: "decidim.budgets.budgets")
+          } do %>
+            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+            <%= t("cancel_voting", scope: "decidim.budgets.budgets.index") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="columns medium-7 mediumlarge-8">
+      <div class="section">
+        <h2 class="section-heading">
+          <%= t(".title") %>
+        </h2>
+        <p>
+          <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user))%>
+          <% if !voted_any? %>
+            <em class="margin-left-1"><%= t(".not_right_one", link: link_to(t(".change_it_here"), new_zip_code_path)) %></em>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="columns medium-5 mediumlarge-4">
+      <% if !voted_any? && landing_page_content.present? %>
+        <div class="callout warning font-customizer">
+          <%= decidim_sanitize_editor(landing_page_content) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="columns medium-7 mediumlarge-8">
+      <div class="section">
+        <%= decidim_sanitize_editor(landing_page_content) %>
+      </div>
+    </div>
+  </div>
+<% end %>

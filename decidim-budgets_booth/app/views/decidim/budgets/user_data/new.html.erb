@@ -1,0 +1,67 @@
+<div class="row collapse">
+  <div class="columns large-8 large-centered text-center page-title">
+    <h1>
+    <h1><%= t(".welcome", organization: current_organization.name).html_safe %></h1>
+  </div>
+</div>
+
+<div class="columns large-4 mediumlarge-6 medium-8 medium-offset-2 medium-centered">
+  <div class="row">
+
+    <%= button_to cancel_redirect_path, class: "link margin-bottom-1", method: :get, data: {
+        confirm: t("actions.cancel_zip_code", scope: "decidim.budgets.budgets")
+      } do %>
+        <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+        <%= t("cancel", scope:"decidim.budgets.user_data.new") %>
+    <% end %>
+  </div>
+  <div class="card">
+    <div class="card__content">
+      <div class="row text-center">
+        <h2><%= t(".title") %></h2>
+        <p><%= t(".description") %></p>
+        <%= decidim_form_for(@form, url: zip_code_index_path, method: :post) do |form| %>
+          <div class="field">
+            <div class="row">
+              <div class="booth-zipcode maximum-width columns small-centered medium-11 mediumlarge-12 margin-bottom-2">
+                <div id="zip-code" class="flex-digits">
+                  <% zip_code_length.times do  |ind| %>
+                    <div class="flex-digits-input">
+                      <input type="text" name="<%= "digit#{ind + 1}"%>" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
+                    </div>
+                  <% end %>
+                  </div>
+                  <div class="zip-code x-margin">
+                    <span class="form-error text-left is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
+                    <span class="form-error text-left  is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
+                    <span class="form-error text-left  is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
+                  </div>
+                  <%= form.hidden_field :zip_code, vlaue: @form.zip_code %>
+                </div>
+              </div>
+            </div>
+          <% if voting_terms.present? %>
+            <div class="card">
+              <div class="card__content">
+                <div class="row medium-7 large-10 medium-centered text-left">
+                  <%= raw(voting_terms) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="row column text-left margin-bottom-3">
+            <%= form.check_box :affirm_statements_are_correct, label: t(".affirm_statements"), required: true %>
+            <small data-abide-error class="form-error" id="affirm-checkbox" role="alert" data-accessibility-violation="true"><%= t(".must_be_accepted") %></small>
+          </div>
+          <div class="row">
+            <div class="columns large-centered">
+              <%= form.submit t(".submit"), class:"button expanded" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "decidim_zip_code" %>

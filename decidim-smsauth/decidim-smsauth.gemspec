@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "countries", "~> 5.1", ">= 5.1.2"
   s.add_dependency "decidim-core", Decidim::Smsauth.decidim_version
+  s.metadata["rubygems_mfa_required"] = "true"
 end

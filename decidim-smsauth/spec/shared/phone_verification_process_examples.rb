@@ -19,7 +19,7 @@ RSpec.shared_examples "phone verification process" do
       within_flash_messages do
         expect(page).to have_content("Please wait at least 1 minute to resend the code.")
       end
-      allow(Time).to receive(:current).and_return(Time.current + 2.minutes)
+      allow(Time).to receive(:current).and_return(2.minutes.from_now)
       click_link("Resend code")
       expect(page).to have_content(/Verification code resent to/)
       fill_in "Verification code", with: "000000"

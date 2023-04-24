@@ -168,7 +168,10 @@ module Decidim
 
       def authorize_user!(user)
         authorization = find_authorization(user)
-        raise Authorization::AuthorizationBoundToOtherUserError if authorization.user != user
+        if authorization.user != user
+          # The authorization method will recover from this error
+          raise Authorization::AuthorizationBoundToOtherUserError
+        end
 
         authorization.metadata = { phone_number: user.phone_number, phone_country: user.phone_country } if authorization.metadata.blank?
         authorization.unique_id = unique_id(user)
@@ -199,16 +202,16 @@ module Decidim
 
       def generate_sessions!(result)
         session[:authentication_attempt] = {
-          "verification_code": result,
-          "sent_at": Time.current,
-          "country": @form.phone_country,
-          "phone": @form.phone_number,
-          "verified": false
+          verification_code: result,
+          sent_at: Time.current,
+          country: @form.phone_country,
+          phone: @form.phone_number,
+          verified: false
         }
       end
 
       def update_sessions!(result)
-        auth_session.merge!("verification_code": result, "sent_at": Time.current)
+        auth_session.merge!(verification_code: result, sent_at: Time.current)
       end
 
       def auth_session

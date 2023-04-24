@@ -5,17 +5,13 @@ module Decidim
     # Customizes the project card cell
     module ProjectListItemExtensions
       extend ActiveSupport::Concern
+      delegate :current_workflow, to: :controller
 
       included do
-        def voting?
-          options[:voting]
-        end
-
         def resource_text
-          raw = translated_attribute(model.description)
-          return raw if raw.length < 65
+          return translated_attribute(model.description) if show_full_description? && voting_open?
 
-          "#{raw[0..trimmer]} ...<br/>"
+          decidim_sanitize_editor html_truncate(translated_attribute(model.description), length: 65, separator: "...")
         end
 
         def selected_budget
@@ -26,8 +22,8 @@ module Decidim
 
         private
 
-        def trimmer
-          65
+        def show_full_description?
+          current_component.settings.show_full_description_on_listing_page == true
         end
       end
     end

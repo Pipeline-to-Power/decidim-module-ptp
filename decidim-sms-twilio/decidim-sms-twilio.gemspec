@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "decidim-core", Decidim::Sms::Twilio.decidim_version
   s.add_dependency "twilio-ruby", "~> 5.72.0"
+  s.metadata["rubygems_mfa_required"] = "true"
 end

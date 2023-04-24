@@ -4,7 +4,7 @@ on: [push, pull_request]
 env:
   CI: "true"
   CODECOV: "true"
-  DECIDIM_MODULE: decidim-sms-twilio
+  DECIDIM_MODULE: decidim-budgets_booth
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}

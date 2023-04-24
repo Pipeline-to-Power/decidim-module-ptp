@@ -1,38 +1,88 @@
-<div class="<%= card_class %> budget-list__item budget-list__item-cell">
-  <div class="budget-list__text flex-horizontal">
-    <%= link_to budget_path(budget), class: link_class do %>
-      <h3 class="card--title">
-        <%= translated_attribute(title) %>
-      </h3>
-    <% end %>
+<% if voting_booth_forced? %>
+  <div class="card card--full card--process">
+    <div class="row collapse card--process__row">
+      <div class="columns mediumlarge-8 large-6 card--process__column">
+        <div class="card__content">
+        <% if voting_open? && voted_this?(budget) %>
+          <h3 class="card--title">
+            <%= translated_attribute(budget.title) %>
+          </h3>
+        <% else %>
+          <%= link_to_budget budget, class: link_class do %>
+            <h3 class="card--title">
+                <%= translated_attribute(budget.title) %>
+            </h3>
+          <% end %>
+        <% end%>
 
-    <div class="heading5">
-      <strong>
-        <%= budget_to_currency(total_budget) %>
-      </strong>
+          <div class="heading5 margin-bottom-3">
+            <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
+          </div>
+
+          <%= link_to_budget budget, class: "button small hollow show_votes" do %>
+            <span class="text-wrap">
+              <%= generate_text_for(budget)%>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <div class="columns mediumlarge-8 large-6 card--process__column">
+        <div class="card--full__image<%= mark_image_as_voted(budget) %>" style="background-image:url('<%= budget.attached_uploader(:main_image).path %>')">
+          <% if voting_open? %>
+            <div class="card__content row collapse">
+              <div class="large-6 large-offset-6 columns">
+
+                <% if !voted_this?(budget) %>
+                  <%= link_to_budget budget, class: "button expanded button--sc" do %>
+                    <span class="show-for-sr"><%= t(".take_part") %></span>
+                    <span aria-hidden="true"><%= t(".take_part") %></span>
+                    <span class="button__info"><%= t(".current_phase", phase: translated_attribute(current_phase)) %></span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="<%= card_class %> budget-list__item budget-list__item-cell">
+    <div class="budget-list__text flex-horizontal">
+      <%= link_to budget_path(budget), class: link_class do %>
+        <h3 class="card--list__heading">
+          <%= translated_attribute(title) %>
+        </h3>
+      <% end %>
+
+      <div class="heading5">
+        <strong>
+          <%= budget_to_currency(total_budget) %>
+        </strong>
+      </div>
+
+      <%= decidim_sanitize_editor translated_attribute(description) %>
     </div>
 
-    <%= decidim_sanitize html_truncate(translated_attribute(description), length: 140) %>
-  </div>
+    <% if !voting_finished? %>
+      <div class="budget-list__icon mr-s">
+        <% if voted? %>
+          <span class="button tiny success card--list__check card--list__check--disabled card--list__check--inline">
+            <%= icon "check", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_finished") %>
+          </span>
+        <% elsif progress? %>
+          <span class="button tiny warning card--list__check card--list__check--disabled card--list__check--inline">
+            <%= icon "bookmark", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_started") %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
 
-  <% if !voting_finished? %>
-    <div class="budget-list__icon mr-s">
-      <% if voted? %>
-        <span class="button tiny success card--list__check card--list__check--disabled card--list__check--inline">
-          <%= icon "check", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_finished") %>
-        </span>
-      <% elsif progress? %>
-        <span class="button tiny warning card--list__check card--list__check--disabled card--list__check--inline">
-          <%= icon "bookmark", class: "icon--small", role: "img", aria_label: t("decidim.budgets.budget_list_item.voting_started") %>
-        </span>
+    <div class="budget-list__data">
+      <%= link_to budget_path(budget), class: "button button--sc expanded #{button_class} mb-none" do %>
+        <span><%= button_text %></span>
+        <%= icon "chevron-right", class: "icon--small", role: "img" %>
       <% end %>
     </div>
-  <% end %>
-
-  <div class="budget-list__data">
-    <%= link_to budget_path(budget), class: "button button--sc expanded #{button_class} mb-none" do %>
-      <span><%= button_text %></span>
-      <%= icon "chevron-right", class: "icon--small", role: "img" %>
-    <% end %>
   </div>
-</div>
+<% end %>

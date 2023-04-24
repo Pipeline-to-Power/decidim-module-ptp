@@ -2,29 +2,15 @@
 
 <%= cell("decidim/budgets/limit_announcement", budget) %>
 
-<div class="voting-wrapper margin-top-3">
+<div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns">
-    <% if budgets_accessible? %>
-      <div class="row">
-        <div class="columns medium-8 large-9">
-          <%= button_to budgets_path, class: "link m-bottom", method: :get do %>
-              <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-              <%= t".back_to_budgets" %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
     <% if voting_finished? %>
       <h2 class="heading2">
         <%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
       </h2>
     <% else %>
-      <% if voting_mode? %>
-        <%= render partial: "budget_summary", locals: { include_heading: true } %>
-        <%= render partial: "cancel_voting_modal" %>
-      <% else %>
-        <%= render partial: "pre_voting_budget_summary", locals: { include_heading: true } %>
-      <% end %>
+      <%= render partial: "budget_summary", locals: { include_heading: true } %>
+      <%= render partial: "cancel_voting_modal" %>
     <% end %>
   </div>
 
@@ -46,8 +32,5 @@
     </div>
   </div>
 </div>
-<%= render partial: "decidim/budgets/voting/thanks_message_modal" %>
-<% handle_thanks_popup %>
-<%= render partial: "decidim/budgets/partials/voting_help_modal" %>
 
 <%= javascript_pack_tag("decidim_budgets_booth_voting") %>

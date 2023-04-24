@@ -29,8 +29,7 @@ module Decidim
             on(:ok) do
               update_attempt_session
               flash[:notice] = t("authorizations.create.success", scope: "decidim.verifications.sms")
-              authorization_method = Decidim::Verifications::Adapter.from_element(authorization.name)
-              redirect_to authorization_method.resume_authorization_path(redirect_url: redirect_url)
+              redirect_to redirect_smsauth
             end
             on(:invalid) do
               flash.now[:alert] = t("authorizations.create.error", scope: "decidim.verifications.sms")
@@ -138,8 +137,13 @@ module Decidim
           return true if expired?
 
           flash[:error] = I18n.t(".not_allowed", scope: "decidim.smsauth.omniauth.send_message")
-          redirect_to action: :edit
+          redirect_to redirect_smsauth
           false
+        end
+
+        def redirect_smsauth
+          authorization_method = Decidim::Verifications::Adapter.from_element(authorization.name)
+          authorization_method.resume_authorization_path(redirect_url: redirect_url)
         end
       end
     end
