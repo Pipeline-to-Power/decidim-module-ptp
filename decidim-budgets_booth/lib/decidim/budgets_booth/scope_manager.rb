@@ -13,9 +13,18 @@ module Decidim
           scopes_mapping_cache[scope.id] ||= generate_scopes_mapping_for(scope)
         end
 
+        def user_data_for(component, user)
+          user_scopes_cache[component.id] ||= {}
+          user_scopes_cache[component.id][user.id] ||= begin
+            user_data = user.budgets_user_data.find_by(component: component)
+            user_data&.metadata || {}
+          end
+        end
+
         # Allow clearing the cache, useful for the specs.
         def clear_cache!
           @scopes_mapping_cache = {}
+          @user_scopes_cache = {}
         end
 
         private
@@ -23,6 +32,10 @@ module Decidim
         # Stores the local cache of the scopes mappings.
         def scopes_mapping_cache
           @scopes_mapping_cache ||= {}
+        end
+
+        def user_scopes_cache
+          @user_scopes_cache ||= {}
         end
 
         # Generates the scopes mapping for the given top-level scope.
@@ -110,8 +123,7 @@ module Decidim
       def user_zip_code(user)
         return nil if user.blank?
 
-        user_data = user.budgets_user_data.find_by(component: component)
-        user_data&.metadata&.[]("zip_code")
+        self.class.user_data_for(component, user)["zip_code"]
       end
 
       private
