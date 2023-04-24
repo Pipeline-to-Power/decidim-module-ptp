@@ -6,7 +6,7 @@ module Decidim
       include FormFactory
       include ::Decidim::BudgetsBooth::BudgetsHelper
 
-      delegate :zip_codes, :user_zip_code, to: :scope_manager
+      delegate :zip_codes_for, :user_zip_code, to: :scope_manager
 
       layout "decidim/budgets/voting_layout"
       before_action :ensure_voting_booth_forced
@@ -16,7 +16,7 @@ module Decidim
 
       def new
         @form = form(UserDataForm).instance
-        @form.zip_code = user_zip_code(current_user, current_component)
+        @form.zip_code = user_zip_code(current_user)
       end
 
       def create
@@ -39,18 +39,14 @@ module Decidim
       private
 
       def ensure_voting_open
-        return true if voting_open?
+        return if voting_open?
 
         flash[:warning] = t("voting_ended", scope: "decidim.budgets.user_data.new")
         redirect_to decidim.root_path
       end
 
       def all_zip_codes
-        [].tap do |zip_code|
-          budgets.each do |budget|
-            zip_code << zip_codes(budget)
-          end
-        end.flatten.uniq
+        @all_zip_codes ||= zip_codes_for(current_component)
       end
 
       def budgets
@@ -58,7 +54,7 @@ module Decidim
       end
 
       def scope_manager
-        @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+        @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
       end
 
       def invalidate_form

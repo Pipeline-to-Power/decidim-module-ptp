@@ -40,7 +40,7 @@ module Decidim
         private
 
         def scope_manager
-          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
         end
 
         def budget_scope_type(budget)

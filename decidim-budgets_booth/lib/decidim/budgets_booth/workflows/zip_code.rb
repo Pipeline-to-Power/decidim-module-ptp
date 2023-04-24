@@ -5,7 +5,8 @@ module Decidim
     module Workflows
       # This is the zip_code Workflow class.
       class ZipCode < ::Decidim::Budgets::Workflows::Base
-        delegate :zip_codes, :user_zip_code, to: :scope_manager
+        delegate :zip_codes_for, :user_zip_code, to: :scope_manager
+
         # No budget is highlighted for this workflow
         def highlighted?(_resource)
           false
@@ -14,10 +15,10 @@ module Decidim
         # User can vote in the resource inside their area where they live. This is being determined
         # by their zip code.
         def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument
-          user_zip_code = user_zip_code(user, budgets_component)
+          user_zip_code = user_zip_code(user)
           return false if user_zip_code.blank?
 
-          zip_codes(resource).include?(user_zip_code)
+          zip_codes_for(resource).include?(user_zip_code)
         end
 
         def budgets
@@ -31,7 +32,7 @@ module Decidim
         private
 
         def scope_manager
-          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new
+          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(budgets_component)
         end
 
         def projects(budget)

@@ -18,7 +18,7 @@
           <%= t(".title") %>
         </h2>
         <p>
-          <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user, current_component))%>
+          <%= t(".based_on_zip_code", zip_code: user_zip_code(current_user))%>
           <% if !voted_any? %>
             <em class="margin-left-1"><%= t(".not_right_one", link: link_to(t(".change_it_here"), new_zip_code_path)) %></em>
           <% end %>
