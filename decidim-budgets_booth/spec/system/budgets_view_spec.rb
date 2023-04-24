@@ -146,6 +146,7 @@ describe "Budgets view", type: :system do
             let!(:extra_project) { create(:project, budget: extra_budget, budget_amount: 75_000) }
 
             before do
+              Decidim::BudgetsBooth::ScopeManager.clear_cache!
               component.update(settings: component_settings.merge(workflow: "zip_code", vote_threshold_percent: 0))
             end
 
