@@ -137,7 +137,6 @@ describe "user data workflow", type: :system do
         let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "10004" }) }
 
         before do
-          Decidim::BudgetsBooth::ScopeManager.clear_cache!
           visit decidim_budgets.new_zip_code_path
         end
 
