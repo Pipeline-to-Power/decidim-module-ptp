@@ -65,7 +65,6 @@ module Decidim
           Decidim::Budgets::BudgetsHeaderCell.include(
             Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
           )
-
           Decidim::Budgets::BudgetsListCell.include(
             Decidim::BudgetsBooth::BudgetsHelper
           )
@@ -77,7 +76,6 @@ module Decidim
           )
 
           # Controllers extensions
-
           Decidim::Budgets::OrdersController.include(
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )
@@ -91,7 +89,6 @@ module Decidim
           )
 
           # Commands extensions
-
           Decidim::Budgets::Admin::CreateBudget.include(
             Decidim::BudgetsBooth::CreateBudgetExtensions
           )
@@ -104,13 +101,14 @@ module Decidim
           Decidim::Budgets::Budget.include(
             Decidim::BudgetsBooth::BudgetExtensions
           )
-
           Decidim::User.include(
             Decidim::BudgetsBooth::UserExtensions
           )
-
           Decidim::Component.include(
             Decidim::BudgetsBooth::ComponentExtensions
+          )
+          Decidim::Scope.include(
+            Decidim::BudgetsBooth::ScopeManageable
           )
 
           # Forms extensions

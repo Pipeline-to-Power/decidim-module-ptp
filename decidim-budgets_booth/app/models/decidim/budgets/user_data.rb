@@ -4,6 +4,7 @@ module Decidim
   module Budgets
     class UserData < ApplicationRecord
       include Decidim::RecordEncryptor
+      include Decidim::BudgetsBooth::ScopeManageable
 
       encrypt_attribute :metadata, type: :hash
       belongs_to :component, foreign_key: "decidim_component_id", class_name: "Decidim::Component"
