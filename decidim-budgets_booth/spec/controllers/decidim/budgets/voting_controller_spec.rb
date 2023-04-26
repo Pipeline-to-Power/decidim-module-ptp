@@ -31,20 +31,6 @@ module Decidim
       end
 
       describe "#index" do
-        context "when not zip code workflow" do
-          let!(:zip_code?) { false }
-
-          before do
-            component.update(settings: { workflow: "foo" })
-          end
-
-          it "redirects user" do
-            get :index, params: { budget_id: budgets.last.id }
-            expect(response).to redirect_to("/")
-            expect(flash[:warning]).to have_content("You are not allowed to perform this action.")
-          end
-        end
-
         context "when voting is not open" do
           let!(:vote) { "foo" }
 

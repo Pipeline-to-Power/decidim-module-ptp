@@ -7,7 +7,7 @@
     </div>
   <% else %>
     <div class="text-center">
-      <%= render :selected_button_tag  if resource_added? %>
+      <%= render :selected_button_tag  if resource_added? && current_order_checked_out? %>
     </div>
     <div class="text-center">
         <span class="budget-list__data__number">

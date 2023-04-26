@@ -10,7 +10,7 @@
     <% checkedout = local_assigns.fetch(:checkout?, false) %>
     <% if !current_order_checked_out? && voting_open? %>
       <button class="button small button--sc" data-toggle="budget-confirm" <%= budget_confirm_disabled_attr %>>
-        <%= t(".vote") %>
+        <%= voting_booth_forced? ? t(".vote") : t(".ready") %>
       </button>
     <% end %>
   </div>
