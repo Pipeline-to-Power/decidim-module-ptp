@@ -1,6 +1,6 @@
 <%= render partial: "decidim/shared/component_announcement" %>
 
-<%= cell("decidim/budgets/limit_announcement", budget) %>
+<% cell("decidim/budgets/limit_announcement", budget) %>
 
 <div class="voting-wrapper <%="margin-top-3" if voting_booth_forced? %>">
   <div class="row columns">
@@ -9,7 +9,7 @@
         <%= t("decidim.budgets.projects.projects_for", name: translated_attribute(budget.title)) %>
       </h2>
     <% else %>
-      <%= render partial: "budget_summary", locals: { include_heading: true } %>
+      <%= render partial: "budget_summary" %>
       <%= render partial: "cancel_voting_modal" %>
     <% end %>
   </div>

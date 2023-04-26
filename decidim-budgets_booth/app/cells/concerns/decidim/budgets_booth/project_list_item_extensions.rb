@@ -20,6 +20,10 @@ module Decidim
           "hollow"
         end
 
+        def voting_mode?
+          options[:voting_mode]
+        end
+
         private
 
         def show_full_description?

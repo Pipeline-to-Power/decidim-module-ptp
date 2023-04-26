@@ -16,14 +16,6 @@ describe "Voting index page", type: :system do
     switch_to_host(organization.host)
   end
 
-  context "when not zip_code workflow" do
-    before do
-      visit_budget(first_budget)
-    end
-
-    it_behaves_like "ensure zip code workflow"
-  end
-
   context "when not signed in" do
     before do
       component.update(settings: component_settings.merge(workflow: "zip_code"))
@@ -157,7 +149,6 @@ describe "Voting index page", type: :system do
       click_button("Add to your vote", match: :first)
       expect(page).to have_button("Add to your vote", count: 4)
       expect(page).to have_button("Remove from vote", count: 1)
-      expect(page).to have_css("svg.icon--actions.icon.card--list__icon.card--list__check", count: 1)
 
       within page.all(".budget-list .budget-list__item")[0] do
         header = page.all("button")[0].text

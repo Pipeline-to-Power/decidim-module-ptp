@@ -12,6 +12,10 @@ module Decidim
           false
         end
 
+        def disable_voting_instructions?(_resource)
+          true
+        end
+
         # User can vote in the resource inside their area where they live. This is being determined
         # by their zip code.
         def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument

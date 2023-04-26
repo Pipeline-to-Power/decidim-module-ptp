@@ -1,0 +1,24 @@
+<div class="card budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
+  <div class="card__content">
+    <% if current_order_checked_out? %>
+      <h2 class="heading3">
+        <%= t(".pre_vote.casted_title") %>
+      </h2>
+      <p>
+        <%= raw t(".pre_vote.casted_description", cancel_link: link_to(t(".cancel_order"), budget_order_path(return_to: "budget"), method: :delete, class: "cancel-order", data: { confirm: t(".are_you_sure") })) %>
+      </p>
+      <div class="align-right">
+        <%= link_to(t(".pre_vote.result_voted"), decidim_budgets.budget_order_path(budget), class: "button hollow button--sc pull-right", remote: true) %>
+      </div>
+    <% else %>
+      <h2 class="heading3">
+        <%= t(".pre_vote.title") %>
+      </h2>
+      <p>
+        <%= description_text %>
+        <%= button_to vote_text, budget_voting_index_path, class: "button hollow button--sc pull-right", method: :get, disabled: !voting_open? %>
+      </p>
+    <% end %>
+  </div>
+</div>
+<%= render partial: "decidim/budgets/voting/voted_summary_modal" if current_order_checked_out? %>
