@@ -3,98 +3,98 @@ fi:
   activemodel:
     attributes:
       sms_registration:
-        name: Your name
-        email: Your email (optional)
+        name: Nimesi
+        email: Sähköpostiosoitteesi (valinnainen)
       sms_sign_in:
-        phone_country: Phone country
-        phone_number: Phone number
+        phone_country: Puhelinnumeron maakoodi
+        phone_number: Puhelinnumero
       sms_verification:
-        verification: Verification code
+        verification: Vahvistuskoodi
       user:
-        mask_number: Your phone number
+        mask_number: Puhelinnumerosi
   decidim:
     authorization_handlers:
       smsauth_id:
-        explanation: Verify yourself using an SMS code.
+        explanation: Vahvista käyttäjätilisi tekstiviestillä.
         fields:
-          phone_country: Phone country
-          phone_number: Phone number
-        name: SMS
+          phone_country: Puhelinnumeron maakoodi
+          phone_number: Puhelinnumero
+        name: Tekstiviesti
     devise:
       sessions:
         new:
-          email: Sign in with Email
+          email: Kirjaudu sisään sähköpostilla
     smsauth:
       omniauth:
         authenticate_user:
-          error: Verification failed. Please try again.
-          signed_in: Signed in successfully.
-          success: Phone number successfully verified.
-          updated_phone_number: Phone number successfully updated.
-          unauthorized: You are not authorized to perform this action.
+          error: Vahvistaminen epäonnistui. Yritä uudestaan.
+          signed_in: Sisäänkirjautuminen onnistui.
+          success: Puhelinnumeron vahvistaminen onnistui.
+          updated_phone_number: Puhelinnumeron päivittäminen onnistui.
+          unauthorized: Tiliäsi ei ole vahvistettu tämän toiminnon suorittamiseen.
         development_hint:
-          verification_code: "The verificaiton code is: "
-          hint_notification: (This message only appears in development mode)
+          verification_code: "Vahvistuskoodisi on: "
+          hint_notification: (Tämä viesti näkyy vain kehitystilassa)
         edit:
-          title: Update your phone number
+          title: Päivitä puhelinnumerosi
         new:
-          another_method: Use another method to sign in
-          title: Sign in with SMS
+          another_method: Käytä toista tapaa kirjautuaksesi sisään
+          title: Kirjaudu sisään tekstiviestillä
         phone_form:
-          submit: Send code via SMS
+          submit: Lähetä koodi tekstiviestillä
         phone_instructions:
-          enter_phone_number: Enter your phone number
-          step_one: Step 1 of 2
-          type_in_phone: Type in your phone number below to get a verification code via SMS to your phone number.
+          enter_phone_number: Anna puhelinnumerosi
+          step_one: Vaihe 1/2
+          type_in_phone: Syötä puhelinnumerosi alapuolelle saadaksesi vahvistuskoodin tekstiviestillä.
         registration:
-          welcome_to_platform: Welcome to the platform!
-          provide_account_detail: Provide account details
-          detail_info: This is the first time you have logged in to this platform, so we kindly ask you to provide us few details about yourself. You can modify these details any time you want under your account settings.
-          required_fields: "*Required fields are marked with an asterisk"
-          tos_title: Terms of service
-          tos_agreement: I agree to the %{link}
-          terms: Terms of Service
-          submit: Complete your account
-          newsletter_title: Contact permission
-          newsletter: Receive occasional newsletters with relevant information
-          error: An error occured, please try again
-          success: You have successfully registered and authorized
-          email_help: Providing your email address makes it easier to sign in to your account later using your email and password.
+          welcome_to_platform: Tervetuloa alustalle!
+          provide_account_detail: Määritä käyttäjätilisi tiedot
+          detail_info: Tämä on ensimmäinen kerta, kun olet kirjautunut alustalle. Pyydämme ystävällisesti kertomaan muutamia tietoja itsestäsi. Voit myöhemmin muokata näitä tietoja käyttäjätilisi asetuksista.
+          required_fields: "*Vaaditut kentät on merkitty tähtimerkillä"
+          tos_title: Käyttöehdot
+          tos_agreement: Hyväksyn %{link}
+          terms: Käyttöehdot
+          submit: Viimeistele käyttäjätilisi
+          newsletter_title: Yhteydenottolupa
+          newsletter: Vastaanota silloin tällöin ajankohtaista tietoa sisältävä uutiskirje
+          error: Jokin meni pieleen. Yritä uudestaan
+          success: Rekisteröityminen onnistui ja sinut on valtuutettu alustan käyttäjäksi
+          email_help: Antamalla sähköpostiosoitteen voit myöhemmin kirjautua alustalle helposti sähköpostin ja salasanan avulla.
         send_message:
           error:
-            invalid_from_number: The sender number is not correctly configured or is not able to send messages. Please contact the platform support for further help.
-            invalid_geo_permission: The system is not configured to send messages to your country. Please contact the platform support for further help.
-            invalid_to_number: The phone number you provided is not correct. Please check that you entered your phone number correctly.
-            unknown: An error occured which has been logged, please try again. If the error persists, please contact the platform support for further help.
-          success: "Verification code sent to %{phone}."
-          resend: "Verification code resent to %{phone}."
-          not_allowed: Please wait at least 1 minute to resend the code.
+            invalid_from_number: Lähettäjän numeroa ei ole asetettu oikein viestien lähettämistä varten. Ota yhteyttä alustan ylläpitoon saadaksesi lisäohjeita.
+            invalid_geo_permission: Viestien lähettäminen ei ole mahdollista maahasi. Ota yhteyttä alustan ylläpitoon saadaksesi lisäohjeita.
+            invalid_to_number: Antamasi puhelinnumero on virheellinen. Ota yhteyttä alustan ylläpitoon saadaksesi lisäohjeita.
+            unknown: Jokin meni pieleen ja tapahtumasta on kirjattu lokimerkintä. Jos ongelma jatkuu, ota yhteyttä alustan ylläpitoon saadaksesi lisäohjeita.
+          success: "Vahvistuskoodi lähetetty numeroon %{phone}."
+          resend: "Vahvistuskoodi lähetetty uudestaan numeroon %{phone}."
+          not_allowed: Odota vähintään 1 minuutti lähettääksesi koodin uudestaan.
         verification:
-          authenticate: Authenticate with SMS
-          sign_in: Sign in with SMS
-          step_two: Step 2 of 2
-          enter_verification_message: "Enter the verification code sent to: %{phone}"
-          enter_verification_code: Enter verification code
-          submit: Verify
-          not_receive: Did not receive the code?
-          resend_code: Resend code
-          use_another_method: use another method
-          different_phone_number: use
-          already_verified: Your account has already verified
-          or: or
+          authenticate: Tunnistaudu tekstiviestillä
+          sign_in: Kirjaudu sisään tekstiviestillä
+          step_two: Vaihe 2/2
+          enter_verification_message: "Kirjoita vahvistuskoodi, joka on lähetetty numeroon: %{phone}"
+          enter_verification_code: Anna vahvistuskoodi
+          submit: Vahvista
+          not_receive: Etkö saanut koodia?
+          resend_code: Lähetä koodi uudestaan
+          use_another_method: käytä toista kirjautumistapaa
+          different_phone_number: käytä
+          already_verified: Käyttäjätilisi on jo vahvistettu
+          or: tai
       verification:
         authorizations:
           edit:
-            verify: Introduce the verification code you received
-            submit: Verify
-            not_receive: Resend code
-            destroy: Restart verification
-            confirm_destroy: Are you sure you want to restart verification process?
+            verify: Syötä vastaanottamasi vahvistuskoodi
+            submit: Vahvista
+            not_receive: Lähetä koodi uudestaan
+            destroy: Aloita vahvistus uudestaan
+            confirm_destroy: Haluatko varmasti aloittaa vahvistusprosessin alusta?
           new:
-            title: Authorize your account
-            submit: Send code via SMS
+            title: Valtuuta tilisi
+            submit: Lähetä koodi uudestaan tekstiviestillä
           update:
-            incorrect: Verification failed. Please try again.
+            incorrect: Vahvistaminen epäonnistui. Yritä uudestaan.
     verifications:
       sms:
         decidim:
@@ -102,4 +102,4 @@ fi:
             verification:
               authorizations:
                 edit:
-                  session_expired: The verification code is expired, please try again
+                  session_expired: Vahvistuskoodi on vanhentunut, yritä uudestaan
