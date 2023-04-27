@@ -16,6 +16,10 @@ module Decidim
           true
         end
 
+        def show_image_in_popup?(_resource)
+          false
+        end
+
         # User can vote in the resource inside their area where they live. This is being determined
         # by their zip code.
         def vote_allowed?(resource, consider_progress: true) # rubocop:disable Lint/UnusedMethodArgument

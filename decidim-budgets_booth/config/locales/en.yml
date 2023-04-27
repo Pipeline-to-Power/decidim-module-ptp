@@ -65,6 +65,8 @@ en:
           back_to_budgets: Back to budgets
         order_progress:
           total_budget: "Total budget: "
+          ready: I am ready
+          vote: Vote
         pre_voting_budget_summary:
           cancel_order: Cancel your vote
           are_you_sure: Are you sure you want to delete your vote?
