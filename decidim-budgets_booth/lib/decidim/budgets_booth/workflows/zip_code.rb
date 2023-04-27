@@ -13,7 +13,7 @@ module Decidim
         end
 
         def disable_voting_instructions?
-          false
+          true
         end
 
         def hide_image_in_popup?
