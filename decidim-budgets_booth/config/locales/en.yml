@@ -49,6 +49,14 @@ en:
           title: Your vote in %{budget_title}
           total_budget: "Total budget: "
           assigned: "Assigned: "
+      partials:
+        voting_help_modal:
+          confirm: I understand how to vote
+          step1: Pick the project
+          step2: Confirm your vote
+          step3: Cast your vote
+          subtitle: You need to cast your vote for it to be counted in the final result.
+          title: Your vote has not been cast.
       projects:
         budget_summary:
           cancel_voting: Cancel voting

@@ -88,6 +88,10 @@ module Decidim
             Decidim::BudgetsBooth::ProjectsControllerExtensions
           )
 
+          Decidim::Budgets::LineItemsController.include(
+            Decidim::BudgetsBooth::LineItemsControllerExtensions
+          )
+
           # Commands extensions
           Decidim::Budgets::Admin::CreateBudget.include(
             Decidim::BudgetsBooth::CreateBudgetExtensions

@@ -12,12 +12,12 @@ module Decidim
           false
         end
 
-        def disable_voting_instructions?(_resource)
-          true
+        def disable_voting_instructions?
+          false
         end
 
-        def show_image_in_popup?(_resource)
-          false
+        def hide_image_in_popup?
+          true
         end
 
         # User can vote in the resource inside their area where they live. This is being determined
