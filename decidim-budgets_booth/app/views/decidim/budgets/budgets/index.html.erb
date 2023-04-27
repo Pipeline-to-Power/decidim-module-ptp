@@ -8,7 +8,7 @@
   <% if voted_all_budgets? %>
     <%= render partial: "decidim/budgets/voting/vote_completed_modal" if vote_completed_content.present? %>
   <% else %>
-    <%= render partial: "decidim/budgets/voting/thanks_message_modal" if vote_success_content.present? %>
+    <%= render partial: "decidim/budgets/voting/thanks_message_modal", locals: {show_vote_image: current_workflow&.show_image_in_popup?(current_component)} if vote_success_content.present? %>
   <% end %>
 <% end%>
 <% handle_thanks_popup %>
