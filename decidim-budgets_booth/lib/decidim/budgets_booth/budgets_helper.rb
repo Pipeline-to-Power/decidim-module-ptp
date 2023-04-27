@@ -27,6 +27,7 @@ module Decidim
       end
 
       def decidim_budgets
+        # raise request.path.inspect
         @decidim_budgets ||= Decidim::EngineRouter.main_proxy(current_component)
       end
 
