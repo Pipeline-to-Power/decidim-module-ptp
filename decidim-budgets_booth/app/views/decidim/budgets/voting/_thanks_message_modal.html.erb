@@ -5,7 +5,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <% if show_vote_image %>
+  <% unless current_workflow.try(:hide_image_in_popup?) %>
     <div class="row">
       <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
         <div class="circle active">
