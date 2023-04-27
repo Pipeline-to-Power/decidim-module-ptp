@@ -1,0 +1,112 @@
+---
+fi:
+  decidim:
+    components:
+      budgets:
+        settings:
+          global:
+            confirm_vote_text: Äänen vahvistussivulla näytettävä teksti
+            thanks_text: Äänestyksen jälkeisen ikkunan teksti
+    budgets:
+      budgets_list:
+        vote: Näytä
+      partials:
+        voting_help_modal:
+          confirm: Ymmärrän, kuinka äänestän
+          step1: Valitse hanke
+          step2: Vahvista äänesi
+          step3: Anna äänesi
+          subtitle: Sinun on annettava äänesi, jotta se lasketaan lopullisiin tuloksiin.
+          title: Et ole vielä antanut ääntäsi.
+      projects:
+        budget_summary:
+          cancel_voting: Poista äänesi
+          choose_budget: Voit päättää budjetin
+          choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
+        cancel_voting_modal:
+          title: Haluatko varmasti lopettaa äänestyksen?
+          label: Poistu äänestyksestä
+          description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
+          continue: Jatka äänestystä
+          exit: En halua äänestää juuri nyt
+        index:
+          back_to_budgets: Takaisin kaikkiin budjetteihin
+        order_progress:
+          total_budget: "Kokonaisbudjetti: "
+          vote: Olen valmis
+        pre_voting_budget_summary:
+          cancel_order: Poista äänesi
+          are_you_sure: Haluatko varmasti poistaa äänesi?
+          pre_vote:
+            title: Tervetuloa äänestämään!
+            start_voting: Aloita äänestys
+            finish_voting: Viimeistele äänestys
+            review_voting: Vahvista äänesi
+            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
+            finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
+            casted_title: Kiitos äänestäsi.
+            casted_description: Olet aikaisemmin äänestänyt tästä budjetista. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
+            result_voted: Tarkasta äänesi
+        project:
+          you_voted: Äänestit tätä
+        project_modal:
+          close_project: Sulje
+          cancel: Peruuta
+          scope: "Teema: "
+          category: "Aihepiiri: "
+          budget_amount: "Budjetti: "
+        show:
+          pre_vote:
+            continue_voting: Jatka äänestystä
+            start_voting: Aloita äänestys
+            introduction: Haluatko äänestää tätä hanketta?
+      project_vote_button:
+        removee_From_votes: Poista äänesi
+        add_to_votes: Lisää ääneesi
+      project_list_item:
+        read_more: Lue lisää
+        ordered_item: Tämä hanke on lisätty ääneesi.
+      voting:
+        voted_summary_modal:
+          title: Äänesi
+          label: Sulje
+          list_description: Valitsit nämä hankkeet.
+          continue: Jatka
+        thanks_message_modal:
+          title: Kiitos äänestäsi!
+          close: Sulje
+          continue: Jatka
+          default_text: Äänesi on nyt annettu. Voit jatkaa äänestystä muissa budjeteissa tai kirjautua ulos alustalta.
+        confirm:
+          return_voting: Haluan muuttaa ääntäni
+          back: Takaisin
+          cancel_order: poistaa äänesi ja aloittaa alusta
+          changed_your_mind_html: Jos muutit mieltäsi, voit %{cancel_link}.
+          title: Vahvista äänesi
+          casted_title: Tarkasta äänesi
+          total_budget: "Kokonaisbudjetti: "
+          assigned: "Käytetty: "
+          list_description: "Valitsit nämä hankkeet:"
+          casted_list_description: "Äänestit näitä hankkeita:"
+          confirm: Onko tämä oikein?
+          cast_vote: Anna äänesi
+        general:
+          not_authorized: Sinun täytyy vahvistaa puhelinnumerosi tekstiviestillä äänestääksesi.
+          multi_authorization_warning: Sinun täytyy vahvistaa käyttäjätilisi äänestääksesi.
+          not_open_warning: Äänestäminen ei ole sallittua.
+        auth_methods:
+          title: Vahvista käyttäjätilisi
+          explanation: Tätä äänestystä varten sinun tulee vahvistaa käyttäjätilisi.
+          select_options: Valitse yksi seuraavista tavoista vahvistaaksesi käyttäjätilisi.
+          unauthorized_verification: muut tavat
+        index:
+          sign_in_first: Sinun täytyy kirjautua sisään äänestääksesi.
+          not_permitted_to: Sinulla ei ole oikeuksia suorittaa tätä toimintoa.
+    authorization_handlers:
+      sms:
+        name: Vahvista "Tekstiviestikoodilla"
+  layouts:
+    decidim:
+      budgets:
+        voting_notification:
+          notification: Olet nyt äänestyskopissa.
