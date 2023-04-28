@@ -1,0 +1,105 @@
+---
+fr:
+  activemodel:
+    attributes:
+      sms_registration:
+        name: Your name
+        email: Your email (optional)
+      sms_sign_in:
+        phone_country: Phone country
+        phone_number: Phone number
+      sms_verification:
+        verification: Verification code
+      user:
+        mask_number: Your phone number
+  decidim:
+    authorization_handlers:
+      smsauth_id:
+        explanation: Verify yourself using an SMS code.
+        fields:
+          phone_country: Phone country
+          phone_number: Phone number
+        name: SMS
+    devise:
+      sessions:
+        new:
+          email: Sign in with Email
+    smsauth:
+      omniauth:
+        authenticate_user:
+          error: Verification failed. Please try again.
+          signed_in: Signed in successfully.
+          success: Phone number successfully verified.
+          updated_phone_number: Phone number successfully updated.
+          unauthorized: You are not authorized to perform this action.
+        development_hint:
+          verification_code: "The verificaiton code is: "
+          hint_notification: (This message only appears in development mode)
+        edit:
+          title: Update your phone number
+        new:
+          another_method: Use another method to sign in
+          title: Sign in with SMS
+        phone_form:
+          submit: Send code via SMS
+        phone_instructions:
+          enter_phone_number: Enter your phone number
+          step_one: Step 1 of 2
+          type_in_phone: Type in your phone number below to get a verification code via SMS to your phone number.
+        registration:
+          welcome_to_platform: Welcome to the platform!
+          provide_account_detail: Provide account details
+          detail_info: This is the first time you have logged in to this platform, so we kindly ask you to provide us few details about yourself. You can modify these details any time you want under your account settings.
+          required_fields: "*Required fields are marked with an asterisk"
+          tos_title: Terms of service
+          tos_agreement: I agree to the %{link}
+          terms: Terms of Service
+          submit: Complete your account
+          newsletter_title: Contact permission
+          newsletter: Receive occasional newsletters with relevant information
+          error: An error occured, please try again
+          success: You have successfully registered and authorized
+          email_help: Providing your email address makes it easier to sign in to your account later using your email and password.
+        send_message:
+          error:
+            invalid_from_number: The sender number is not correctly configured or is not able to send messages. Please contact the platform support for further help.
+            invalid_geo_permission: The system is not configured to send messages to your country. Please contact the platform support for further help.
+            invalid_to_number: The phone number you provided is not correct. Please check that you entered your phone number correctly.
+            unknown: An error occured which has been logged, please try again. If the error persists, please contact the platform support for further help.
+          success: "Verification code sent to %{phone}."
+          resend: "Verification code resent to %{phone}."
+          not_allowed: Please wait at least 1 minute to resend the code.
+        verification:
+          authenticate: Authenticate with SMS
+          sign_in: Sign in with SMS
+          step_two: Step 2 of 2
+          enter_verification_message: "Enter the verification code sent to: %{phone}"
+          enter_verification_code: Enter verification code
+          submit: Verify
+          not_receive: Did not receive the code?
+          resend_code: Resend code
+          use_another_method: use another method
+          different_phone_number: use
+          already_verified: Your account has already verified
+          or: or
+      verification:
+        authorizations:
+          edit:
+            verify: Introduce the verification code you received
+            submit: Verify
+            not_receive: Resend code
+            destroy: Restart verification
+            confirm_destroy: Are you sure you want to restart verification process?
+          new:
+            title: Authorize your account
+            submit: Send code via SMS
+          update:
+            incorrect: Verification failed. Please try again.
+    verifications:
+      sms:
+        decidim:
+          smsauth:
+            verification:
+              authorizations:
+                edit:
+                  session_expired: The verification code is expired, please try again
