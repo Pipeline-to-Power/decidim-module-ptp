@@ -1,0 +1,6 @@
+---
+fi:
+  decidim:
+    components:
+      sms-twilio:
+        name: Sms-twilio
