@@ -64,7 +64,6 @@ module Decidim
                   .new(current_organization).query.find_by(slug: params[:participatory_process_slug])
         process&.active_step&.title
       end
-
     end
   end
 end
