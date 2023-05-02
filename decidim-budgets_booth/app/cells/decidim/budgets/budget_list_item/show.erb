@@ -34,9 +34,9 @@
 
                 <% if !voted_this?(budget) %>
                   <%= link_to_budget budget, class: "button expanded button--sc" do %>
-                    <span class="show-for-sr"><%= t(".take_part") %></span>
-                    <span aria-hidden="true"><%= t(".take_part") %></span>
-                    <span class="button__info"><%= t(".current_phase", phase: translated_attribute(current_phase)) %></span>
+                    <span class="show-for-sr"><%= t("take_part", scope: "decidim.budgets.budget_list_item") %></span>
+                    <span aria-hidden="true"><%= t("take_part", scope: "decidim.budgets.budget_list_item") %></span>
+                    <span class="button__info"><%= t("current_phase", scope: "decidim.budgets.budget_list_item", phase: translated_attribute(current_phase)) %></span>
                   <% end %>
                 <% end %>
               </div>

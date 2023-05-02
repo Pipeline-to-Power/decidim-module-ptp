@@ -15,6 +15,6 @@
   disabled: vote_button_disabled?,
   title: vote_button_label
  ) do %>
-  <%= resource_added? ? t(".remove_from_vote") :t(".add_to_vote") %>
+  <%= resource_added? ? t("remove_from_vote", scope: "decidim.budgets.project_vote_button") :t("add_to_vote", scope: "decidim.budgets.project_vote_button") %>
 <% end %>
 
