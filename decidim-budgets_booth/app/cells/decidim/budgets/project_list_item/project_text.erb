@@ -32,10 +32,10 @@
     <% if !show_full_description? %>
       <% if voting_mode? %>
         <button class="link" data-open="project-modal-<%= model.id %>">
-          <%= t ".read_more" %>
+          <%= t("read_more", scope: "decidim.budgets.project_list_item") %>
         </button>
       <% else %>
-        <%= link_to t(".read_more"), resource_path, class: "link" %>
+        <%= link_to t("read_more", scope: "decidim.budgets.project_list_item"), resource_path, class: "link" %>
       <% end %>
     <% end %>
   </div>

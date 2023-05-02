@@ -2,7 +2,7 @@
   <% if budgets.none? %>
   <div class="section">
     <div class="callout warning font-customizer">
-      <%= t(".no_budgets_found") %>
+      <%= t("no_budgets_found", scope: "decidim.budgets.budgets_list") %>
     </h2>
   </div>
   <% end %>
