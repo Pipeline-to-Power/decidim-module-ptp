@@ -39,16 +39,6 @@ module Decidim
           end
         end
 
-        # def generate_projects_link(budget)
-        #   if voting_open? && !voted_this?(budget)
-        #     budget_voting_index_path(budget)
-        #   elsif voting_open? && voted_this?(budget)
-        #     decidim_budgets.budget_order_path(budget)
-        #   else
-        #     budget_projects_path(budget)
-        #   end
-        # end
-
         def generate_text_for(budget)
           if voted_this?(budget)
             t("decidim.budgets.budget_list_item.show_my_vote")

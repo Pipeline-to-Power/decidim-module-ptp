@@ -108,6 +108,7 @@ $active-item-color: $black;
       display: block;
     }
   }
+
   &__data{
     justify-content: center;
   }
@@ -127,7 +128,7 @@ $active-item-color: $black;
     flex-direction: column;
 
     a{
-      margin: 1rem 0 0 0;
+      margin: 1rem 0 0;
     }
   }
 }
@@ -137,7 +138,8 @@ $active-item-color: $black;
 }
 
 .font-customizer{
-  h2, h3{
+  h2,
+  h3{
     font-size: 1.1rem;
   }
 }
@@ -160,7 +162,7 @@ $active-item-color: $black;
       width: 2.5rem;
       text-align: center;
 
-      @include breakpoint(smallmedium up) {
+      @include breakpoint(smallmedium up){
         height: 3rem;
         width: 3rem;
       }
