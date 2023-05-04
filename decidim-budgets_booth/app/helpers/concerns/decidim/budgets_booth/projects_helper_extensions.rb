@@ -51,10 +51,6 @@ module Decidim
         t(key, scope: i18n_scope)
       end
 
-      def budgets_accessible?
-        !voting_mode? && budgets_count > 1
-      end
-
       def budgets_count
         Decidim::Budgets::Budget.where(component: current_component).count
       end
