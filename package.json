@@ -1,7 +1,7 @@
 {
   "scripts": {
     "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx decidim-*/app/packs",
-    "stylelint": "stylelint app/packs/**/*.scss"
+    "stylelint": "stylelint decidim-*/app/packs/**/*.scss"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
