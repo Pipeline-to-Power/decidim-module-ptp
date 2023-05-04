@@ -1,11 +1,22 @@
 {
   "scripts": {
-    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx decidim-*/app/packs"
+    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx decidim-*/app/packs",
+    "stylelint": "stylelint app/packs/**/*.scss"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.19.1",
-    "@babel/preset-env": "^7.20.2",
-    "@decidim/dev": "^0.27.0",
-    "@decidim/eslint-config": "^0.27.0"
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/preset-env": "^7.21.5",
+    "@decidim/dev": "^0.27.2",
+    "@decidim/eslint-config": "^0.27.2",
+    "@decidim/stylelint-config": "^0.27.2",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-standard": "^3.1.0"
   }
 }

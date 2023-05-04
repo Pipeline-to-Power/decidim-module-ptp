@@ -160,7 +160,7 @@ $active-item-color: $black;
       width: 2.5rem;
       text-align: center;
 
-      @include breakpoint(smallmedium up){
+      @include breakpoint(smallmedium up) {
         height: 3rem;
         width: 3rem;
       }
