@@ -6,7 +6,7 @@ shared_examples "filtering projects" do
   context "when filtering" do
     it "allows searching by text" do
       within ".filters__search" do
-        fill_in "filter[search_text]", with: translated(project.title)
+        fill_in "filter[search_text_cont]", with: translated(project.title)
 
         find(".button").click
       end
@@ -24,7 +24,7 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within ".scope_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_scope_check_boxes_tree_filter" do
         uncheck "All"
         check translated(scope.name)
       end
@@ -41,8 +41,7 @@ shared_examples "filtering projects" do
       project.save
 
       visit_budget
-
-      within ".category_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_category_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
       end
@@ -60,7 +59,7 @@ shared_examples "filtering projects" do
 
       visit_budget
 
-      within ".category_id_check_boxes_tree_filter" do
+      within ".filters__section.with_any_category_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
       end
@@ -69,14 +68,13 @@ shared_examples "filtering projects" do
         expect(page).to have_css(".budget-list__item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
-      if voting_mode
-        find("a", text: "Read more", match: :first).click
-        click_link "View all projects"
 
-        within "#projects" do
-          expect(page).to have_css(".budget-list__item", count: 1)
-          expect(page).to have_content(translated(project.title))
-        end
+      find("a", text: "Read more", match: :first).click
+      click_link "View all projects"
+
+      within "#projects" do
+        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_content(translated(project.title))
       end
     end
   end
