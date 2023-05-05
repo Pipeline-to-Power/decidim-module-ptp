@@ -61,8 +61,8 @@ fr:
             start_voting: Start voting
             introduction: Want to vote this project?
       project_vote_button:
-        removee_From_votes: Remove your vote
-        add_to_votes: Add to your vote
+        remove_from_vote: Remove from vote
+        add_to_vote: Add to your vote
       project_list_item:
         read_more: Read more
         ordered_item: This item is added to the your votes.
