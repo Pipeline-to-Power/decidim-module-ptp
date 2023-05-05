@@ -35,7 +35,7 @@ fi:
           total_budget: "Kokonaisbudjetti: "
           vote: Olen valmis
         pre_voting_budget_summary:
-          cancel_order: Poista äänesi
+          cancel_order: poistaa äänesi
           are_you_sure: Haluatko varmasti poistaa äänesi?
           pre_vote:
             title: Tervetuloa äänestämään!
