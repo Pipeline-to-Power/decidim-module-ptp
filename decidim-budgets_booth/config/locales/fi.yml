@@ -20,7 +20,7 @@ fi:
           title: Et ole vielä antanut ääntäsi.
       projects:
         budget_summary:
-          cancel_voting: Poista äänesi
+          cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetin
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
         cancel_voting_modal:
@@ -35,7 +35,7 @@ fi:
           total_budget: "Kokonaisbudjetti: "
           vote: Olen valmis
         pre_voting_budget_summary:
-          cancel_order: Poista äänesi
+          cancel_order: poistaa äänesi
           are_you_sure: Haluatko varmasti poistaa äänesi?
           pre_vote:
             title: Tervetuloa äänestämään!
@@ -61,8 +61,8 @@ fi:
             start_voting: Aloita äänestys
             introduction: Haluatko äänestää tätä hanketta?
       project_vote_button:
-        removee_From_votes: Poista äänesi
-        add_to_votes: Lisää ääneesi
+        remove_from_vote: Poista äänestäsi
+        add_to_vote: Lisää ääneesi
       project_list_item:
         read_more: Lue lisää
         ordered_item: Tämä hanke on lisätty ääneesi.
