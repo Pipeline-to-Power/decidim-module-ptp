@@ -42,7 +42,7 @@ shared_examples "budget summary" do
       click_button "Read more"
     end
     within ".reveal-overlay" do
-      click_button "Remove your vote"
+      click_button "Remove from vote"
     end
     expect(page).to have_content("ASSIGNED: €50,000")
     within "#order-selected-projects" do
