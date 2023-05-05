@@ -61,8 +61,8 @@ fi:
             start_voting: Aloita äänestys
             introduction: Haluatko äänestää tätä hanketta?
       project_vote_button:
-        remove_from_vote: Remove from vote
-        add_to_vote: Add to your vote
+        remove_from_vote: Poista äänestäsi
+        add_to_vote: Lisää ääneesi
       project_list_item:
         read_more: Lue lisää
         ordered_item: Tämä hanke on lisätty ääneesi.
