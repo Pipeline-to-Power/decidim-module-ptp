@@ -5,18 +5,18 @@ fr:
       budgets:
         settings:
           global:
-            confirm_vote_text: Text shown on the confirm vote page
-            thanks_text: Popup text after voting
+            confirm_vote_text: Texte affiché sur la page de confirmation du vote
+            thanks_text: Texte dans la modale après le vote
     budgets:
       budgets_list:
-        vote: Show
+        vote: Afficher
       partials:
         voting_help_modal:
-          confirm: I understand how to vote
-          step1: Pick the project
-          step2: Confirm your vote
-          step3: Cast your vote
-          subtitle: You need to cast your vote for it to be counted in the final result.
+          confirm: C'est compris !
+          step1: Choisir le projet
+          step2: Confirmez votre vote
+          step3: Voter
+          subtitle: Vous devez confirmer votre vote pour qu'il soit compté dans le résultat final.
           title: Your vote has not been cast.
       projects:
         budget_summary:
@@ -84,29 +84,29 @@ fr:
           changed_your_mind_html: If you changed your mind, you can %{cancel_link}.
           title: Confirm your vote
           casted_title: Review your vote
-          total_budget: "Total budget: "
-          assigned: "Assigned: "
-          list_description: "These are the projects you picked:"
-          casted_list_description: "These are the projects you voted for:"
-          confirm: Is this correct?
-          cast_vote: Cast your vote
+          total_budget: "Budget total: "
+          assigned: "Assigné à :"
+          list_description: "Voici les projets que vous avez sélectionné :"
+          casted_list_description: "Voici les projets pour lesquels vous avez voté :"
+          confirm: Est-ce correct ?
+          cast_vote: Voter
         general:
-          not_authorized: You need to verify your phone number with SMS in order to vote.
-          multi_authorization_warning: You need to verify yourself in order to vote.
-          not_open_warning: Voting is not allowed.
+          not_authorized: Vous devez s'authentifier via votre numéro de téléphone pour pouvoir voter.
+          multi_authorization_warning: Vous devez vous authentifier pour voter.
+          not_open_warning: Le vote n'est pas autorisé.
         auth_methods:
-          title: Please verify yourself
-          explanation: This voting requires to verify your identity.
-          select_options: Please select from one of the options below to verify yourself.
-          unauthorized_verification: another
+          title: Veuillez vous authoriser
+          explanation: Ce vote nécessite de vérifier votre identité.
+          select_options: Veuillez sélectionner l'une des options ci-dessous pour vous authentifier.
+          unauthorized_verification: autre
         index:
-          sign_in_first: You need to sign in to start voting.
-          not_permitted_to: You don't have permission to perform this action.
+          sign_in_first: Vous devez vous connecter pour commencer à voter.
+          not_permitted_to: Vous n'avez pas la permission d'effectuer cette action.
     authorization_handlers:
       sms:
-        name: Authorize with "Code by SMS"
+        name: Autoriser avec "Code par SMS"
   layouts:
     decidim:
       budgets:
         voting_notification:
-          notification: You are now in the voting booth.
+          notification: Vous êtes dans la cabine de vote.
