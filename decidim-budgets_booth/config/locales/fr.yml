@@ -17,73 +17,73 @@ fr:
           step2: Confirmez votre vote
           step3: Voter
           subtitle: Vous devez confirmer votre vote pour qu'il soit compté dans le résultat final.
-          title: Your vote has not been cast.
+          title: Le vote n'a pas été confirmé.
       projects:
         budget_summary:
-          cancel_voting: Cancel voting
-          choose_budget: You decide the budget
-          choose_description: Choose the projects you like and cast your vote at the end.
+          cancel_voting: Annuler le vote
+          choose_budget: Vous décidez du budget
+          choose_description: Choisissez les projets que vous aimez et votez.
         cancel_voting_modal:
-          title: Are you sure you don't want to cast your vote?
-          label: Exit voting
-          description: If you cancel your vote, it will not be count for the final result. In order to get your vote heard, please go back to cast your vote.
-          continue: Continue voting
-          exit: I don't want to vote right now
+          title: Êtes-vous sûr de ne pas vouloir voter ?
+          label: Quitter le vote
+          description: Si vous annulez votre vote, cela ne sera pas pris en compte pour le résultat final. Afin de faire compter votre vote, veuillez revenir en arrière pour le finaliser et le confirmer.
+          continue: Continuer le vote
+          exit: Je ne veux pas voter pour le moment
         index:
-          back_to_budgets: Back to budgets
+          back_to_budgets: Retour aux budgets
         order_progress:
-          total_budget: "Total budget: "
-          vote: I am ready
+          total_budget: "Budget total : "
+          vote: Je suis prêt
         pre_voting_budget_summary:
-          cancel_order: Cancel your vote
-          are_you_sure: Are you sure you want to delete your vote?
+          cancel_order: Annuler votre vote
+          are_you_sure: Êtes-vous sûr de vouloir supprimer votre vote ?
           pre_vote:
-            title: Welcome to the vote!
-            start_voting: Start voting
-            finish_voting: Finish voting
-            review_voting: Review your vote
-            start_description: You can browse to the projects to get yourself familiar with them. In order to start voting, click the "Start voting" button.
-            finish_description: You have already started voting in this budget. Would you like to finish your vote?
-            casted_title: Thank you for your voting.
-            casted_description: You have previously voted in this budget. If you want to see what you voted, click "Review your vote" button. You can also %{cancel_link} and start again.
-            result_voted: Review your vote
+            title: Bienvenue au vote!
+            start_voting: Commencer à voter
+            finish_voting: Terminer le vote
+            review_voting: Revoir votre vote
+            start_description: Vous pouvez naviguer vers les projets pour vous familiariser avec eux. Pour commencer à voter, cliquez sur le bouton "Commencer à voter".
+            finish_description: Vous avez déjà commencé à voter dans ce budget. Voulez-vous terminer votre vote ?
+            casted_title: Merci pour votre vote .
+            casted_description: Vous avez précédemment voté dans ce budget. Si vous voulez voir ce que vous avez voté, cliquez sur le bouton "Revoir votre vote". Vous pouvez aussi %{cancel_link} et recommencer.
+            result_voted: Revoir votre vote
         project:
-          you_voted: You voted for this
+          you_voted: Vous avez voté pour
         project_modal:
-          close_project: Close
-          cancel: Cancel
-          scope: "Scope: "
-          category: "Category: "
-          budget_amount: "Budget: "
+          close_project: Fermer
+          cancel: Annuler
+          scope: "Portée : "
+          category: "Catégorie : "
+          budget_amount: "Budget : "
         show:
           pre_vote:
-            continue_voting: Continue voting
-            start_voting: Start voting
-            introduction: Want to vote this project?
+            continue_voting: Continuer le vote
+            start_voting: Commencer à voter
+            introduction: Vous voulez voter pour ce projet ?
       project_vote_button:
-        remove_from_vote: Remove from vote
-        add_to_vote: Add to your vote
+        remove_from_vote: Supprimer du vote
+        add_to_vote: Ajouter au vote
       project_list_item:
-        read_more: Read more
-        ordered_item: This item is added to the your votes.
+        read_more: En savoir plus
+        ordered_item: Ce point est ajouté à vos votes.
       voting:
         voted_summary_modal:
-          title: Your vote
-          label: Close
-          list_description: These are the projects you picked.
-          continue: Continue
+          title: Votre vote
+          label: Fermer
+          list_description: Voici les projets que vous avez sélectionné.
+          continue: Continuer
         thanks_message_modal:
-          title: Thank you for voting!
-          close: Close
-          continue: Continue
-          default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
+          title: Merci pour votre vote!
+          close: Fermer
+          continue: Continuer
+          default_text: Votre vote a été enregistré. Vous pouvez continuer à voter dans d'autres budgets ou vous déconnecter de la plateforme.
         confirm:
-          return_voting: I want to change my vote
-          back: Back
-          cancel_order: cancel your vote and start over
-          changed_your_mind_html: If you changed your mind, you can %{cancel_link}.
-          title: Confirm your vote
-          casted_title: Review your vote
+          return_voting: Je veux changer mon vote
+          back: Retour
+          cancel_order: annuler votre vote et recommencer
+          changed_your_mind_html: Si vous avez changé d'avis, vous pouvez %{cancel_link}.
+          title: Confirmer votre vote
+          casted_title: Revoir votre vote
           total_budget: "Budget total: "
           assigned: "Assigné à :"
           list_description: "Voici les projets que vous avez sélectionné :"
