@@ -3,48 +3,48 @@ fr:
   activemodel:
     attributes:
       sms_registration:
-        name: Your name
-        email: Your email (optional)
+        name: Votre nom
+        email: Votre adresse e-mail (facultatif)
       sms_sign_in:
-        phone_country: Phone country
-        phone_number: Phone number
+        phone_country: Pays du numéro de téléphone
+        phone_number: Numéro de téléphone
       sms_verification:
-        verification: Verification code
+        verification: Code de vérification
       user:
-        mask_number: Your phone number
+        mask_number: Votre numéro de téléphone
   decidim:
     authorization_handlers:
       smsauth_id:
-        explanation: Verify yourself using an SMS code.
+        explanation: Authentifiez vous en utilisant un code SMS.
         fields:
-          phone_country: Phone country
-          phone_number: Phone number
+          phone_country: Pays du numéro de téléphone
+          phone_number: Numéro de téléphone
         name: SMS
     devise:
       sessions:
         new:
-          email: Sign in with Email
+          email: Se connecter avec e-mail
     smsauth:
       omniauth:
         authenticate_user:
-          error: Verification failed. Please try again.
-          signed_in: Signed in successfully.
-          success: Phone number successfully verified.
-          updated_phone_number: Phone number successfully updated.
-          unauthorized: You are not authorized to perform this action.
+          error: L'authentification a échoué. Veuillez réessayer.
+          signed_in: Connecté avec succès.
+          success: Numéro de téléphone vérifié avec succès.
+          updated_phone_number: Numéro de téléphone mis à jour avec succès.
+          unauthorized: Vous n'êtes pas autorisé à effectuer cette action.
         development_hint:
-          verification_code: "The verificaiton code is: "
-          hint_notification: (This message only appears in development mode)
+          verification_code: "Le code de verification est : "
+          hint_notification: (Ce message n'apparaît qu'en mode développement)
         edit:
-          title: Update your phone number
+          title: Mettre à jour votre numéro de téléphone
         new:
-          another_method: Use another method to sign in
-          title: Sign in with SMS
+          another_method: Utilisez une autre méthode pour vous connecter
+          title: Se connecter par SMS
         phone_form:
-          submit: Send code via SMS
+          submit: Envoyer le code par SMS
         phone_instructions:
-          enter_phone_number: Enter your phone number
-          step_one: Step 1 of 2
+          enter_phone_number: Entrez votre numéro de téléphone
+          step_one: Étape 1 sur 2
           type_in_phone: Entrez votre numéro de téléphone ci-dessous pour recevoir un code de vérification par SMS.
         registration:
           welcome_to_platform: Bienvenue sur la plateforme !
