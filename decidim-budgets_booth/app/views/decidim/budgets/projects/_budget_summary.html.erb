@@ -8,7 +8,7 @@
         </button>
       </div>
     </div>
-  <% else %>
+  <% elsif budgets.count > 1 %>
     <div class="row">
       <div class="columns medium-8 large-9">
         <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
