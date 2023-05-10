@@ -75,9 +75,10 @@ RSpec.shared_context "with single scoped budget" do
   let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
 
   let!(:budget) { create(:budget, component: component, total_budget: 100_000) }
+  let!(:projects_set) { create_list(:project, 3, budget: budget, budget_amount: 25_000) }
 
   before do
-    budget.update!(scope: parent_scope, description: { en: "<p>Eius officiis expedita. 55</p>" })
+    budget.update!(scope: subscopes[0], description: { en: "<p>Eius officiis expedita. 55</p>" })
   end
 end
 

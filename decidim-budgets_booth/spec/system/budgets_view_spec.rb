@@ -212,7 +212,8 @@ describe "Budgets view", type: :system do
 
       it "redirects to the voting booth" do
         expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-        expect(page).to have_no_content
+        expect(page).to have_content("Based on your ZIP code - 10004. Not the right one?")
+        expect(page).to have_link("Change it here", href: decidim_budgets.new_zip_code_path)
       end
     end
   end
