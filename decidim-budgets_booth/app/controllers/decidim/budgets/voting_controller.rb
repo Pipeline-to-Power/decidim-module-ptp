@@ -49,7 +49,7 @@ module Decidim
         return unless current_order.checked_out?
 
         flash[:warning] = I18n.t("not_allowed", scope: "decidim.budgets.budgets.index")
-        redirect_to decidim_budgets.budgets_path
+        redirect_to decidim.root_path
       end
 
       def decidim_budgets
