@@ -1,6 +1,7 @@
 <%= render partial: "decidim/shared/component_announcement" %>
-<% if budgets.count > 1 && voting_booth_forced? %>
-  <div class="row">
+
+<% if budgets.count== 1 && voting_booth_forced? %>
+  <div class="row margin-top-1">
     <div class="columns medium-7 mediumlarge-8">
       <div class="section">
         <h2 class="section-heading">

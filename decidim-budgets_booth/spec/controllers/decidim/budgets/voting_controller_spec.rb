@@ -58,7 +58,7 @@ module Decidim
 
           it "redirects the user" do
             get :index, params: { budget_id: budgets.last.id }
-            expect(response).to redirect_to(decidim_budgets.budgets_path)
+            expect(response).to redirect_to("/")
             expect(flash[:warning]).to have_content("You are not allowed to perform this action.")
           end
         end
