@@ -67,6 +67,20 @@ RSpec.shared_context "with scoped budgets" do
   end
 end
 
+RSpec.shared_context "with single scoped budget" do
+  include_context "with scopes"
+
+  let(:organization) { create(:organization) }
+  let(:component) { create(:budgets_component, settings: component_settings, organization: organization) }
+  let(:component_settings) { { scopes_enabled: true, scope_id: parent_scope.id } }
+
+  let!(:budget) { create(:budget, component: component, total_budget: 100_000) }
+
+  before do
+    budget.update!(scope: parent_scope, description: { en: "<p>Eius officiis expedita. 55</p>" })
+  end
+end
+
 RSpec.shared_context "with zip_code workflow" do
   let!(:component) do
     create(

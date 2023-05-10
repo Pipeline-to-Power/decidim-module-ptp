@@ -26,6 +26,14 @@ module Decidim
         redirect_to decidim_budgets.new_zip_code_path
       end
 
+      def ensure_multiple_budgets
+        budget = budgets.first
+        return true if budgets.count > 1 || budgets.count.zero?
+
+        redirect_to decidim_budgets.budget_voting_index_path(budget) && return if voting_booth_forced?
+        redirect_to decidim_budgets.budget_projects_path(budget)
+      end
+
       def decidim_budgets
         # raise request.path.inspect
         @decidim_budgets ||= Decidim::EngineRouter.main_proxy(current_component)
