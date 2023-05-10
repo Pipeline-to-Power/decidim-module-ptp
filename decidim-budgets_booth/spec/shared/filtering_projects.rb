@@ -23,7 +23,6 @@ shared_examples "filtering projects" do
       project.save
 
       visit_budget
-
       within ".scope_id_check_boxes_tree_filter" do
         uncheck "All"
         check translated(scope.name)
@@ -41,7 +40,6 @@ shared_examples "filtering projects" do
       project.save
 
       visit_budget
-
       within ".category_id_check_boxes_tree_filter" do
         uncheck "All"
         check translated(category.name)
@@ -69,14 +67,13 @@ shared_examples "filtering projects" do
         expect(page).to have_css(".budget-list__item", count: 1)
         expect(page).to have_content(translated(project.title))
       end
-      if voting_mode
-        find("a", text: "Read more", match: :first).click
-        click_link "View all projects"
 
-        within "#projects" do
-          expect(page).to have_css(".budget-list__item", count: 1)
-          expect(page).to have_content(translated(project.title))
-        end
+      find("a", text: "Read more", match: :first).click
+      click_link "View all projects"
+
+      within "#projects" do
+        expect(page).to have_css(".budget-list__item", count: 1)
+        expect(page).to have_content(translated(project.title))
       end
     end
   end

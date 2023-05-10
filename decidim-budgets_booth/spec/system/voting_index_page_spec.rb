@@ -60,7 +60,7 @@ describe "Voting index page", type: :system do
     end
 
     it "redirects the user" do
-      expect(page).to have_current_path(decidim_budgets.budgets_path)
+      expect(page).to have_current_path("/")
       within_flash_messages do
         expect(page).to have_content "You are not allowed to perform this action."
       end
