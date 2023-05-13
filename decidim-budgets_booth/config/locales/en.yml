@@ -45,7 +45,7 @@ en:
             review_voting: Review your vote
             start_description: You can browse to the projects to get yourself familiar with them. In order to start voting, click the "Start voting" button.
             finish_description: You have already started voting in this budget. Would you like to finish your vote?
-            casted_title: Thank you for your voting.
+            casted_title: Thank you for voting
             casted_description: You have previously voted in this budget. If you want to see what you voted, click "Review your vote" button. You can also %{cancel_link} and start again.
             result_voted: Review your vote
         project:
