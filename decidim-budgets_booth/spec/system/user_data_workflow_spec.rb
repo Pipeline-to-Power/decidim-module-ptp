@@ -101,7 +101,7 @@ describe "user data workflow", type: :system do
         end
 
         it "renders errors" do
-          within ".zip-code" do
+          within ".zip-code-errors" do
             expect(page).to have_content("ZIP code format is not correct.")
           end
           within "#affirm-checkbox" do
@@ -210,7 +210,7 @@ describe "user data workflow", type: :system do
               element.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt }));
             JS
           )
-          within ".zip-code" do
+          within ".zip-code-errors" do
             expect(page).to have_content("Only letters and digits are allowed.")
           end
           expect(page).to have_selector(".is-invalid-input", count: 5)
@@ -233,7 +233,7 @@ describe "user data workflow", type: :system do
               element.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt }));
             JS
           )
-          within ".zip-code" do
+          within ".zip-code-errors" do
             expect(page).to have_no_content("Only letters and digits are allowed.")
           end
           expect(page).to have_no_selector(".is-invalid-input")

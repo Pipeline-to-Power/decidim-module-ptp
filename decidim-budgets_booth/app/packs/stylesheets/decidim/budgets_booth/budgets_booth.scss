@@ -179,9 +179,8 @@ $active-item-color: $black;
   }
 }
 
-.zip-code{
-  &.x-margin{
-    margin-left: 15px;
-    margin-right: 15px;
+.zip-code-errors{
+  .form-error{
+    margin-top: 1rem;
   }
 }
