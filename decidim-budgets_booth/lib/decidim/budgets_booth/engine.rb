@@ -108,7 +108,7 @@ module Decidim
             Decidim::BudgetsBooth::ComponentExtensions
           )
           Decidim::Scope.include(
-            Decidim::BudgetsBooth::ScopeManageable
+            Decidim::BudgetsBooth::ScopeExtensions
           )
 
           # Forms extensions
