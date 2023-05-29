@@ -24,7 +24,7 @@ This module adds the following feature to the [main branch](https://github.com/p
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp", branch: "feature/zip-code-voting" do
+gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp", branch: "feature/0.26/zip-code-voting" do
   gem "decidim-budgets_booth"
 end
 ```
