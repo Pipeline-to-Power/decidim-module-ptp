@@ -10,37 +10,37 @@ module Decidim
         # not have to be re-fetched for the multiple instances of the
         # ScopeManager class.
         def scopes_mapping_for(scope)
-          scopes_mapping_cache[scope.id] ||= generate_scopes_mapping_for(scope)
-        end
-
-        # Fetches the user's component specific metadata from the local cache in
-        # order to improve the performance. This data is fetched multiple times
-        # during the request and it requires decryption which causes a small
-        # delay when this data is utilized. It should be decrypted only once per
-        # request.
-        def user_data_for(component, user)
-          user_scopes_cache[component.id] ||= {}
-          user_scopes_cache[component.id][user.id] ||= begin
-            user_data = user.budgets_user_data.find_by(component: component)
-            user_data&.metadata || {}
-          end
+          scopes_mapping_cache[scope.id] ||= Rails.cache.fetch(
+            "#{cache_key_prefix}/#{scope.cache_key_with_version}",
+            expires_in: 1.hour
+          ) { generate_scopes_mapping_for(scope) }
         end
 
         # Allow clearing the cache, useful for the specs.
         def clear_cache!
+          scopes_mapping_cache.keys.each do |id|
+            scope = Decidim::Scope.find(id)
+            Rails.cache.delete("#{cache_key_prefix}/#{scope.cache_key_with_version}")
+          rescue ActiveRecord::RecordNotFound
+            # If the record was not found, cache key cannot be regenerated, so
+            # deleting the old cache record can be omitted.
+          end
           @scopes_mapping_cache = {}
-          @user_scopes_cache = {}
         end
 
         private
 
+        def cache_key_prefix
+          "decidim/budgets_booth/scopes_mapping"
+        end
+
+        def cache_key(key)
+          "#{cache_key_prefix}/#{key}"
+        end
+
         # Stores the local cache of the scopes mappings.
         def scopes_mapping_cache
           @scopes_mapping_cache ||= {}
-        end
-
-        def user_scopes_cache
-          @user_scopes_cache ||= {}
         end
 
         # Generates the scopes mapping for the given top-level scope.
@@ -128,10 +128,19 @@ module Decidim
       def user_zip_code(user)
         return nil if user.blank?
 
-        self.class.user_data_for(component, user)["zip_code"]
+        user_data_for(user)["zip_code"]
       end
 
       private
+
+      # Loads the metadata for a specific user from the user data records. If
+      # the cache clear method has been called after the user data was loaded
+      # (e.g. the data was deleted or updated at the same process), this will
+      # reload the data accordingly.
+      def user_data_for(user)
+        user_data = user.budgets_user_data.find_by(component: component)
+        user_data&.metadata || {}
+      end
 
       def scope_for(resource)
         return resource if resource.is_a?(Decidim::Scope)

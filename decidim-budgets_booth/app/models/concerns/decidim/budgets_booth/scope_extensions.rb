@@ -4,7 +4,7 @@ require "active_support/concern"
 
 module Decidim
   module BudgetsBooth
-    module ScopeManageable
+    module ScopeExtensions
       extend ActiveSupport::Concern
 
       included do

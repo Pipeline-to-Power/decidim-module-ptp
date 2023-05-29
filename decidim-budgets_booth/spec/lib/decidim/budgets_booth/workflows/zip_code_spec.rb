@@ -72,4 +72,20 @@ describe Decidim::BudgetsBooth::Workflows::ZipCode do
       expect(result).to be_falsey
     end
   end
+
+  describe "#disable_voting_instructions?" do
+    let(:parent_scope) { create(:scope, organization: organization) }
+
+    it "is disabled by default" do
+      expect(subject).to be_disable_voting_instructions
+    end
+  end
+
+  describe "hide_image_in_popup?" do
+    let(:parent_scope) { create(:scope, organization: organization) }
+
+    it "is disabled by default" do
+      expect(subject).to be_hide_image_in_popup
+    end
+  end
 end

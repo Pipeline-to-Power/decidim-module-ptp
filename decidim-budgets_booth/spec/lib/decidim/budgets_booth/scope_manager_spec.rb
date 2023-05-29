@@ -99,5 +99,62 @@ describe Decidim::BudgetsBooth::ScopeManager do
         expect(described_class.new(another_component).user_zip_code(user)).to be_nil
       end
     end
+
+    context "with multiple processes or threads", :caching do
+      # File cache store needed to persist the cache over multiple processes.
+      let(:file_store) { ActiveSupport::Cache.lookup_store(:file_store, cache_location) }
+      let(:cache_location) { Rails.root.join("tmp/test-file-cache-store") }
+      let(:scope_manager) { Decidim::BudgetsBooth::ScopeManager.new(component) }
+
+      let(:user) { create(:user, organization: organization) }
+      let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "12345" }) }
+
+      # Disable transactional tests to persist the data over multiple
+      # processes.
+      self.use_transactional_tests = false
+
+      before do
+        # Has to be set in order to use the actual memory store because the
+        # runtime configuration has been already loaded with the :null_store
+        # configuration at the testing environment.
+        allow(Rails).to receive(:cache).and_return(file_store)
+        Rails.cache.clear
+      end
+
+      after do
+        FileUtils.rm_rf(cache_location)
+
+        # Because the transactional tests are disabled, we need to manually
+        # clear the tables after the test.
+        connection = ActiveRecord::Base.connection
+        connection.disable_referential_integrity do
+          connection.tables.each do |table_name|
+            next if connection.select_value("SELECT COUNT(*) FROM #{table_name}").zero?
+
+            connection.execute("TRUNCATE #{table_name} CASCADE")
+          end
+        end
+      end
+
+      it "does not persist the state in other processes" do
+        expect(subject.user_zip_code(user)).to eq("12345")
+
+        pid = Process.fork do
+          subcomp = Decidim::Component.find(component.id)
+          subsm = Decidim::BudgetsBooth::ScopeManager.new(subcomp)
+          expect(subsm.user_zip_code(user)).to eq("12345")
+          sleep 5
+          expect(subsm.user_zip_code(user)).to eq("67890")
+        end
+
+        # Give enough time for the other process to do the first expectation
+        sleep(2)
+        user_data.destroy!
+        create(:user_data, component: component, user: user, metadata: { zip_code: "67890" })
+
+        Process.wait(pid)
+        expect($CHILD_STATUS.exitstatus).to eq(0)
+      end
+    end
   end
 end

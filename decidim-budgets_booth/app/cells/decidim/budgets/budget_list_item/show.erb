@@ -3,17 +3,17 @@
     <div class="row collapse card--process__row">
       <div class="columns mediumlarge-8 large-6 card--process__column">
         <div class="card__content">
-        <% if voting_open? && voted_this?(budget) %>
-          <h3 class="card--title">
-            <%= translated_attribute(budget.title) %>
-          </h3>
-        <% else %>
-          <%= link_to_budget budget, class: link_class do %>
+          <% if voting_open? && voted_this?(budget) %>
             <h3 class="card--title">
-                <%= translated_attribute(budget.title) %>
+              <%= translated_attribute(budget.title) %>
             </h3>
-          <% end %>
-        <% end%>
+          <% else %>
+            <%= link_to_budget budget, class: link_class do %>
+              <h3 class="card--title">
+                <%= translated_attribute(budget.title) %>
+              </h3>
+            <% end %>
+          <% end%>
 
           <div class="heading5 margin-bottom-3">
             <%= decidim_sanitize_editor html_truncate(translated_attribute(budget.description), length: 65, separator: "...") %>
@@ -34,9 +34,9 @@
 
                 <% if !voted_this?(budget) %>
                   <%= link_to_budget budget, class: "button expanded button--sc" do %>
-                    <span class="show-for-sr"><%= t(".take_part") %></span>
-                    <span aria-hidden="true"><%= t(".take_part") %></span>
-                    <span class="button__info"><%= t(".current_phase", phase: translated_attribute(current_phase)) %></span>
+                    <span class="show-for-sr"><%= t("take_part", scope: "decidim.budgets.budget_list_item") %></span>
+                    <span aria-hidden="true"><%= t("take_part", scope: "decidim.budgets.budget_list_item") %></span>
+                    <span class="button__info"><%= t("current_phase", scope: "decidim.budgets.budget_list_item", phase: translated_attribute(current_phase)) %></span>
                   <% end %>
                 <% end %>
               </div>

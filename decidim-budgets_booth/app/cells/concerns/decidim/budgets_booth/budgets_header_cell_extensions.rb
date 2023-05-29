@@ -7,8 +7,8 @@ module Decidim
       include ::Decidim::BudgetsBooth::BudgetsHelper
 
       included do
-        delegate :voting_open?, :voting_finished?, :component_settings, to: :controller
-        delegate :user_zip_code, to: :scope_manager
+        delegate :voting_open?, :voting_finished?, :component_settings, :current_workflow, to: :controller
+        delegate :user_zip_code, to: :current_workflow
 
         private
 

@@ -5,7 +5,15 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  <% unless current_workflow.try(:hide_image_in_popup?) %>
+    <div class="row">
+      <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
+        <div class="circle active">
+          <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box", formats: [:svg] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <div class="row text-left margin-bottom-2">
     <%= vote_success_content %>
   </div>

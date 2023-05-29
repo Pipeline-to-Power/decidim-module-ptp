@@ -1,78 +1,69 @@
 <div class="row column voting-rules">
-  <% if voting_booth_forced? %>
-    <% if voting_open? && !voted_this?(budget) %>
-      <div class="row">
-        <div class="columns medium-8 large-9">
-          <button class="link m-bottom" data-open="cancel-voting">
-            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-            <%= t(".cancel_voting") %>
-          </button>
-        </div>
+  <% if voting_mode? %>
+    <div class="row">
+      <div class="columns medium-8 large-9">
+        <button class="link m-bottom" data-open="cancel-voting">
+          <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+          <%= t(".cancel_voting") %>
+        </button>
       </div>
-    <% else %>
-      <div class="row">
-        <div class="columns medium-8 large-9">
-          <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
-            <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-            <%= t(".back_to_budgets") %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="callout warning">
-      <div class="row">
-        <div class="columns medium-8 large-9">
-          <h2 class="heading3">
-            <%= t(".rules.title") %>
-          </h2>
-          <ul>
-            <%= raw current_rule_explanation %>
-          </ul>
-        </div>
+    </div>
+  <% elsif budgets.count > 1 %>
+    <div class="row">
+      <div class="columns medium-8 large-9">
+        <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
+          <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+          <%= t(".back_to_budgets") %>
+        <% end %>
       </div>
     </div>
   <% end %>
 </div>
-<div class="card budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
-  <div class="card__content">
-    <% if include_heading %>
+<% if voting_mode? %>
+  <div class="card budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
+    <div class="card__content">
       <h2 class="heading3">
         <%= t(".choose_budget") %>
       </h2>
       <p>
         <%= t(".choose_description") %>
       </p>
-    <% end %>
 
-    <% if current_order.projects_rule? %>
-      <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>">
-        <span class="mini-title"><%= t(".total_projects") %>
-          <strong class="mini-title__strong mini-title__strong--highlight">
-            <%= current_order.maximum_projects %>
-          </strong>
+      <% if current_order.projects_rule? %>
+        <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>">
+          <span class="mini-title"><%= t(".total_projects") %>
+            <strong class="mini-title__strong mini-title__strong--highlight">
+              <%= current_order.maximum_projects %>
+            </strong>
+          </span>
+        </div>
+      <% else %>
+        <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
+          <span class="mini-title"><%= t(".total_budget") %>
+            <strong class="mini-title__strong mini-title__strong--highlight">
+              <%= budget_to_currency(budget.total_budget) %>
+            </strong>
+          </span>
+        </div>
+      <% end %>
+
+      <%= render partial: "order_progress" %>
+
+      <div>
+        <span class="mini-title">
+          <%= t(".assigned") %>
+          <%= render partial: "order_total_budget" %>
         </span>
       </div>
-    <% else %>
-      <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>" data-total-budget="<%= budget.total_budget %>">
-        <span class="mini-title"><%= t(".total_budget") %>
-          <strong class="mini-title__strong mini-title__strong--highlight">
-            <%= budget_to_currency(budget.total_budget) %>
-          </strong>
-        </span>
-      </div>
-    <% end %>
-
-    <%= render partial: "order_progress" %>
-
-    <div>
-      <span class="mini-title">
-        <%= t(".assigned") %>
-        <%= render partial: "order_total_budget" %>
-      </span>
     </div>
-  </div>
 
-  <%= render partial: "order_selected_projects" %>
-</div>
+    <%= render partial: "order_selected_projects" %>
+  </div>
+<% else %>
+  <% if current_order_checked_out? %>
+    <%= render partial: "pre_voting_budget_summary" %>
+  <% else %>
+    <%= render partial: "pre_voting_budget_summary" %>
+  <% end %>
+<% end %>
 <%= render partial: "budget_confirm" %>
