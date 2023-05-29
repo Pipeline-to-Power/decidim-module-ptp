@@ -1,10 +1,10 @@
 <% if voting_booth_forced? %>
   <% if budgets.none? %>
-  <div class="section">
-    <div class="callout warning font-customizer">
-      <%= t(".no_budgets_found") %>
-    </h2>
-  </div>
+    <div class="section">
+      <div class="callout warning font-customizer">
+        <%= t("no_budgets_found", scope: "decidim.budgets.budgets_list") %>
+      </div>
+    </div>
   <% end %>
 
   <div id="budgets">

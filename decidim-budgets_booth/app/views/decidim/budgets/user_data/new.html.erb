@@ -30,16 +30,16 @@
                       <input type="text" name="<%= "digit#{ind + 1}"%>" autocomplete="off" aria-label="<%= t(".inputs", count: ind + 1) %>">
                     </div>
                   <% end %>
-                  </div>
-                  <div class="zip-code-errors">
-                    <span class="form-error text-left is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
-                    <span class="form-error text-left is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
-                    <span class="form-error text-left is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
-                  </div>
-                  <%= form.hidden_field :zip_code, vlaue: @form.zip_code %>
                 </div>
-              </div>
+                <div class="zip-code-errors">
+                  <span class="form-error text-left is-invisible" role="alert" id="only-letters-allowed"><%= t("decidim.budgets.user_data.error.only_letters") %></span>
+                  <span class="form-error text-left  is-invisible" role="alert" id="zip-code-error"><%= t("decidim.budgets.user_data.error.zip_code_empty") %></span>
+                  <span class="form-error text-left  is-invisible" role="alert" data-invalid="<%= @invalid %>" id="zip-code-not-valid"><%= t("decidim.budgets.user_data.error.zip_code_included") %></span>
+                </div>
+                <%= form.hidden_field :zip_code, vlaue: @form.zip_code %>
+                </div>
             </div>
+          </div>
           <% if voting_terms.present? %>
             <div class="card">
               <div class="card__content">
