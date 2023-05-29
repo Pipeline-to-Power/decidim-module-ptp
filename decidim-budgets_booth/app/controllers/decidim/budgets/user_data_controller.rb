@@ -6,7 +6,7 @@ module Decidim
       include FormFactory
       include ::Decidim::BudgetsBooth::BudgetsHelper
 
-      delegate :zip_codes_for, :user_zip_code, to: :scope_manager
+      delegate :user_zip_code, to: :current_workflow
 
       layout "decidim/budgets/voting_layout"
       before_action :ensure_voting_booth_forced
@@ -14,9 +14,11 @@ module Decidim
       before_action :ensure_voting_open
       before_action :ensure_not_voted
 
+      helper_method :user_zip_code
+
       def new
         @form = form(UserDataForm).instance
-        @form.zip_code = user_zip_code(current_user)
+        @form.zip_code = user_zip_code
       end
 
       def create
@@ -46,7 +48,7 @@ module Decidim
       end
 
       def all_zip_codes
-        @all_zip_codes ||= zip_codes_for(current_component)
+        @all_zip_codes ||= scope_manager.zip_codes_for(current_component)
       end
 
       def budgets

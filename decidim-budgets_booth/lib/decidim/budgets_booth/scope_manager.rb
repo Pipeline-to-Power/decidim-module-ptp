@@ -28,19 +28,6 @@ module Decidim
           @scopes_mapping_cache = {}
         end
 
-        def mark_user_updated!(user)
-          Rails.cache.write(cache_key("#{user.id}/updated"), Time.zone.now, expires_in: 1.hour)
-        end
-
-        def user_updated_after?(user, time)
-          return true if Rails.cache.is_a?(ActiveSupport::Cache::NullStore)
-
-          updated_at = Rails.cache.read(cache_key("#{user.id}/updated"))
-          return false unless updated_at
-
-          time > updated_at
-        end
-
         private
 
         def cache_key_prefix
@@ -146,24 +133,13 @@ module Decidim
 
       private
 
-      # Stores the component specific user data in a cached variable for faster
-      # fetching on consecutive fetches. Fetching the data is slow because it is
-      # decrypted, so we need to store it temporarily for faster access.
-      def user_data_cache
-        @user_data_cache ||= {}
-      end
-
       # Loads the metadata for a specific user from the user data records. If
       # the cache clear method has been called after the user data was loaded
       # (e.g. the data was deleted or updated at the same process), this will
       # reload the data accordingly.
       def user_data_for(user)
-        user_data_cache.delete(user.id) if self.class.user_updated_after?(user, Time.zone.now)
-
-        user_data_cache[user.id] ||= begin
-          user_data = user.budgets_user_data.find_by(component: component)
-          user_data&.metadata || {}
-        end
+        user_data = user.budgets_user_data.find_by(component: component)
+        user_data&.metadata || {}
       end
 
       def scope_for(resource)
