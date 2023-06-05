@@ -55,7 +55,7 @@ describe "Confirm voting", type: :system do
           click_button "Continue"
         end
         expect(page).to have_content("Review your vote")
-        expect(page).to have_content("Thank you for your voting.")
+        expect(page).to have_content("Thank you for voting")
         expect(page).to have_css("svg.icon--check.icon", count: 1)
         expect(current_vote.checked_out_at).not_to be_nil
         click_link("Review your vote")
