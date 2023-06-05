@@ -44,7 +44,7 @@ fi:
             review_voting: Vahvista äänesi
             start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
             finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
-            casted_title: Kiitos äänestäsi.
+            casted_title: Kiitos äänestäsi
             casted_description: Olet aikaisemmin äänestänyt tästä budjetista. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
             result_voted: Tarkasta äänesi
         project:

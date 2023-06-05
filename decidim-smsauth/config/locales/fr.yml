@@ -3,98 +3,98 @@ fr:
   activemodel:
     attributes:
       sms_registration:
-        name: Your name
-        email: Your email (optional)
+        name: Votre nom
+        email: Votre adresse e-mail (facultatif)
       sms_sign_in:
-        phone_country: Phone country
-        phone_number: Phone number
+        phone_country: Pays du numéro de téléphone
+        phone_number: Numéro de téléphone
       sms_verification:
-        verification: Verification code
+        verification: Code de vérification
       user:
-        mask_number: Your phone number
+        mask_number: Votre numéro de téléphone
   decidim:
     authorization_handlers:
       smsauth_id:
-        explanation: Verify yourself using an SMS code.
+        explanation: Authentifiez vous en utilisant un code SMS.
         fields:
-          phone_country: Phone country
-          phone_number: Phone number
+          phone_country: Pays du numéro de téléphone
+          phone_number: Numéro de téléphone
         name: SMS
     devise:
       sessions:
         new:
-          email: Sign in with Email
+          email: Se connecter avec e-mail
     smsauth:
       omniauth:
         authenticate_user:
-          error: Verification failed. Please try again.
-          signed_in: Signed in successfully.
-          success: Phone number successfully verified.
-          updated_phone_number: Phone number successfully updated.
-          unauthorized: You are not authorized to perform this action.
+          error: L'authentification a échoué. Veuillez réessayer.
+          signed_in: Connecté avec succès.
+          success: Numéro de téléphone vérifié avec succès.
+          updated_phone_number: Numéro de téléphone mis à jour avec succès.
+          unauthorized: Vous n'êtes pas autorisé à effectuer cette action.
         development_hint:
-          verification_code: "The verificaiton code is: "
-          hint_notification: (This message only appears in development mode)
+          verification_code: "Le code de verification est : "
+          hint_notification: (Ce message n'apparaît qu'en mode développement)
         edit:
-          title: Update your phone number
+          title: Mettre à jour votre numéro de téléphone
         new:
-          another_method: Use another method to sign in
-          title: Sign in with SMS
+          another_method: Utilisez une autre méthode pour vous connecter
+          title: Se connecter par SMS
         phone_form:
-          submit: Send code via SMS
+          submit: Envoyer le code par SMS
         phone_instructions:
-          enter_phone_number: Enter your phone number
-          step_one: Step 1 of 2
-          type_in_phone: Type in your phone number below to get a verification code via SMS to your phone number.
+          enter_phone_number: Entrez votre numéro de téléphone
+          step_one: Étape 1 sur 2
+          type_in_phone: Entrez votre numéro de téléphone ci-dessous pour recevoir un code de vérification par SMS.
         registration:
-          welcome_to_platform: Welcome to the platform!
-          provide_account_detail: Provide account details
-          detail_info: This is the first time you have logged in to this platform, so we kindly ask you to provide us few details about yourself. You can modify these details any time you want under your account settings.
-          required_fields: "*Required fields are marked with an asterisk"
-          tos_title: Terms of service
-          tos_agreement: I agree to the %{link}
-          terms: Terms of Service
-          submit: Complete your account
-          newsletter_title: Contact permission
-          newsletter: Receive occasional newsletters with relevant information
-          error: An error occured, please try again
-          success: You have successfully registered and authorized
-          email_help: Providing your email address makes it easier to sign in to your account later using your email and password.
+          welcome_to_platform: Bienvenue sur la plateforme !
+          provide_account_detail: Fournir les détails du compte
+          detail_info: C'est la première fois que vous vous connectez à cette plate-forme, donc nous vous demandons de nous fournir quelques détails à votre sujet. Vous pouvez modifier ces informations à tout moment dans les paramètres de votre compte.
+          required_fields: "*Les champs obligatoires sont marqués d'un astérisque"
+          tos_title: Conditions d'utilisation
+          tos_agreement: J'accepte les %{link}
+          terms: Conditions d'utilisation
+          submit: Complétez votre compte
+          newsletter_title: Autorisation de contact
+          newsletter: Recevoir des newsletters occasionnelles avec des informations pertinentes
+          error: Une erreur s'est produite, veuillez réessayer
+          success: Vous vous êtes inscrit et autorisé avec succès
+          email_help: En ajoutant votre adresse e-mail, il sera plus facile de vous connecter ensuite.
         send_message:
           error:
-            invalid_from_number: The sender number is not correctly configured or is not able to send messages. Please contact the platform support for further help.
-            invalid_geo_permission: The system is not configured to send messages to your country. Please contact the platform support for further help.
-            invalid_to_number: The phone number you provided is not correct. Please check that you entered your phone number correctly.
-            unknown: An error occured which has been logged, please try again. If the error persists, please contact the platform support for further help.
-          success: "Verification code sent to %{phone}."
-          resend: "Verification code resent to %{phone}."
-          not_allowed: Please wait at least 1 minute to resend the code.
+            invalid_from_number: Le numéro de l'expéditeur n'est pas correctement configuré ou n'est pas en mesure d'envoyer des messages. Veuillez contacter le support de la plateforme pour plus d'aide.
+            invalid_geo_permission: Le système n'est pas configuré pour envoyer des messages à votre pays. Veuillez contacter le support de la plateforme pour plus d'aide.
+            invalid_to_number: Le numéro de téléphone n'est pas correct. Veuillez vérifier que vous avez entré votre numéro de téléphone correctement.
+            unknown: Une erreur est survenue, veuillez réessayer. Si l'erreur persiste, veuillez contacter le support de la plateforme pour plus d'aide.
+          success: "Code de vérification envoyé à %{phone}."
+          resend: "Code de vérification renvoyé à %{phone}."
+          not_allowed: Veuillez patienter au moins 1 minute pour renvoyer le code.
         verification:
-          authenticate: Authenticate with SMS
-          sign_in: Sign in with SMS
-          step_two: Step 2 of 2
-          enter_verification_message: "Enter the verification code sent to: %{phone}"
-          enter_verification_code: Enter verification code
-          submit: Verify
-          not_receive: Did not receive the code?
-          resend_code: Resend code
-          use_another_method: use another method
-          different_phone_number: use
-          already_verified: Your account has already verified
-          or: or
+          authenticate: Connexion par SMS
+          sign_in: Se connecter par SMS
+          step_two: Étape 2 sur 2
+          enter_verification_message: "Entrez le code de vérification reçu au: %{phone}"
+          enter_verification_code: Entrez le code de vérification
+          submit: Vérifier
+          not_receive: Vous n'avez pas reçu le code ?
+          resend_code: Renvoyer le code
+          use_another_method: utiliser une autre méthode
+          different_phone_number: utiliser
+          already_verified: Votre compte a déjà été vérifié
+          or: ou
       verification:
         authorizations:
           edit:
-            verify: Introduce the verification code you received
-            submit: Verify
-            not_receive: Resend code
-            destroy: Restart verification
-            confirm_destroy: Are you sure you want to restart verification process?
+            verify: Introduisez le code de vérification que vous avez reçu
+            submit: Vérifier
+            not_receive: Renvoyer le code
+            destroy: Réessayer la vérification
+            confirm_destroy: Êtes-vous sûr de vouloir redémarrer le processus de vérification ?
           new:
-            title: Authorize your account
-            submit: Send code via SMS
+            title: Autoriser votre compte
+            submit: Envoyer le code par SMS
           update:
-            incorrect: Verification failed. Please try again.
+            incorrect: La vérification a échoué. Veuillez réessayer.
     verifications:
       sms:
         decidim:
@@ -102,4 +102,4 @@ fr:
             verification:
               authorizations:
                 edit:
-                  session_expired: The verification code is expired, please try again
+                  session_expired: Le code de vérification est expiré, veuillez réessayer
