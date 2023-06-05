@@ -104,7 +104,6 @@ describe Decidim::BudgetsBooth::ScopeManager do
       # File cache store needed to persist the cache over multiple processes.
       let(:file_store) { ActiveSupport::Cache.lookup_store(:file_store, cache_location) }
       let(:cache_location) { Rails.root.join("tmp/test-file-cache-store") }
-      let(:scope_manager) { Decidim::BudgetsBooth::ScopeManager.new(component) }
 
       let(:user) { create(:user, organization: organization) }
       let!(:user_data) { create(:user_data, component: component, user: user, metadata: { zip_code: "12345" }) }

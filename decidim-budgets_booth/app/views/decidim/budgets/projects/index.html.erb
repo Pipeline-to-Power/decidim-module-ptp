@@ -8,7 +8,7 @@
           <%= t("title_single", scope: "decidim.budgets.budgets_header") %>
         </h2>
         <p>
-          <%= t("based_on_zip_code", scope: "decidim.budgets.budgets_header", zip_code: user_zip_code(current_user))%>
+          <%= t("based_on_zip_code", scope: "decidim.budgets.budgets_header", zip_code: user_zip_code)%>
           <% if !voted_any? %>
             <em class="margin-left-1"><%= t("not_right_one", scope: "decidim.budgets.budgets_header", link: link_to(t("change_it_here", scope: "decidim.budgets.budgets_header"), new_zip_code_path)).try(:html_safe) %></em>
           <% end %>
