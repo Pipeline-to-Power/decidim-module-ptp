@@ -9,12 +9,6 @@ module Decidim
       included do
         delegate :voting_open?, :voting_finished?, :component_settings, :current_workflow, to: :controller
         delegate :user_zip_code, to: :current_workflow
-
-        private
-
-        def scope_manager
-          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
-        end
       end
     end
   end

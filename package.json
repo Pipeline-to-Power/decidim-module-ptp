@@ -3,6 +3,9 @@
     "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ext .js,.jsx decidim-*/app/packs",
     "stylelint": "stylelint decidim-*/app/packs/**/*.scss"
   },
+  "dependencies": {
+    "@decidim/webpacker": "^0.26.7"
+  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
     "@babel/preset-env": "^7.21.5",

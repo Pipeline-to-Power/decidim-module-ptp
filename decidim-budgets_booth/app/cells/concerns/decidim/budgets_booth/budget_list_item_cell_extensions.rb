@@ -49,10 +49,6 @@ module Decidim
 
         private
 
-        def scope_manager
-          @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
-        end
-
         def budget_scope_type(budget)
           type = translated_attribute(budget&.scope&.scope_type&.name)
           return if type.blank?

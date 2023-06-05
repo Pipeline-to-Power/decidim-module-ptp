@@ -1,0 +1,112 @@
+---
+fr:
+  decidim:
+    components:
+      budgets:
+        settings:
+          global:
+            confirm_vote_text: Text shown on the confirm vote page
+            thanks_text: Popup text after voting
+    budgets:
+      budgets_list:
+        vote: Show
+      partials:
+        voting_help_modal:
+          confirm: I understand how to vote
+          step1: Pick the project
+          step2: Confirm your vote
+          step3: Cast your vote
+          subtitle: You need to cast your vote for it to be counted in the final result.
+          title: Your vote has not been cast.
+      projects:
+        budget_summary:
+          cancel_voting: Cancel voting
+          choose_budget: You decide the budget
+          choose_description: Choose the projects you like and cast your vote at the end.
+        cancel_voting_modal:
+          title: Are you sure you don't want to cast your vote?
+          label: Exit voting
+          description: If you cancel your vote, it will not be count for the final result. In order to get your vote heard, please go back to cast your vote.
+          continue: Continue voting
+          exit: I don't want to vote right now
+        index:
+          back_to_budgets: Back to budgets
+        order_progress:
+          total_budget: "Total budget: "
+          vote: I am ready
+        pre_voting_budget_summary:
+          cancel_order: Cancel your vote
+          are_you_sure: Are you sure you want to delete your vote?
+          pre_vote:
+            title: Welcome to the vote!
+            start_voting: Start voting
+            finish_voting: Finish voting
+            review_voting: Review your vote
+            start_description: You can browse to the projects to get yourself familiar with them. In order to start voting, click the "Start voting" button.
+            finish_description: You have already started voting in this budget. Would you like to finish your vote?
+            casted_title: Thank you for your voting.
+            casted_description: You have previously voted in this budget. If you want to see what you voted, click "Review your vote" button. You can also %{cancel_link} and start again.
+            result_voted: Review your vote
+        project:
+          you_voted: You voted for this
+        project_modal:
+          close_project: Close
+          cancel: Cancel
+          scope: "Scope: "
+          category: "Category: "
+          budget_amount: "Budget: "
+        show:
+          pre_vote:
+            continue_voting: Continue voting
+            start_voting: Start voting
+            introduction: Want to vote this project?
+      project_vote_button:
+        remove_from_vote: Remove from vote
+        add_to_vote: Add to your vote
+      project_list_item:
+        read_more: Read more
+        ordered_item: This item is added to the your votes.
+      voting:
+        voted_summary_modal:
+          title: Your vote
+          label: Close
+          list_description: These are the projects you picked.
+          continue: Continue
+        thanks_message_modal:
+          title: Thank you for voting!
+          close: Close
+          continue: Continue
+          default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
+        confirm:
+          return_voting: I want to change my vote
+          back: Back
+          cancel_order: cancel your vote and start over
+          changed_your_mind_html: If you changed your mind, you can %{cancel_link}.
+          title: Confirm your vote
+          casted_title: Review your vote
+          total_budget: "Total budget: "
+          assigned: "Assigned: "
+          list_description: "These are the projects you picked:"
+          casted_list_description: "These are the projects you voted for:"
+          confirm: Is this correct?
+          cast_vote: Cast your vote
+        general:
+          not_authorized: You need to verify your phone number with SMS in order to vote.
+          multi_authorization_warning: You need to verify yourself in order to vote.
+          not_open_warning: Voting is not allowed.
+        auth_methods:
+          title: Please verify yourself
+          explanation: This voting requires to verify your identity.
+          select_options: Please select from one of the options below to verify yourself.
+          unauthorized_verification: another
+        index:
+          sign_in_first: You need to sign in to start voting.
+          not_permitted_to: You don't have permission to perform this action.
+    authorization_handlers:
+      sms:
+        name: Authorize with "Code by SMS"
+  layouts:
+    decidim:
+      budgets:
+        voting_notification:
+          notification: You are now in the voting booth.

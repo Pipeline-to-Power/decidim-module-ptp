@@ -6,8 +6,7 @@ module Decidim
     module ProjectsHelperExtensions
       include BudgetsHelper
 
-      delegate :progress?, :budgets, to: :current_workflow
-      delegate :user_zip_code, to: :scope_manager
+      delegate :progress?, :budgets, :user_zip_code, to: :current_workflow
 
       def voting_mode?
         false
@@ -64,12 +63,6 @@ module Decidim
 
       def voting_booth_forced?
         current_workflow.try(:voting_booth_forced?)
-      end
-
-      private
-
-      def scope_manager
-        @scope_manager ||= ::Decidim::BudgetsBooth::ScopeManager.new(current_component)
       end
     end
   end

@@ -11,7 +11,7 @@ module Decidim
         # ScopeManager class.
         def scopes_mapping_for(scope)
           scopes_mapping_cache[scope.id] ||= Rails.cache.fetch(
-            "#{cache_key_prefix}/#{scope.cache_key_with_version}",
+            cache_key(scope.cache_key_with_version),
             expires_in: 1.hour
           ) { generate_scopes_mapping_for(scope) }
         end
@@ -20,7 +20,7 @@ module Decidim
         def clear_cache!
           scopes_mapping_cache.keys.each do |id|
             scope = Decidim::Scope.find(id)
-            Rails.cache.delete("#{cache_key_prefix}/#{scope.cache_key_with_version}")
+            Rails.cache.delete(cache_key(scope.cache_key_with_version))
           rescue ActiveRecord::RecordNotFound
             # If the record was not found, cache key cannot be regenerated, so
             # deleting the old cache record can be omitted.
