@@ -32,13 +32,11 @@ module Decidim
       let(:project) { create(:project, budget: budgets.last) }
       let(:votes) { "enabled" }
       let(:decidim_budgets) { Decidim::EngineRouter.main_proxy(component) }
-      # let(:current_settings) { double(:current_settings, votes: votes) }
 
       before do
         request.env["decidim.current_organization"] = organization
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
-        # allow(component).to receive(:current_settings).and_return(current_settings)
       end
 
       describe "#index" do

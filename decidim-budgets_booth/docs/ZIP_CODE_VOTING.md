@@ -1,8 +1,8 @@
 # ZIP code voting
 
-The zip-code voting feature provides a standardized format for creating scopes to represent ZIP code areas. In order to use the feature, the administrator must add the scopes, and scope types to the budgets in a specific order.
+The ZIP code voting feature provides a custom workflow for budgeting for creating scopes to represent ZIP code areas. In order to use the feature, the administrator must add the proper scopes and scope types, and configure the budgets component to use these scopes.
 
-## Enabling ZIP code
+## Enabling ZIP code voting
 
 After installing this module, you should be able to enable/disable this feature from the admin panel. To enable ZIP code workflow, you need to select the "scopes enabled" from your budget's component settings for which you want to enable this feature. Also, you need to select the custom workflow "Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code." that is designed for this feature.
 

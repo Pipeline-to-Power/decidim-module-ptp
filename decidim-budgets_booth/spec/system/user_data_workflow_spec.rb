@@ -245,16 +245,6 @@ describe "user data workflow", type: :system do
           expect(inputs[4].value).to have_content("c")
         end
       end
-
-      # context "key up" do
-      #   it "deletes with backspace" do
-      #     find('div[contenteditable="true"].ql-editor').native.send_keys "a", [:left], [:enter], [:shift, :enter], [:backspace], [:backspace]
-      #   end
-
-      #   it "adds the key" do
-
-      #   end
-      # end
     end
   end
 

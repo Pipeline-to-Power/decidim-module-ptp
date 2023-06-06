@@ -66,13 +66,13 @@ module Decidim
             Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
           )
           Decidim::Budgets::BudgetsListCell.include(
-            Decidim::BudgetsBooth::BudgetsHelper
+            Decidim::BudgetsBooth::VotingExtensions
           )
 
           # We need to  change the budgets header only when zip-code is enabled.
-          # for that we need to access #voting_booth_forced? inside BudgetsHelper
+          # for that we need to access #voting_booth_forced? inside VotingExtensions
           Decidim::Budgets::BudgetsHeaderCell.include(
-            Decidim::BudgetsBooth::BudgetsHelper
+            Decidim::BudgetsBooth::VotingExtensions
           )
 
           # Controllers extensions
@@ -123,7 +123,6 @@ module Decidim
       end
 
       # Initializing BudgetsBooth engine before running the server
-      # Also, we neeed to new workflow for zip_code_voting as a configuration option.
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
@@ -135,6 +134,10 @@ module Decidim
           settings.attribute :vote_cancel_url, type: :string
           settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
+      end
+
+      initializer "decidim_budgets.add_zip_code_workflow" do
+        Decidim::Budgets.workflows[:zip_code] = Decidim::BudgetsBooth::Workflows::ZipCode
       end
     end
   end
