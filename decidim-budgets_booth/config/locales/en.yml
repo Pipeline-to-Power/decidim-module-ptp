@@ -52,6 +52,8 @@ en:
         add_to_vote: Add to your vote
         remove_from_vote: Remove from vote
       projects:
+        budget_confirm:
+          is_this_correct: Is this correct?
         budget_summary:
           back_to_budgets: Show all budgets
           cancel_voting: Cancel voting

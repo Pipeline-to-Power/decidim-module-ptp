@@ -20,6 +20,14 @@
       </ul>
     </div>
     <p class="text-center"><%= t(".are_you_sure") %></p>
+
+      <% if !voting_booth_forced? && voting_terms.present? %>
+        <div class="margin-bottom-2">
+          <h3 class="text-center"><%= t(".is_this_correct") %></h3>
+            <p><%== voting_terms %></p>
+        </div>
+      <% end %>
+
     <div class="row">
       <div class="columns medium-8 medium-offset-2">
         <%= button_to t(".confirm"), checkout_budget_order_path(budget), class: "button expanded", data: { disable: true } %>
