@@ -76,7 +76,6 @@ $(() => {
       let jj = 0;
       for (let ii = ind; ii < zipcodeInputs.length; ii += 1) {
         if (jj > pastedData.length) {
-          console.log("1")
           return;
         }
         if (pastedData.substr(jj, 1)) {
@@ -95,7 +94,6 @@ $(() => {
           event.preventDefault();
           input.value = ""
         }
-        console.log("Backspace key pressed");
       }
     });
 
@@ -111,12 +109,9 @@ $(() => {
         nextInput.select();
       } else {
         let checkbox = document.querySelector("#user_data_affirm_statements_are_correct")
-        console.log(checkbox)
-        console.log("Checkbox is checked?", checkbox.checked)
         if (checkbox.checked) {
           submitBotton.focus();
         } else {
-          console.log("NOT CHECKED")
           checkbox.focus()
         }
       }
