@@ -4,7 +4,7 @@ module Decidim
   module BudgetsBooth
     module BudgetListItemCellExtensions
       extend ActiveSupport::Concern
-      include BudgetsHelper
+      include VotingExtensions
 
       included do
         delegate :voting_open?, :voting_finished?, to: :controller
@@ -45,15 +45,6 @@ module Decidim
           else
             t("decidim.budgets.budget_list_item.more_info")
           end
-        end
-
-        private
-
-        def budget_scope_type(budget)
-          type = translated_attribute(budget&.scope&.scope_type&.name)
-          return if type.blank?
-
-          type.split.last
         end
       end
     end
