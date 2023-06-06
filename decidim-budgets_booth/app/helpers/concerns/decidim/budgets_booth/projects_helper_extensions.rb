@@ -64,6 +64,10 @@ module Decidim
       def voting_booth_forced?
         current_workflow.try(:voting_booth_forced?)
       end
+
+      def voting_terms
+        translated_attribute(component_settings.try(:voting_terms)).presence
+      end
     end
   end
 end
