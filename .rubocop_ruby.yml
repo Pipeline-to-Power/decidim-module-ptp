@@ -16,7 +16,7 @@ AllCops:
     - "**/node_modules/**/*"
     - "**/vendor/**/*"
     - "development_app/**/*"
-    - "*_development_app/**/*"
+    - "development_app/**/*"
     - "decidim_app-design/node_modules/**/*"
     - "spec/decidim_dummy_app/**/*"
     - "node_modules/**/*"

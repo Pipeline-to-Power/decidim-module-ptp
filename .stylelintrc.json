@@ -1,3 +1,3 @@
 {
-  "extends": ["@decidim/stylelint-config"]
+  "extends": "@decidim/stylelint-config"
 }
