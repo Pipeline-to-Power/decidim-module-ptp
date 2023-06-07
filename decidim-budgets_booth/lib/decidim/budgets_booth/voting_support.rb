@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    module VotingExtensions
+    module VotingSupport
       delegate :budgets, :voted, :voted?, to: :current_workflow
 
       def voting_booth_forced?

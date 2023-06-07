@@ -4,7 +4,7 @@
 module Decidim
   module BudgetsBooth
     module OrdersControllerExtensions
-      include ::Decidim::BudgetsBooth::VotingExtensions
+      include ::Decidim::BudgetsBooth::VotingSupport
       extend ActiveSupport::Concern
 
       included do

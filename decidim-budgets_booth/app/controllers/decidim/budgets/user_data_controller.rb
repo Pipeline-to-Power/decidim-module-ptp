@@ -4,7 +4,7 @@ module Decidim
   module Budgets
     class UserDataController < ApplicationController
       include FormFactory
-      include ::Decidim::BudgetsBooth::VotingExtensions
+      include ::Decidim::BudgetsBooth::VotingSupport
 
       delegate :user_zip_code, to: :current_workflow
 

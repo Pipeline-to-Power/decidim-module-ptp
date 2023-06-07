@@ -4,7 +4,7 @@ module Decidim
   module BudgetsBooth
     module ProjectsControllerExtensions
       extend ActiveSupport::Concern
-      include VotingExtensions
+      include VotingSupport
 
       included do
         def index

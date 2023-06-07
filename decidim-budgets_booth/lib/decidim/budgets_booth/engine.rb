@@ -66,13 +66,13 @@ module Decidim
             Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
           )
           Decidim::Budgets::BudgetsListCell.include(
-            Decidim::BudgetsBooth::VotingExtensions
+            Decidim::BudgetsBooth::VotingSupport
           )
 
           # We need to  change the budgets header only when zip-code is enabled.
-          # for that we need to access #voting_booth_forced? inside VotingExtensions
+          # for that we need to access #voting_booth_forced? inside VotingSupport
           Decidim::Budgets::BudgetsHeaderCell.include(
-            Decidim::BudgetsBooth::VotingExtensions
+            Decidim::BudgetsBooth::VotingSupport
           )
 
           # Controllers extensions

@@ -7,7 +7,7 @@ module Decidim
   # This namespace holds the logic of the `BudgetsBooth` component. This component
   # allows users to create budgets_booth in a participatory space.
   module BudgetsBooth
-    autoload :VotingExtensions, "decidim/budgets_booth/voting_extensions"
+    autoload :VotingSupport, "decidim/budgets_booth/voting_support"
     autoload :ScopeManager, "decidim/budgets_booth/scope_manager"
     include ActiveSupport::Configurable
     # Default configuration digits to generate the zip code.
