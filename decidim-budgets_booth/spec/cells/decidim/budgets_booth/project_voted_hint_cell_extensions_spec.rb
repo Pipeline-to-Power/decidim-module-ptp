@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
+describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
   let(:klass) do
     Class.new do
       include Decidim::BudgetsBooth::ProjectVotedHintCellExtensions

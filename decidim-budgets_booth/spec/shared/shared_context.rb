@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_context "with scopes" do
+shared_context "with scopes" do
   let(:parent_scope) { create(:scope, organization: organization) }
   let!(:subscopes) { create_list(:scope, 3, parent: parent_scope, organization: organization) }
   let!(:first_postals) do
@@ -29,11 +29,11 @@ RSpec.shared_context "with scopes" do
   end
 end
 
-RSpec.shared_context "with user data" do
+shared_context "with user data" do
   let!(:user_data) { create(:user_data, component: component, user: user) }
 end
 
-RSpec.shared_context "with scoped budgets" do
+shared_context "with scoped budgets" do
   include_context "with scopes"
 
   let(:organization) { create(:organization) }
@@ -67,7 +67,7 @@ RSpec.shared_context "with scoped budgets" do
   end
 end
 
-RSpec.shared_context "with single scoped budget" do
+shared_context "with single scoped budget" do
   include_context "with scopes"
 
   let(:organization) { create(:organization) }
@@ -82,7 +82,7 @@ RSpec.shared_context "with single scoped budget" do
   end
 end
 
-RSpec.shared_context "with zip_code workflow" do
+shared_context "with zip_code workflow" do
   let!(:component) do
     create(
       :budgets_component,

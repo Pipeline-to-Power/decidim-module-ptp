@@ -2,13 +2,13 @@
 
 require "spec_helper"
 
-describe Decidim::BudgetsBooth::BudgetsHelper do
+describe Decidim::BudgetsBooth::VotingSupport do
   subject { dummy }
 
   let(:dummy) { klass.new }
   let(:klass) do
     Class.new do
-      include Decidim::BudgetsBooth::BudgetsHelper
+      include Decidim::BudgetsBooth::VotingSupport
 
       def current_organization
         organization

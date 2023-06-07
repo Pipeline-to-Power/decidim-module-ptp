@@ -7,7 +7,6 @@
         <span class="progress-meter-text progress-meter-text--right"><%= current_order_budget_percent %>%</span>
       </div>
     </div>
-    <% checkedout = local_assigns.fetch(:checkout?, false) %>
     <% if !current_order_checked_out? && voting_open? %>
       <button class="button small button--sc" data-toggle="budget-confirm" <%= budget_confirm_disabled_attr %>>
         <%= voting_booth_forced? ? t(".vote") : t(".ready") %>

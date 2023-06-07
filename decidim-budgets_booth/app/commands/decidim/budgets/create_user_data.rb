@@ -24,8 +24,6 @@ module Decidim
 
       def create_user_data!
         attributes = {
-          component: form.component,
-          user: form.user,
           metadata: { zip_code: form.zip_code },
           affirm_statements_are_correct: form.affirm_statements_are_correct
         }

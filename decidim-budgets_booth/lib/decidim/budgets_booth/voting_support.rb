@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    module BudgetsHelper
+    module VotingSupport
       delegate :budgets, :voted, :voted?, to: :current_workflow
 
       def voting_booth_forced?
@@ -36,7 +36,6 @@ module Decidim
       end
 
       def decidim_budgets
-        # raise request.path.inspect
         @decidim_budgets ||= Decidim::EngineRouter.main_proxy(current_component)
       end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "rendering new zip code page" do |zip_code_length|
+shared_examples "rendering new zip code page" do |zip_code_length|
   it "renders new zip code page correctly" do
     expect(page).to have_current_path(decidim_budgets.new_zip_code_path)
     expect(page).to have_no_selector(".flash")

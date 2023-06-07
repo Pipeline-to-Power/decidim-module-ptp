@@ -3,7 +3,7 @@
 module Decidim
   module Budgets
     module BudgetsHelper
-      include ::Decidim::BudgetsBooth::BudgetsHelper
+      include ::Decidim::BudgetsBooth::VotingSupport
       def thanks_popup?
         session[:thanks_message] == true
       end

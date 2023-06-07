@@ -1,23 +1,27 @@
 # Decidim::BudgetsBooth
 
-This module aims at wrapping up the voting process so as to help users focus voting once they enter the booth, and keeps away other irrelevant information. Also, the module introduces "zip code" workflow, in which users are limited to vote the budgets from the same neighborhood/borough. click [here](docs/ZIP_CODE_VOTING.md) for more information about how to set the zip codes.
+The purpose of this module is to improve the budgeting voting process to help users to focus on the primary action and hide all the irrelevant information and distractions from the user that may lead to the user not understanding that their vote has not been cast. The idea is to "lock" the user inside a voting booth during the voting process and make it extremely clear for them that if they exit the voting booth, they have not yet cast their vote.
+
+The module also introduces a new budgeting workflow called "ZIP code". This workflow allows limiting the budgets available for the user based on their ZIP code, providing them only those budgets they are eligible to vote at. For more information and how to set this up, please refer to the [ZIP code voting documentation](docs/ZIP_CODE_VOTING.md).
 
 ## Usage
 
-This module is built on top of the decidim-budgets module and adds extra feature/capabilities.
-After installing and configuring this module, you should be able to select the "zip code" workflow from your budgets' component configuration as shown as follows:
-![zip code workflow](zip-code-workflow.png)
-This module adds the following feature to the [main branch](https://github.com/pipeline-to-Power/decidim-module-ptp/):
+This module is built on top of the `decidim-budgets` module and adds extra feature/capabilities to it. After installing this module, the normal budgeting component will automatically provide the voting booth capabilities meaning if you do not want these capabilities, you should uninstall this module.
 
-- Adding capability of adding/editing zip code for the user (users may change their zip code only if they have not voted yet, or if they have deleted all of their votes).
-- Capability of enabling/disabling "zip code" workflow from components configuration.
-- Defining cancel and after finishing voting redirects (useful for asking for feedback, for example, after completing voting).
-- Introducing maximum number of budgets, in which users can vote.
+For enabling the "ZIP code voting" feature, you have a new workflow available for the budgets component named "ZIP code" which shows up at the configuration page as follows:
+![zip code workflow](docs/zip-code-workflow.png)
+
+This workflow enables the following features to the budget voting experience:
+- Capability for enabling/disabling "ZIP code" workflow from components configuration.
+- Capability for the user to provide their ZIP code when entering the voting booth.
+  * Users may change their zip code only if they have not voted yet, or if they have deleted all of their votes.
+- Defining cancel and after finishing voting redirection destinations.
+  * Useful for asking for feedback, for example, after completing voting.
+- Introducing a new configuration for maximum number of budgets, in which users can vote.
 - Adding after voting and after completing voting message, configurable from admin panel.
-- Capability of showing/hiding vote instruction, when the user starts to vote.
-- Capability of showing image in after voting popup.
-- Reverting the confirmation page to the popup.
-- Capability of Adding image to the budgets from back office.
+- Capability of showing/hiding voting instruction, when the user starts to vote.
+- Capability of showing images in the after voting popup.
+- Capability of adding images to the budgets from back office, to be displayed at the budgets listing page.
 
 ## Installation
 
@@ -39,27 +43,30 @@ bundle
 
 ### Admin configuration
 
-To configure this module correctly, you need to first define and set the zip codes correctly ([click here for more information](docs/ZIP_CODE_VOTING.md)). Next, you can configure the following options from your budgets configurations:
-
-- Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code: Selecting this option enables zip code workflow.
-- Maximum number of budgets that user can vote on: this options limits the number of budgets a user can vote on. the default for this value is zero, which means that users can vote in all budgets, made available through selected workflows.
-- Popup text after each vote: The content of the popup which is being shown after each voting.
-- Popup text after voting in all available budgets: he content of the popup which is being shown after user voted in all available budgets.
-- Terms and conditions to be shown when user wants to enter their ZIP code: Set of terms and conditions you ask the users to admit before adding/editing their zip code (this message is being set in zip code entering view).
-- URL to redirect user after voting on all available budgets (default is budgets list)
-- URL to redirect user when canceling voting (default to the root path)
-- Show full project descriptions on the listing page and disable the details popup: By selecting this button, once the users enter the voting booth, they see the complete project information (not truncated version).
+To configure this module correctly, you need to first configure the ZIP codes correctly. Please refer to the [ZIP code voting documentation](docs/ZIP_CODE_VOTING.md) for more information on how to set it up. Next, you can configure the following options from your budgets component configurations:
+- **Vote based on ZIP code:** allows participants to vote on budgets matching their entered ZIP code.
+  * Selecting this option enables ZIP code workflow.
+  * Any other workflow will work as Decidim would normally work but with the voting booth feature enabled.
+- **Popup text after each vote:** the content of the popup which is being shown after each voting.
+- **Popup text after voting in all available budgets:** the content of the popup which is being shown after user voted in all available budgets.
+- **Terms and conditions to be shown when user wants to enter their ZIP code:** set of terms and conditions you ask the users to agree on when they are entering their ZIP code.
+  * This message is shown in ZIP code entering view when using the ZIP code voting.
+  * Otherwise, this message will show up when the user is about to confirm their vote.
+- **URL to redirect user after voting on all available budgets:** Defines where user is redirected after completing their vote.
+  * By default, the user is redirected back to the budgets list.
+- **URL to redirect user when canceling voting:** Defines where the user is redirected if they decide to cancel the voting process.
+  * By default, the user is redirected to the root path.
+- **Show full project descriptions on the listing page and disable the details popup:** This option shows the complete project descriptions on the projects listing page while voting. If this setting is disabled, the descriptions will show up as "teasers" and the whole details are opened within a modal window.
 
 ### Hard coded configuration
 
-You can set the number of digits for the zip codes. The default is set to 5, which is the case for most of the countries. But if you need to add/remove the digits, you can set it from the "zip_code_length".
-To do so, you need to add an initializer, and add the following:
+You can set the number of digits for the ZIP codes which may differ in different countries. The default is set to 5, which is the case for those countries considered when this module was developed. If you need set this to a different number, you can use the following code within an initializer to change this setting:
+
 ```ruby
 Decidim::BudgetsBooth.configure do |config|
-# change this value to desired value
+  # Change this value to the number of characters in the ZIP codes within the country where this instances is used at.
   config.zip_code_length = 5
 end
-```
 
 ## Testing
 
