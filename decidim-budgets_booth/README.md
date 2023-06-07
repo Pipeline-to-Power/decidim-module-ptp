@@ -3,11 +3,14 @@
 The purpose of this module is to improve the budgeting voting process to help users to focus on the primary action and hide all the irrelevant information and distractions from the user that may lead to the user not understanding that their vote has not been cast. The idea is to "lock" the user inside a voting booth during the voting process and make it extremely clear for them that if they exit the voting booth, they have not yet cast their vote.
 
 The module also introduces a new budgeting workflow called "ZIP code". This workflow allows limiting the budgets available for the user based on their ZIP code, providing them only those budgets they are eligible to vote at. For more information and how to set this up, please refer to the [ZIP code voting documentation](docs/ZIP_CODE_VOTING.md).
+
 ## Usage
 
 This module is built on top of the `decidim-budgets` module and adds extra feature/capabilities to it. After installing this module, the normal budgeting component will automatically provide the voting booth capabilities meaning if you do not want these capabilities, you should uninstall this module.
+
 For enabling the "ZIP code voting" feature, you have a new workflow available for the budgets component named "ZIP code" which shows up at the configuration page as follows:
 ![zip code workflow](docs/zip-code-workflow.png)
+
 This workflow enables the following features to the budget voting experience:
 - Capability for enabling/disabling "ZIP code" workflow from components configuration.
 - Capability for the user to provide their ZIP code when entering the voting booth.
@@ -37,6 +40,7 @@ bundle
 ## Configuration
 
 ### Admin configuration
+
 To configure this module correctly, you need to first configure the ZIP codes correctly. Please refer to the [ZIP code voting documentation](docs/ZIP_CODE_VOTING.md) for more information on how to set it up. Next, you can configure the following options from your budgets component configurations:
 - **Vote based on ZIP code:** allows participants to vote on budgets matching their entered ZIP code.
   * Selecting this option enables ZIP code workflow.
@@ -55,6 +59,7 @@ To configure this module correctly, you need to first configure the ZIP codes co
 ### Hard coded configuration
 
 You can set the number of digits for the ZIP codes which may differ in different countries. The default is set to 5, which is the case for those countries considered when this module was developed. If you need set this to a different number, you can use the following code within an initializer to change this setting:
+
 ```ruby
 Decidim::BudgetsBooth.configure do |config|
   # Change this value to the number of characters in the ZIP codes within the country where this instances is used at.
