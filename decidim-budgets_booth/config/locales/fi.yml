@@ -1,15 +1,41 @@
 ---
 fi:
   decidim:
-    components:
-      budgets:
-        settings:
-          global:
-            confirm_vote_text: Äänen vahvistussivulla näytettävä teksti
-            thanks_text: Äänestyksen jälkeisen ikkunan teksti
     budgets:
+      admin:
+        budgets:
+          edit:
+            images: Images
+      budget_list_item:
+        current_phase: 'Current phase: %{phase}'
+        more_info: More info
+        show_my_vote: Show my vote
+        take_part: Take part
+      budgets:
+        actions:
+          cancel_voting: Are you sure you want to exit the voting booth?
+          cancel_zip_code: Are you sure you want to exit?
+        index:
+          cancel_voting: Cancel voting
+          login_before_access: You need to login first.
+          not_allowed: You are not allowed to perform this action.
+      budgets_header:
+        based_on_zip_code: Based on your ZIP code - %{zip_code}.
+        change_it_here: Change it here
+        not_right_one: Not the right one? %{link}
+        title: 'Ballots available to you'
+        title_single: 'This ballot is available to you'
       budgets_list:
+        no_budgets_found: No budgets were found based on your ZIP code. You can change your ZIP code if it's not correct, or you can search again later.
         vote: Näytä
+      orders:
+        modal:
+          assigned: 'Assigned: '
+          close: Close window
+          description: These are the projects you have chosen to be part of the budget.
+          ok: OK
+          title: Your vote in %{budget_title}
+          total_budget: 'Total budget: '
       partials:
         voting_help_modal:
           confirm: Ymmärrän, kuinka äänestän
@@ -18,93 +44,109 @@ fi:
           step3: Anna äänesi
           subtitle: Sinun on annettava äänesi, jotta se lasketaan lopullisiin tuloksiin.
           title: Et ole vielä antanut ääntäsi.
+      project_list_item:
+        ordered_item: This item is added to the your vote.
+        read_more: Lue lisää
+      project_vote_button:
+        add_to_vote: Lisää ääneesi
+        remove_from_vote: Poista äänestäsi
       projects:
+        budget_confirm:
+          is_this_correct: Is this correct?
         budget_summary:
+          back_to_budgets: Show all budgets
           cancel_voting: Poistu äänestyksestä
           choose_budget: Voit päättää budjetin
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
         cancel_voting_modal:
-          title: Haluatko varmasti lopettaa äänestyksen?
-          label: Poistu äänestyksestä
-          description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
           continue: Jatka äänestystä
+          description: Jos poistut äänestyksestä, ääntäsi ei lasketa lopulliseen tulokseen. Jos haluat äänesi vaikuttavan lopputulokseen, palaa takaisin äänestämään.
           exit: En halua äänestää juuri nyt
+          label: Poistu äänestyksestä
+          title: Haluatko varmasti lopettaa äänestyksen?
         index:
           back_to_budgets: Takaisin kaikkiin budjetteihin
         order_progress:
-          total_budget: "Kokonaisbudjetti: "
-          vote: Olen valmis
+          ready: I am ready
+          total_budget: 'Kokonaisbudjetti: '
+          vote: Vote
         pre_voting_budget_summary:
-          cancel_order: poistaa äänesi
           are_you_sure: Haluatko varmasti poistaa äänesi?
+          cancel_order: poistaa äänesi
           pre_vote:
-            title: Tervetuloa äänestämään!
-            start_voting: Aloita äänestys
-            finish_voting: Viimeistele äänestys
-            review_voting: Vahvista äänesi
-            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
-            finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
-            casted_title: Kiitos äänestäsi
             casted_description: Olet aikaisemmin äänestänyt tästä budjetista. Jos haluat nähdä, kuinka äänestit, paina "Tarkasta äänesi" -painiketta. Voit myös %{cancel_link} ja aloittaa alusta.
+            casted_title: Thank you for your voting
+            finish_description: Olet jo aloittanut tämän budjetin äänestyksen. Haluaisitko viimeistellä äänesi?
+            finish_voting: Viimeistele äänestys
             result_voted: Tarkasta äänesi
+            start_description: Voit selata hankkeita tutustuaksesi niihin. Aloittaaksesi äänestyksen, paina "Aloita äänestys" -painiketta.
+            start_voting: Aloita äänestys
+            title: Tervetuloa äänestämään!
+          ready: I am ready
         project:
           you_voted: Äänestit tätä
         project_modal:
-          close_project: Sulje
+          budget_amount: 'Budjetti: '
           cancel: Peruuta
-          scope: "Teema: "
-          category: "Aihepiiri: "
-          budget_amount: "Budjetti: "
+          category: 'Aihepiiri: '
+          close_project: Sulje
+          scope: 'Teema: '
         show:
           pre_vote:
             continue_voting: Jatka äänestystä
-            start_voting: Aloita äänestys
             introduction: Haluatko äänestää tätä hanketta?
-      project_vote_button:
-        remove_from_vote: Poista äänestäsi
-        add_to_vote: Lisää ääneesi
-      project_list_item:
-        read_more: Lue lisää
-        ordered_item: Tämä hanke on lisätty ääneesi.
+            start_voting: Aloita äänestys
+      user_data:
+        error:
+          only_letters: Only letters and digits are allowed.
+          unknown: There was an error. Please try again.
+          zip_code_empty: ZIP code format is not correct.
+          zip_code_included: The ZIP code you provided is not part of the areas that are eligible for voting. Make sure you have entered the correct ZIP code and try again.
+        new:
+          affirm_statements: By checking this box, I affirm that these stamenets are true, and that I  meet the voting eligibility requirements.
+          cancel: Cancel
+          change_zip_code_after_vote: You can not change your ZIP code after started voting. Delete all of your votes first.
+          description: Please provide your ZIP code to find your Participatory Budgeting ballots.
+          inputs:
+            one: First digit
+            other: digit %{count}
+          must_be_accepted: must be accepted
+          submit: Find my ballots
+          title: ZIP code
+          voting_ended: You can not set your ZIP code when the voting is not open.
+          welcome: Welcome to the <br><strong>%{organization} Participatory Budgeting!</strong>
+        success: You have successfully registered your ZIP code.
       voting:
-        voted_summary_modal:
-          title: Äänesi
-          label: Sulje
-          list_description: Valitsit nämä hankkeet.
-          continue: Jatka
-        thanks_message_modal:
-          title: Kiitos äänestäsi!
-          close: Sulje
-          continue: Jatka
-          default_text: Äänesi on nyt annettu. Voit jatkaa äänestystä muissa budjeteissa tai kirjautua ulos alustalta.
-        confirm:
-          return_voting: Haluan muuttaa ääntäni
-          back: Takaisin
-          cancel_order: poistaa äänesi ja aloittaa alusta
-          changed_your_mind_html: Jos muutit mieltäsi, voit %{cancel_link}.
-          title: Vahvista äänesi
-          casted_title: Tarkasta äänesi
-          total_budget: "Kokonaisbudjetti: "
-          assigned: "Käytetty: "
-          list_description: "Valitsit nämä hankkeet:"
-          casted_list_description: "Äänestit näitä hankkeita:"
-          confirm: Onko tämä oikein?
-          cast_vote: Anna äänesi
         general:
-          not_authorized: Sinun täytyy vahvistaa puhelinnumerosi tekstiviestillä äänestääksesi.
-          multi_authorization_warning: Sinun täytyy vahvistaa käyttäjätilisi äänestääksesi.
           not_open_warning: Äänestäminen ei ole sallittua.
-        auth_methods:
-          title: Vahvista käyttäjätilisi
-          explanation: Tätä äänestystä varten sinun tulee vahvistaa käyttäjätilisi.
-          select_options: Valitse yksi seuraavista tavoista vahvistaaksesi käyttäjätilisi.
-          unauthorized_verification: muut tavat
         index:
           sign_in_first: Sinun täytyy kirjautua sisään äänestääksesi.
-          not_permitted_to: Sinulla ei ole oikeuksia suorittaa tätä toimintoa.
-    authorization_handlers:
-      sms:
-        name: Vahvista "Tekstiviestikoodilla"
+        thanks_message_modal:
+          close: Sulje
+          continue: Jatka
+          title: Kiitos äänestäsi!
+        vote_completed_modal:
+          close: Close
+          continue: Continue
+          title: You successfully completed your votes
+        voted_summary_modal:
+          continue: Jatka
+          label: Sulje
+          list_description: Valitsit nämä hankkeet.
+          title: Äänesi
+    components:
+      budgets:
+        settings:
+          global:
+            maximum_budgets_to_vote_on: Maximum number of budgets that user can vote on (default is 0, which means user can vote on all available budgets)
+            show_full_description_on_listing_page: Show full project descriptions on the listing page and disable the details popup
+            vote_cancel_url: URL to redirect user when canceling voting (defaullt to the root path)
+            vote_completed_content: Popup text after voting in all available budgets
+            vote_success_content: Popup text after each vote
+            vote_success_url: URL to redirect user after voting on all available budgets (default is budgets list)
+            voting_terms: Terms and conditions to be shown when user wants to enter their ZIP code
+            workflow_choices:
+              zip_code: 'Vote based on ZIP code: allows participants to vote on budgets matching their entered ZIP code.'
   layouts:
     decidim:
       budgets:
