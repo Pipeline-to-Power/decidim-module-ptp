@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_context "when signed-in" do
+shared_context "when signed-in" do
   include_context "when organization present"
 
   let(:user) { create(:user, :confirmed, organization: organization, phone_number: "4578945421", phone_country: "FI") }
@@ -10,7 +10,7 @@ RSpec.shared_context "when signed-in" do
   end
 end
 
-RSpec.shared_context "with unauthorized user sign in" do
+shared_context "with unauthorized user sign in" do
   include_context "when organization present"
   let(:user) { create(:user, :confirmed, organization: organization) }
 
@@ -19,7 +19,7 @@ RSpec.shared_context "with unauthorized user sign in" do
   end
 end
 
-RSpec.shared_context "when organization present" do
+shared_context "when organization present" do
   let(:organization) { create(:organization) }
 
   before do
@@ -27,7 +27,7 @@ RSpec.shared_context "when organization present" do
   end
 end
 
-RSpec.shared_context "with twilio gateway" do
+shared_context "with twilio gateway" do
   let(:server) { "https://api.twilio.com" }
   let(:api_version) { "2010-04-01" }
   let(:api_key) { "dummykey" }
