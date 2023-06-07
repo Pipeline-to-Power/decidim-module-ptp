@@ -4,12 +4,11 @@ Localization improvements for the United States.
 
 ## Usage
 
-L10n will be available as a Component for a Participatory
-Space.
-After installing this gem, all of the dates will be shown in U.S format. Also, date-pickers change
-to reflect those changes.
+After installing this gem, all of the dates will be shown in U.S. format. Also
+all date picker elements are also changed to utilize the same regional
+formatting when picking the dates and times in the forms.
 
-![U.S format dates](date_change.png)
+![U.S date formats](docs/date_change.png)
 
 
 ## Installation
@@ -17,9 +16,7 @@ to reflect those changes.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-ptp", github: "Pipeline-to-Power/decidim-module-ptp" do
-  gem "decidim-l10n"
-end
+gem "decidim-l10n", github: "Pipeline-to-Power/decidim-module-ptp", branch: "main"
 ```
 
 And then execute:
