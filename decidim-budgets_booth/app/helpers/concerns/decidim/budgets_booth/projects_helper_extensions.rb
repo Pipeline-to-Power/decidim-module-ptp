@@ -4,7 +4,9 @@ module Decidim
   module BudgetsBooth
     # Customizes the projects helper
     module ProjectsHelperExtensions
-      delegate :progress?, to: :current_workflow
+      include VotingSupport
+
+      delegate :progress?, :budgets, :user_zip_code, to: :current_workflow
 
       def voting_mode?
         false
@@ -49,12 +51,22 @@ module Decidim
         t(key, scope: i18n_scope)
       end
 
-      def budgets_accessible?
-        !voting_mode? && budgets_count > 1
-      end
-
       def budgets_count
         Decidim::Budgets::Budget.where(component: current_component).count
+      end
+
+      def current_phase
+        process = Decidim::ParticipatoryProcesses::OrganizationParticipatoryProcesses
+                  .new(current_organization).query.find_by(slug: params[:participatory_process_slug])
+        process&.active_step&.title
+      end
+
+      def voting_booth_forced?
+        current_workflow.try(:voting_booth_forced?)
+      end
+
+      def voting_terms
+        translated_attribute(component_settings.try(:voting_terms)).presence
       end
     end
   end

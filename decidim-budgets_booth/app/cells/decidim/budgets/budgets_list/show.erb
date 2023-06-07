@@ -1,0 +1,58 @@
+<% if voting_booth_forced? %>
+  <div class="row">
+    <div class="columns mediumlarge-12">
+      <%= render :card_list %>
+    </div>
+  </div>
+  <% if voting_open? && voted? %>
+    <div class="row columns">
+      <div class="margin-bottom-3">
+        <p>
+          <%= t(:if_change_opinion, scope: i18n_scope) %>
+          <%= link_to(
+          t("cancel_order.only_one", scope: i18n_scope),
+          budget_order_path(voted.first),
+          method: :delete,
+          data: { confirm: t("projects.budget_summary.are_you_sure", scope: "decidim.budgets") }) if voted.one? %>
+        </p>
+        <% if !voted.one? && voted.any? %>
+          <ul>
+            <% voted.each do |budget| %>
+              <li>
+                <%= link_to(
+                  t("cancel_order.more_than_one", scope: i18n_scope, name: translated_attribute(budget.title)),
+                  budget_order_path(budget),
+                  method: :delete,
+                  class: "cancel-order",
+                  data: {
+                    confirm: t("projects.budget_summary.are_you_sure", scope: "decidim.budgets")
+                    }
+                ) %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="row">
+    <div class="columns medium-7 mediumlarge-8">
+      <% if !voting_finished? && (voted?) %>
+        <div class="section">
+          <h2 class="section-heading">
+            <%= t(:my_budgets, scope: i18n_scope) %>
+          </h2>
+
+          <%= render :voted %>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="columns mediumlarge-12">
+          <%= render :card_list %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

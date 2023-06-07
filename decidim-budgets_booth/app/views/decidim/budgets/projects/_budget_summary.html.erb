@@ -1,5 +1,5 @@
 <div class="row column voting-rules">
-  <% unless current_order_checked_out? %>
+  <% if voting_mode? %>
     <div class="row">
       <div class="columns medium-8 large-9">
         <button class="link m-bottom" data-open="cancel-voting">
@@ -8,21 +8,26 @@
         </button>
       </div>
     </div>
+  <% elsif budgets.count > 1 %>
+    <div class="row">
+      <div class="columns medium-8 large-9">
+        <%= button_to(decidim_budgets.budgets_path, class: "link m-bottom", method: :get) do %>
+          <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
+          <%= t(".back_to_budgets") %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-<% if current_order_checked_out? %>
-  <%= render partial: "pre_voting_budget_summary" %>
-<% else %>
+<% if voting_mode? %>
   <div class="card budget-summary" data-progress-reference data-safe-url="<%= budget_url(budget) %>">
     <div class="card__content">
-      <% if include_heading %>
-        <h2 class="heading3">
-          <%= t(".choose_budget") %>
-        </h2>
-        <p>
-          <%= t(".choose_description") %>
-        </p>
-      <% end %>
+      <h2 class="heading3">
+        <%= t(".choose_budget") %>
+      </h2>
+      <p>
+        <%= t(".choose_description") %>
+      </p>
 
       <% if current_order.projects_rule? %>
         <div class="budget-summary__total" data-total-allocation="<%= current_order.available_allocation %>">
@@ -54,4 +59,11 @@
 
     <%= render partial: "order_selected_projects" %>
   </div>
+<% else %>
+  <% if current_order_checked_out? %>
+    <%= render partial: "pre_voting_budget_summary" %>
+  <% else %>
+    <%= render partial: "pre_voting_budget_summary" %>
+  <% end %>
 <% end %>
+<%= render partial: "budget_confirm" %>

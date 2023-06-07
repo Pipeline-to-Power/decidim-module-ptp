@@ -1,16 +1,42 @@
 ---
-
 en:
   decidim:
-    components:
-      budgets:
-        settings:
-          global:
-            confirm_vote_text: Text shown on the confirm vote page
-            thanks_text: Popup text after voting
     budgets:
+      admin:
+        budgets:
+          edit:
+            images: Images
+      budget_list_item:
+        current_phase: 'Current phase: %{phase}'
+        more_info: More info
+        show_my_vote: Show my vote
+        take_part: Take part
+      budgets:
+        actions:
+          cancel_voting: Are you sure you want to exit the voting booth?
+          cancel_zip_code: Are you sure you want to exit?
+        index:
+          cancel_voting: Cancel voting
+          login_before_access: You need to login first.
+          not_allowed: You are not allowed to perform this action.
+      budgets_header:
+        based_on_zip_code: Based on your ZIP code - %{zip_code}.
+        change_it_here: Change it here
+        not_right_one: Not the right one? %{link}
+        title: 'Ballots available to you'
+        title_single: 'This ballot is available to you'
       budgets_list:
+        no_budgets_found: No budgets were found based on your ZIP code. You can change
+          your ZIP code if it's not correct, or you can search again later.
         vote: Show
+      orders:
+        modal:
+          assigned: 'Assigned: '
+          close: Close window
+          description: These are the projects you have chosen to be part of the budget.
+          ok: OK
+          title: Your vote in %{budget_title}
+          total_budget: 'Total budget: '
       partials:
         voting_help_modal:
           confirm: I understand how to vote
@@ -19,93 +45,126 @@ en:
           step3: Cast your vote
           subtitle: You need to cast your vote for it to be counted in the final result.
           title: Your vote has not been cast.
+      project_list_item:
+        ordered_item: This item is added to the your vote.
+        read_more: Read more
+      project_vote_button:
+        add_to_vote: Add to your vote
+        remove_from_vote: Remove from vote
       projects:
+        budget_confirm:
+          is_this_correct: Is this correct?
         budget_summary:
+          back_to_budgets: Show all budgets
           cancel_voting: Cancel voting
           choose_budget: You decide the budget
-          choose_description: Choose the projects you like and cast your vote at the end.
+          choose_description: Choose the projects you like and cast your vote at the
+            end.
         cancel_voting_modal:
-          title: Are you sure you don't want to cast your vote?
-          label: Exit voting
-          description: If you cancel your vote, it will not be count for the final result. In order to get your vote heard, please go back to cast your vote.
           continue: Continue voting
+          description: If you cancel your vote, it will not be count for the final
+            result. In order to get your vote heard, please go back to cast your vote.
           exit: I don't want to vote right now
+          label: Exit voting
+          title: Are you sure you don't want to cast your vote?
         index:
           back_to_budgets: Back to budgets
         order_progress:
-          total_budget: "Total budget: "
-          vote: I am ready
+          ready: I am ready
+          total_budget: 'Total budget: '
+          vote: Vote
         pre_voting_budget_summary:
-          cancel_order: Cancel your vote
           are_you_sure: Are you sure you want to delete your vote?
+          cancel_order: Cancel your vote
           pre_vote:
-            title: Welcome to the vote!
-            start_voting: Start voting
+            casted_description: You have previously voted in this budget. If you want
+              to see what you voted, click "Review your vote" button. You can also
+              %{cancel_link} and start again.
+            casted_title: Thank you for your voting
+            finish_description: You have already started voting in this budget. Would
+              you like to finish your vote?
             finish_voting: Finish voting
-            review_voting: Review your vote
-            start_description: You can browse to the projects to get yourself familiar with them. In order to start voting, click the "Start voting" button.
-            finish_description: You have already started voting in this budget. Would you like to finish your vote?
-            casted_title: Thank you for voting
-            casted_description: You have previously voted in this budget. If you want to see what you voted, click "Review your vote" button. You can also %{cancel_link} and start again.
             result_voted: Review your vote
+            start_description: You can browse to the projects to get yourself familiar
+              with them. In order to start voting, click the "Start voting" button.
+            start_voting: Start voting
+            title: Welcome to the vote!
+          ready: I am ready
         project:
           you_voted: You voted for this
         project_modal:
-          close_project: Close
+          budget_amount: 'Budget: '
           cancel: Cancel
-          scope: "Scope: "
-          category: "Category: "
-          budget_amount: "Budget: "
+          category: 'Category: '
+          close_project: Close
+          scope: 'Scope: '
         show:
           pre_vote:
             continue_voting: Continue voting
-            start_voting: Start voting
             introduction: Want to vote this project?
-      project_vote_button:
-        remove_from_vote: Remove from vote
-        add_to_vote: Add to your vote
-      project_list_item:
-        read_more: Read more
-        ordered_item: This item is added to the your votes.
+            start_voting: Start voting
+      user_data:
+        error:
+          only_letters: Only letters and digits are allowed.
+          unknown: There was an error. Please try again.
+          zip_code_empty: ZIP code format is not correct.
+          zip_code_included: The ZIP code you provided is not part of the areas that
+            are eligible for voting. Make sure you have entered the correct ZIP code
+            and try again.
+        new:
+          affirm_statements: By checking this box, I affirm that these stamenets are
+            true, and that I  meet the voting eligibility requirements.
+          cancel: Cancel
+          change_zip_code_after_vote: You can not change your ZIP code after started
+            voting. Delete all of your votes first.
+          description: Please provide your ZIP code to find your Participatory Budgeting
+            ballots.
+          inputs:
+            one: First digit
+            other: digit %{count}
+          must_be_accepted: must be accepted
+          submit: Find my ballots
+          title: ZIP code
+          voting_ended: You can not set your ZIP code when the voting is not open.
+          welcome: Welcome to the <br><strong>%{organization} Participatory Budgeting!</strong>
+        success: You have successfully registered your ZIP code.
       voting:
-        voted_summary_modal:
-          title: Your vote
-          label: Close
-          list_description: These are the projects you picked.
-          continue: Continue
-        thanks_message_modal:
-          title: Thank you for voting!
-          close: Close
-          continue: Continue
-          default_text: Your vote has now been cast. You can continue voting in other budgets or sign out from the platform now.
-        confirm:
-          return_voting: I want to change my vote
-          back: Back
-          cancel_order: cancel your vote and start over
-          changed_your_mind_html: If you changed your mind, you can %{cancel_link}.
-          title: Confirm your vote
-          casted_title: Review your vote
-          total_budget: "Total budget: "
-          assigned: "Assigned: "
-          list_description: "These are the projects you picked:"
-          casted_list_description: "These are the projects you voted for:"
-          confirm: Is this correct?
-          cast_vote: Cast your vote
         general:
-          not_authorized: You need to verify your phone number with SMS in order to vote.
-          multi_authorization_warning: You need to verify yourself in order to vote.
           not_open_warning: Voting is not allowed.
-        auth_methods:
-          title: Please verify yourself
-          explanation: This voting requires to verify your identity.
-          select_options: Please select from one of the options below to verify yourself.
-          unauthorized_verification: another
         index:
           sign_in_first: You need to sign in to start voting.
-          not_permitted_to: You don't have permission to perform this action.
-    authorization_handlers:
-      sms:
-        name: Authorize with "Code by SMS"
+        thanks_message_modal:
+          close: Close
+          continue: Continue
+          title: Thank you for voting!
+        vote_completed_modal:
+          close: Close
+          continue: Continue
+          title: You successfully completed your votes
+        voted_summary_modal:
+          continue: Continue
+          label: Close
+          list_description: These are the projects you picked.
+          title: Your vote
+    components:
+      budgets:
+        settings:
+          global:
+            maximum_budgets_to_vote_on: Maximum number of budgets that user can vote
+              on (default is 0, which means user can vote on all available budgets)
+            show_full_description_on_listing_page: Show full project descriptions
+              on the listing page and disable the details popup
+            vote_cancel_url: URL to redirect user when canceling voting (defaullt
+              to the root path)
+            vote_completed_content: Popup text after voting in all available budgets
+            vote_success_content: Popup text after each vote
+            vote_success_url: URL to redirect user after voting on all available budgets
+              (default is budgets list)
+            voting_terms: Terms and conditions to be shown when user wants to enter
+              their ZIP code
+            workflow_choices:
+              zip_code: 'Vote based on ZIP code: allows participants to vote on budgets
+                matching their entered ZIP code.'
   layouts:
     decidim:
       budgets:

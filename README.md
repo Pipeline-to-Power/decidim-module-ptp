@@ -4,7 +4,7 @@ A [Decidim](https://github.com/decidim/decidim) module that encapsulates followi
 1. [decidim-budgets_booth](./decidim-budgets_booth) module, which overrides the voting process.
 2. [decidim-l10n](./decidim-l10n) module, that provides different formats for dates and times.
 3. [decidim-sms-twilio](./decidim-sms-twilio) module, which provides Twilio SMS integration.
-4. [decdidim-smsauth](./decdidim-smsauth) module, that provides SMS based authentication implementation.
+4. [decidim-smsauth](./decidim-smsauth) module, that provides SMS based authentication implementation.
 
 You may add a selection of the these modules, in which case, please refer to those modules readme file.
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "phone authorization process" do
+shared_examples "phone authorization process" do
   include_context "with twilio gateway"
 
   describe "authentication process" do

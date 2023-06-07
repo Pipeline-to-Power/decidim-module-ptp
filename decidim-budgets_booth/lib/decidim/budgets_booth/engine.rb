@@ -16,14 +16,15 @@ module Decidim
         # "sms" authentication.
         Decidim::Budgets::Engine.routes.prepend do
           resources :budgets do
-            resources :voting, only: [:index] do
-              collection do
-                get :confirm, to: "voting#confirm"
-              end
-            end
+            resources :voting, only: [:index]
 
             namespace :voting do
               resources :projects, only: [:show]
+            end
+            resource :order, only: [:show]
+
+            collection do
+              resources :zip_code, only: [:new, :create], controller: "user_data", path: "user/zip_code"
             end
           end
         end
@@ -61,13 +62,62 @@ module Decidim
             Decidim::BudgetsBooth::BudgetListItemCellExtensions
           )
 
+          Decidim::Budgets::BudgetsHeaderCell.include(
+            Decidim::BudgetsBooth::BudgetsHeaderCellExtensions
+          )
+          Decidim::Budgets::BudgetsListCell.include(
+            Decidim::BudgetsBooth::VotingSupport
+          )
+
+          # We need to  change the budgets header only when zip-code is enabled.
+          # for that we need to access #voting_booth_forced? inside VotingSupport
+          Decidim::Budgets::BudgetsHeaderCell.include(
+            Decidim::BudgetsBooth::VotingSupport
+          )
+
           # Controllers extensions
+          Decidim::Budgets::OrdersController.include(
+            Decidim::BudgetsBooth::OrdersControllerExtensions
+          )
+
+          Decidim::Budgets::BudgetsController.include(
+            Decidim::BudgetsBooth::BudgetsControllerExtensions
+          )
+
+          Decidim::Budgets::ProjectsController.include(
+            Decidim::BudgetsBooth::ProjectsControllerExtensions
+          )
+
           Decidim::Budgets::LineItemsController.include(
             Decidim::BudgetsBooth::LineItemsControllerExtensions
           )
 
-          Decidim::Budgets::OrdersController.include(
-            Decidim::BudgetsBooth::OrdersControllerExtensions
+          # Commands extensions
+          Decidim::Budgets::Admin::CreateBudget.include(
+            Decidim::BudgetsBooth::CreateBudgetExtensions
+          )
+
+          Decidim::Budgets::Admin::UpdateBudget.include(
+            Decidim::BudgetsBooth::UpdateBudgetExtensions
+          )
+
+          # Models extensions
+          Decidim::Budgets::Budget.include(
+            Decidim::BudgetsBooth::BudgetExtensions
+          )
+          Decidim::User.include(
+            Decidim::BudgetsBooth::UserExtensions
+          )
+          Decidim::Component.include(
+            Decidim::BudgetsBooth::ComponentExtensions
+          )
+          Decidim::Scope.include(
+            Decidim::BudgetsBooth::ScopeExtensions
+          )
+
+          # Forms extensions
+          Decidim::Budgets::Admin::BudgetForm.include(
+            Decidim::BudgetsBooth::BudgetFormExtensions
           )
         end
       end
@@ -76,9 +126,18 @@ module Decidim
       initializer "decidim_budgets_booth.add_global_component_settings" do
         manifest = Decidim.find_component_manifest("budgets")
         manifest.settings(:global) do |settings|
-          settings.attribute :confirm_vote_text, type: :text, translated: true, editor: true
-          settings.attribute :thanks_text, type: :text, translated: true, editor: true
+          settings.attribute :maximum_budgets_to_vote_on, type: :integer, default: 0
+          settings.attribute :vote_success_content, type: :text, translated: true, editor: true
+          settings.attribute :vote_completed_content, type: :text, translated: true, editor: true
+          settings.attribute :voting_terms, type: :text, translated: true, editor: true
+          settings.attribute :vote_success_url, type: :string
+          settings.attribute :vote_cancel_url, type: :string
+          settings.attribute :show_full_description_on_listing_page, type: :boolean, default: false
         end
+      end
+
+      initializer "decidim_budgets.add_zip_code_workflow" do
+        Decidim::Budgets.workflows[:zip_code] = Decidim::BudgetsBooth::Workflows::ZipCode
       end
     end
   end

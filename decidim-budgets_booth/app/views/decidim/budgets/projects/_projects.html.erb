@@ -7,7 +7,7 @@
 <div class="budget-list">
   <% projects.each do |project| %>
     <%= render partial: "project", locals: { project: project } %>
-    <%= render partial: "project_modal", locals: { project: project } if voting_mode? %>
+    <%= render partial: "project_modal", locals: { project: project } %>
   <% end %>
   <%= render partial: "project_modal", locals: { project: @select_project } if @select_project.present? %>
 </div>
