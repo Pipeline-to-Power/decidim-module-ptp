@@ -5,7 +5,7 @@ fi:
       admin:
         budgets:
           edit:
-            images: Images
+            images: Kuvat
       budget_list_item:
         current_phase: 'Current phase: %{phase}'
         more_info: More info
