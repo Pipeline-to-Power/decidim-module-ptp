@@ -5,6 +5,7 @@ module Decidim
     # Customizes the project card cell
     module ProjectListItemExtensions
       extend ActiveSupport::Concern
+      delegate :current_workflow, to: :controller
 
       include Decidim::ApplicationHelper
 

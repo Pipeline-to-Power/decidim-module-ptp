@@ -1,11 +1,11 @@
-# Decidim::Sms-twilio
+# Decidim::Sms::Twilio
 
 Twilio SMS integration.
 
 ## Usage
 
-Sms-twilio will be available as a Component for a Participatory
-Space. SMS-related tasks will be done with [Twilio sms gateway](https://www.twilio.com) after adding this module.
+Sms::Twilio provides a [Twilio](https://www.twilio.com) integration to be used
+to send SMS messages from Decidim using the Twilio APIs.
 
 ## Installation
 
@@ -34,7 +34,8 @@ You need to add the followings to your .rbenv-vars:
 | TWILIO_SENDER           | Sender number assigned to your account from Twilio | Required |
 
 
-Please refer to [Twilio documentation](https://www.twilio.com/docs/twilio-cli) for more information.
+Please refer to [Twilio documentation](https://www.twilio.com/docs/twilio-cli)
+for more information.
 
 Next, you need to add the followings to your secrets.yml file:
 

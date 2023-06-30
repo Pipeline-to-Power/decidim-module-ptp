@@ -54,11 +54,22 @@ module Decidim
       end
 
       def generate_code
-        SecureRandom.random_number(10_000_000).to_s
+        code = SecureRandom.random_number(10**@auth_code_length).to_s
+        add_zeros(code)
+      end
+
+      def auth_code_length
+        @auth_code_length ||= 7
       end
 
       def phone_with_country_code(country_code, phone_number)
         PhoneNumberFormatter.new(phone_number: phone_number, iso_country_code: country_code).format
+      end
+
+      def add_zeros(code)
+        return code if code.length == @auth_code_length
+
+        ("0" * (@auth_code_length - code.length)) + code
       end
     end
   end

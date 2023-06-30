@@ -4,17 +4,17 @@ SMS based authentication implementation.
 
 ## Usage
 
-The sign in process for Decidim is seen confusing and cumbersome during the most
-popular participatory budgeting voting phase which generally draws the most
-attention. In order to make it simpler for the majority of the public, this module employs an SMS based
-authentication flow during this working phase. After adding this module:
+The sign in process for Decidim is seen confusing and cumbersome during the most popular participatory budgeting voting
+phase which generally draws the most attention. In order to make it simpler for the majority of the public, this module
+provides an SMS based authentication flow during this working phase. After adding this module:
 
-- Users can choose between the SMS-based authentication or email based authentication based on their preferences at the login page.
-- The users can enter their phone number (with a possible country code selection dropdown) after which a confirmation code will be sent to the provided phone number through the selected SMS sending operator service.
-- Once the users enter the confirmation code to the platform, they can continue using Decidim normally. Before letting the user in, further details can be asked from the users, including their name, nickname and their email address.
+- Users can choose between the SMS authentication or email authentication based on their preferences at the login page.
+- Users can enter their phone number (with a possible country code selection dropdown) after which a confirmation code
+  will be sent to the provided phone number through the selected SMS sending operator service.
+- Once the users enter the confirmation code to the platform, they can continue using Decidim normally. Before letting
+  the user in, further details can be asked from the users, including their name, nickname and their email address.
 
-
-![built-in sms-authentication](smsauthoption.png)
+![built-in sms-authentication](docs/smsauthoption.png)
 
 ## Installation
 
@@ -37,7 +37,7 @@ Add the following to your secrets.yml file:
 
 ```yml
   omniauth:
-  # Add this after other available authentication options:
+    # Add this after other available authentication options:
     sms:
       enabled: true
       icon: phone
