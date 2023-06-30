@@ -181,8 +181,7 @@ $active-item-color: $black;
   }
 }
 
-.zip-code-errors{
-  .form-error{
-    margin-top: 1rem;
-  }
+#affirm-checkbox{
+  margin-top: $global-margin;
+  font-weight: bold;
 }
