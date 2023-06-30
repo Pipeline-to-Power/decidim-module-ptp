@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "unauthorized action" do |action|
+shared_examples "unauthorized action" do |action|
   let(:decidim) { Decidim::Core::Engine.routes.url_helpers }
 
   it "redirects user with proper errors" do

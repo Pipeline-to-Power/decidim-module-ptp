@@ -7,10 +7,9 @@ module Decidim
 
       included do
         def css_class
-          # css = ["text-sm", "text-success"]
           css = ["text-success"]
           css << options[:class] if options[:class]
-          css << "text-sm" unless options[:class].include?("text-m")
+          css << "text-sm" unless options[:class]&.include?("text-m")
           css.join(" ")
         end
       end

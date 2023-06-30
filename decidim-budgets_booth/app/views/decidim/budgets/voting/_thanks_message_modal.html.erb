@@ -5,19 +5,18 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
-  <div class="row">
-    <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
-      <div class="circle active">
-        <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box", formats: [:svg] %>
+  <% unless current_workflow.try(:hide_image_in_popup?) %>
+    <div class="row">
+      <div class="columns text-center small-12 medium-4 medium-offset-4 voting-help-item m-bottom">
+        <div class="circle active">
+          <%= render partial: "decidim/budgets/partials/svgs/icon-ballot-box", formats: [:svg] %>
+        </div>
       </div>
     </div>
-  </div>
-  <% if thanks_text.present? %>
-    <div class="row text-left margin-bottom-2">
-      <%== thanks_text %>
-    </div>
   <% end %>
+  <div class="row text-left margin-bottom-2">
+    <%= vote_success_content %>
+  </div>
   <div class="row">
     <div class="columns medium-8 medium-offset-2">
       <button class="button expanded" data-close type="button">
