@@ -52,3 +52,14 @@ task :development_app do
   install_modules("development_app")
   seed_db("development_app")
 end
+
+task :run_specs do
+  modules = ["decidim-budgets_booth", "decidim-smsauth", "decidim-sms-twilio", "decidim-l10n"]  # Replace with your module names
+
+  modules.each do |module_name|
+    Dir.chdir(module_name) do
+      sh "bundle exec rspec spec"
+      Dir.chdir("..")
+    end
+  end
+end
