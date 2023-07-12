@@ -54,7 +54,7 @@ task :development_app do
 end
 
 task :run_specs do
-  modules = ["decidim-budgets_booth", "decidim-smsauth", "decidim-sms-twilio", "decidim-l10n"]  # Replace with your module names
+  modules = ["decidim-budgets_booth", "decidim-smsauth", "decidim-sms-twilio", "decidim-l10n"]
 
   modules.each do |module_name|
     Dir.chdir(module_name) do
