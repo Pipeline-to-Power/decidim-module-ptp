@@ -279,13 +279,14 @@ describe "Non zip code workflow", type: :system do
         visit decidim_budgets.budgets_path
       end
 
-      it "render the budgets list" do
-        expect(page).to have_current_path(decidim_budgets.budgets_path)
-        within "#budgets" do
-          expect(page).not_to have_css(".card.card--list.budget-list", count: 1)
-          expect(page).not_to have_selector("a", text: "More info", count: 1)
-          expect(page).to have_link(text: "SHOW")
-        end
+      it "redirects the user to projects list" do
+        expect(page).to have_current_path(decidim_budgets.budget_projects_path(budget))
+        expect(page).to have_no_content("Back to budgets")
+        expect(page).to have_no_content("Show all budgets")
+        click_button "Start voting"
+        expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
+        expect(page).to have_no_content("Back to budgets")
+        expect(page).to have_no_content("Show all budgets")
       end
     end
   end
