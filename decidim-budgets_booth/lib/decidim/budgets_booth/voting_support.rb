@@ -30,7 +30,7 @@ module Decidim
         budget = budgets.first
         return true if budgets.count > 1 || budgets.count.zero?
 
-        redirect_to decidim_budgets.budget_voting_index_path(budget) and return if voting_booth_forced? # rubocop:disable Style/AndOr
+        return redirect_to decidim_budgets.budget_voting_index_path(budget) if voting_booth_forced?
 
         redirect_to decidim_budgets.budget_projects_path(budget)
       end
