@@ -10,7 +10,7 @@ describe Decidim::BudgetsBooth::ProjectVotedHintCellExtensions do
   end
 
   before do
-    allow_any_instance_of(klass).to receive(:options).and_return(options) # rubocop:disable Rspec/AnyInstance
+    allow_any_instance_of(klass).to receive(:options).and_return(options) # rubocop:disable RSpec/AnyInstance
   end
 
   describe "#css_class" do
