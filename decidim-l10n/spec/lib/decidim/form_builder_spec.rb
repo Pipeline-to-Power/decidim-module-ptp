@@ -91,44 +91,41 @@ describe Decidim::FormBuilder do
       end
     end
 
-    # 0.27->
-    # context "when the start_time is set as Time" do
-    #   before do
-    #     resource.start_time = Time.parse("2017-02-01T15:00:00.000Z")
-    #   end
+    context "when the start_time is set as Time" do
+      before do
+        resource.start_time = Time.parse("2017-02-01T15:00:00.000Z")
+      end
 
-    #   it { expect(resource.start_time).to be_a(Time) }
+      it { expect(resource.start_time).to be_a(Time) }
 
-    #   it "formats the start date correctly" do
-    #     expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-    #   end
+      it "formats the start date correctly" do
+        expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
+      end
 
-    #   context "with another timezone", tz: "Helsinki" do
-    #     it "formats the start date in the correct time zone" do
-    #       expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
-    #     end
-    #   end
-    # end
+      context "with another timezone", tz: "Helsinki" do
+        it "formats the start date in the correct time zone" do
+          expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
+        end
+      end
+    end
 
-    # 0.27->
-    # context "when the start_time is set as DateTime" do
-    #   before do
-    #     resource.start_time = DateTime.parse("2017-02-01T15:00:00.000Z") # _rubocop:disable Style/DateTime
-    #     raise resource.start_time.class.inspect
-    #   end
+    context "when the start_time is set as DateTime" do
+      before do
+        resource.start_time = DateTime.parse("2017-02-01T15:00:00.000Z") # rubocop:disable Style/DateTime
+      end
 
-    #   it { expect(resource.start_time).to be_a(DateTime) }
+      it { expect(resource.start_time).to be_a(DateTime) }
 
-    #   it "formats the start date correctly" do
-    #     expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
-    #   end
+      it "formats the start date correctly" do
+        expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 03:00 PM")
+      end
 
-    #   context "with another timezone", tz: "Helsinki" do
-    #     it "formats the start date in the correct time zone" do
-    #       expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
-    #     end
-    #   end
-    # end
+      context "with another timezone", tz: "Helsinki" do
+        it "formats the start date in the correct time zone" do
+          expect(parsed.css("input").first.attr("data-startdate")).to eq("02/01/2017 05:00 PM")
+        end
+      end
+    end
 
     context "when the resource has errors" do
       before do
