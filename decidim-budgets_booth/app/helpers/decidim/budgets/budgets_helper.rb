@@ -19,10 +19,6 @@ module Decidim
       def vote_success_content
         translated_attribute(component_settings.try(:vote_success_content))&.html_safe
       end
-
-      def vote_completed_content
-        translated_attribute(component_settings.try(:vote_completed_content))&.html_safe
-      end
     end
   end
 end

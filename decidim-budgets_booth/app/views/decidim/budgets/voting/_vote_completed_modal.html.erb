@@ -1,4 +1,4 @@
-<div class="reveal" id="vote-completed" data-reveal data-session="<%= thanks_popup? %>" aria-labelledby="thanks-voting-completion-label" aria-live="polite">
+<div class="reveal" id="vote-completed" data-reveal data-session="<%= vote_completed_popup? %>" aria-labelledby="thanks-voting-completion-label" aria-live="polite">
   <div class="reveal__header text-center">
     <h4 id="exit-voting-notification-label"><%= t(".title") %></h4>
     <button class="close-button" data-close aria-label="<%= t(".close") %>" type="button">
@@ -18,3 +18,4 @@
     </div>
   </div>
 </div>
+<%= javascript_pack_tag("decidim_handle_voting_complete") %>
