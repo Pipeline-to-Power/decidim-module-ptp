@@ -81,6 +81,7 @@ describe "Voting index page", type: :system do
 
     it "renders the page correctly" do
       expect(page).to have_content("You are now in the voting booth.")
+      expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
       expect(page).to have_content("TOTAL BUDGET €100,000")
       expect(page).to have_content("10 PROJECTS")

@@ -24,7 +24,6 @@ fi:
         change_it_here: Muuta sitä tästä
         not_right_one: Onko postinumero väärin? %{link}
         title: 'Sinulle saatavilla olevat äänestykset'
-        title_single: 'Tämä äänestys on saatavilla sinulle'
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä

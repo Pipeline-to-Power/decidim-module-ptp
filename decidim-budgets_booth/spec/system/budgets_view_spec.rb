@@ -205,16 +205,26 @@ describe "Budgets view", type: :system do
     before do
       sign_in user
       component.update(settings: component_settings.merge(workflow: "zip_code"))
+      visit decidim_budgets.budgets_path
     end
 
-    context "when visit budgets list" do
-      before { visit decidim_budgets.budgets_path }
-
-      it "redirects to the voting booth" do
-        expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
-        expect(page).to have_content("Based on your ZIP code - 10004. Not the right one?")
-        expect(page).to have_link("Change it here", href: decidim_budgets.new_zip_code_path)
+    it "shows the budgets list when visit budgets list" do
+      expect(page).to have_current_path(decidim_budgets.budgets_path)
+      expect(page).to have_content "You are now in the voting booth."
+      within "#budgets" do
+        expect(page).to have_css(".card.card--list.budget-list", count: 1)
+        expect(page).to have_selector("a", text: "More info", count: 1)
+        expect(page).to have_link(text: /TAKE PART/, href: decidim_budgets.budget_voting_index_path(budget))
+        expect(page).to have_link(translated(budget.title), href: decidim_budgets.budget_voting_index_path(budget))
+        expect(page).to have_content("Eius officiis expedita. 55")
       end
+    end
+
+    it "does not show the budgets header in voting booth when go to the booth" do
+      visit decidim_budgets.budget_voting_index_path(budget)
+      expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
+      expect(page).not_to have_content("Based on your ZIP code - 10004. Not the right one?")
+      expect(page).not_to have_link("Change it here", href: decidim_budgets.new_zip_code_path)
     end
   end
 
