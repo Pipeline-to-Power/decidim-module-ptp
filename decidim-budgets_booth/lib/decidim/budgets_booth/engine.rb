@@ -45,9 +45,6 @@ module Decidim
           Decidim::Budgets::ProjectsHelper.include(
             Decidim::BudgetsBooth::ProjectsHelperExtensions
           )
-          Decidim::ApplicationHelper.include(
-            Decidim::BudgetsBooth::ApplicationHelperExtensions
-          )
 
           # Cells extensions
           Decidim::Budgets::ProjectVotedHintCell.include(
@@ -79,6 +76,10 @@ module Decidim
           )
 
           # Controllers extensions
+          Decidim::ApplicationController.include(
+            Decidim::BudgetsBooth::CompleteVotingPopup
+          )
+
           Decidim::Budgets::OrdersController.include(
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )

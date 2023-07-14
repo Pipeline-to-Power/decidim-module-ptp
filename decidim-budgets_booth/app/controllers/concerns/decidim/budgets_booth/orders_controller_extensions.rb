@@ -14,6 +14,7 @@ module Decidim
           enforce_permission_to :vote, :project, order: current_order, budget: budget, workflow: current_workflow
           Decidim::Budgets::Checkout.call(current_order) do
             on(:ok) do
+              reset_workflow
               handle_user_redirect
             end
 
@@ -37,13 +38,17 @@ module Decidim
 
         def handle_user_redirect
           if voted_all_budgets?
-            session[:vote_completed] = true
-            session[:voted_component] = current_component.id
+            session[:booth_vote_completed] = true
+            session[:booth_voted_component] = current_component.id
             redirect_to success_redirect_path
           else
             session[:thanks_message] = true
             redirect_to decidim_budgets.budgets_path
           end
+        end
+
+        def reset_workflow
+          @current_workflow = Decidim::Budgets.workflows[workflow_name].new(current_component, current_user)
         end
 
         def order

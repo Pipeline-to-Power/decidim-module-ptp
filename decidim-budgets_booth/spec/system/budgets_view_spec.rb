@@ -121,10 +121,9 @@ describe "Budgets view", type: :system do
             end
 
             context "with cancel voting booth url" do
+              include_context "with a survey"
               before do
-                stub_request(:get, "http://www.example.com/foo")
-                  .to_return(status: 200, body: "Dummy body")
-                component.update(settings: component_settings.merge(workflow: "zip_code", vote_cancel_url: "http://www.example.com/foo"))
+                component.update(settings: component_settings.merge(workflow: "zip_code", vote_cancel_url: main_component_path(surveys_component)))
                 visit current_path
               end
 
@@ -135,7 +134,7 @@ describe "Budgets view", type: :system do
                   expect(page).to have_content("Are you sure you want to exit the voting booth?")
                   click_link "OK"
                 end
-                expect(page).to have_current_path("http://www.example.com/foo")
+                expect(page).to have_current_path(main_component_path(surveys_component))
               end
             end
 
