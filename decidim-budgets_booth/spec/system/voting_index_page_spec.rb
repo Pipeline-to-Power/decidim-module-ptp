@@ -81,6 +81,7 @@ describe "Voting index page", type: :system do
 
     it "renders the page correctly" do
       expect(page).to have_content("You are now in the voting booth.")
+      expect(page).to have_content("You decide the #{first_budget.title["en"]} budget")
       expect(page).to have_button("Cancel voting")
       expect(page).to have_content("TOTAL BUDGET €100,000")
       expect(page).to have_content("10 PROJECTS")
@@ -292,6 +293,72 @@ describe "Voting index page", type: :system do
       end
     end
 
+    describe "redirect after completing votes" do
+      let!(:order) { create(:order, user: user, budget: second_budget) }
+
+      before do
+        first_budget.update!(total_budget: 26_000)
+        second_budget.update!(total_budget: 26_000)
+        order.checked_out_at = Time.current
+        order.projects << second_budget.projects.first
+        order.save!
+      end
+
+      context "when vote success URL is not set" do
+        before do
+          visit current_path
+          vote_budget!
+        end
+
+        it "redirects to the budgets path" do
+          expect(page).to have_current_path(decidim_budgets.budgets_path)
+        end
+      end
+
+      context "when vote success URL is set" do
+        include_context "with a survey"
+        before do
+          component.update!(settings: component_settings.merge(workflow: "zip_code", vote_completed_content: { en: "<p>Completed voting dummy text</p>" }, vote_success_url: main_component_path(surveys_component)))
+          visit current_path
+          vote_budget!
+        end
+
+        it "shows the modal" do
+          expect(page).to have_current_path(main_component_path(surveys_component))
+          expect(page).to have_selector("#vote-completed")
+          within "#vote-completed" do
+            expect(page).to have_content("You successfully completed your votes")
+            expect(page).to have_content("Completed voting dummy text")
+          end
+        end
+      end
+
+      context "when non-zipcode workflow" do
+        let!(:second_order) { create(:order, user: user, budget: budgets.last) }
+        let(:third_budget) { budgets.last }
+
+        include_context "with a survey"
+        before do
+          third_budget.update!(total_budget: 26_000)
+          second_order.checked_out_at = Time.current
+          second_order.projects << third_budget.projects.first
+          second_order.save!
+          component.update!(settings: component_settings.merge(workflow: "all", vote_completed_content: { en: "<p>Completed voting dummy text</p>" }, vote_success_url: main_component_path(surveys_component)))
+          visit current_path
+          non_zipcode_vote_budget!
+        end
+
+        it "shows the modal" do
+          expect(page).to have_current_path(main_component_path(surveys_component))
+          expect(page).to have_selector("#vote-completed")
+          within "#vote-completed" do
+            expect(page).to have_content("You successfully completed your votes")
+            expect(page).to have_content("Completed voting dummy text")
+          end
+        end
+      end
+    end
+
     context "when maximum budget exceeds" do
       before do
         first_budget.update!(total_budget: 24_999)
@@ -405,6 +472,13 @@ describe "Voting index page", type: :system do
   def vote_budget!
     click_button("Add to your vote", match: :first)
     click_button "Vote"
+    click_button "Confirm"
+  end
+
+  def non_zipcode_vote_budget!
+    click_button("Add to your vote", match: :first)
+    click_button "I understand how to vote"
+    click_button "I am ready"
     click_button "Confirm"
   end
 end

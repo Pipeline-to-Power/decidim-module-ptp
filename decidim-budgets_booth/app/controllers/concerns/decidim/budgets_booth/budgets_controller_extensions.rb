@@ -10,8 +10,7 @@ module Decidim
         layout :determine_layout
         before_action :ensure_authenticated, if: :open_and_voting_booth_forced?
         before_action :ensure_user_zip_code, if: :open_and_voting_booth_forced?
-        before_action :ensure_multiple_budgets
-
+        before_action :ensure_multiple_budgets, unless: :open_and_voting_booth_forced?
         def index
           # we need to redefine this action to avoid redirect in case of single budget
         end

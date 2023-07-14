@@ -30,7 +30,7 @@ module Decidim
         budget = budgets.first
         return true if budgets.count > 1 || budgets.count.zero?
 
-        redirect_to decidim_budgets.budget_voting_index_path(budget) and return if voting_booth_forced? # rubocop:disable Style/AndOr
+        return redirect_to decidim_budgets.budget_voting_index_path(budget) if voting_booth_forced?
 
         redirect_to decidim_budgets.budget_projects_path(budget)
       end
@@ -65,16 +65,15 @@ module Decidim
       # vote in all available budgets. to check that user has voted to all available budgets, we should
       # consider this settings as well.
       def voted_all_budgets?
-        default_limit = current_component.settings.maximum_budgets_to_vote_on
+        default_limit = current_component.settings.maximum_budgets_to_vote_on || 0
         available_budgets = budgets.count
         vote_limit = if default_limit.zero?
                        available_budgets
                      else
                        [default_limit, available_budgets].min
                      end
-        return false if voted.count < vote_limit
 
-        true
+        voted.count >= vote_limit
       end
 
       # This configuration option can be set in component settings, the dfault url when the user has voted on all budgets

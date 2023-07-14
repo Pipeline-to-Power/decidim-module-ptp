@@ -1,0 +1,21 @@
+
+<div class="reveal" id="vote-completed" data-reveal aria-labelledby="thanks-voting-completion-label" aria-live="polite">
+  <div class="reveal__header text-center">
+    <h4><%= t("title", scope: "decidim.budgets.voting.vote_completed_modal") %></h4>
+    <button class="close-button" data-close aria-label="<%= t("close", scope: "decidim.budgets.voting.vote_completed_modal") %>" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="row text-left margin-bottom-2">
+    <%= vote_completed_content %>
+  </div>
+
+  <div class="row">
+    <div class="columns medium-8 medium-offset-2">
+      <button class="button expanded" data-close type="button">
+        <%= t("continue", scope: "decidim.budgets.voting.vote_completed_modal") %>
+      </button>
+    </div>
+  </div>
+</div>

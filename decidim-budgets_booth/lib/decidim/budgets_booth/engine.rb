@@ -76,6 +76,10 @@ module Decidim
           )
 
           # Controllers extensions
+          Decidim::ApplicationController.include(
+            Decidim::BudgetsBooth::CompleteVotingPopup
+          )
+
           Decidim::Budgets::OrdersController.include(
             Decidim::BudgetsBooth::OrdersControllerExtensions
           )
