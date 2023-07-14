@@ -13,7 +13,7 @@ module Decidim
       end
 
       def thanks_popup?
-        session[:thanks_message] == true
+        session[:booth_thanks_message] == true
       end
 
       def handle_thanks_popup
@@ -21,7 +21,7 @@ module Decidim
       end
 
       def remove_thanks_session
-        session.delete(:thanks_message)
+        session.delete(:booth_thanks_message)
       end
 
       def thanks_text

@@ -24,7 +24,6 @@ fi:
         change_it_here: Muuta sitä tästä
         not_right_one: Onko postinumero väärin? %{link}
         title: 'Sinulle saatavilla olevat äänestykset'
-        title_single: 'Tämä äänestys on saatavilla sinulle'
       budgets_list:
         no_budgets_found: Äänestettäviä budjetteja ei löytynyt postinumerollasi. Voit vaihtaa postinumeroasi, jos se on väärin tai voit yrittää myöhemmin uudestaan.
         vote: Näytä
@@ -56,7 +55,7 @@ fi:
         budget_summary:
           back_to_budgets: Näytä kaikki budjetit
           cancel_voting: Poistu äänestyksestä
-          choose_budget: Voit päättää budjetin
+          choose_budget: Voit päättää budjetista alueella %{budget_title}
           choose_description: Valitse sellaiset hankkeet, joista pidät ja anna äänesi sen jälkeen.
         cancel_voting_modal:
           continue: Jatka äänestystä
