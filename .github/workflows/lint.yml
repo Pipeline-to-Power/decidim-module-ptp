@@ -1,5 +1,12 @@
 name: "[CI] Lint"
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - release/*
+      - feature/0.26/zip-code-voting
+  pull_request:
 
 env:
   CI: "true"
@@ -16,17 +23,17 @@ jobs:
     if: "!startsWith(github.head_ref, 'chore/l10n')"
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2.0.0
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
       - name: Get npm cache directory path
         id: npm-cache-dir-path
-        run: echo "::set-output name=dir::$(npm get cache)-lint"
-      - uses: actions/cache@v2
+        run: echo "dir=$(npm get cache)-lint" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
         id: npm-cache
         with:
           path: ${{ steps.npm-cache-dir-path.outputs.dir }}
