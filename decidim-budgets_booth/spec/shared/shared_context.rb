@@ -91,3 +91,10 @@ shared_context "with zip_code workflow" do
     )
   end
 end
+
+shared_context "with a survey" do
+  let!(:participatory_space) { component.participatory_space }
+  let!(:surveys_component) { create(:surveys_component, :published, participatory_space: participatory_space) }
+  let!(:survey) { create(:survey, component: surveys_component) }
+  let!(:questionnaire) { create(:questionnaire, questionnaire_for: survey) }
+end

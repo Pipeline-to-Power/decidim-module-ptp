@@ -36,7 +36,7 @@ describe Decidim::BudgetsBooth::OrdersControllerExtensions, type: :controller do
       it "sets thanks session and redirects the user" do
         post :checkout, params: { budget_id: budgets.first.id, component_id: component.id, participatory_process_slug: component.participatory_space.slug }
         expect(response).to redirect_to(decidim_budgets.budgets_path)
-        expect(session[:thanks_message]).to be(true)
+        expect(session[:booth_thanks_message]).to be(true)
       end
     end
 
