@@ -42,7 +42,7 @@ module Decidim
             session[:booth_voted_component] = current_component.id
             redirect_to success_redirect_path
           else
-            session[:thanks_message] = true
+            session[:booth_thanks_message] = true
             redirect_to decidim_budgets.budgets_path
           end
         end

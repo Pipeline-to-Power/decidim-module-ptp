@@ -2,7 +2,7 @@
 
 module Decidim
   module BudgetsBooth
-    # This cell has the commons for the budgets cells
+    # This cell captures the logic to show the popup for completing the voting
     class VoteCompletedCell < Decidim::ViewModel
       def show
         return if vote_completed_content.blank?
