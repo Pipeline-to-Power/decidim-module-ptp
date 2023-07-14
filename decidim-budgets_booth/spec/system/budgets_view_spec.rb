@@ -220,7 +220,7 @@ describe "Budgets view", type: :system do
       end
     end
 
-    it "dpes not show the budgets header in voting booth when go to the booth" do
+    it "does not show the budgets header in voting booth when go to the booth" do
       visit decidim_budgets.budget_voting_index_path(budget)
       expect(page).to have_current_path(decidim_budgets.budget_voting_index_path(budget))
       expect(page).not_to have_content("Based on your ZIP code - 10004. Not the right one?")

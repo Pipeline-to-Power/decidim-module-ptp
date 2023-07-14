@@ -24,7 +24,6 @@ en:
         change_it_here: Change it here
         not_right_one: Not the right one? %{link}
         title: 'Ballots available to you'
-        title_single: 'This ballot is available to you'
       budgets_list:
         no_budgets_found: No budgets were found based on your ZIP code. You can change
           your ZIP code if it's not correct, or you can search again later.
