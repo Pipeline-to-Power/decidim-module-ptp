@@ -170,6 +170,12 @@ $active-item-color: $black;
   }
 }
 
+.zip-code-errors{
+  .form-error{
+    margin-top: $global-margin;
+  }
+}
+
 .booth-zipcode{
   &.thumbnail{
     padding-right: 4px !important;
