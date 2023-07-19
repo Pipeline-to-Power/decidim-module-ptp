@@ -14,7 +14,8 @@
 spec/decidim_dummy_app
 
 # default development application
-*development_app
+/development_app
+/development_app_*
 
 # env vars
 .env
